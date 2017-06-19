@@ -3,3 +3,14 @@
 .content {
 	
 }
+
+.background-img {
+	font-family: "Fira Sans", sans-serif;
+	background: url('../image/sub_main.jpeg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.login-form {
+	
+}
