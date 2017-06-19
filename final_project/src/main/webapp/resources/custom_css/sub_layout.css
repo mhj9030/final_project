@@ -35,6 +35,13 @@ html {
 	margin-left: 20px;
 	margin-bottom: 50px;
 	text-align: left;
+	color : #fff;
+}
+
+.sub-layout-selectors {
+	margin-left: 20px;
+	margin-bottom: 50px;
+	text-align: left;
 }
 
 .content-form-right input {
@@ -61,7 +68,31 @@ html {
 }
 
 .created-password{
+	
 	border: 1px solid #e9e9e9;
 	width: 377px;
 	height: 40px;
+}
+
+.footer-login {
+	margin-top : 50px;
+	text-align: left;
+}
+
+.login-btn {
+	margin-bottom : 10px;
+	text-align : center;
+	border-color : #7bb93c;
+	width: 200px;
+	height: 40px;
+	font-size: 14px;
+	border-style: none;
+	color : #fff;
+	background: #7bb93c;
+	
+}
+.login-btn:HOVER {
+	border-color : #4291d7;
+	color : #fff;
+	background: #3b8dd5;
 }

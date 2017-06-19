@@ -8,8 +8,13 @@
 <!-- Sub-Layout -->
 <tiles-definitions>
 	<definition name=".subLayout" template="/WEB-INF/view/sub_layout/template.jsp">
-	    <put-attribute name="title" value="spring" />
+		<put-attribute name="title" value="spring" />
 	</definition>
-	
-   
+
+<!-- Main-Layout -->
+	<definition name=".mainLayout" template="/WEB-INF/view/main_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	</definition>
+
+
 </tiles-definitions>
