@@ -1,0 +1,39 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+
+
+.navbar-inverse{
+	background: #fff;
+	border-bottom-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>li>a  {
+	color : #563d7c;
+	font-size: 15px;
+}
+
+.navbar-inverse .navbar-nav>li>a:HOVER {
+	background-color : #fafafa;
+	color : #563d7c;
+}
+
+.jumbotron {
+	background: #384653 url('https://static.rocketpunch.com/img/index_header.jpg') no-repeat center top;
+	background-size: cover;
+	height: 370px;
+}
+
+.text-zone{
+	text-align : center;
+	padding: 100px 0 0;
+}
+
+.text-zone h2 {
+	color : #fff;
+}
+
+.text-zone p{
+	color : #fff;
+	font-size: 15px;
+}
+
