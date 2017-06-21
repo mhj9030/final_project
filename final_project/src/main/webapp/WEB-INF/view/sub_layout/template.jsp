@@ -98,7 +98,7 @@
   </div>
   <div class="container" id = "shows">
     <div class="form-signin">
-      <h2 class="form-signin-heading">Welcome!</h2>
+      <h2 class="form-signin-heading">Welcome! Job Square</h2>
       <span class="form-signin-heading2">지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!</span>
 
 
