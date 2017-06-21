@@ -19,6 +19,9 @@
 <!-- Main_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/main_layout.css" rel="stylesheet">
 
+<!-- Main_layout_footer CSS -->
+<link href="<%=cp%>/resources/custom_css/main_layout_footer.css" rel="stylesheet">
+
   <!-- Jquery 3.1.0 -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 
@@ -31,13 +34,13 @@
 </head>
 <body>
 
-<div class="header">
-    <tiles:insertAttribute name="header"/>
-</div>
 
-<div class="footer">
-    <tiles:insertAttribute name="footer"/>
-</div>
+    <tiles:insertAttribute name="headers"/>
+
+
+
+    <tiles:insertAttribute name="footers"/>
+
 
 </body>
 <!-- 회원가입/로그인 모달 창 -->
