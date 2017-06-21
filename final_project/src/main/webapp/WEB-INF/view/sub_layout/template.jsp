@@ -104,25 +104,23 @@
 
       <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required="required" autofocus="">
 
-
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
 
       <button class="sub-layout-btn" type="submit">로그인</button>
 
       <div class="footer-login">
-        잡스퀘어에 가입해보세요! <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button>
+        잡스퀘어에 가입해보세요! <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button><a href="#">둘러보기</a>
       </div>
     </div>
   </div>
 
 </body>
 
-<!-- 회원가입 모달 창 생성 -->
+<!-- 회원가입 모달 창 -->
 <script type="text/javascript">
   $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').focus()
   })
-
 </script>
 
 </html>
