@@ -35,8 +35,12 @@
     <tiles:insertAttribute name="header"/>
 </div>
 
+<div class="footer">
+    <tiles:insertAttribute name="footer"/>
+</div>
+
 </body>
-<!-- 회원가입 모달 창 -->
+<!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
   $('#job-register').on('shown.bs.modal', function () {
     $('#myInput').focus()
