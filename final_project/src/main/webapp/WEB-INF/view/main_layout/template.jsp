@@ -53,11 +53,9 @@
 <!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
   $('#job-register').on('shown.bs.modal', function () {
-    $('#myInput').focus()
   })
   
     $('#job-login').on('shown.bs.modal', function () {
-    $('#myInput').focus()
   })
 </script>
 </html>
