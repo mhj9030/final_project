@@ -28,81 +28,27 @@
 
   <!-- Bootstrap JS -->
   <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
-<style type="text/css">
-.blank{
- 	height : 50px;
-}
 
-.wrap{
-	width: 920px;
-	margin: 0 auto;
-}
-
-.panel-title{
-	line-height: 50px;
-	font-size: 17px;
-	color : black;
-}
-
-.panel-link{
-	line-height: 50px;
-	font-size: 10px;
-	color : #ccc;
-	text-decoration: none;
-}
-
-.panel-group{
-	height: 320px; 
-	border: 1px solid black;
-		
-}
-
-.panel-group .group-img{
-	height: 50%;
-	background-image: url('<%=cp%>/resources/image/Desert.jpg');
-	background-size: cover;
-}
-
-.panel-hire{
-	height: 220px; 
-	border: 1px solid black;
-}
-
-.panel-busi{
-	height: 220px;
-	border: 1px solid black;
-}
-
-.panel-news{
-	height: 500px;
-	border: 1px solid black;
-}
-
-
-</style>
 
 
 </head>
 <body>
 
 
-<<<<<<< HEAD
 
-<div class="header">
-    <tiles:insertAttribute name="header"/>
-</div>
-=======
+
     <tiles:insertAttribute name="headers"/>
 
+	
+    <tiles:insertAttribute name="body"/>
 
 
     <tiles:insertAttribute name="footers"/>
 
->>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
 
-<div class="body">
-    <tiles:insertAttribute name="body"/>
-</div>
+
+
+
 </body>
 <!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
