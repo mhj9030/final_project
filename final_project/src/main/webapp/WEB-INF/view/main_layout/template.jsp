@@ -20,6 +20,9 @@
 <!-- Main_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/main_layout.css" rel="stylesheet">
 
+<!-- Main_layout_footer CSS -->
+<link href="<%=cp%>/resources/custom_css/main_layout_footer.css" rel="stylesheet">
+
   <!-- Jquery 3.1.0 -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 
@@ -83,18 +86,31 @@
 <body>
 
 
+<<<<<<< HEAD
 
 <div class="header">
     <tiles:insertAttribute name="header"/>
 </div>
+=======
+    <tiles:insertAttribute name="headers"/>
+
+
+
+    <tiles:insertAttribute name="footers"/>
+
+>>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
 
 <div class="body">
     <tiles:insertAttribute name="body"/>
 </div>
 </body>
-<!-- 회원가입 모달 창 -->
+<!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
   $('#job-register').on('shown.bs.modal', function () {
+    $('#myInput').focus()
+  })
+  
+    $('#job-login').on('shown.bs.modal', function () {
     $('#myInput').focus()
   })
 </script>

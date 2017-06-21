@@ -14,9 +14,15 @@
 <!-- Main-Layout -->
 	<definition name=".mainLayout" template="/WEB-INF/view/main_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
+<<<<<<< HEAD
 	  	<put-attribute name="header" value="/WEB-INF/view/main_layout/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/main_layout/container.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/main_layout/footer.jsp" />
+=======
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/main_layout//main.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+>>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
 	</definition>
 
 
