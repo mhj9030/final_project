@@ -13,6 +13,8 @@ input::-webkit-input-placeholder {
 	color: #fff;
 }
 
+input[attr='placeholder']{color:#fff;}
+
 input::-moz-placeholder {
 	color: #fff;
 }

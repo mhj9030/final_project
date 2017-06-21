@@ -110,7 +110,7 @@
       <button class="sub-layout-btn" type="submit">로그인</button>
 
       <div class="footer-login">
-        잡스퀘어에 가입해보세요!  <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button><a href="#">둘러보기</a>
+        잡스퀘어에 가입해보세요!  <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button><a href="<%=cp%>/main">둘러보기</a>
       </div>
     </div>
   </div>

@@ -41,5 +41,9 @@
   $('#job-register').on('shown.bs.modal', function () {
     $('#myInput').focus()
   })
+  
+    $('#job-login').on('shown.bs.modal', function () {
+    $('#myInput').focus()
+  })
 </script>
 </html>
