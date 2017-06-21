@@ -30,6 +30,7 @@
   <link rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
+
 </head>
 
 <body>
@@ -95,7 +96,7 @@
     <video id="video1" height="100%" autoplay="autoplay">
       <source src="<%=cp%>/resources/video/submain.mp4"> </video>
   </div>
-  <div class="container">
+  <div class="container" id = "shows">
     <div class="form-signin">
       <h2 class="form-signin-heading">Welcome!</h2>
       <span class="form-signin-heading2">지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!</span>
@@ -109,7 +110,7 @@
       <button class="sub-layout-btn" type="submit">로그인</button>
 
       <div class="footer-login">
-        잡스퀘어에 가입해보세요! <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button><a href="#">둘러보기</a>
+        잡스퀘어에 가입해보세요!  <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button><a href="#">둘러보기</a>
       </div>
     </div>
   </div>

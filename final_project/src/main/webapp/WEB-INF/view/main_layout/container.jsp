@@ -9,13 +9,9 @@
 
 
 
-<div style="width: 920px; margin: 0 auto; ">
-	<div class="row">
-		<div class="col-md-12">
-			<div style="width:100%; height: 200px;"></div>
-		</div>
-	</div> 
+<div class="wrap">
 	
+	<!-- 광고 슬라이드 -->
 	<div class="row">
 	  <div class="col-md-6">
 	  	<div style="width: 100%; height: 150px; border: 1px solid black;"></div>
@@ -25,64 +21,102 @@
 	  </div>
 	</div>
 	
-	<div class="row">
-		<div class="col-md-12">
-			<div style="width:100%; height: 50px;"></div>
+	
+	<div class="row blank">
+		<div class="col-md-11">
+			<h4 class="panel-title">추천그룹</h4>
+		</div>
+		<div class="col-md-1">
+			<a class="panel-link" href="#">더보기</a>
 		</div>
 	</div> 
-
+	
+	<!-- 추천그룹 -->
 	<div class="row">
 	  <div class="col-md-4">
-	  	<div style="width: 100%; height: 320px; border: 1px solid black;"></div>
+	  	<div class="panel-group">
+	  		<div class="group-img"></div>
+	  	</div>
 	  </div>
 	  <div class="col-md-4">
-		<div style="width: 100%; height: 320px; border: 1px solid black;"></div>
+		<div class="panel-group">
+			<div class="group-img"></div>
+		</div>
 	  </div>
 	  <div class="col-md-4">
-	  	<div style="width: 100%; height: 320px; border: 1px solid black;"></div>
+	  	<div class="panel-group">
+	  		<div class="group-img"></div>
+	  	</div>
 	  </div>
 	</div>
 	
-	<div class="row">
-		<div class="col-md-10">
-			<div style="width: 100%; height: 30px;"></div>
+	<div class="row blank">
+		<div class="col-md-11">
+			<h4 class="panel-title">인기 채용정보</h4>
 		</div>
-		<div class="col-md-2">
-			<div style="width: 100%; height: 30px;"></div>
+		<div class="col-md-1">
+			<a class="panel-link" href="#">더보기</a>
+		</div>
+	</div> 
+	
+	
+	<div class="row">
+	  <div class="col-md-4">
+	  	<div  class="panel-hire"></div>
+	  </div>
+	  <div class="col-md-4">
+		<div class="panel-hire"></div>
+	  </div>
+	  <div class="col-md-4">
+	  	<div class="panel-hire"></div>
+	  </div>
+	</div>
+	
+	<div class="row blank">
+		<div class="col-md-11">
+			<h4 class="panel-title">인기 기업정보</h4>
+		</div>
+		<div class="col-md-1">
+			<a class="panel-link" href="#">더보기</a>
+		</div>
+	</div> 
+	
+	<div class="row">
+	  <div class="col-md-4">
+	  	<div class="panel-busi"></div>
+	  </div>
+	  <div class="col-md-4">
+		<div class="panel-busi"></div>
+	  </div>
+	  <div class="col-md-4">
+	  	<div class="panel-busi"></div>
+	  </div>
+	</div>
+	
+	<div class="row blank">
+		<div class="col-md-11">
+			<div></div>
+		</div>
+		<div class="col-md-1">
+			<div></div>
 		</div>
 	</div>
 	
-	
 	<div class="row">
-	  <div class="col-md-4">
-	  	<div style="width: 100%; height: 220px; border: 1px solid black;"></div>
+	  <div class="col-md-6">
+	  	<div class="panel-news"></div>
 	  </div>
-	  <div class="col-md-4">
-		<div style="width: 100%; height: 220px; border: 1px solid black;"></div>
-	  </div>
-	  <div class="col-md-4">
-	  	<div style="width: 100%; height: 220px; border: 1px solid black"></div>
+	  <div class="col-md-6">
+		<div class="panel-news"></div>
 	  </div>
 	</div>
 	
-	<div class="row">
-		<div class="col-md-10">
-			<div style="width: 100%; height: 30px;"></div>
+	<div class="row blank">
+		<div class="col-md-11">
+			<div></div>
 		</div>
-		<div class="col-md-2">
-			<div style="width: 100%; height: 30px;"></div>
+		<div class="col-md-1">
+			<div></div>
 		</div>
-	</div>
-	
-	<div class="row">
-	  <div class="col-md-4">
-	  	<div style="width: 100%; height: 220px; border: 1px solid black;"></div>
-	  </div>
-	  <div class="col-md-4">
-		<div style="width: 100%; height: 220px; border: 1px solid black;"></div>
-	  </div>
-	  <div class="col-md-4">
-	  	<div style="width: 100%; height: 220px; border: 1px solid black;"></div>
-	  </div>
 	</div>
 </div>
