@@ -140,7 +140,7 @@
 				<li><a href="#">기업</a></li>
 				<li><a href="#">채용</a></li>
 				<li><a href="#">인재</a></li>
-				<li><a href="<%=cp%>/community/main">커뮤니티</a></li>
+				<li><a href="<%=cp%>/community">커뮤니티</a></li>
 				<li><a href="#">코인</a></li>
 				<li><a href="#">고객센터</a></li>
 			</ul>	
