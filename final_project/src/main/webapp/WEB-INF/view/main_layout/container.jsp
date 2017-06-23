@@ -35,17 +35,26 @@
 	<div class="row">
 	  <div class="col-md-4">
 	  	<div class="panel-group">
-	  		<div class="group-img"></div>
+	  		<div class="group-img">11</div>
+	  		<div class="group-name">22</div>
+	  		<div class="group-intro">33</div>
+	  		<div class="gruop-join">44</div>
 	  	</div>
 	  </div>
 	  <div class="col-md-4">
 		<div class="panel-group">
 			<div class="group-img"></div>
+	  		<div class="group-name"></div>
+	  		<div class="group-intro"></div>
+	  		<div class="gruop-join"></div>
 		</div>
 	  </div>
 	  <div class="col-md-4">
 	  	<div class="panel-group">
 	  		<div class="group-img"></div>
+	  		<div class="group-name"></div>
+	  		<div class="group-intro"></div>
+	  		<div class="gruop-join"></div>
 	  	</div>
 	  </div>
 	</div>

@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+body{
+	background: #eef3f6;
+}
+
 .blank{
  	height : 50px;
 }
@@ -25,13 +29,35 @@
 .panel-group{
 	height: 320px; 
 	border: 1px solid black;
+	box-sizing: border-box;
+	background: white;
+	text-align: center;
 		
 }
 
 .panel-group .group-img{
-	height: 50%;
+	height: 150px;
 	background-image: url('<%=cp%>/resources/image/Desert.jpg');
 	background-size: cover;
+	
+}
+
+.panel-group .group-name{
+	border : 1px solid #ccc;
+	height: 40px;
+	padding : 10px 10px;
+}
+
+.panel-group .group-intro{
+	border : 1px solid #ccc;
+	height: 40px;
+	
+}
+
+.panel-group .gruop-join{
+	border : 1px solid #ccc;
+	height: 40px;
+	padding : 10px 10px;
 }
 
 .panel-hire{
