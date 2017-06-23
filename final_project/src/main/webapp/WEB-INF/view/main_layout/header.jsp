@@ -19,12 +19,12 @@
           <div class="row">
             <div class="col-sm-6 col-xs-6">
               <div class="form-group">
-                <input type="text" id="id_last_name" name="last_name" required="" data-required="성을 입력해주세요" placeholder="성" class="form-control last_name">
+                <input type="text" id="id_last_name" name="last_name" required="required" data-required="성을 입력해주세요" placeholder="성" class="form-control last_name">
               </div>
             </div>
             <div class="col-sm-6 col-xs-6">
               <div class="form-group">
-                <input type="text" id="id_first_name" name="first_name" required="" data-required="이름을 입력해주세요" placeholder="이름" class="form-control first_name">
+                <input type="text" id="id_first_name" name="first_name" required="required" data-required="이름을 입력해주세요" placeholder="이름" class="form-control first_name">
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
-                <input type="email" id="id_email" name="email" required="" data-required="E-mail을 입력해주세요" data-validate="E-mail 형식을 확인해주세요."
+                <input type="email" id="id_email" name="email" required="required" data-required="E-mail을 입력해주세요" data-validate="E-mail 형식을 확인해주세요."
                   placeholder="E-mail" class="form-control email">
               </div>
             </div>
@@ -41,7 +41,7 @@
           <div class="form-group row">
             <div class="col-sm-12">
               <div class="form-group">
-                <input type="password" id="id_password" name="password" required="" data-required="비밀번호를 입력해주세요" placeholder="비밀번호" class="form-control password">
+                <input type="password" id="id_password" name="password" required="required" data-required="비밀번호를 입력해주세요" placeholder="비밀번호" class="form-control password">
               </div>
             </div>
           </div>
@@ -76,12 +76,12 @@
           <div class="row">
             <div class="col-sm-6 col-xs-6">
               <div class="form-group">
-                <input type="text" id="id_last_name" name="last_name" required="" data-required="성을 입력해주세요" placeholder="성" class="form-control last_name">
+                <input type="text" id="id_last_name" name="last_name" required="required" data-required="성을 입력해주세요" placeholder="성" class="form-control last_name">
               </div>
             </div>
             <div class="col-sm-6 col-xs-6">
               <div class="form-group">
-                <input type="text" id="id_first_name" name="first_name" required="" data-required="이름을 입력해주세요" placeholder="이름" class="form-control first_name">
+                <input type="text" id="id_first_name" name="first_name" required="required" data-required="이름을 입력해주세요" placeholder="이름" class="form-control first_name">
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
-                <input type="email" id="id_email" name="email" required="" data-required="E-mail을 입력해주세요" data-validate="E-mail 형식을 확인해주세요."
+                <input type="email" id="id_email" name="email" required="required" data-required="E-mail을 입력해주세요" data-validate="E-mail 형식을 확인해주세요."
                   placeholder="E-mail" class="form-control email">
               </div>
             </div>
@@ -98,7 +98,7 @@
           <div class="form-group row">
             <div class="col-sm-12">
               <div class="form-group">
-                <input type="password" id="id_password" name="password" required="" data-required="비밀번호를 입력해주세요" placeholder="비밀번호" class="form-control password">
+                <input type="password" id="id_password" name="password" required="required" data-required="비밀번호를 입력해주세요" placeholder="비밀번호" class="form-control password">
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@
 		<p>지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!
 </p>
 		<p>
-			<a class="btn btn-success" href="#" role="button" data-toggle="modal" data-target="#job-register">무료 가입 &raquo;</a>
+			<a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#job-register">무료 가입</a>
 		</p>
 		</div>
 	</div>

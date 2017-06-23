@@ -30,10 +30,19 @@
 
 .text-zone h2 {
 	color : #fff;
+	font-size : 28px;
 }
 
 .text-zone p{
 	color : #fff;
 	font-size: 15px;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+	width : auto;
+	border-radius : 0px;
+	background-color : #8cc74f;
+	border-color : #91c957;
+	
 }
 

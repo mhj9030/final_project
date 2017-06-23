@@ -14,11 +14,11 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
 
-  <!-- SUB CSS -->
-  <link rel="stylesheet" href="<%=cp%>/resources/custom_css/sub_layout.css">
-
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="<%=cp%>/resources/css/bootstrap.min.css">
+  
+    <!-- SUB CSS -->
+  <link rel="stylesheet" href="<%=cp%>/resources/custom_css/sub_layout.css">
 
   <!-- Jquery 3.1.0 -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
@@ -93,7 +93,7 @@
   </div>
 
   <div>
-    <video id="video1" height="100%" autoplay="autoplay">
+    <video id="video1" autoplay="autoplay">
       <source src="<%=cp%>/resources/video/submain.mp4"> </video>
   </div>
   <div class="container" id = "shows">
