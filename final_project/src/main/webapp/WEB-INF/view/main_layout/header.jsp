@@ -121,7 +121,7 @@
   </div>
 
 
-
+<!-- nav시작 -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -143,12 +143,8 @@
 				<li><a href="<%=cp%>/community/main">커뮤니티</a></li>
 				<li><a href="#">코인</a></li>
 				<li><a href="#">고객센터</a></li>
-
-			</ul>
-
-
-
-
+			</ul>	
+			
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" type="button" role="button" data-toggle="modal" data-target="#job-register" rel="nofollow">무료 가입</a></li>
 				<li><a href="#" type="button" role="button" data-toggle="modal" data-target="#job-login" rel="nofollow">로그인</a></li>
@@ -157,25 +153,9 @@
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="회사명, 서비스명 검색">
 			</form>
-
 		</div>
-
 	</div>
-	<!--/.navbar-collapse -->
-
 </nav>
+<!-- nav종료 -->
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-	<div class="container">
-	<div class = "text-zone">
-		<h2>구인 | 채용 네트워크, 잡 스퀘어에 오신 것을 환영합니다.</h2>
-		<p>지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!
-</p>
-		<p>
-			<a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#job-register">무료 가입</a>
-		</p>
-		</div>
-	</div>
-</div>
 

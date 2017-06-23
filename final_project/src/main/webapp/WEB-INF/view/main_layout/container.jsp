@@ -7,6 +7,20 @@
    String cp = request.getContextPath();
 %>
 
+<!-- 메인 점보트론 -->
+<div class="jumbotron">
+	<div class="container">
+	<div class = "text-zone">
+		<h2>구인 | 채용 네트워크, 잡 스퀘어에 오신 것을 환영합니다.</h2>
+		<p>지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!
+</p>
+		<p>
+			<a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#job-register">무료 가입</a>
+		</p>
+		</div>
+	</div>
+</div>
+
 
 
 <div class="wrap">
