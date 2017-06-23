@@ -28,7 +28,6 @@ body{
 
 .panel-group{
 	height: 320px; 
-	border: 1px solid black;
 	box-sizing: border-box;
 	background: white;
 	text-align: center;
@@ -36,41 +35,158 @@ body{
 }
 
 .panel-group .group-img{
-	height: 150px;
-	background-image: url('<%=cp%>/resources/image/Desert.jpg');
-	background-size: cover;
+	height: 170px;
 	
 }
 
+.panel-group .group-img img{
+	width: 100%;
+	height: 100%;
+}
+
 .panel-group .group-name{
-	border : 1px solid #ccc;
+	font-size : 19px;
+	font-weight : bold;
+	height: 50px;
+	padding : 10px 10px;
+}
+
+.panel-group .group-type{
 	height: 40px;
 	padding : 10px 10px;
 }
 
-.panel-group .group-intro{
-	border : 1px solid #ccc;
-	height: 40px;
-	
-}
-
 .panel-group .gruop-join{
-	border : 1px solid #ccc;
 	height: 40px;
 	padding : 10px 10px;
 }
 
 .panel-hire{
 	height: 220px; 
-	border: 1px solid black;
+	box-sizing: border-box;
+	background: white;
+	text-align: center;
+}
+
+.panel-hire .hire-info{
+	width : 100%;
+	height: 110px; 
+}
+
+.panel-hire .hire-info .hire-img{
+	float : left;
+	width : 40%;
+	height: 100%; 
+}
+
+.panel-hire .hire-info .hire-img img{
+	width : 100%;
+	height: 100%; 
+}
+
+.panel-hire .hire-info .hire-etc{
+	float:left;
+	width : 60%;
+	height: 100%;
+}
+
+.panel-hire .hire-info .hire-etc div{
+	width : 100%;
+	height : 33%;
+	padding : 7px 0px;
+	
+}
+
+.panel-hire .hire-type{
+	height: 50px;
+	line-height: 50px;
+}
+
+.panel-hire .hire-now{
+	height: 50px;
+	line-height: 50px;
 }
 
 .panel-busi{
-	height: 220px;
-	border: 1px solid black;
+	height: 260px; 
+	box-sizing: border-box;
+	background: white;
 }
+
+.panel-busi .busi-img{
+	width:100%;
+	height: 80px;
+}
+
+.panel-busi .busi-img img{
+	margin : 10px 10px;
+	width:35%;
+	height: 80%;
+}
+
+
+.panel-busi .busi-name{
+	padding : 10px 10px;
+	font-size : 18px;
+	font-weight : bold;
+	height: 50px;
+}
+.panel-busi .busi-intro{
+	margin-left : 10px;
+	height: 50px;
+}
+
+.panel-busi .busi-etc div{
+	float : left;
+	padding : 10px;
+	width : 30%;
+	height: 80px;
+}
+
+.panel-busi .busi-etc .busi-etc-text{
+	line-height: 60px;
+}
+
+.panel-busi .busi-etc div>img{
+	width: 100%;
+	height: 100%;
+}
+
 
 .panel-news{
 	height: 500px;
-	border: 1px solid black;
+	background: white;
+	padding: 10px;
+}
+
+.panel-news h4{
+	font-weight: bold;
+}
+
+.panel-news hr{
+	margin-top: 0px;
+    margin-bottom: 10px;
+    border-top: 1px solid #2196F3;
+}
+
+.panel-news div{
+	width : 425px;
+	height : 480px;
+}
+
+.panel-news table{
+	margin : 0 auto;
+	width : 95%;
+	height : 10%;
+}
+
+.panel-news .news-subject{
+	font-size : 17px;
+	font-weight: bold;
+}
+
+.panel-news .news-created{
+	font-size : 12px;
+	text-align: right;
+	padding-top: 25px;
 }
