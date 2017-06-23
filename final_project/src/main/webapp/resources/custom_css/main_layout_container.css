@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+.blank{
+ 	height : 50px;
+}
+
+.wrap{
+	width: 920px;
+	margin: 0 auto;
+}
+
+.panel-title{
+	line-height: 50px;
+	font-size: 17px;
+	color : black;
+}
+
+.panel-link{
+	line-height: 50px;
+	font-size: 10px;
+	color : #ccc;
+	text-decoration: none;
+}
+
+.panel-group{
+	height: 320px; 
+	border: 1px solid black;
+		
+}
+
+.panel-group .group-img{
+	height: 50%;
+	background-image: url('<%=cp%>/resources/image/Desert.jpg');
+	background-size: cover;
+}
+
+.panel-hire{
+	height: 220px; 
+	border: 1px solid black;
+}
+
+.panel-busi{
+	height: 220px;
+	border: 1px solid black;
+}
+
+.panel-news{
+	height: 500px;
+	border: 1px solid black;
+}

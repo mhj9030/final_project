@@ -21,7 +21,7 @@
         	<li><a href="">유료서비스 안내</a></li>
         </ul>
         
-        <p>© 2012-2016 RocketPunch, Inc. All rights reserved. </p>
+        <p>© 2017 Job Square, Inc. All rights reserved. </p>
         <p>직업정보제공사업신고 JOB-20170621</p>
       </div>
     </footer>
