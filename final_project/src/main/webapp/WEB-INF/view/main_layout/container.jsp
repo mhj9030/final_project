@@ -172,7 +172,7 @@
 	  			<hr>
 				<table>
 					<tr>
-						<td class="news-subject" width="250">가입자 무료포인트 100증정</td>
+						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
 						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>
 					</tr>
 					
