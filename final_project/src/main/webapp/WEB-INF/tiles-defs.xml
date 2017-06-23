@@ -20,8 +20,11 @@
 	</definition>
 	
 	<!-- Community-Layout -->
-	<definition name=".communityLayout" template="/WEB-INF/view/community/after/after.jsp">
+	<definition name=".communityLayout" template="/WEB-INF/view/community_review_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
+		<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/community_review_layout/container.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
 
 </tiles-definitions>
