@@ -16,47 +16,6 @@
 
 <!-- Bootstrap CSS -->
 <link href="<%=cp%>/resources/css/bootstrap.min.css" rel="stylesheet">
-<<<<<<< HEAD
-
-<!-- Main_layout CSS -->
-<link href="<%=cp%>/resources/custom_css/main_layout.css" rel="stylesheet">
-
-<!-- Main_layout_footer CSS -->
-<link href="<%=cp%>/resources/custom_css/main_layout_footer.css" rel="stylesheet">
-
-<!-- Main_layout_container CSS -->
-<link href="<%=cp%>/resources/custom_css/main_layout_container.css" rel="stylesheet">
-
-<!-- Jquery 3.1.0 -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
-
-<!-- Bootstrap JS -->
-<script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
-
-
-
-
-
-</head>
-<body>
-
-
-
-
-
-    <tiles:insertAttribute name="headers"/>
-
-	
-    <tiles:insertAttribute name="body"/>
-
-
-    <tiles:insertAttribute name="footers"/>
-
-
-
-
-
-=======
 <!-- Main_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/main_layout.css" rel="stylesheet">
 <!-- Main_layout_footer CSS -->
@@ -78,7 +37,7 @@
 	<tiles:insertAttribute name="sub_headers"/>
     <tiles:insertAttribute name="body"/>
     <tiles:insertAttribute name="footers"/>
->>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
+
 </body>
 <!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
