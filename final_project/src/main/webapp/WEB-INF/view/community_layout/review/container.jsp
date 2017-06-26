@@ -8,16 +8,17 @@
 %>
 
 
-
-<div class="wrap_wide">
+<div class="wrap_wide cmenu">
     <div class="wrap">
-        <ol class="breadcrumb">
-            <li><a href="#">면접후기</a></li>
-            <li><a href="#">게시판 이름 2</a></li>
-            <li><a href="#">게시판 이름 3</a></li>
-            <li><a href="#">게시판 이름 4</a></li>
-            <li><a href="#">게시판 이름 5</a></li>
-        </ol>
+<ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="on"><a href="#">면접후기</a></li>
+            <li role="presentation" class=""><a href="#">그룹</a></li>
+            <li role="presentation" class=""><a href="#">취업뉴스</a></li>
+            <li role="presentation" class=""><a href="#">취업꿀팁</a></li>
+            <li role="presentation" class=""><a href="#">기업 추천 게시판</a></li>
+            <li role="presentation" class=""><a href="#">자유게시판</a></li>
+            <li role="presentation" class=""><a href="#">포토갤러리</a></li>
+        </ul>
     </div>
 </div>
 
