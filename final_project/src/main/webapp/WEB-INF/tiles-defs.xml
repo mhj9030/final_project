@@ -14,23 +14,94 @@
 	<!-- Main-Layout -->
 	<definition name=".mainLayout" template="/WEB-INF/view/main_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
-	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />	
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/main_layout/container.jsp" />
 		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
 	
-	<!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->
-	<definition name=".*.*.*" extends=".mainLayout">
-		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/>
+	<!-- Community-Layout -->
+	<definition name=".communityLayout" template="/WEB-INF/view/community_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="sub_headers" value="/WEB-INF/view/community_layout/sub_header.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
-	<definition name=".*.*" extends=".mainLayout">
-		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
-	</definition>
-	<definition name=".*" extends=".mainLayout">
-    	  <put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
+		
+	<!-- Community-Layout 서브메뉴들 -->
+	<definition name=".community_layout.*.*" extends=".communityLayout">
+		<put-attribute name="body" value="/WEB-INF/view/community_layout/{1}/{2}.jsp"/>
 	</definition>
 	
-		<!-- Profile-Layout -->
+	
+	<!-- Company-Layout -->
+	<definition name=".companyLayout" template="/WEB-INF/view/company_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="sub_headers" value="/WEB-INF/view/company_layout/sub_header.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+		
+	<!-- Company-Layout 서브메뉴들 -->
+	<definition name=".company_layout.*.*" extends=".companyLayout">
+		<put-attribute name="body" value="/WEB-INF/view/company_layout/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- Employ-Layout -->
+	<definition name=".employLayout" template="/WEB-INF/view/employ_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="sub_headers" value="/WEB-INF/view/employ_layout/sub_header.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+		
+	<!-- Employ-Layout 서브메뉴들 -->
+	<definition name=".employ_layout.*.*" extends=".employLayout">
+		<put-attribute name="body" value="/WEB-INF/view/employ_layout/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- Help-Layout -->
+	<definition name=".helpLayout" template="/WEB-INF/view/help_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="sub_headers" value="/WEB-INF/view/help_layout/sub_header.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+		
+	<!-- Help-Layout 서브메뉴들 -->
+	<definition name=".help_layout.*.*" extends=".helpLayout">
+		<put-attribute name="body" value="/WEB-INF/view/help_layout/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- Point -Layout -->
+	<definition name=".pointLayout" template="/WEB-INF/view/point_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="sub_headers" value="/WEB-INF/view/point_layout/sub_header.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+		
+	<!-- Point-Layout 서브메뉴들 -->
+	<definition name=".point_layout.*.*" extends=".pointLayout">
+		<put-attribute name="body" value="/WEB-INF/view/point_layout/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- Talent -Layout -->
+	<definition name=".talentLayout" template="/WEB-INF/view/talent_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="sub_headers" value="/WEB-INF/view/talent_layout/sub_header.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+		
+	<!-- Talent-Layout 서브메뉴들 -->
+	<definition name=".talent_layout.*.*" extends=".talentLayout">
+		<put-attribute name="body" value="/WEB-INF/view/talent_layout/{1}/{2}.jsp"/>
+	</definition>
+	
+	
+	
+	
+	<!-- Profile-Layout -->
 	<definition name=".profileLayout" template="/WEB-INF/view/profile_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
 		<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
