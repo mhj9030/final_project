@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.wrap_wide.cmenu {
+.wrap_wide {
 	background: #666;
 	color : #fff;
 }
@@ -9,4 +9,26 @@
 	position: relative;
 	height: 42px;
 	overflow: hidden;
+}
+
+.wrap {
+	width: 100%;
+max-width: 980px;
+margin: 0 auto;
+}
+
+
+.cmenu .nav>li.on>a, .cmenu .nav>li>a:hover, .cmenu .nav>li>a:focus{
+	background-color: transparent;
+	border-color: #fff;
+}
+
+.cmenu .nav-pills>li>a {
+	color : #fff;
+	border-bottom: 2px solid transparent;
+	border-radius: 0;
+}
+
+.nav>li>a{
+	
 }
