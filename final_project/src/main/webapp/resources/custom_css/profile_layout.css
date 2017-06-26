@@ -2,10 +2,10 @@
 
 .wrap_wide {
 	background: #666;
-	color : #fff;
+	color: #fff;
 }
 
-.cmenu .wrap{
+.cmenu .wrap {
 	position: relative;
 	height: 42px;
 	overflow: hidden;
@@ -13,22 +13,136 @@
 
 .wrap {
 	width: 100%;
-max-width: 980px;
-margin: 0 auto;
+	max-width: 980px;
+	margin: 0 auto;
 }
 
-
-.cmenu .nav>li.on>a, .cmenu .nav>li>a:hover, .cmenu .nav>li>a:focus{
+.cmenu .nav>li.on>a, .cmenu .nav>li>a:hover, .cmenu .nav>li>a:focus {
 	background-color: transparent;
 	border-color: #fff;
 }
 
 .cmenu .nav-pills>li>a {
-	color : #fff;
+	color: #fff;
 	border-bottom: 2px solid transparent;
 	border-radius: 0;
 }
 
-.nav>li>a{
-	
+.page.profile .wrap_wide.cover {
+	position: relative;
+	height: 250px;
+}
+
+.page.profile .cover .image {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #1d2129;
+}
+
+.page.profile .ontop {
+	position: relative;
+	min-height: 170px;
+}
+
+.wrap>.main.all{
+	float: none;
+	width: 100%;
+}
+
+.section.summary{
+	position: relative;
+	padding: 0 0 0 200px;
+}
+
+.section.summary .user_thumb{
+	position: absolute;
+	left: 0;
+	top: -90px;
+	float: left;
+}
+
+.section.summary .user_thumb .preview{
+	position: relative;
+	width: 160px;
+	height: 160px;
+	margin: 0 auto;
+	border: 2px solid #fff;
+	overflow: hidden;
+}
+
+.section.summary .user_thumb .preview .img-center{
+	width: 180px;
+	height: 180px;
+}
+
+.img-center{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+}
+
+.section .icontrol{
+	display: inline;
+}
+
+.section.summary .user_thumb .icontrol .form-inline{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	margin: 0;
+	padding: 110px 0 0;
+	text-align: center;
+}
+
+#user_info{
+	position: relative;
+	left: 0;
+	bottom: 10px;
+	height: 0;
+}
+
+#user_info .name {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+#user_info .name .job_title{
+	display: inline;
+	margin: 0;
+	color:#aaa;
+	font-size: 18px;
+	vertical-align: bottom;
+}
+#user_info .name h2{
+	margin: 0;
+	color:#fff;
+	font-size: 24px;
+	line-height: 42px;
+	vertical-align: bottom;
+}
+
+#user_info .name span{
+font-size: 14px;
+}
+
+.section.summary .user_status{
+	position: absolute;
+	left: 0;
+	top:100px;
+	float: left;
+	width: 160px;
+	text-align: center;
 }
