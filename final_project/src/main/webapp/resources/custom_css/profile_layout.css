@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+.wrap_wide.cmenu {
+	background: #666;
+	color : #fff;
+}
+
+.cmenu .wrap{
+	position: relative;
+	height: 42px;
+	overflow: hidden;
+}
