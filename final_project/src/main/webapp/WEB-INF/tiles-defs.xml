@@ -19,12 +19,15 @@
 		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
 	
-	<!-- Community-Layout -->
-	<definition name=".communityLayout" template="/WEB-INF/view/community_review_layout/template.jsp">
-		<put-attribute name="title" value="spring" />
-		<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/view/community_review_layout/container.jsp" />
-		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	<!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->
+	<definition name=".*.*.*" extends=".mainLayout">
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/>
+	</definition>
+	<definition name=".*.*" extends=".mainLayout">
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
+	</definition>
+	<definition name=".*" extends=".mainLayout">
+    	  <put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
 	</definition>
 	
 		<!-- Profile-Layout -->

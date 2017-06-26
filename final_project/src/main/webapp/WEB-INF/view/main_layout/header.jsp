@@ -132,17 +132,17 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Job square</a>
+			<a class="navbar-brand" href="<%=cp%>/main">Job square</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#">네트워크</a></li>
-				<li><a href="#">기업</a></li>
-				<li><a href="#">채용</a></li>
-				<li><a href="#">인재</a></li>
-				<li><a href="<%=cp%>/community">커뮤니티</a></li>
-				<li><a href="#">코인</a></li>
-				<li><a href="#">고객센터</a></li>
+				<li><a href="<%=cp%>/company/main">기업</a></li>
+				<li><a href="<%=cp%>/employ/main">채용</a></li>
+				<li><a href="<%=cp%>/talent/main">인재</a></li>
+				<li><a href="<%=cp%>/community/review">커뮤니티</a></li>
+				<li><a href="<%=cp%>/point/main">포인트</a></li>
+				<li><a href="<%=cp%>/help/main">고객센터</a></li>
 			</ul>	
 			
 			<ul class="nav navbar-nav navbar-right">
