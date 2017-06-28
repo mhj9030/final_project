@@ -7,30 +7,43 @@
 	String cp=request.getContextPath();
 %>
 
+
 <div class="list-body" align="center">
 	<div class="page-header">
 		<h1 align="left">
-			| 포인트 소개 <small></small>
+			| 나의포인트 <small></small>
 		</h1>
+	</div>
+
+	<div>
+		사용자 님의 Job square 포인트<br><br>
 		
-	
+		<table class="table" >
+			<tr>
+				<td colspan="3" align="center">
+					<font size="3"><b>나의포인트</b></font>
+				</td>
+			</tr>
+			<tr align="center">
+				<td rowspan="2" width="50%">
+					사용가능한 포인트<br>
+					<font size="14"><b>0</b></font> 원
+				</td>
+				<td width="200px">
+					적립 예정 포인트<br>
+					0 원
+				</td>
+			</tr>
+			<tr align="center">
+				<td>
+					소멸 예정 포인트<br>
+					0 원
+				</td>
+			</tr>
+		</table>
 	</div>
 
 	<div>
-		<div>
-			<img src="" height="150px" width="150px">
-		</div>
-		<div style="height: 200px;">
-			<h3>포인트란?</h3>
-			홈페이지 내에서 사용 가능한 마일리지 제도입니다.<br>
-			회사 면접 후기 글과 각 종 댓글과 이력서 공개를 통하여 얻을 수 있으며 <br>
-			공개된 이력서를 열람하는데 사용하실 수 있습니다.
-		</div>
-	</div>
-
-	<div>
-		<div align="right">1개(1/10 페이지)</div>
-
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -59,12 +72,6 @@
 
 		<div>
 			<div>1 2 3</div>
-		</div>
-
-		<div class= "footer-bar" >
-			<div class = "footer-bar-submit">
-				<button type="button" class="btn btn-default" onclick="#">글쓰기</button>
-			</div>
 		</div>
 
 	</div>

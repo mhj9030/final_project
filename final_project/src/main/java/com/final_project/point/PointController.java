@@ -9,7 +9,5 @@ public class PointController {
 	@RequestMapping("/point/main")
 	public String method() {
 		return ".point_layout.main.container";
-
 	}
-
 }
