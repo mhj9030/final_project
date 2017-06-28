@@ -40,6 +40,32 @@
 	width: 300px;
 }
 
+.footer-bar {
+	margin-top : 60px;
+	clear: both;
+}
+
+.footer-bar .foorter-bar-refresh {
+	float: left;
+	width: 20%;
+	min-width: 85px;
+}
+
+.footer-bar .footer-search-bar {
+	float: left; 
+ 	width: 60%;
+ 	text-align: center;
+}
+
+.footer-bar .footer-bar-submit {
+	float: left;
+	width: 20%;
+	min-width: 85px;
+	text-align: center;
+}
+
+
+
 
 
 
