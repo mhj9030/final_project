@@ -5,8 +5,9 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 
-<!-- Sub-Layout -->
+
 <tiles-definitions>
+	<!-- Sub-Layout -->
 	<definition name=".subLayout" template="/WEB-INF/view/sub_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
 	</definition>
@@ -19,6 +20,21 @@
 		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
 	
+
+	<!-- Company-Layout -->
+	<definition name=".companylayout" template="/WEB-INF/view/main_layout/template.jsp">
+		<put-attribute name="title" value="spring" />
+	  	<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />	
+		<put-attribute name="body" value="/WEB-INF/view/main_layout/container.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+	
+	<definition name=".company_layout.*.*" extends=".companylayout">
+		<put-attribute name="body" value="/WEB-INF/view/community_layout/{1}/{2}.jsp"/>
+	</definition>
+	
+	
+	
 	<!-- Community-Layout -->
 	<definition name=".communityLayout" template="/WEB-INF/view/community_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
@@ -26,6 +42,8 @@
 		<put-attribute name="sub_headers" value="/WEB-INF/view/community_layout/sub_header.jsp" />
 		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
+		
+	<!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->
 		
 	<!-- Community-Layout 서브메뉴들 -->
 	<definition name=".community_layout.*.*" extends=".communityLayout">
@@ -97,10 +115,7 @@
 	<definition name=".talent_layout.*.*" extends=".talentLayout">
 		<put-attribute name="body" value="/WEB-INF/view/talent_layout/{1}/{2}.jsp"/>
 	</definition>
-	
-	
-	
-	
+
 	<!-- Profile-Layout -->
 	<definition name=".profileLayout" template="/WEB-INF/view/profile_layout/template.jsp">
 		<put-attribute name="title" value="spring" />

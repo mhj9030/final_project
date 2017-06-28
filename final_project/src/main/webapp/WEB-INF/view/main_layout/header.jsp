@@ -137,7 +137,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="#">네트워크</a></li>
-				<li><a href="<%=cp%>/company/main">기업</a></li>
+				<li><a href="<%=cp%>/company/search">기업</a></li>
 				<li><a href="<%=cp%>/employ/main">채용</a></li>
 				<li><a href="<%=cp%>/talent/main">인재</a></li>
 				<li><a href="<%=cp%>/community/review">커뮤니티</a></li>
