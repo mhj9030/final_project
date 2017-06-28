@@ -13,7 +13,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Calendar;
 
-import javax.media.jai.JAI;
+import javax.media.jai.JAI; 
 import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletResponse;
 

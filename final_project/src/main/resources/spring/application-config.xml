@@ -9,4 +9,5 @@
          <context:component-scan
             base-package="org.springframework.samples.service"/>  -->
 	 <import resource="/../../mybatis/mybatis-context.xml"/>
+
 </beans>
