@@ -10,10 +10,10 @@
 <div class="wrap_wide cmenu">
     <div class="wrap">
 		<ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class=""><a href="#">게시판1</a></li>
-            <li role="presentation" class=""><a href="#">게시판2</a></li>
-            <li role="presentation" class=""><a href="#">게시판3</a></li>
-            <li role="presentation" class=""><a href="#">게시판4</a></li>
+            <li role="presentation" class=""><a href="#">포인트소개</a></li>
+            <li role="presentation" class=""><a href="#">나의포인트</a></li>
+            <li role="presentation" class=""><a href="#">포인트마켓</a></li>
+            <li role="presentation" class=""><a href="#">이력서보관함</a></li>
         </ul>
     </div>
 </div>
