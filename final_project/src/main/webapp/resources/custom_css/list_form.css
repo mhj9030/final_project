@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+.list-body{
+	clear:both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    min-height: 500px;
+    padding-top: 20px;
+    width: 800px;
+    height: 700px;
+}
+
+.page-header h1{
+	margin-left: 10px;
+}
+
+.table-hover thead{
+	text-align: center;
+}
+
+.table-hover th{
+	text-align: center;
+}
+
+.list-comp{
+	width: 100%; 
+	margin: 10px auto;
+}
+
+.list-search{
+	width: 100%;
+	text-align: center;
+}
+
+.list-searchList{
+	margin-right: 5px; 
+}
+
+.input-group{
+	width: 300px;
+}
+
+
+
+
+
+
+
+
+
+
