@@ -26,11 +26,12 @@
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 <!-- Profile_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
-
-
-<!-- company 전용 CSS -->
 <!-- list_form CSS -->
 <link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
+
+<!-- company 전용 CSS -->
+<!-- company_search_list.css -->
+<link href="<%=cp%>/resources/custom_css/company_search_list.css" rel="stylesheet">
 
 
 

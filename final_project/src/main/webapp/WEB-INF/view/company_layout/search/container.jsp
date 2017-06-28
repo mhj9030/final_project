@@ -7,25 +7,32 @@
 	String cp=request.getContextPath();
 %>
 
-<div>
-	<div><h4>기업 정보</h4></div>
-	<div>
-		<div><h5>기업 검색</h5></div>
-		
-		<div class="btn-group">
-  			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    			선택 <span class="caret"></span>
-  			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="#">기업명</a></li>
-			    <li><a href="#">기업형태</a></li>
-			    <li><a href="#">업종</a></li>
-			</ul>
+<div class="list-body" align="center">
+	<div class="page-header">
+		<h1 align="left">
+			| 기업검색 <small></small>
+		</h1>
+	</div>
+	
+	<div class="search">
+		<div class="search-select">
+			<div class="btn-group">
+	  			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    			선택 <span class="caret"></span>
+	  			</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">기업명</a></li>
+				    <li><a href="#">기업형태</a></li>
+				    <li><a href="#">업종</a></li>
+				</ul>
+			</div>
 		</div>
 		
-		<div>
-			<input type="text" placeholder="기업명 검색">
-			<button type="submit">검색</button>
+		<div class="search-name">
+			<input class="search-name form-control" type="text" placeholder="기업명 검색">
+			<button type="submit" class="btn">
+				<span class="glyphicon glyphicon-search"></span> 검색
+			</button>
 		</div>
 		
 		<div class="btn-group" role="group" aria-label="...">
