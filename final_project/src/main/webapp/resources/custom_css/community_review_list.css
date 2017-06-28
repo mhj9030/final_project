@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+.list_wrap{
+	width: 900px;
+	height : 1000px;
+	margin: 30px auto;
+}
+
+.list_wrap h3{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.search_wrap{
+	width : 400px;
+	height : 30px;
+	margin : 10px auto;
+	box-sizing: border-box;
+}
+
+.table-hover{
+	width: 950px;
+	margin: 0px auto 20px;
+}
+
+.table-hover div{
+	height : 30px;
+}
+
+
+

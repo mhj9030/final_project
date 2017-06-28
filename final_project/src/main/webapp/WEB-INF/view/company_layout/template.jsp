@@ -37,6 +37,7 @@
 	<tiles:insertAttribute name="sub_headers"/>
     <tiles:insertAttribute name="body"/>
     <tiles:insertAttribute name="footers"/>
+
 </body>
 <!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">

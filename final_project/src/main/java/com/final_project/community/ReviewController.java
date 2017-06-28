@@ -12,7 +12,7 @@ public class ReviewController {
 	public String method(Model model) {
 		
 		model.addAttribute("review", "on");
-		return ".community_layout.review.container";
+		return ".community_layout.review.list";
 	}
 
 }

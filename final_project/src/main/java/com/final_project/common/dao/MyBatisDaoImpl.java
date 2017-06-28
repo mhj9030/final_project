@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 public class MyBatisDaoImpl implements CommonDAO {
 	@Autowired
 	private SqlSession sqlSession;
+
 	
-/*	
 	public void setSqlSessionTemplate(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-*/
+
 	
 	// ******************************************************************
 	// 데이터 추가
