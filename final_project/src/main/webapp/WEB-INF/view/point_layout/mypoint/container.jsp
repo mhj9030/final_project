@@ -7,7 +7,6 @@
 	String cp=request.getContextPath();
 %>
 
-
 <div class="list-body" align="center">
 	<div class="page-header">
 		<h1 align="left">
@@ -15,9 +14,9 @@
 		</h1>
 	</div>
 
+	<!-- 나의 포인트 -->
 	<div>
-		사용자 님의 Job square 포인트<br><br>
-		
+		${userName} 님의 Job square 포인트<br><br>
 		<table class="table" >
 			<tr>
 				<td colspan="3" align="center">
@@ -26,53 +25,53 @@
 			</tr>
 			<tr align="center">
 				<td rowspan="2" width="50%">
-					사용가능한 포인트<br>
-					<font size="14"><b>0</b></font> 원
+					사용가능한 포인트<br><font size="14"><b>${point.mypoint}</b></font> 원
 				</td>
 				<td width="200px">
-					적립 예정 포인트<br>
-					0 원
+					적립 예정 포인트<br>${point.reserve} 원
 				</td>
 			</tr>
 			<tr align="center">
 				<td>
-					소멸 예정 포인트<br>
-					0 원
+					소멸 예정 포인트<br>${point.terminate} 원
 				</td>
 			</tr>
 		</table>
 	</div>
-
+	
+	<!-- 포인트 내역 -->
 	<div>
 		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th width="100">번호</th>
-					<th>제목</th>
-					<th width="150">작성자</th>
-					<th width="150">작성일</th>
-				</tr>
-			</thead>
-
-			<tbody>
+			<tbody >
+				<c:forEach var="list" items="${list}">
+					<tr align="center">
+						<td width="150px">${list.classify}</td>
+						<td align="left">
+							${list.classify}<br>
+							${list.history}
+						</td>
+						<td width="150px">${list.poDate}</td>
+						<td width="100px">
+							<c:if test="${list.classify=='적립'}">+</c:if>
+							<c:if test="${list.classify=='사용'}">-</c:if>
+							${list.point}
+						</td>
+					</tr>
+				</c:forEach>
 				<tr align="center">
-					<td>1</td>
-					<td align="left"><a href="#">Job square 포인트 이용약관 170628</a></td>
-					<td>관리자</td>
+					<td>적립</td>
+					<td align="left">
+						적립<br>
+						가입 이벤트 적립
+					</td>
 					<td>2017-06-28</td>
-				</tr>
-				<tr align="center">
-					<td>2</td>
-					<td align="left"><a href="#">Job square 포인트 이용약관 160627</a></td>
-					<td>관리자</td>
-					<td>2016-06-27</td>
+					<td>+1000</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<div>
-			<div>1 2 3</div>
+		<div style="text-align: center;">
+			<div>1 2 3${paging}</div>
 		</div>
-
 	</div>
 </div>

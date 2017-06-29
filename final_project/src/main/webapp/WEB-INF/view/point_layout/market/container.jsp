@@ -7,14 +7,9 @@
 	String cp=request.getContextPath();
 %>
 
+
 <div class="list_wrap">
-	<h3>| 면접후기</h3>
+	<h3>| 포인트 마켓</h3>
 	
-	<div class="">
-		검색
-	</div>
-	
-	<div class="">
-		리스트
-	</div>
+	임시페이지
 </div>
