@@ -60,6 +60,9 @@
 	</definition>
 		
 	<!-- Company-Layout 서브메뉴들 -->
+	<definition name=".company_layout.*.*.*" extends=".companyLayout">
+		<put-attribute name="body" value="/WEB-INF/view/company_layout/{1}/{2}/{3}.jsp"/>
+	</definition>
 	<definition name=".company_layout.*.*" extends=".companyLayout">
 		<put-attribute name="body" value="/WEB-INF/view/company_layout/{1}/{2}.jsp"/>
 	</definition>

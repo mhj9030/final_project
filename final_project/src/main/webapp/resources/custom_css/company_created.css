@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.created-body{
+	clear: both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    min-height: 500px;
+    padding-top: 20px;
+    width: 800px;
+}
+
+.business{
+	width: 150px;
+	float: left;
+	margin-right: 10px;
+}
+
+.business .sub .form-control{
+	visibility: collapse;
+}

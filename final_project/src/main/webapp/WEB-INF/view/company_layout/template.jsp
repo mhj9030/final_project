@@ -32,7 +32,10 @@
 <!-- company 전용 CSS -->
 <!-- company_search_list.css -->
 <link href="<%=cp%>/resources/custom_css/company_search_list.css" rel="stylesheet">
-
+<!-- company_search_article.css -->
+<link href="<%=cp%>/resources/custom_css/company_search_article.css" rel="stylesheet">
+<!-- company_created.css -->
+<link href="<%=cp%>/resources/custom_css/company_created.css" rel="stylesheet">
 
 
 </head>

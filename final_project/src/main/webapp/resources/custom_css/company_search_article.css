@@ -1,0 +1,64 @@
+.cover-back{
+    width: 100%;
+    height: 360px;
+}
+
+.cover-back img{
+	width: 100%;  
+	height: 100%;
+}
+
+.cover-content{
+	position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    padding-top: 180px;
+    text-align: center;
+    color: white;
+}
+
+.cover-content .image{
+	width: 100px;
+	height: 100px;
+	margin-left: 900px;
+}
+
+.cover-content .image img{
+	width: 100%;  
+	height: 100%;
+}
+
+.content{
+	clear: both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    padding-top: 20px;
+    width: 800px;
+}
+
+.basic{
+	weight: 100%;
+	margin-bottom: 70px;
+}
+
+.intro{
+	margin-bottom: 70px;
+}
+
+#map{
+	height: 300px;
+	weight: 100%;
+}
+
+
+
+
+
+
+
+
+

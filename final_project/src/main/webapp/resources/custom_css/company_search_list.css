@@ -75,13 +75,15 @@
 
 .item-image img{
 	height: 100%;
+	margin: 0;
 }
 
 .item-content{
 	text-align: left;
 	height: 100%;
 	float: left;
-	padding: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
 }
 
 

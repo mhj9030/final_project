@@ -30,9 +30,8 @@
 	</div>
 	
 	<div class="search">
+		<div class="search-header" align="left"><h4>검색 조건</h4></div>
 		<div class="search-select">
-			<div class="subject" align="left"><h4></h4></div>
-			
 			<div class="btn-group">
 	  			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 	    			선택 <span class="caret"></span>
@@ -228,7 +227,7 @@
 		<div class="list-header">
 			<div class="subject" align="left"><h4>전체 기업(142)</h4></div>
 			<div class="chk_info" align="right">
-				<input type="radio" name="chk_info" value=""> 최신순
+				<input type="radio" name="chk_info" value="" checked="checked"> 최신순
 				<input type="radio" name="chk_info" value=""> 인기순
 			</div>
 		</div>
@@ -239,10 +238,10 @@
 			</div>
 			<div class="item-content">
 				<div class="content-name">
-					<h4><a href="#">KH정보교육원</a></h4>
+					<h4><a href="<%=cp%>/company/search/article">KH정보교육원</a></h4>
 				</div>
-				<div class="content-intro">최고의 교육원!!!!!</div>
-				<div class="content-type">교육업 : 전문/기능학원</div>
+				<div class="content-intro"><h5>최고의 교육원!!!!!</h5></div>
+				<div class="content-type"><h5>교육업 : 전문/기능학원</h5></div>
 			</div>
 		</div>
 	</div>

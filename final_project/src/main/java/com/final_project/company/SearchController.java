@@ -8,10 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SearchController {
 	
 	@RequestMapping("/company/search")
-	public String method(Model model) {
+	public String list(Model model) {
 		
 		model.addAttribute("search", "on");
 		
 		return ".company_layout.search.container";
+	}
+	
+	@RequestMapping("/company/search/article")
+	public String article(Model model) throws Exception{
+		
+		model.addAttribute("search", "on");
+		
+		return ".company_layout.search.article";
 	}
 }
