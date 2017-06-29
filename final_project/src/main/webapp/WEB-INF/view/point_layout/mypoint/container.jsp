@@ -7,17 +7,13 @@
 	String cp=request.getContextPath();
 %>
 
-<div class="list-body" align="center">
-	<div class="page-header">
-		<h1 align="left">
-			| 나의포인트 <small></small>
-		</h1>
-	</div>
+<div class="list_wrap">
+	<h3>| 나의 포인트</h3>
 
 	<!-- 나의 포인트 -->
 	<div>
 		${userName} 님의 Job square 포인트<br><br>
-		<table class="table" >
+		<table style="clean; border: 1px solid black; width: 100%; height: 200px;">
 			<tr>
 				<td colspan="3" align="center">
 					<font size="3"><b>나의포인트</b></font>
@@ -39,8 +35,17 @@
 		</table>
 	</div>
 	
+	<!-- 기간 검색 -->
+	<div style="height: 70px; text-align: center;">
+		<div style="height: 50px; align: center;">
+			기간 검색 <input type="date" name="startDate" /> ~ <input type="date" name="endDate" /> 
+			<button class="btn">검색</button>
+		</div>
+	</div>
+	
 	<!-- 포인트 내역 -->
 	<div>
+		- 나의 포인트 내역 -
 		<table class="table table-hover">
 			<tbody >
 				<c:forEach var="list" items="${list}">
