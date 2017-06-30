@@ -16,7 +16,7 @@
 
   function check() {
         var f = document.boardForm;
-
+ 
     	var str = f.subject.value;
         if(!str) {
             alert("제목을 입력하세요. ");

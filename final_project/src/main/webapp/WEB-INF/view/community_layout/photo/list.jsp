@@ -12,12 +12,12 @@
 		자유롭게 사진을 공유할 수 있습니다.
 	</p>
 	<div class="photo_list_subwrap">
-		<c:forEach var="d" begin="1" end="6" step="1" >
+		<c:forEach var="d" begin="1" end="5" step="1">
 			<div class="photo_list">
 				<div class="photo_list_btns">
-					<button class="btn btn-default btn-sm">1</button>
-					<button class="btn btn-default btn-sm">1</button>
-					<button class="btn btn-default btn-sm">1</button>
+					<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-search"></i></button>
+					<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-save"></i></button>
+					<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-thumbs-up"></i></button>
 				</div>
 				<div class="photo_list_img">
 					<img src="<%=cp%>/resources/image/Desert.jpg">
@@ -26,12 +26,13 @@
 					덥다 더워!
 				</div>
 				<div class="photo_list_create">
-					김민혁 | 2017-06-29
+					김민혁 | 2017-06-29 | <i class="glyphicon glyphicon-thumbs-up"></i> 20
 				</div>
 			</div>
-			<c:if test="${d==3}">
-			<br>
-			</c:if>
-		</c:forEach>
+		</c:forEach>	
+	</div>
+	
+	<div class="photo_list_paging">
+		1 2 3
 	</div>
 </div>

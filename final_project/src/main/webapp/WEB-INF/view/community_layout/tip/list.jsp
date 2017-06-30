@@ -30,7 +30,7 @@
     		<input type="checkbox" id="che_12" value=""><label for="che_12" class="green">공무원</label><br>
     		<input type="checkbox" id="che_13" value=""><label for="che_13" class="green">취준생</label>
     		<input type="checkbox" id="che_14" value=""><label for="che_14" class="green">알바생</label>
-    		<input type="checkbox" id="che_15" value=""><label for="che_15" class="green">학생</label>
+    		<input type="checkbox" id="che_15" value=""><label for="che_15" class="green">기타</label>
     		<input type="checkbox" id="che_16" value=""><label for="che_16" class="green">전체</label>
 		</div>
 		

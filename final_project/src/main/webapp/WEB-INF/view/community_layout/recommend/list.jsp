@@ -15,8 +15,8 @@
 		자신의 경험담 및 기업의 정보를 공유하고 기업을 추천합시다!!
 	</p>
 	<div class="recommend_list_tab">
-		<i class="glyphicon glyphicon-inbox"></i><span>등록된 회사 : 700</span>
-		<i class="glyphicon glyphicon-edit"></i><span>등록된 후기 : 800</span>
+		<i class="glyphicon glyphicon-inbox"></i><span> 등록된 회사 : 700</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		<i class="glyphicon glyphicon-edit"></i><span> 등록된 후기 : 800</span>
 		<form name="searchForm" method="post" class="form-inline recommend_search">
 			<input type="text" class="form-control input-sm input-search"
 			  		name="searchValue" placeholder="기업명을 입력하세요.">

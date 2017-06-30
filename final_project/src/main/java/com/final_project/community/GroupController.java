@@ -11,7 +11,7 @@ public class GroupController {
 	public String list(Model model) {
 		
 		model.addAttribute("group", "on");
-		return ".community_layout.group.container";
+		return ".community_layout.group.list";
 
 	}
 
