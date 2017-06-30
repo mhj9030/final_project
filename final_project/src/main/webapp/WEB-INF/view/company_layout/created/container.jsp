@@ -16,7 +16,10 @@
 			var business_sub=$(this).find('option:selected').val();
 			
 			$(".business-sub").hide();
+			$("select[name=subCode]").attr("disabled", "disabled");
+
 			$("."+business_sub).show();
+			$("."+business_sub).removeAttr("disabled");
 		});
 	});
 	
@@ -102,52 +105,51 @@
 			<select name="subCode" class="business-sub service form-control">
 			  <option value="1">호텔/여행/항공</option>
 			  <option value="2">외식업/식음료</option>
-			  <option value="3">공공기관/공기업</option>
-			  <option value="4">웨딩/장례/이벤트</option>
-			  <option value="5">뷰티/미용</option>
-			  <option value="6">레저/스포츠/여가</option>
-			  <option value="7">기타서비스업</option>
+			  <option value="3">웨딩/장례/이벤트</option>
+			  <option value="4">뷰티/미용</option>
+			  <option value="5">레저/스포츠/여가</option>
+			  <option value="6">기타서비스업</option>
 			</select>
 			
 			<select name="subCode" class="business-sub production form-control">
-			  <option value="8">전기/전자/제어</option>
-			  <option value="9">석유/화학/에너지</option>
-			  <option value="10">섬유/의류</option>
-			  <option value="11">농업/어업/광업</option>
-			  <option value="12">기계/설비/자동차</option>
-			  <option value="13">가구/목재/제지</option>
-			  <option value="14">조선/항공/우주</option>
-			  <option value="15">화장품/뷰티</option>
-			  <option value="16">금속/철강</option>
-			  <option value="17">생활용품/소비재</option>
-			  <option value="18">기타제조업</option>
+			  <option value="7">전기/전자/제어</option>
+			  <option value="8">석유/화학/에너지</option>
+			  <option value="9">섬유/의류</option>
+			  <option value="10">농업/어업/광업</option>
+			  <option value="11">기계/설비/자동차</option>
+			  <option value="12">가구/목재/제지</option>
+			  <option value="13">조선/항공/우주</option>
+			  <option value="14">화장품/뷰티</option>
+			  <option value="15">금속/철강</option>
+			  <option value="16">생활용품/소비재</option>
+			  <option value="17">기타제조업</option>
 			</select>
 			
 			<select name="subCode" class="business-sub medical form-control">
-			  <option value="19">의료</option>
-			  <option value="20">제약</option>
-			  <option value="21">사회복지</option>
+			  <option value="18">의료</option>
+			  <option value="19">제약</option>
+			  <option value="20">사회복지</option>
 			</select>
 			
 			<select name="subCode" class="business-sub sale form-control">
-			  <option value="22">판매</option>
-			  <option value="23">유통/무역</option>
-			  <option value="24">운송/운수/물류</option>
+			  <option value="21">판매</option>
+			  <option value="22">유통/무역</option>
+			  <option value="23">운송/운수/물류</option>
 			</select>
 			
 			<select name="subCode" class="business-sub education form-control">
-			  <option value="25">초중고대학</option>
-			  <option value="26">유아/유치원</option>
-			  <option value="27">교재/학습지</option>
-			  <option value="28">학원</option>
-			  <option value="29">전문/기능학원</option>
+			  <option value="24">초중고대학</option>
+			  <option value="25">유아/유치원</option>
+			  <option value="26">교재/학습지</option>
+			  <option value="27">학원</option>
+			  <option value="28">전문/기능학원</option>
 			</select>
 			
 			<select name="subCode" class="business-sub construction form-control">
-			  <option value="30">건설/건축/토목</option>
-			  <option value="31">실내/인테리어</option>
-			  <option value="32">환경/설비</option>
-			  <option value="33">부동산/임대</option>
+			  <option value="29">건설/건축/토목</option>
+			  <option value="30">실내/인테리어</option>
+			  <option value="31">환경/설비</option>
+			  <option value="32">부동산/임대</option>
 			</select>
 			
 			<select name="subCode" class="business-sub it form-control">
@@ -201,7 +203,7 @@
   		
   		<div class="form-group">
     		<label>매출액</label>
-    		<input name="cProfit" type="number" class="form-control" placeholder="매출액(단위 : 원)">
+    		<input name="cProfit" type="number" class="form-control" placeholder="매출액(단위 : 만원)">
   		</div>
   		
   		<div class="form-group">
@@ -213,15 +215,7 @@
     		<label>연락처</label>
     		<div class="row">
 			  <div class="col-xs-2">
-			    <select name="cTel1" class="form-control">
-					<option value="">선 택</option>
-					<option value="010" ${dto.tel1=="010" ? "selected='selected'" : ""}>010</option>
-					<option value="011" ${dto.tel1=="011" ? "selected='selected'" : ""}>011</option>
-					<option value="016" ${dto.tel1=="016" ? "selected='selected'" : ""}>016</option>
-					<option value="017" ${dto.tel1=="017" ? "selected='selected'" : ""}>017</option>
-					<option value="018" ${dto.tel1=="018" ? "selected='selected'" : ""}>018</option>
-					<option value="019" ${dto.tel1=="019" ? "selected='selected'" : ""}>019</option>
-				</select>
+			  	<input name="cTel1" type="text" class="form-control">
 			  </div>
 			  <div class="col-xs-2">
 			    <input name="cTel2" type="text" class="form-control">
