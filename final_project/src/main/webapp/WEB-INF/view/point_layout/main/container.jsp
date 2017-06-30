@@ -7,20 +7,14 @@
 	String cp=request.getContextPath();
 %>
 
-<div class="list-body" align="center">
-	<div class="page-header">
-		<h1 align="left">
-			| 포인트 소개 <small></small>
-		</h1>
-		
-	
-	</div>
+<div class="list_wrap">
+	<h3>| 포인트 소개</h3>
 
-	<div>
-		<div>
-			<img src="" height="150px" width="150px">
+	<div style="height: 250px; align: center;">
+		<div style="float: left; width: 250px;">
+			<img src="" height="200px" width="200px">
 		</div>
-		<div style="height: 200px;">
+		<div style="float: left;">
 			<h3>포인트란?</h3>
 			홈페이지 내에서 사용 가능한 마일리지 제도입니다.<br>
 			회사 면접 후기 글과 각 종 댓글과 이력서 공개를 통하여 얻을 수 있으며 <br>
@@ -29,8 +23,6 @@
 	</div>
 
 	<div>
-		<div align="right">1개(1/10 페이지)</div>
-
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -48,24 +40,27 @@
 					<td>관리자</td>
 					<td>2017-06-28</td>
 				</tr>
+				<c:forEach var="dto" items="${list}">
 				<tr align="center">
-					<td>2</td>
-					<td align="left"><a href="#">Job square 포인트 이용약관 160627</a></td>
-					<td>관리자</td>
-					<td>2016-06-27</td>
+					<td>${dto.poNum}</td>
+					<td align="left"><a href="#">${dto.subject}</a></td>
+					<td>${dto.mId}</td>
+					<td>${dto.created}</td>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 
-		<div>
-			<div>1 2 3</div>
+		<div style="text-align: center;">
+			<div>1 2 3${paging}</div>
 		</div>
 
-		<div class= "footer-bar" >
+	<c:if test="${mId=='admin'}">
+		<div class= "footer-bar">
 			<div class = "footer-bar-submit">
 				<button type="button" class="btn btn-default" onclick="#">글쓰기</button>
 			</div>
 		</div>
-
+	</c:if>
 	</div>
 </div>

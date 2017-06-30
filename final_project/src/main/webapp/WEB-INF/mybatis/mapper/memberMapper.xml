@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+
+
+<!-- 회원가입 -->
+<insert id="insertMember">
+	INSERT INTO member (mid, mpwd, mname, mbirth, mgender) VALUES
+	 (#{mid}, #{mpwd}, #{mname}, TO_DATE(#{mbirth}, 'MM/DD/YYYY'), #{mgender})
+</insert>
+
+<!-- 회원정보 불러오기 -->
+<select id="readMember" resultType="com.final_project.member.Member" parameterType="String">
+	SELECT mid, mpwd, mname, TO_CHAR(mbirth, 'YYYY-MM-DD')mbirth,
+		mgender, TO_CHAR(mcreated, 'YYYY-MM-DD')mcreated
+			FROM member
+				WHERE mid = #{mid}
+</select>
+
+    <!-- 어쏘러티(권한) 테이블 -->    
+	<insert id="insertAuthority" parameterType="com.final_project.member.Member">
+	    INSERT INTO memberAuthority(mid, authority)
+	        VALUES (#{mid}, #{authority})
+	</insert>
+
+</mapper>
