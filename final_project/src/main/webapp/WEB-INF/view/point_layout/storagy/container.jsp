@@ -8,13 +8,7 @@
 %>
 
 <div class="list_wrap">
-	<h3>| 면접후기</h3>
+	<h3>| 이력서 보관함</h3>
 	
-	<div class="">
-		검색
-	</div>
-	
-	<div class="">
-		리스트
-	</div>
+	임시페이지
 </div>

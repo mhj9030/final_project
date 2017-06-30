@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form id="overview_form" action="/api/users/80085/overview" method="put" class="form user_overview clearfix tab-pane" data-target="#overview_view_text">
+                                    <form id="overview_form" action="/api/users/80085/overview"  class="form user_overview clearfix tab-pane" data-target="#overview_view_text">
                                         <label for="id_overview">자기소개</label>
                                         <div class="form-group">
                                             <textarea id="id_overview" name="overview" data-origin="" rows="4" maxlength="200" placeholder="자기소개" class="form-control"></textarea>

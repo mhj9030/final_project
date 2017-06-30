@@ -20,15 +20,21 @@
 <link href="<%=cp%>/resources/custom_css/main_layout.css" rel="stylesheet">
 <!-- Main_layout_footer CSS -->
 <link href="<%=cp%>/resources/custom_css/main_layout_footer.css" rel="stylesheet">
-<!-- Main_layout_container CSS -->
-<link href="<%=cp%>/resources/custom_css/main_layout_container.css" rel="stylesheet">
 <!-- Jquery 3.1.0 -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 <!-- Bootstrap JS -->
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 <!-- Profile_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<!-- smart edit -->
+<script type="text/javascript" src="<%=cp%>/resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 
+
+<!-- 본인의 css영역 -->
+<!-- community_review_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_review_list.css" rel="stylesheet">
+<!-- created_form CSS -->
+<link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
 
 
 </head>

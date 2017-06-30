@@ -26,12 +26,15 @@
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 <!-- Profile_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<!-- smart edit -->
+<script type="text/javascript" src="<%=cp%>/resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 
-<!-- company 전용 CSS -->
-<!-- list_form CSS -->
-<link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
-
+<!-- 본인의 css영역 -->
+<!-- community_review_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_review_list.css" rel="stylesheet">
+<!-- created_form CSS -->
+<link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
 
 
 </head>
@@ -40,7 +43,6 @@
 	<tiles:insertAttribute name="sub_headers"/>
     <tiles:insertAttribute name="body"/>
     <tiles:insertAttribute name="footers"/>
-
 </body>
 <!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
