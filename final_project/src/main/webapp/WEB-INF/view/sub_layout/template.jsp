@@ -35,6 +35,9 @@
   <!-- 회원가입 JS -->
   <script src="<%=cp%>/resources/js/register.js" type="text/javascript"></script>
   
+    <!-- 회원가입 JS -->
+  <script src="<%=cp%>/resources/js/login.js" type="text/javascript"></script>
+  
   <!-- 알림창 CSS -->
   <link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
  
@@ -55,10 +58,10 @@ $(function() {
 				)
 	} else if(mode == "loginfail"){
 		swal(
-				  '실패',
-				  '이제 등록한 아이디로 로그인 할 수 있습니다.',
-				  'success'
-				)
+  				'Oops...',
+  				'존재하지 않는 아이디나 비밀번호가 틀립니다.',
+  				'error'
+)
 	}
 });
 
@@ -161,7 +164,7 @@ $(function() {
       <span class="form-signin-heading2">지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!</span>
 
 
-<form name = "loginac" method="post" onsubmit="login();">
+<form name = "loginac" method="post" onsubmit="return login();">
       <input type="email" id="mid" name = "mid" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
 
       <input type="password" id="mpwd" name = "mpwd" class="form-control" placeholder="Password" required="required">

@@ -55,3 +55,29 @@
 .breadcrumb{
 	background-color: transparent;
 }
+
+.navbar-content{
+	width: 320px;
+	padding: 15px;
+}
+.navbar-footer {
+	background-color: #ddd;
+}
+.navbar-footer-content{
+	padding: 10px;
+}
+
+.col-md-7 span {
+	color : #000;
+}
+
+.btn-xs{
+	line-height: 1.1em;
+}
+
+.navbar-nav>li>.dropdown-menu{
+	border-radius: 0px;
+}
+.dropdown-menu{
+	padding: 0px;
+}
