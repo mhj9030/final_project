@@ -34,7 +34,6 @@
 	</definition>
 	
 	
-	
 	<!-- Community-Layout -->
 	<definition name=".communityLayout" template="/WEB-INF/view/community_layout/template.jsp">
 		<put-attribute name="title" value="spring" />
@@ -49,7 +48,7 @@
 	<definition name=".community_layout.*.*" extends=".communityLayout">
 		<put-attribute name="body" value="/WEB-INF/view/community_layout/{1}/{2}.jsp"/>
 	</definition>
-	
+
 	
 	<!-- Company-Layout -->
 	<definition name=".companyLayout" template="/WEB-INF/view/company_layout/template.jsp">

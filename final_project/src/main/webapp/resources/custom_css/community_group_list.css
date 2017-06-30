@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+.group_list_wrap{
+	width: 800px;
+	min-height: 550px;
+	margin: 30px auto;
+	box-sizing: border-box;
+}
+
+.group_list_wrap h3{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 40px;
+}
+
+.group_list_wrap p{
+	font-size: 12px;
+	color : #ff0057;
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+
+.group_list_tag{
+	width: 100%;
+	height: 100px;
+	background: #f2f2f2;
+}
+
+.group_list_tag .group_list_tag_subject{
+	width: 15%;
+	height: 100px;
+	float : left;
+	padding : 20px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.group_list_tag .group_list_tag_btns{
+	width: 85%;
+	height: 100px;
+	float : left;
+	padding : 5px;
+}
+
+.group_list_tag .group_list_tag_btns button{
+	margin: 0px 5px 5px 0px;
+}
+
+.group_list_btn_group{
+	margin-top : 40px;
+	padding-top : 10px;
+	width: 20%;
+	height: 50px;
+	float: left;
+}
+
+.group_list_dropdown{
+	top: 73%;
+}
+
+.group_list_search{
+	margin-top : 40px;
+	padding-top : 10px;
+	text-align : center;
+	width: 60%;
+	height: 50px;
+	float: left;
+}
+
+.group_list_createbtn{
+	padding-left : 50px;
+	margin-top : 40px;
+	padding-top : 10px;
+	width: 20%;
+	height: 50px;
+	float: left;
+}
+.group_back{
+	width: 100%;
+	height: 1px;
+	clear: both;
+}
+
+.group_list_wrap .group_row{
+	margin: 0px 0px 10px;
+	border: 0px;
+	height: auto;
+}
+
+.group_list_wrap .group_list_group{
+	margin : 10px;
+	float : left;
+	width : 245px;
+	height: 260px;
+	border: 1px solid #4b4b4b;
+}
+
+.group_list_group .group_list_groupimg{
+	width:100%;
+	height: 119px;
+	border-bottom: 1px solid #ccc;
+}
+
+.group_list_group .group_list_groupimg img{
+	width:100%;
+	height: 100%;
+}
+
+.group_list_group .group_list_groupsubject{
+	font-size: 18px;
+    width: 100%;
+    height: 49px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    padding-top: 12px;
+}
+
+.group_list_group .group_list_groupmember{
+	width:100%;
+	height: 49px;
+	border-bottom: 1px solid #ccc;
+	padding-left: 20px;
+}
+
+.group_list_group .group_list_groupmember .grorpmember_img{
+	float : left;
+	width: 30px;
+	height: 30px;
+	margin : 10px;
+}
+
+.group_list_group .group_list_groupmember .grorpmember_img img{
+	width : 100%;
+	height: 100%;
+}
+
+.group_list_group .group_list_groupjoin{
+	padding-top: 6px;
+	width:100%;
+	height: 39px;
+}
+
