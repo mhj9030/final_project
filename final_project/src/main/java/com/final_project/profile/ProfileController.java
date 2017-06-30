@@ -1,16 +1,27 @@
 package com.final_project.profile;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller("ProfileController")
+@Controller
 public class ProfileController {
-	
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String method() {
-		return ".profileLayout";
 
+	@Autowired
+	private ProfileService service;
+
+	@RequestMapping(value = "/profile")
+	public String method(@RequestParam(value = "mid") String mid, Model model, HttpSession session) throws Exception {
+
+		Profile dto = service.profileRead(mid);
+
+		model.addAttribute("dto", dto);
+
+		return ".profileLayout";
 	}
 
 }
