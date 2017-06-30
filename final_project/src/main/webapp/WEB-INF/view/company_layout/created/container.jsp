@@ -213,7 +213,7 @@
     		<label>연락처</label>
     		<div class="row">
 			  <div class="col-xs-2">
-			    <select name="tel1" class="form-control">
+			    <select name="cTel1" class="form-control">
 					<option value="">선 택</option>
 					<option value="010" ${dto.tel1=="010" ? "selected='selected'" : ""}>010</option>
 					<option value="011" ${dto.tel1=="011" ? "selected='selected'" : ""}>011</option>

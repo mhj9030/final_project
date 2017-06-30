@@ -17,6 +17,16 @@ public class CreatedServiceImpl implements CreatedService{
 	@Override
 	public void insertCompany(Company dto, String pathname) throws Exception {
 		try {
+			if(dto.getcSerial1()!=null && dto.getcSerial1().length()!=0 &&
+					dto.getcSerial2() != null && dto.getcSerial2().length()!=0 &&
+							dto.getcSerial3() != null && dto.getcSerial3().length()!=0)
+				dto.setcSerial(dto.getcSerial1() + "-" + dto.getcSerial2() + "-" + dto.getcSerial3());
+			
+			if(dto.getcTel1()!=null && dto.getcTel1().length()!=0 &&
+					dto.getcTel2() != null && dto.getcTel2().length()!=0 &&
+							dto.getcTel3() != null && dto.getcTel3().length()!=0)
+				dto.setcTel(dto.getcTel1() + "-" + dto.getcTel2() + "-" + dto.getcTel3());
+			
 			dao.insertData("company.insertCompany", dto);
 			
 			if(!dto.getUpload().isEmpty()){

@@ -9,7 +9,7 @@
 	</insert>
 	
 	<!-- 기업 이미지 파일 등록 -->
-	<insert id="inserComImage" parameterType="com.final_project.company.Company">
+	<insert id="insertComImage" parameterType="com.final_project.company.Company">
 		insert into com_image(ciNum, cSaveFilename, cOriginalFilename, cSerial)
 			values(com_image_seq.nextval, #{cSaveFilename}, #{cOriginalFilename}, #{cSerial})
 	</insert>
