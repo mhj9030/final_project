@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="profile">
+
+
+<!-- 회원정보 불러오기 -->
+<select id="readProfile" resultType="com.final_project.profile.Profile" parameterType="String">
+SELECT m.mid, mname, TO_CHAR(mbirth, 'YYYY-MM-DD')mbirth,
+	 mgender, p.prophoto, p.procover, p.prointro
+		FROM member m
+			LEFT OUTER JOIN profile p ON m.mid = p.mid
+				WHERE m.mid = #{mid}
+</select>
+
+
+</mapper>

@@ -46,7 +46,7 @@
                                 <div class="name clearfix">
                                     <p class="job_title"> </p>
                                     <h2 class="break">
-                                <strong>사용자 이름</strong><span> 남 / 여 </span>
+                                <strong>${dto.mname }</strong><span>  ${dto.mgender } </span>
  
                                 
                             </h2> </div>
@@ -66,8 +66,17 @@
                                 <div class="tab-content set">
                                     <div id="overview_view" class="panel-inline media tab-pane active">
                                         <div class="panel-body overview">
-                                            <div id="overview_view_text" class="overview"> 아직 자기소개가 없습니다.
- 
+                                            <div id="overview_view_text" class="overview">
+ 											
+ 											 <c:if test="${empty dto.proIntro }">
+                                             자기 소개가 없습니다.
+ 											</c:if>
+ 											
+ 											<c:if test="${!empty dto.proIntro }">
+                                             ${dto.proIntro }
+ 											</c:if>
+ 											
+ 											
                                             </div>
                                         </div>
                                     </div>
@@ -180,5 +189,7 @@
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
 
