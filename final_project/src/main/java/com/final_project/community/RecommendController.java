@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RecommendController {
 	
 	@RequestMapping("/community/recommend")
-	public String method(Model model) {
+	public String list(Model model) {
 		
 		model.addAttribute("recommend", "on");
-		return ".community_layout.recommend.container";
+		return ".community_layout.recommend.list";
 
 	}
 

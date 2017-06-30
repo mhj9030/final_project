@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GroupController {
 	
 	@RequestMapping("/community/group")
-	public String method(Model model) {
+	public String list(Model model) {
 		
 		model.addAttribute("group", "on");
 		return ".community_layout.group.container";

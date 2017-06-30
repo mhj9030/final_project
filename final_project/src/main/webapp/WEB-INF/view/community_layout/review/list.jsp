@@ -8,20 +8,18 @@
 %>
 
 
-<div class="list_wrap">
+<div class="review_list_wrap">
 	<h3>| 면접후기</h3>
-	<div class="search_wrap">
-		<form name="searchForm" action="" method="post">
-			<select name="searchKey" class="selectField">
-				<option value="company">기업명</option>
-				<option value="name">작성자</option>
-			</select> 
-			<input type="text" name="searchValue">
-			<button>검색</button>
-		</form>
+	<p>
+		기업 면접에 관련된 인터뷰형식의 후기를 공유합니다.
+	</p>
+	
+	<div class="review_select">
+		<input type="radio" name="review_list" value="최신순" checked="checked">최신순&nbsp;&nbsp;
+		<input type="radio" name="review_list" value="추천순">추천순
 	</div>
-
-	<table class="table table-hover">
+	
+	<table class="table review_list_table">
 		<tr>
 			<td width="110">
 				<img src="<%=cp%>/resources/image/Desert.jpg" style="width:100px; height: 100px;"> 
@@ -35,7 +33,7 @@
 				<div>2017-06-27 | 조회수 : 0 | 추천 : 0</div>
 				<div>결과 : 불합격</div>
 				<div>
-					<button>보러가기</button>
+					<button class="btn btn-info">후기보기</button>
 				</div>
 			</td>
 		</tr>
@@ -52,7 +50,7 @@
 				<div>2017-06-27 | 조회수 : 0 | 추천 : 0</div>
 				<div>결과 : 불합격</div>
 				<div>
-					<button>보러가기</button>
+					<button class="btn btn-info">후기보기</button>
 				</div>
 			</td>
 		</tr>
@@ -61,10 +59,30 @@
 	<div style="text-align: center;">
 		1 2 3...
 	</div>
-	<div style="text-align: center;">
-		<button>글쓰기</button>
-		<button>추천순</button>
-		<button>최신목록</button>
-	</div>
-
+	
+	<div class= "footer-bar" >
+		<div class = "foorter-bar-refresh">
+			<button type="button" class="btn btn-default btn-sm wbtn" onclick="#">새로고침</button>
+		</div>
+			
+		<div class = "footer-search-bar">
+			<form name="searchForm" method="post" class="form-inline">
+				<select class="form-control input-sm" name="searchKey">
+					<option value="subject">제목</option>
+					<option value="userName">작성자</option>
+					<option value="content">내용</option>
+					<option value="created">등록일</option>
+				</select> <input type="text" class="form-control input-sm input-search"
+					name="searchValue">
+				<button type="button" class="btn btn-info btn-sm btn-search" onclick="searchList();"> 
+					검색
+				</button>
+			</form>
+		</div>
+		<div class = "footer-bar-submit">
+			<button type="button" class="btn btn-default" onclick="#">
+				 글쓰기
+			</button>
+		</div>
+	</div>	
 </div>

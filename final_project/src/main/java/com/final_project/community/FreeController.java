@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FreeController {
 	
 	@RequestMapping("/community/free")
-	public String method(Model model) {
+	public String list(Model model) {
 		
 		model.addAttribute("free", "on");
-		return ".community_layout.free.container";
+		return ".community_layout.free.list";
 
 	}
 
