@@ -53,6 +53,12 @@ $(function() {
 				  '이제 등록한 아이디로 로그인 할 수 있습니다.',
 				  'success'
 				)
+	} else if(mode == "loginfail"){
+		swal(
+				  '실패',
+				  '이제 등록한 아이디로 로그인 할 수 있습니다.',
+				  'success'
+				)
 	}
 });
 
@@ -147,24 +153,27 @@ $(function() {
     <video id="video1" autoplay="autoplay">
       <source src="<%=cp%>/resources/video/submain.mp4"> </video>
   </div>
+  
+  
   <div class="container" id = "shows">
     <div class="form-signin">
       <h2 class="form-signin-heading">Welcome! Job Square</h2>
       <span class="form-signin-heading2">지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!</span>
 
 
+<form name = "loginac" method="post" onsubmit="login();">
+      <input type="email" id="mid" name = "mid" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
 
-      <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required="required" autofocus="">
-
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+      <input type="password" id="mpwd" name = "mpwd" class="form-control" placeholder="Password" required="required">
 
       <button class="sub-layout-btn" type="submit">로그인</button>
-
+</form>
       <div class="footer-login">
         잡스퀘어에 가입해보세요!  <button class="register-btn" data-toggle="modal" data-target="#myModal"> 무료 가입</button><a href="<%=cp%>/main">둘러보기</a>
       </div>
     </div>
   </div>
+  
 
 </body>
 
