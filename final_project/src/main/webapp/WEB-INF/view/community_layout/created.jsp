@@ -7,7 +7,48 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-  
+  if(typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function() {
+        var TRIM_PATTERN = /(^\s*)|(\s*$)/g;
+        return this.replace(TRIM_PATTERN, "");
+    };
+  }
+
+  function check() {
+        var f = document.boardForm;
+ 
+    	var str = f.subject.value;
+        if(!str) {
+            alert("제목을 입력하세요. ");
+            f.subject.focus();
+            return false;
+        }
+
+	    str = f.name.value;
+        if(!str) {
+            alert("이름을 입력하세요. ");
+            f.name.focus();
+            return false;
+        }
+
+        str = f.content.value;
+        if(!str || str=="<p>&nbsp;</p>") {
+        	 alert("내용을 입력하세요. ");
+            f.content.focus();
+            return false;
+        }
+
+    	str = f.pwd.value;
+        if(!str) {
+            alert("패스워드를 입력하세요. ");
+            f.pwd.focus();
+            return false;
+        }
+    	
+       	f.action = "<%=cp%>/bbs/${mode}";
+       	
+       	return true;
+  }
 </script>
 
 <div class="created_form">

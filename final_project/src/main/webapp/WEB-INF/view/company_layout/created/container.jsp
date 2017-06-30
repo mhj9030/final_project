@@ -99,7 +99,7 @@
 			  <option value="a​gency">기관/협회</option>
 			</select>
 
-			<select id="subCode" name="subCode" class="business-sub service form-control">
+			<select name="subCode" class="business-sub service form-control">
 			  <option value="1">호텔/여행/항공</option>
 			  <option value="2">외식업/식음료</option>
 			  <option value="3">공공기관/공기업</option>
@@ -109,7 +109,7 @@
 			  <option value="7">기타서비스업</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub production form-control">
+			<select name="subCode" class="business-sub production form-control">
 			  <option value="8">전기/전자/제어</option>
 			  <option value="9">석유/화학/에너지</option>
 			  <option value="10">섬유/의류</option>
@@ -123,19 +123,19 @@
 			  <option value="18">기타제조업</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub medical form-control">
+			<select name="subCode" class="business-sub medical form-control">
 			  <option value="19">의료</option>
 			  <option value="20">제약</option>
 			  <option value="21">사회복지</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub sale form-control">
+			<select name="subCode" class="business-sub sale form-control">
 			  <option value="22">판매</option>
 			  <option value="23">유통/무역</option>
 			  <option value="24">운송/운수/물류</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub education form-control">
+			<select name="subCode" class="business-sub education form-control">
 			  <option value="25">초중고대학</option>
 			  <option value="26">유아/유치원</option>
 			  <option value="27">교재/학습지</option>
@@ -143,14 +143,14 @@
 			  <option value="29">전문/기능학원</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub construction form-control">
+			<select name="subCode" class="business-sub construction form-control">
 			  <option value="30">건설/건축/토목</option>
 			  <option value="31">실내/인테리어</option>
 			  <option value="32">환경/설비</option>
 			  <option value="33">부동산/임대</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub it form-control">
+			<select name="subCode" class="business-sub it form-control">
 			  <option value="33">인터넷/컨텐츠</option>
 			  <option value="34">쇼핑몰</option>
 			  <option value="35">네트워크/통신</option>
@@ -162,7 +162,7 @@
 			  <option value="41">게임</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub design form-control">
+			<select name="subCode" class="business-sub design form-control">
 			  <option value="42">신문/잡지</option>
 			  <option value="43">방송사/케이블</option>
 			  <option value="44">연예/엔터테인먼트</option>
@@ -174,14 +174,14 @@
 			  <option value="50">디자인/설계</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub bank form-control">
+			<select name="subCode" class="business-sub bank form-control">
 			  <option value="51">은행/금융</option>
 			  <option value="52">대출/캐피탈</option>
 			  <option value="53">증권/보험</option>
 			  <option value="54">기타금융</option>
 			</select>
 			
-			<select id="subCode" name="subCode" class="business-sub a​gency form-control">
+			<select name="subCode" class="business-sub a​gency form-control">
 			  <option value="55">정부/공기업</option>
 			  <option value="56">협회/단체</option>
 			  <option value="57">법률/법무/특허</option>

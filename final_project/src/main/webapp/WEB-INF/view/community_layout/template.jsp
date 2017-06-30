@@ -7,6 +7,7 @@
  <%
 	String cp=request.getContextPath();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +29,27 @@
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
 <!-- smart edit -->
 <script type="text/javascript" src="<%=cp%>/resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- created_form CSS -->
+<link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
+<!-- list_form CSS -->
+<link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
 
 
 <!-- 본인의 css영역 -->
+<!-- community_group_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_group_list.css" rel="stylesheet">
 <!-- community_review_list CSS -->
 <link href="<%=cp%>/resources/custom_css/community_review_list.css" rel="stylesheet">
-<!-- created_form CSS -->
-<link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
+<!-- community_news_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_news_list.css" rel="stylesheet">
+<!-- community_tip_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_tip_list.css" rel="stylesheet">
+<!-- community_recommend_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_recommend_list.css" rel="stylesheet">
+<!-- community_free_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_free_list.css" rel="stylesheet">
+<!-- community_photo_list CSS -->
+<link href="<%=cp%>/resources/custom_css/community_photo_list.css" rel="stylesheet">
 
 
 </head>
@@ -44,6 +59,7 @@
     <tiles:insertAttribute name="body"/>
     <tiles:insertAttribute name="footers"/>
 </body>
+
 <!-- 회원가입/로그인 모달 창 -->
 <script type="text/javascript">
   $('#job-register').on('shown.bs.modal', function () {
