@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PhotoController {
 	
 	@RequestMapping("/community/photo")
-	public String method(Model model) {
+	public String list(Model model) {
 		
 		model.addAttribute("photo", "on");
-		return ".community_layout.photo.container";
+		return ".community_layout.photo.list";
 
 	}
 

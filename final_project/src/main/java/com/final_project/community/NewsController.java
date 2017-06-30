@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NewsController {
 	
 	@RequestMapping("/community/news")
-	public String method(Model model) {
+	public String list(Model model) {
 		
 		model.addAttribute("news", "on");
-		return ".community_layout.news.container";
+		return ".community_layout.news.list";
 
 	}
 
