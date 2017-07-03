@@ -9,12 +9,25 @@
     width: 800px;
 }
 
-.business{
+.created-body .form-group{
+	margin-bottom: 30px;
+}
+
+.business-main{
 	width: 150px;
 	float: left;
 	margin-right: 10px;
 }
 
-.business .sub .form-control{
-	visibility: collapse;
+.business-sub{
+	width: 150px;
+	float: left;
+	margin-right: 10px;
 }
+
+.business-title label{
+	margin-right: 120px;
+	margin-left: 10px;
+	font-size: 12px;
+}
+

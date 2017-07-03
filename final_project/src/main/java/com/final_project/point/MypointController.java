@@ -19,13 +19,15 @@ public class MypointController {
 	
 	@RequestMapping("/point/mypoint")
 	public String method(HttpSession session, Model model) throws Exception {
-		Point point = null;
+		Point point = new Point();
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("mId", /*session.getId()*/"asd@daum.net");
-		
+		point.setMypoint(0);
+		point.setReserve(0);
+		point.setTerminate(0);
 		// 나의 포인트
-		point = service.mypoint(map);
+		/*point = service.mypoint(map);
 		
 		int current_page = 0;
 		int total_page = 0;
@@ -46,15 +48,15 @@ public class MypointController {
 		map.put("end", end);
 
 		// 포인트 내역
-		List<Point> list = service.readlist(map);
+		List<Point> list = service.readlist(map);*/
 		
 		// 페이징
 		String paging = null;
-		paging = util.paging(current_page, total_page);
+		//paging = util.paging(current_page, total_page);
 		
 		model.addAttribute("point", point);
-		model.addAttribute("list", list);
-		model.addAttribute("paging", paging);
+		//model.addAttribute("list", list);
+		//model.addAttribute("paging", paging);
 		
 		return ".point_layout.mypoint.container";
 	}
