@@ -7,5 +7,11 @@
 	String cp=request.getContextPath();
 %>
 
-
-<div>채용관리</div>
+<div class="employ-body">
+	<div class="page-header">
+		<h1 align="left">
+			| 채용관리 <small></small>
+		</h1>
+	</div>
+	
+</div>

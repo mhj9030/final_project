@@ -36,6 +36,8 @@
 <link href="<%=cp%>/resources/custom_css/company_search_article.css" rel="stylesheet">
 <!-- company_created.css -->
 <link href="<%=cp%>/resources/custom_css/company_created.css" rel="stylesheet">
+<!-- company_employ.css -->
+<link href="<%=cp%>/resources/custom_css/company_employ.css" rel="stylesheet">
 
 
 </head>
