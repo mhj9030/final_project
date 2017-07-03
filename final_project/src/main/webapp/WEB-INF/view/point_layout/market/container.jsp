@@ -14,7 +14,7 @@
 	
 	<!-- 나의 포인트 -->
 	<div style="height: 50px; text-align: center; font-size: 7;">
-		<b>${sessionScope.member.userId}</b> 님의 사용가능한 포인트 <b>${point.mypoint}</b> 원
+		<b>${sessionScope.member.userName}</b> 님의 사용가능한 포인트 <b>${point.mypoint}</b> 원
 	</div>
 	
 	<!-- 검색 -->
