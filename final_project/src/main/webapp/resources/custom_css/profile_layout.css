@@ -148,6 +148,7 @@
 	text-align: center;
 }
 
+
 .modal-content {
 	border-radius: 0px;
 }
@@ -163,3 +164,10 @@
 .list-unstyled list clearfix {
 	margin-right: -50px;
 }
+
+.panel-body {
+	padding: 0;
+	padding-top: 20px;
+}
+
+

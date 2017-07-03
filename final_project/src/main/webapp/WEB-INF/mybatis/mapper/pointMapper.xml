@@ -2,6 +2,44 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="point">
+	<!-- intro -->
+	<select id="bbsDataCount" resultType="Integer">
+		select nvl(count(*), 0) from point_intro
+	</select>
+	
+	<select id="selectBbsList" parameterType="map" resultType="com.final_project.point.Point">
+		select poNum, subject, content, created, mname from(
+			select rownum rnum, tb.* from(
+				select poNum, subject, content, to_char(created, 'YYYY-MM-DD') created, mname 
+				from point_intro pi
+				join member m on pi.mid=m.mid
+				order by poNum desc
+			)tb where <![CDATA[rownum <= #{end}
+		)where rnum >= #{start}]]>
+	</select>
+	
+	<select id="readBoard" parameterType="map" resultType="com.final_project.point.Point">
+		select poNum, subject, content, to_char(created, 'YYYY-MM-DD') created, mname 
+		from point_intro pi
+		join member m on pi.mid=m.mid
+		where poNum=#{poNum}
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.final_project.point.Point">
+		insert into point_intro(poNum, subject, content, mId) 
+		values(point_intro_seq.nextval, #{subject}, #{content}, #{mId})
+	</insert>
+	
+	<update id="updateBoard" parameterType="com.final_project.point.Point">
+		update point_intro set subject=#{subject}, content=#{content} where poNum=#{poNum}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="map">
+		delete from point_intro where poNum=#{poNum}
+	</delete>
+	
+	
+	<!-- mypoint -->
 	<select id="selectMypoint" parameterType="map" resultType="Integer">
 		select mypoint from(
 			select rownum rnum, tb.* from(
@@ -26,5 +64,7 @@
 		select classify, history, to_char(poDate, 'YYYY-MM-DD hh:mm:ss') poDate, point, total 
 		from point where mId=#{mId} and <![CDATA[total<>0]]>
 	</select>
+	
+	<!-- 검색 -->
 	
 </mapper>
