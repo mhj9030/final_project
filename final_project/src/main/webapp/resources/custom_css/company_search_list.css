@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+.list-body{
+	height: auto;	
+}
+
 .search{
 	clear: both;
 }
@@ -22,10 +26,6 @@
 .search .search-content .name .btn-info{
 	float: left;
 	margin-left: 5px;
-}
-
-.search .search-content .size{
-	
 }
 
 .search .search-content .size .btn{
@@ -75,16 +75,34 @@
 
 .item-image img{
 	height: 100%;
+	width: 80px;
 	margin: 0;
 }
 
 .item-content{
 	text-align: left;
 	height: 100%;
+	width: 700px;
 	float: left;
 	padding-left: 10px;
 	padding-top: 5px;
 }
 
+.content-name{
+	float: left;
+}
+
+.item-content .content-employ{
+	float: right;
+    margin-top: 10px;
+}
+
+.item-content .content-intro{
+	clear: both;
+}
+
+.list .page{
+	margin-top: 10px;
+}
 
 

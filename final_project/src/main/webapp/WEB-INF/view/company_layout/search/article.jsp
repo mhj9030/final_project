@@ -11,15 +11,26 @@
 <div class="article-body" align="center">
 	<div class="cover">
 		<div class="cover-back">
-    		<img src="<%=cp%>/resources/image/Desert.jpg"/>
+    		
+    		<c:if test="${not empty dto.cCoverImage}">
+				<img src="<%=cp%>/uploads/company/${dto.cCoverImage}"/>
+			</c:if>
+			<c:if test="${empty dto.cCoverImage}">
+				<img src="<%=cp%>/resources/image/profile_img.jpg">
+			</c:if>
 		</div>
 
 		<div class="cover-content">
 			<div class="image">
-				<img src="<%=cp%>/resources/image/google.jpeg">
+				<c:if test="${not empty dto.cLogoImage}">
+					<img width="80px" src="<%=cp%>/uploads/company/${dto.cLogoImage}">
+				</c:if>
+				<c:if test="${empty dto.cLogoImage}">
+					<img width="80px" src="<%=cp%>/resources/image/profile_img.jpg">
+				</c:if>
 			</div>
-			<h4>KH정보교육원</h4>
-			<h5>교육업 : 전문/기능학원</h5>
+			<h4>${dto.cName}</h4>
+			<h5>${dto.maName} : ${dto.subName}</h5>
 		</div>
 	</div>
 	
@@ -34,23 +45,23 @@
 				<tbody>
 					<tr align="center">
 		  				<td class="active" width="100">대표자</td>
-		  				<td width="100">홍길동</td>
+		  				<td width="100">${dto.cCeo}</td>
 		  				<td class="active" width="100">설립년도</td>
-		  				<td width="100">2017-01-01</td>
+		  				<td width="100">${dto.cCreated}</td>
 		  			</tr>
 		  			
 		  			<tr align="center">
 		  				<td class="active" width="100">기업형태</td>
-		  				<td width="100">대기업</td>
+		  				<td width="100">${dto.cSize}</td>
 		  				<td class="active" width="100">사원수</td>
-		  				<td width="100">1,000명</td>
+		  				<td width="100">${dto.cPeople}</td>
 		  			</tr>
 		  			
 		  			<tr align="center">
 		  				<td class="active" width="100">매출액</td>
-		  				<td width="100">1,000억원</td>
+		  				<td width="100">${dto.cProfit} 만원</td>
 		  				<td class="active" width="100">업종</td>
-		  				<td width="100">교육업</td>
+		  				<td width="100">${dto.maName}</td>
 		  			</tr>
 				</tbody>
 			</table>
@@ -64,12 +75,7 @@
 			</div>
 			
 			<div class="intro-body">
-				1998년에 개원한 KH정보교육원은 실업자 재취업 교육을 통해서 실업극복과 경제 활성화에 기여했고, IT교육의 새로운 기준을 제시했습니다.
-				이를 바탕으로 다양한 교육산업을 추진하였으며, 현재 NCS기반의 직업교육을 통해 지식과 기술을 갖춘 능력 중심의 인재를 양성하기 위한 시스템을 구축하였습니다.
-				KH정보교육원은 최적의 교육환경을 통해 인간중심의 기술인력을 양성하고, NCS기반의 실무중심 교과과정 및 다양한 취업지원 시스템과 산학협력 활동을 시행하고 있습니다.
-				최고의 IT전문가가 되고 싶다면, KH정보교육원의 문을 두드리십시오.
-				KH가 함께 도와드리겠습니다.
-				KH정보교육원은 대한민국의 IT기술과 변화를 선도할 전문교육기관으로 거듭나기 위해 교육의 새로운 패러다임을 제시합니다.
+				<p class="intro-content">${dto.cIntro}</p>
 			</div>
 		</div>
 		
@@ -79,7 +85,7 @@
 					| 기업 위치 <small></small>
 				</h1>
 			</div>
-			<h5>주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩</h5>
+			<h5>주소 : ${dto.cAddress}</h5>
 			<div id="map"></div>
 		</div>
 	</div>

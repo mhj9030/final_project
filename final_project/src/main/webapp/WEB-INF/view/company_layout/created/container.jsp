@@ -34,6 +34,37 @@
     		
     	return true;
 	}
+	
+	function serialCheck(){
+		var cSerial1=$("#serial1").val();
+		var cSerial2=$("#serial2").val();
+		var cSerial3=$("#serial3").val();
+		
+		var cSerial=cSerial1+"-"+cSerial2+"-"+cSerial3;	
+		
+		var url="<%=cp%>/company/serialCheck";
+		var query="serial="+cSerial
+		$.ajax({
+			type:"post",
+			url:url,
+			data:query,
+			dataType:"JSON",
+			success:function(data){
+				var passed=data.passed;
+				
+				if(passed=="true"){
+					var str="<span style='color:blue; font-weight:bold;'>"+cSerial+"</span> 사용 가능한 번호입니다.";
+				} else{
+					var str="<span style='color:red; font-weight: bold;'>"+cSerial+"</span> 이미 등록된 번호입니다.";
+					$(".serial-help-block").html(str);
+					$("#serial1").val("");
+					$("#serial2").val("");
+					$("#serial3").val("");
+					$("#serial1").focus();
+				}
+			}
+		});
+	}
 </script>
 
 
@@ -49,14 +80,15 @@
 			<label>사업자 등록번호</label>
 			<div class="row">
 			  <div class="col-xs-2">
-			    <input name="cSerial1" type="text" class="form-control">
+			    <input id="cSerial1" name="cSerial1" type="text" class="form-control">
 			  </div>
 			  <div class="col-xs-2">
-			    <input name="cSerial2" type="text" class="form-control">
+			    <input id="cSerial2" name="cSerial2" type="text" class="form-control">
 			  </div>
 			  <div class="col-xs-3">
-			    <input name="cSerial3" type="text" class="form-control">
+			    <input id="cSerial3" name="cSerial3" type="text" class="form-control">
 			  </div>
+			  <p class=serial-help-block></p>
 			</div>
 		</div>
 		
@@ -207,6 +239,11 @@
   		</div>
   		
   		<div class="form-group">
+    		<label>간단한 소개말</label>
+    		<input name="cDescription" type="text" class="form-control" placeholder="간단한 소개말">
+  		</div>
+  		
+  		<div class="form-group">
     		<label>기업소개</label>
     		<textarea name="cIntro" class="form-control" rows="3"></textarea>
   		</div>
@@ -227,8 +264,16 @@
   		</div>
   		
   		<div class="form-group">
-    		<label>주소</label>
-    		<input type="text" class="form-control" placeholder="주소">
+    		<label>주소</label><br>
+    		<div class="row">
+    			<div class="col-xs-10">
+    				<input name="cAddress" type="text" class="form-control" id="sample5_address" placeholder="주소" readonly="readonly">
+    			</div>
+    			<div class="col-xs-2">
+    				<input type="button" class="btn btn-default" onclick="sample5_execDaumPostcode()" value="주소 검색">
+    			</div>
+    		</div>
+			<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
   		</div>
   		
   		<div class="form-group">
@@ -244,3 +289,66 @@
   		<button type="submit" class="btn btn-default">등록</button>
 	</form>
 </div>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="//apis.daum.net/maps/maps3.js?apikey=ac8d0f9810c74bf05979f5efc0168e40&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = data.address; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 기본 주소가 도로명 타입일때 조합한다.
+                if(data.addressType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = fullAddr;
+                // 주소로 좌표를 검색
+                geocoder.addr2coord(data.address, function(status, result) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
+</script>

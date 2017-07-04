@@ -29,23 +29,29 @@ public class CreatedServiceImpl implements CreatedService{
 			
 			dao.insertData("company.insertCompany", dto);
 			
-			if(!dto.getUpload().isEmpty()){
-				for(MultipartFile mf:dto.getUpload()){
-					if(mf.isEmpty())
-						continue;
+			for(int i=0; i<dto.getUpload().size(); i++){
+				MultipartFile mf=dto.getUpload().get(i);
+				String imageFile=fileManager.doFileUpload(mf, pathname);
+				
+				if(i==0){
+					dto.setcLogoImage(imageFile);
 					
-					String cSaveFilename=fileManager.doFileUpload(mf, pathname);
-					
-					if(cSaveFilename!=null){
+					if(imageFile!=null){
 						String cOriginalFilename=mf.getOriginalFilename();
-						
-						dto.setcOriginalFilename(cOriginalFilename);
-						dto.setcSaveFilename(cSaveFilename);
-						
-						insertComImage(dto);
+						dto.setcLogoOriginalFilename(cOriginalFilename);
 					}
-				}
+				}else{
+					dto.setcCoverImage(imageFile);
+					
+					if(imageFile!=null){
+						String cOriginalFilename=mf.getOriginalFilename();
+						dto.setcCoverOriginalFilename(cOriginalFilename);
+					}
+				}	
 			}
+			
+			insertComImage(dto);
+			
 		} catch (Exception e) {
 			throw e;
 		}

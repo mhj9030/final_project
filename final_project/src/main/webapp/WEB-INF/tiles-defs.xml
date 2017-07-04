@@ -125,5 +125,21 @@
 		<put-attribute name="body" value="/WEB-INF/view/profile_layout/container.jsp" />
 		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
 	</definition>
+	
+    <!-- Profile-pwd-Layout -->
+	<definition name=".profile.settingpwd" template="/WEB-INF/view/profile_pwd/template.jsp">
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/profile_pwd/container.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
+	
+	    <!-- Profile-Setting-layout-->
+	<definition name=".profile.setting" template="/WEB-INF/view/profile_setting/template.jsp">
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="headers" value="/WEB-INF/view/main_layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/profile_setting/container.jsp" />
+		<put-attribute name="footers" value="/WEB-INF/view/main_layout/footer.jsp" />
+	</definition>
 
 </tiles-definitions>

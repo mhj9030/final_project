@@ -13,6 +13,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">잡스퀘어 회원가입</h4> </div>
+               
+                <div class="panel-bodyimgs">
+        </div>
+        
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-6 col-xs-6">
@@ -129,12 +133,13 @@
                                             <p class="text-muted small">${member.userId }</p>
                                             <input type="hidden" value="${member.userId }">
                                             <div class="divider"> </div> 
-                                           
-                                            <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-user" aria-hidden="true"></i> 내프로필</button>
+                                           <form name = "profileaction">
+                                            <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"><i class="fa fa-user" aria-hidden="true"></i> 내프로필</button>
                                             <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-user" aria-hidden="true"></i> 지원서 관리</button>
-                                            <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-cogs" aria-hidden="true"></i> 계정설정</button>
-                                            <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-user" aria-hidden="true"></i> 내프로필</button>
-                                            <a href="<%=cp%>/profile?mid=${member.userId }">asd</a>
+                                            <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('pwd', 'update');"><i class="fa fa-cogs" aria-hidden="true"></i> 계정설정</button>
+                                            <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"><i class="fa fa-user" aria-hidden="true"></i> 준비중</button>
+                                            <a href="<%=cp%>/profile?id=${member.userId }">asd</a>
+                                            </form>
                                             </div>
                                     </div>
                                 </div>
