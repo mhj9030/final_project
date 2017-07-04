@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.final_project.member.SessionInfo;
+
 @Controller("company.createdController")
 public class CreatedController {
 	@Autowired
@@ -27,7 +29,7 @@ public class CreatedController {
 	
 	@RequestMapping(value="/company/created", method=RequestMethod.POST)
 	public String createdSubmit(Company dto, HttpSession session) throws Exception{
-		//SessionInfo info=(SessionInfo)session.getAttribute("member");
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"company";
 
