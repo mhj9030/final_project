@@ -4,16 +4,54 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * @author user1
+ *
+ */
 public class Company {
+	private int cNum;
 	private String cSerial, cSerial1, cSerial2, cSerial3; 
 	private String cCeo, cName, mId;
 	private int cPeople, cProfit, subCode;
-	private String cCreated, cSize, cIntro;
-	private String cTel, cTel1, cTel2, cTel3; 
+	private String subName, maName;
+	private String cCreated, cSize, cIntro, cDescription, cAddress;
+	private String cTel, cTel1, cTel2, cTel3;
+	private int employ_cnt;
 	
 	private int ciNum;
-	private String cOriginalFilename, cSaveFilename;
+	private String cCoverImage, cLogoImage, cLogoOriginalFilename, cCoverOriginalFilename;
 	private List<MultipartFile> upload;
+	
+	public int getcNum() {
+		return cNum;
+	}
+	public void setcNum(int cNum) {
+		this.cNum = cNum;
+	}
+	public String getSubName() {
+		return subName;
+	}
+	public void setSubName(String subName) {
+		this.subName = subName;
+	}
+	public String getMaName() {
+		return maName;
+	}
+	public void setMaName(String maName) {
+		this.maName = maName;
+	}
+	public String getcLogoOriginalFilename() {
+		return cLogoOriginalFilename;
+	}
+	public void setcLogoOriginalFilename(String cLogoOriginalFilename) {
+		this.cLogoOriginalFilename = cLogoOriginalFilename;
+	}
+	public String getcCoverOriginalFilename() {
+		return cCoverOriginalFilename;
+	}
+	public void setcCoverOriginalFilename(String cCoverOriginalFilename) {
+		this.cCoverOriginalFilename = cCoverOriginalFilename;
+	}
 	public String getcSerial() {
 		return cSerial;
 	}
@@ -92,6 +130,12 @@ public class Company {
 	public void setcIntro(String cIntro) {
 		this.cIntro = cIntro;
 	}
+	public String getcDescription() {
+		return cDescription;
+	}
+	public void setcDescription(String cDescription) {
+		this.cDescription = cDescription;
+	}
 	public String getcTel() {
 		return cTel;
 	}
@@ -122,22 +166,34 @@ public class Company {
 	public void setCiNum(int ciNum) {
 		this.ciNum = ciNum;
 	}
-	public String getcOriginalFilename() {
-		return cOriginalFilename;
+	public String getcCoverImage() {
+		return cCoverImage;
 	}
-	public void setcOriginalFilename(String cOriginalFilename) {
-		this.cOriginalFilename = cOriginalFilename;
+	public void setcCoverImage(String cCoverImage) {
+		this.cCoverImage = cCoverImage;
 	}
-	public String getcSaveFilename() {
-		return cSaveFilename;
+	public String getcLogoImage() {
+		return cLogoImage;
 	}
-	public void setcSaveFilename(String cSaveFilename) {
-		this.cSaveFilename = cSaveFilename;
+	public void setcLogoImage(String cLogoImage) {
+		this.cLogoImage = cLogoImage;
 	}
 	public List<MultipartFile> getUpload() {
 		return upload;
 	}
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
+	}
+	public int getEmploy_cnt() {
+		return employ_cnt;
+	}
+	public void setEmploy_cnt(int employ_cnt) {
+		this.employ_cnt = employ_cnt;
+	}
+	public String getcAddress() {
+		return cAddress;
+	}
+	public void setcAddress(String cAddress) {
+		this.cAddress = cAddress;
 	}
 }
