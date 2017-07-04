@@ -47,24 +47,24 @@
 	min-height: 170px;
 }
 
-.wrap>.main.all{
+.wrap>.main.all {
 	float: none;
 	width: 100%;
 }
 
-.section.summary{
+.section.summary {
 	position: relative;
 	padding: 0 0 0 200px;
 }
 
-.section.summary .user_thumb{
+.section.summary .user_thumb {
 	position: absolute;
 	left: 0;
 	top: -90px;
 	float: left;
 }
 
-.section.summary .user_thumb .preview{
+.section.summary .user_thumb .preview {
 	position: relative;
 	width: 160px;
 	height: 160px;
@@ -73,12 +73,12 @@
 	overflow: hidden;
 }
 
-.section.summary .user_thumb .preview .img-center{
+.section.summary .user_thumb .preview .img-center {
 	width: 180px;
 	height: 180px;
 }
 
-.img-center{
+.img-center {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -91,11 +91,11 @@
 	margin: auto;
 }
 
-.section .icontrol{
+.section .icontrol {
 	display: inline;
 }
 
-.section.summary .user_thumb .icontrol .form-inline{
+.section.summary .user_thumb .icontrol .form-inline {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -105,7 +105,7 @@
 	text-align: center;
 }
 
-#user_info{
+#user_info {
 	position: relative;
 	left: 0;
 	bottom: 10px;
@@ -119,30 +119,55 @@
 	width: 100%;
 }
 
-#user_info .name .job_title{
+#user_info .name .job_title {
 	display: inline;
 	margin: 0;
-	color:#aaa;
+	color: #aaa;
 	font-size: 18px;
 	vertical-align: bottom;
 }
-#user_info .name h2{
+
+#user_info .name h2 {
 	margin: 0;
-	color:#fff;
+	color: #fff;
 	font-size: 24px;
 	line-height: 42px;
 	vertical-align: bottom;
 }
 
-#user_info .name span{
-font-size: 14px;
+#user_info .name span {
+	font-size: 14px;
 }
 
-.section.summary .user_status{
+.section.summary .user_status {
 	position: absolute;
 	left: 0;
-	top:100px;
+	top: 100px;
 	float: left;
 	width: 160px;
 	text-align: center;
 }
+
+
+.modal-content {
+	border-radius: 0px;
+}
+
+.panel-bodyimgs {
+	padding: 30px 50px !important;
+	height:150px;
+	background: #384653 url('../../resources/image/teamwork.jpg') no-repeat center top;
+	background-size : cover;
+	color: #fff !important;
+}
+
+.list-unstyled list clearfix {
+	margin-right: -50px;
+}
+
+.panel-body {
+	padding: 0;
+	padding-top: 20px;
+}
+
+

@@ -17,7 +17,7 @@
 		<table class="mypoint_list">
 			<tr align="center">
 				<td background="#525f78">
-					<font size="3"><b>${userName} 님</b></font>의 Job square 포인트
+					<font size="3"><b>${sessionScope.member.userName} 님</b></font>의 Job square 포인트
 				</td>
 				<td rowspan="2" width="50%">
 					사용가능한 포인트<br><font size="14"><b>${point.mypoint}</b></font> 원

@@ -13,6 +13,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">잡스퀘어 회원가입</h4> </div>
+               
+                <div class="panel-bodyimgs">
+        </div>
+        
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-6 col-xs-6">

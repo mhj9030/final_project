@@ -14,7 +14,7 @@ import com.final_project.common.MyUtil;
 
 @Controller("point.mypointController")
 public class MypointController {
-	private MypointServiceImpl service = new MypointServiceImpl();
+	private PointServiceImpl service = new PointServiceImpl();
 	private MyUtil util;
 	
 	@RequestMapping("/point/mypoint")

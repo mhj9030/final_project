@@ -2,10 +2,16 @@ package com.final_project.point;
 
 public class Point {
 	private int poNum;
-	private String subject, content, created, mId;
+	private String subject, content, created, mId, mName;
 	private String poDate, classify, point, total;
 	private int mypoint, reserve, terminate;
 	
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
 	public int getPoNum() {
 		return poNum;
 	}
