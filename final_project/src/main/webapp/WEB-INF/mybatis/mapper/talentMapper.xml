@@ -2,11 +2,11 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="talent">
-	<select id="mainClass">
-		select * from main_class
+	<select id="mainClass" resultType="com.final_project.talent.Talent">
+		select maCode mainCode, maName mainName from main_class
 	</select>
 	
-	<select id="subClass">
-		select * from sub_class
+	<select id="subClass" parameterType="map" resultType="com.final_project.talent.Talent">
+		select subCode, subName from sub_class where maCode=#{mainCode}
 	</select>
 </mapper>
