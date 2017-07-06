@@ -37,9 +37,14 @@
 	<div class="content">
 		<div class="basic">
 			<div class="page-header">
-				<h1 align="left">
-					| 기본 정보 <small></small>
-				</h1>
+				<div class="row">
+					<div class="col-xs-5">
+						<h1 align="left">| 기본 정보 <small></small></h1>
+					</div>
+					<div class="col-xs-7" style="margin-top: 30px; text-align: right;">
+						<button class="btn btn-default" type="button">문의하기</button>
+					</div>
+				</div>
 			</div>
 			<table class="table table-condensed">
 				<tbody>
@@ -106,7 +111,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 var geocoder = new daum.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addr2coord('서울특별시 영등포구 선유동2로 57 이레빌딩', function(status, result) {
+geocoder.addr2coord('${dto.cAddress}', function(status, result) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === daum.maps.services.Status.OK) {
@@ -121,7 +126,7 @@ geocoder.addr2coord('서울특별시 영등포구 선유동2로 57 이레빌딩'
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">KH정보교육원</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${dto.cName}</div>'
         });
         infowindow.open(map, marker);
 

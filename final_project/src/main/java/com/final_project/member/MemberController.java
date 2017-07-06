@@ -52,6 +52,7 @@ public class MemberController {
 		SessionInfo info = new SessionInfo();
 		info.setUserId(dto.getMid());
 		info.setUserName(dto.getMname());
+		info.setcSerial(dto.getcSerial());
 		session.setAttribute("member", info);
 		
 		//프로필 영역 변수

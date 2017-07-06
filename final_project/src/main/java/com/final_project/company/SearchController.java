@@ -101,7 +101,7 @@ public class SearchController {
 		
 		searchValue = URLDecoder.decode(searchValue, "utf-8");
 		
-		Company dto=service.readCompany(cNum);
+		Company dto=service.readCompanyNum(cNum);
 		
 		dto.setcIntro(myUtil.htmlSymbols(dto.getcIntro()));
 		
