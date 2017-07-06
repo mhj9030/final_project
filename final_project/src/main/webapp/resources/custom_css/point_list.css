@@ -120,3 +120,13 @@ h3{
 	margin: 0px auto 15px;
 	text-align: center;
 }
+
+span button{
+	margin-top: 10px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	background: #c0c0c0;
+	height: 30px;
+	font-size: 5px;
+	vertical-align: top;
+}

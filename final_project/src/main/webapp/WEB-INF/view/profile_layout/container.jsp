@@ -44,8 +44,6 @@
                                     <p class="job_title"> </p>
                                     <h2 class="break">
                                 <strong>${dto.mname }</strong><span>  ${dto.mgender } </span>
- 
-                                
                             </h2> </div>
                             </div>
   
@@ -64,18 +62,76 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-
                                 </div>
                             </div>
     
                         </section>
-                        
-  
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class ="contents">
+        		<div class = "wrap">
+        			<div class ="main all">
+        			<section class = "section_box">
+        			<div class ="panel-head">
+        						<h3 class="panel-title">프로필 정보 <small>프로필 완성도를 높여 더 많은 기회를 만나세요.</small></h3>
+        					</div>
+        				<div class ="panel panel-default">
+        					<div class = "panel-body panel-view shadow">
+        						<ul class  = "list-unstyled list list4 list-overflow-x clearfix">
+        						
+        							<li role="presentation">
+                                        <div class="panel panel-info panel-colorful">
+                                            <div class="pad-all text-center">
+                                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                <span class="text-2x text-thin">경력</span>
+                                                <p>경력 보기</p>
+                                            </div>
+                                        </div>
+                                </li>
+                                
+                               <li role="presentation">
+                                        <div class="panel panel-info panel-colorful">
+                                            <div class="pad-all text-center">
+                                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                                <span class="text-2x text-thin">프로젝트</span>
+                                                <p>프로젝트 보기</p>
+                                            </div>
+                                        </div>
+                                </li>
+                                
+                               <li role="presentation">
+                                        <div class="panel panel-info panel-colorful">
+                                            <div class="pad-all text-center">
+                                               <i class="fa fa-university" aria-hidden="true"></i>
+                                                <span class="text-2x text-thin">학교</span>
+                                                <p>서울대학교 졸업</p>
+                                            </div>
+                                        </div>
+                                </li>
+                                
+                                
+                               <li role="presentation">
+                                        <div class="panel panel-info panel-colorful">
+                                            <div class="pad-all text-center">
+                                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                <span class="text-2x text-thin">대표 전문 분야</span>
+                                                <p>JAVA, ORACLE, JSP, CSS</p>
+                                            </div>
+                                        </div>
+                                </li>
+                                
+                                
+        						</ul>
+        					</div>
+        				</div>
+        			</section>
+        		</div>
+        		</div>
+        </div>
+        
         </div>
         </div>
 
