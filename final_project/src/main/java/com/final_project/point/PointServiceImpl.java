@@ -95,8 +95,14 @@ public class PointServiceImpl implements PointService{
 	// mypoint
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("point.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	@Override
@@ -108,14 +114,14 @@ public class PointServiceImpl implements PointService{
 		try {
 			mypoint = dao.getIntValue("point.selectMypoint", map);
 			reserve = dao.getIntValue("point.selectReserve", map);
+			
 		} catch (Exception e) {
+			System.out.println("mypoint: " + e.toString());
 			e.printStackTrace();
 		}
-		int terminate = 0;
 		
 		point.setMypoint(mypoint);
 		point.setReserve(reserve);
-		point.setTerminate(terminate);
 		
 		return point;
 	}

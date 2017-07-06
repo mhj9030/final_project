@@ -3,8 +3,14 @@ package com.final_project.point;
 public class Point {
 	private int poNum;
 	private String subject, content, created, mId, mName;
-	private String poDate, classify, point, total;
-	private int mypoint, reserve, terminate;
+	private String poDate, classify, history, point, total;
+	public String getHistory() {
+		return history;
+	}
+	public void setHistory(String history) {
+		this.history = history;
+	}
+	private int mypoint, reserve;
 	
 	public String getmName() {
 		return mName;
@@ -77,11 +83,5 @@ public class Point {
 	}
 	public void setReserve(int reserve) {
 		this.reserve = reserve;
-	}
-	public int getTerminate() {
-		return terminate;
-	}
-	public void setTerminate(int terminate) {
-		this.terminate = terminate;
 	}
 }
