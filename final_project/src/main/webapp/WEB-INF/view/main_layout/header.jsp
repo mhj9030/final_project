@@ -6,96 +6,20 @@
 <%
 	String cp = request.getContextPath();
 %>
-  <!-- Job Register-->
-<div class="modal fade" id="job-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">잡스퀘어 회원가입</h4> </div>
-               
-                <div class="panel-bodyimgs">
-        </div>
-        
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-6">
-                        <div class="form-group">
-                            <input type="text" id="id_last_name" name="last_name" required="required" data-required="성을 입력해주세요" placeholder="성" class="form-control last_name"> </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-6">
-                        <div class="form-group">
-                            <input type="text" id="id_first_name" name="first_name" required="required" data-required="이름을 입력해주세요" placeholder="이름" class="form-control first_name"> </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <input type="email" id="id_email" name="email" required="required" data-required="E-mail을 입력해주세요" data-validate="E-mail 형식을 확인해주세요." placeholder="E-mail" class="form-control email"> </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <input type="password" id="id_password" name="password" required="required" data-required="비밀번호를 입력해주세요" placeholder="비밀번호" class="form-control password"> </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="text agreement">회원가입시 잡스퀘어 <a href="/tos" target="_blank" rel="nofollow">이용약관</a>, <a href="/privacy" target="_blank" rel="nofollow">개인정보취급방침</a>을 읽고 이해하셨으며 해당 내용에 동의하신 것이 됩니다.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-success">가입하기</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Job Login-->
-<div class="modal fade" id="job-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">잡스퀘어 로그인</h4> </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-6">
-                        <div class="form-group">
-                            <input type="text" id="id_last_name" name="last_name" required="required" data-required="성을 입력해주세요" placeholder="성" class="form-control last_name"> </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-6">
-                        <div class="form-group">
-                            <input type="text" id="id_first_name" name="first_name" required="required" data-required="이름을 입력해주세요" placeholder="이름" class="form-control first_name"> </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <input type="email" id="id_email" name="email" required="required" data-required="E-mail을 입력해주세요" data-validate="E-mail 형식을 확인해주세요." placeholder="E-mail" class="form-control email"> </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <input type="password" id="id_password" name="password" required="required" data-required="비밀번호를 입력해주세요" placeholder="비밀번호" class="form-control password"> </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="text agreement">회원가입시 잡스퀘어 <a href="/tos" target="_blank" rel="nofollow">이용약관</a>, <a href="/privacy" target="_blank" rel="nofollow">개인정보취급방침</a>을 읽고 이해하셨으며 해당 내용에 동의하신 것이 됩니다.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-success">가입하기</button>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+function navloginCheck() {
+	var f = document.navlogin;
+	f.action = "/final_project/member/login_check";
+	return true;
+}
+
+    $(function () {
+        var mode = "${mode}";
+        if (mode == "loginfail") {
+            swal('Oops...', '존재하지 않는 아이디나 비밀번호가 틀립니다.', 'error')
+        }
+    });
+</script>
 <!-- nav시작 -->
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
@@ -113,42 +37,63 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty sessionScope.member }">
-                    <li><a href="#" type="button" role="button" data-toggle="modal" data-target="#job-register" rel="nofollow">무료 가입</a></li>
-                    <li><a href="#" type="button" role="button" data-toggle="modal" data-target="#job-login" rel="nofollow">로그인</a></li>
+                    <li><a href="<%=cp%>/member/signin" type="button">무료
+							가입</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">로그인 <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" name="navlogin" method="post" onsubmit="return navloginCheck();">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">사용자 이메일</label>
+                                                <input type="email" class="form-control" name="mid" id="exampleInputEmail2" placeholder="사용자 이메일" required> </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">사용자 비밀번호</label>
+                                                <input type="password" class="form-control" name="mpwd" id="exampleInputPassword2" placeholder="비밀번호" required>
+                                                <input type="hidden" name="state" value="navlogin">
+                                                <div class="help-block text-right"> <a href="">비밀번호를 잊으셨나요?</a> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block" data-loading-text="Loading..." autocomplete="off">로그인</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center"> 계정이 없으신가요? <a href="<%=cp%>/member/signin"><b>가입하기</b></a> </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                 </c:if>
                 <c:if test="${not empty sessionScope.member}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                        <img src="<%=cp %>/resources/image/profile_img.jpg" class="img-responsive img-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
-                                    </span> <span class="user-name">
-                                        ${member.userName }
-                                    </span> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px; margin-top: -5px;"> <img
+								src="<%=cp%>/resources/image/profile_img.jpg"
+								class="img-responsive img-circle" title="John Doe"
+								alt="John Doe" width="30px" height="30px">
+						</span> <span class="user-name"> ${member.userName } </span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="navbar-content">
                                     <div class="row">
-                                        <div class="col-md-5"> <img src="<%=cp %>/resources/image/profile_img.jpg" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
-                                        </div>
+                                        <div class="col-md-5"> <img src="<%=cp%>/resources/image/profile_img.jpg" alt="Alternate Text" class="img-responsive" width="120px" height="120px" /> </div>
                                         <div class="col-md-7"> <span>${member.userName }</span>
                                             <p class="text-muted small">${member.userId }</p>
                                             <input type="hidden" value="${member.userId }">
-                                            <div class="divider"> </div> 
-                                           <form name = "profileaction">
-                                            <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"><i class="fa fa-user" aria-hidden="true"></i> 내프로필</button>
-                                            <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-user" aria-hidden="true"></i> 지원서 관리</button>
-                                            <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('pwd', 'update');"><i class="fa fa-cogs" aria-hidden="true"></i> 계정설정</button>
-                                            <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"><i class="fa fa-user" aria-hidden="true"></i> 준비중</button>
-                                            <a href="<%=cp%>/profile?id=${member.userId }">asd</a>
-                                            </form>
-                                            </div>
+                                            <div class="divider"></div>
+                                            <form name="profileaction">
+                                                <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 내프로필 </button>
+                                                <button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 관리 </button>
+                                                <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('pwd', 'update');"> <i class="fa fa-cogs" aria-hidden="true"></i> 계정설정 </button>
+                                                <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 준비중 </button> <a href="<%=cp%>/profile?id=${member.userId }">asd</a> </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="navbar-footer">
                                     <div class="navbar-footer-content">
                                         <div class="row">
-                                            <div class="col-md-6"> 
-                                            <a href="<%=cp%>/member/logout" class = "btn btn-danger btn-xs"><i class="fa fa-power-off" aria-hidden="true"></i>로그아웃</a>
-                                            </div>
+                                            <div class="col-md-6"> <a href="<%=cp%>/member/logout" class="btn btn-danger btn-xs"><i
+													class="fa fa-power-off" aria-hidden="true"></i>로그아웃</a> </div>
                                         </div>
                                     </div>
                                 </div>

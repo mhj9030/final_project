@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.final_project.member.Member;
-import com.final_project.member.MemberService;
 import com.final_project.member.SessionInfo;
 
 @Controller
@@ -19,9 +17,6 @@ public class ProfileController {
 
 	@Autowired
 	private ProfileService service;
-
-	@Autowired
-	private MemberService service2;
 
 	@RequestMapping(value = "/profile")
 	public String method(@RequestParam(value = "id") String id, Model model, HttpSession session) throws Exception {
@@ -60,7 +55,7 @@ public class ProfileController {
 			return "redirect:/submain";
 		}
 
-		Member dto = service2.readMember(info.getUserId());
+		Profile dto = service.profileRead(info.getUserId());
 		if (dto == null) {
 			session.invalidate();
 			return "redirect:/";
