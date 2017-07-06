@@ -40,11 +40,11 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public Company readCompany(int cNum) throws Exception {
+	public Company readCompanyNum(int cNum) throws Exception {
 		Company dto=null;
 		
 		try {
-			dto=dao.getReadData("company.readCompany", cNum);
+			dto=dao.getReadData("company.readCompanyNum", cNum);
 		} catch (Exception e) {
 			throw e;
 		}
