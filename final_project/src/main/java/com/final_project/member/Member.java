@@ -10,6 +10,7 @@ public class Member {
 	private String mname; // 사용자 이름
 	private String mbirth; // 사용자 생일
 	private String mgender; // 사용자 성별
+	private String cSerial; // 사업자등록번호(기업등록을 했을 때, 생성)
 	
 	private String authority;
 
@@ -77,4 +78,11 @@ public class Member {
 		this.authority = authority;
 	}
 
+	public String getcSerial() {
+		return cSerial;
+	}
+
+	public void setcSerial(String cSerial) {
+		this.cSerial = cSerial;
+	}
 }
