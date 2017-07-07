@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qa">
+
+<select id="seq" resultType="Integer">
+  SELECT qa_seq.NEXTVAL FROM dual
+</select>
+
+<insert id="insertQa" parameterType="com.final_project.help.Qa">
+INSERT INTO qa 
+     (qaNum, mId, subject, content,
+     groupNum, orderNo, depth, parent ) VALUES (
+        #{qaNum}, #{mId}, #{subject}, #{content},
+        #{groupNum}, #{orderNo}, #{depth}, #{parent}
+     )
+</insert>
+
+<sql id="where-list">
+   <if test="searchKey=='userName' ">
+        userName=#{searchValue}
+   </if>
+   <if test="searchKey=='subject' ">
+        INSTR(subject, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='content' ">
+        DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='created' ">
+        TO_CHAR(created, 'YYYY-MM-DD') = #{searchValue}
+         OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+   </if>
+</sql>
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+  SELECT NVL(COUNT(*), 0) 
+        FROM qa b JOIN member m ON b.mId=m.mId
+  <where>
+  	<if test="searchValue!=null and searchValue != '' ">
+  	      <include refid="where-list"/>
+  	</if>
+  </where>
+</select>
+
+<select id="listQa" parameterType="map"
+            resultType="com.final_project.help.Qa">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum, tb.* FROM (
+			     SELECT qaNum,  b.mId,
+                      subject, TO_CHAR(b.created, 'YYYY-MM-DD')  created
+                      ,hitCount, groupNum, orderNo, depth, m.mName
+			        FROM qa b JOIN member m ON b.mId=m.mId
+                    <where>
+                         <if test="searchValue != null and searchValue != ''">
+			                  <include refid="where-list"/>
+		                 </if>
+	                </where>
+	                ORDER BY groupNum DESC, orderNo ASC
+	<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+	]]>
+</select>
+
+<!-- 글보기 -->
+<select id="readQa" resultType="com.final_project.help.Qa" parameterType="Integer">
+		SELECT qaNum, b.mId, subject, content, groupNum, 
+                 depth, orderNo, parent, hitCount, b.created
+				 FROM qa b JOIN member m ON b.mId=m.mId
+                 WHERE qaNum = #{qaNum}
+</select>
+<!-- 조회수 증가 -->
+<update id="updateHitCount" parameterType="Integer">
+		UPDATE qa SET hitCount=hitCount+1 WHERE qaNum = #{qaNum}
+</update>
+
+	<!-- 이전글 -->
+<select id="preReadQa" resultType="com.final_project.help.Qa" 
+				parameterType="map">
+	SELECT tb.* FROM (
+			SELECT qaNum, subject 
+			         FROM qa b JOIN member m ON b.mId=m.mId
+                    <where>
+                         <if test="searchValue != null and searchValue != '' ">
+			                  <include refid="where-list"/>
+		                 </if>
+		               <![CDATA[
+		                 AND (( groupNum = #{groupNum} AND orderNo < #{orderNo})
+                         OR (groupNum > #{groupNum} ))
+		                 ]]>
+	                </where>
+				ORDER BY groupNum ASC, orderNo DESC
+			) tb WHERE ROWNUM=1
+</select>
+
+<!-- 다음글 -->
+<select id="nextReadQa" resultType="com.final_project.help.Qa" 
+				parameterType="map">
+		SELECT tb.* FROM (
+			SELECT qaNum, subject 
+                 FROM qa b JOIN member m ON b.mId=m.mId			
+                    <where>
+                         <if test="searchValue != null and searchValue != '' ">
+			                  <include refid="where-list"/>
+		                 </if>
+		               <![CDATA[
+		                 AND (( groupNum = #{groupNum} AND orderNo > #{orderNo})
+                         OR (groupNum < #{groupNum} ))
+		                 ]]>
+	                </where>
+				ORDER BY groupNum DESC, orderNo ASC
+			) tb WHERE ROWNUM=1
+</select>
+	
+	
+	
+	
+	
+</mapper>
