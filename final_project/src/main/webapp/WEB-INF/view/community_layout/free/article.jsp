@@ -370,6 +370,10 @@ function sendLikeFree(frnum) {
 		}
 	}
 	
+	function emptydown(){
+		alert("다운로드 받을 파일이 없습니다.");	
+	}
+	
 </script>
 
 
@@ -384,7 +388,19 @@ function sendLikeFree(frnum) {
 			<td class="article_hitCount">${dto.created} | 조회 ${dto.hitCount}</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: right;"><button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/free/download?frnum=${dto.frnum}'">다운로드</button></td>
+			<td colspan="2" style="text-align: right;">
+					<c:if test="${not empty dto.originalFilename }">
+						<button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/free/download?frnum=${dto.frnum}'">
+							${dto.originalFilename} 다운로드(클릭)
+						</button>
+					</c:if>
+					<c:if test="${empty dto.originalFilename }">
+						<button class="btn btn-block btn-info" onclick="emptydown();">
+							파일이없습니다.
+						</button>
+					</c:if>
+				
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2" class="photo_article_content">${dto.content}</td>

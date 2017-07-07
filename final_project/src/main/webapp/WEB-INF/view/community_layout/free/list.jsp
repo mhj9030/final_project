@@ -42,7 +42,7 @@
 		                            <c:if test="${dto.depth!=0}">
 		                                <img src='<%=cp%>/resources/image/re.gif'>
 		                            </c:if>
-									<a href="${articleUrl}&frnum=${dto.frnum}">${dto.subject}</a>
+									<a href="${articleUrl}&frnum=${dto.frnum}">${dto.subject}[${dto.replyCount}]</a>
 								</td>
 								<td>${dto.mName}</td>
 								<td>${dto.created}</td>
