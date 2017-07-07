@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="employ">
+<!-- 직종 -->
+<select id="list_sub_bu_class"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	SELECT subcode, subname, macode FROM sub_bu_class
+</select>
+
+<select id="list_main_bu_class"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	  SELECT macode,maname FROM main_bu_class
+</select>
+
+<!-- 직업 -->
+<select id="list_sub_class"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	SELECT subcode, subname, macode FROM sub_class
+</select>
+
+<select id="list_main_class"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	  SELECT macode,maname FROM main_class
+</select>
+<!-- 자격증 -->
+<select id="list_license"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	  select liCode, license from license
+</select>
+
+<!-- 우대사항 -->
+<select id="list_cePrefere"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	  select DISTINCT cePrefere from com_employ
+</select>
+
+<!-- 근무조건 -->
+<select id="list_ceType"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	  select DISTINCT ceType from com_employ
+</select>
+
+<!-- 학력 -->
+<select id="list_ability"
+	            resultType="com.final_project.employ.Employ" parameterType="Integer">
+	  select ability from ability_type
+</select>
+
+<!-- 검색 -->
+<select id="list_com_employ"
+				resultType="com.final_project.employ.Employ" parameterType="Integer">
+			select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage
+			from com_employ CE
+			JOIN ability_type A ON A.atCode = CE.atCode
+			JOIN company C ON C.cSerial = CE.cSerial
+			JOIN com_image CI ON C.cSerial=CI.cSerial
+			JOIN sub_class L ON CE.subCode=L.subCode
+			<!-- WHERE cePay &gt; #{startpay} AND cePay &lt; #{endpay} -->
+			
+			<trim prefix="WHERE" prefixOverrides="AND |OR "> 
+			    <if test="startpay != null">
+			        AND cePay &gt; #{startpay}
+			    </if>
+			    <if test="endpay != null">
+			        AND cePay &lt; #{endpay}
+			    </if>
+			    <if test="cePrefere!='우대사항'">
+			        AND INSTR(cePrefere, #{cePrefere}) &gt; 0
+			    </if>
+			    <if test="ceType!='근무조건'">
+			        AND INSTR(ceType, #{ceType}) &gt; 0
+			    </if>
+			    <if test="ability!='학력'">
+			        AND INSTR(ability, #{ability}) &gt; 0
+			    </if>
+			    <if test="subname!='2차직종'">
+			        AND INSTR(subname, #{subname}) &gt; 0
+			    </if>
+			    <if test="sdate != ''">
+			        AND ceStart &gt; #{sdate}
+			    </if>
+			    <if test="edate != ''">
+			        AND ceEnd &lt; #{edate}
+			    </if>
+			    <!-- <if test="license!='자격증'">
+			        AND INSTR(license, #{license}) &gt; 0
+			    </if> -->
+		  	</trim>
+
+</select>
+
+
+
+</mapper>

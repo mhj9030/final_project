@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<insert id="insertNotice" parameterType="com.final_project.help.Notice">
+		INSERT INTO notice(notNum, subject, content, hitCount, mId) VALUES
+		(notice_seq.NEXTVAL, #{subject}, #{content}, #{hitCount}, #{mId})
+	</insert>
+
+<sql id="where-list">
+	  <if test="searchKey=='userName'">
+	      userName=#{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='content'">
+	      DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+          OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+	  </if>
+	</sql>	
+	
+	
+<!-- 글개수 -->
+	<select id="dataCount" parameterType="map"
+	            resultType="Integer">
+	  SELECT NVL(COUNT(*), 0) FROM notice b
+	        JOIN member m
+	        ON b.mId=m.mId
+	     <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     </where>   
+	</select>
+	
+	
+	
+	<!-- 글리스트 -->
+	<select id="listNotice" parameterType="map"
+	            resultType="com.final_project.help.Notice">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum, tb.* FROM (
+			     SELECT notNum, b.mId, subject
+			           ,TO_CHAR(b.created, 'YYYY-MM-DD') created
+					   ,hitCount, m.mName
+			        FROM notice b JOIN member m ON b.mId=m.mId
+                    <where>
+                         <if test="searchValue != null and searchValue != ''">
+			                  <include refid="where-list"/>
+		                 </if>
+	                </where>
+	                ORDER BY notNum DESC
+	<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+	<!-- 글보기 -->
+	<select id="readNotice" resultType="com.final_project.help.Notice" parameterType="Integer">
+		SELECT notNum, b.mId, subject, content
+				   ,hitCount, b.created, m.mName
+		FROM notice b JOIN member m ON b.mId=m.mId
+		WHERE notNum = #{notNum}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE notice SET hitCount=hitCount+1 WHERE notNum = #{notNum}
+	</update>
+	
+	<!-- 삭제 -->
+      <delete id="deleteNotice" parameterType="Integer">
+            DELETE FROM notice WHERE notNum = #{notNum}
+      </delete>
+	
+	
+	
+</mapper>
