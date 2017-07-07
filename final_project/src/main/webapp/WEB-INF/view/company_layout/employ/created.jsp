@@ -39,11 +39,12 @@
 		var f=document.employForm;
 		
 		var mode="${mode}";
-		if(mode=="created")
+		if(mode=="created") {
 			f.action="<%=cp%>/company/employ/created";
-		else if(mode=="update")
+		} else if(mode=="update") {
 			f.action="<%=cp%>/company/employ/update";
-
+		}
+		
 		f.submit();
 	}
 </script>
@@ -57,12 +58,12 @@
 	<form name="employForm" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>제목</label>
-			<input name="ceNum" type="text" class="form-control" placeholder="제목" value="">
+			<input name="ceSubject" type="text" class="form-control" placeholder="제목" value="">
 		</div>
 
 		<div class="form-group">
 			<label>고용 인원수</label>
-			<input name="cePeople" type="number" class="form-control" placeholder="인원수" value="">
+			<input name="cePeople" type="number" class="form-control" placeholder="인원수">
 		</div>
 		
 		<div class="form-group">

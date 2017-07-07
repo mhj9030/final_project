@@ -28,7 +28,7 @@ public class EmployController {
 	@RequestMapping(value="/company/employ/created", method=RequestMethod.GET)
 	public String createdForm(Model model, HttpSession session) throws Exception{
 		
-		model.addAttribute("employ", "on");
+		model.addAttribute("employHead", "on");
 		model.addAttribute("mode", "created");
 		
 		return ".company_layout.employ.created";

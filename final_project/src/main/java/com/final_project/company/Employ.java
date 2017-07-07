@@ -11,7 +11,7 @@ public class Employ {
 	private MultipartFile upload; 
 	private String cSerial;
 	private int atCode, subCode;
-	
+
 	public int getCeNum() {
 		return ceNum;
 	}
