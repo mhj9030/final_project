@@ -6,28 +6,44 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.final_project.common.MyUtil;
+import com.final_project.common.MyUtilBootstrap;
+import com.final_project.member.SessionInfo;
 
 @Controller("point.mypointController")
 public class MypointController {
-	private MypointServiceImpl service = new MypointServiceImpl();
-	private MyUtil util;
+	@Autowired
+	private PointServiceImpl service;
+	
+	@Autowired
+	private MyUtilBootstrap util;
 	
 	@RequestMapping("/point/mypoint")
-	public String method(HttpSession session, Model model) throws Exception {
-		Point point = null;
+	public String list(@RequestParam(value="page", defaultValue="1")int current_page, 
+			@RequestParam(value="startDate", defaultValue="")String startDate,
+			@RequestParam(value="endDate", defaultValue="")String endDate,
+			@RequestParam(value="pointType", defaultValue="")String pointType,
+			HttpSession session, Model model) throws Exception {
+		Point dto = new Point();
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Map<String, Object> map = new HashMap<>();
-		
-		map.put("mId", /*session.getId()*/"asd@daum.net");
-		
+		map.put("mId", info.getUserId());
 		// 나의 포인트
-		point = service.mypoint(map);
+		dto = service.mypoint(map);
 		
-		int current_page = 0;
+		map.put("startDate", startDate.replace("-", ""));
+		map.put("endDate", endDate.replace("-", ""));
+		map.put("pointType", pointType);
+		System.out.println(map.get("pointType"));
+		
 		int total_page = 0;
 		int rows = 10;
 		
@@ -45,6 +61,8 @@ public class MypointController {
 		map.put("start", start);
 		map.put("end", end);
 
+		
+		System.out.println("List");
 		// 포인트 내역
 		List<Point> list = service.readlist(map);
 		
@@ -52,10 +70,13 @@ public class MypointController {
 		String paging = null;
 		paging = util.paging(current_page, total_page);
 		
-		model.addAttribute("point", point);
+		model.addAttribute("point", dto);
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		model.addAttribute("pointType", pointType);
 		
-		return ".point_layout.mypoint.container";
+		return ".point_layout.mypoint.mypoint";
 	}
 }

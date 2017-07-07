@@ -35,7 +35,7 @@
   <!-- 회원가입 JS -->
   <script src="<%=cp%>/resources/js/register.js" type="text/javascript"></script>
   
-    <!-- 회원가입 JS -->
+    <!-- 로그인 JS -->
   <script src="<%=cp%>/resources/js/login.js" type="text/javascript"></script>
   
   <!-- 알림창 CSS -->

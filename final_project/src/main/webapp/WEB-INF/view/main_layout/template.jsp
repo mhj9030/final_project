@@ -29,6 +29,12 @@
 <!-- Jquery 3.1.0 -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 
+<!-- 알림창 JS -->
+<script src="<%=cp%>/resources/js/sweetalert2.min.js" type="text/javascript"></script>
+
+<!-- 로그인 JS -->
+<script src="<%=cp%>/resources/js/login.js" type="text/javascript"></script>
+
 <!-- Bootstrap JS -->
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 
@@ -37,6 +43,13 @@
 
 <!-- Font Awesome CSS -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Profile JS -->
+<script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
+
+  <!-- 알림창 CSS -->
+  <link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
+
 
 
 

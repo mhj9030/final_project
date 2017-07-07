@@ -3,6 +3,8 @@
  */
 
 
+
+
 function getUsername() {
 	var firstname = $("#id_first_name").val().trim();
 	var lastname = $("#id_last_name").val().trim();
@@ -34,10 +36,19 @@ function getUsername() {
 			success:function(data){
 				var state=data.state;
 				if(state=="true"){
-					alert(mid+" 아이디는 사용가능합니다"); 
+					swal(
+							  '',
+							  '등록 가능한 이메일 입니다.',
+							  'success'
+							)
 				}else{
-					alert(mid+" 아이디는 사용불가능 합니다"); 
+					swal(
+							  '',
+							  '중복되는 이메일 이거나 사용이 불가능한 이메일 입니다.',
+							  'error'
+							)
 					$("#m_email").val("");
+					$('#m_email').focus();
 				}
 			}
 		});

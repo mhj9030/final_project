@@ -22,10 +22,12 @@ public class MemberController {
 	private MemberService service;
 
 	@RequestMapping(value = "/member/login_check", method = RequestMethod.POST)
-	public String loginsubmit(@RequestParam String mid, @RequestParam String mpwd, Model model, HttpSession session, HttpServletRequest req)
+	public String loginsubmit(@RequestParam String mid, @RequestParam String mpwd, @RequestParam String state, Model model, HttpSession session, HttpServletRequest req)
 			throws Exception {
 		
 		String cp = req.getContextPath();
+		
+		System.out.println(state);
 
 		// 로그인 정보 가져오기
 		Member dto = service.readMember(mid);
@@ -38,6 +40,10 @@ public class MemberController {
 
 		// 암호화 된 비밀번호 서로 비교
 		if (dto == null || (!dto.getMpwd().equals(s2))) {
+			if(state.equals("navlogin")){
+				model.addAttribute("mode", "loginfail");
+				return ".mainLayout";
+			}
 			model.addAttribute("mode", "loginfail");
 			return ".subLayout";
 		}
@@ -46,12 +52,15 @@ public class MemberController {
 		SessionInfo info = new SessionInfo();
 		info.setUserId(dto.getMid());
 		info.setUserName(dto.getMname());
+		info.setcSerial(dto.getcSerial());
 		session.setAttribute("member", info);
 		
 		//프로필 영역 변수
 		String profileurl = cp+"/profile?mid="+mid;
 		
 		model.addAttribute("profileurl", profileurl);
+		
+		
 
 		return ".mainLayout";
 
@@ -81,12 +90,19 @@ public class MemberController {
 			service.insertMember(dto);
 		} catch (Exception e) {
 			model.addAttribute("mode", "registerFail"); // 회원가입 실패 mode 전송
-			return ".subLayout";
+			return ".signup";
 		}
 		model.addAttribute("mode", "registerComplet"); // 오류 발생이 안되면 완료 mode 전송
 
-		return ".subLayout";
+		return ".signup";
 
+	}
+	
+	@RequestMapping(value="/member/signin")
+	public String signinPage() throws Exception {
+		
+		
+		return ".signup";
 	}
 
 	// 사용자 이메일 중복 체크
