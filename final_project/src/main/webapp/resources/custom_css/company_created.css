@@ -31,3 +31,25 @@
 	font-size: 12px;
 }
 
+.col-xs-2.original-filename{
+	padding-top: 2px;
+	width: auto;
+}
+
+.title-form-control label{
+	margin-right: 150px;
+	margin-left: 10px;
+	font-size: 12px;
+}
+
+.main-form-control{
+	width: 180px;
+	float: left;
+	margin-right: 10px;
+}
+
+.sub-form-control{
+	width: 180px;
+	float: left;
+	margin-right: 10px;
+}

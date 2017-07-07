@@ -68,15 +68,56 @@
 		]]>
 	</select>
 	
-	<!-- 기업 정보 가져오기 -->
-	<select id="readCompany" parameterType="Integer" resultType="com.final_project.company.Company">
-		select cNum, cCeo, cName, cPeople, to_char(cCreated, 'YYYY-MM-DD') cCreated, cSize, cTel, cProfit, cIntro, cAddress, sb.subName, mb.maName, ci.cLogoImage, ci.cCoverImage
+	<!-- 기업 정보 가져오기(기업 번호) -->
+	<select id="readCompanyNum" parameterType="Integer" resultType="com.final_project.company.Company">
+		select c.cSerial, cNum, cCeo, cName, cPeople, to_char(cCreated, 'YYYY-MM-DD') cCreated, cSize, cTel, cProfit, cIntro, cAddress, sb.subName, mb.maName, ci.cLogoImage, ci.cCoverImage
 			from company c
 		  	join sub_bu_class sb on c.subCode=sb.subCode
 		  	join main_bu_class mb on sb.maCode=mb.maCode
 		  	join com_image ci on c.cSerial=ci.cSerial
 		  	where cNum=#{cNum}
 	</select>
+	
+	<!-- 기업 정보 가져오기(유저 아이디) -->
+	<select id="readCompanyId" parameterType="String" resultType="com.final_project.company.Company">
+		select c.cSerial, mId, cNum, cCeo, cName, cPeople, to_char(cCreated, 'YYYY-MM-DD') cCreated, cSize, cTel, cProfit, 
+			cIntro, cDescription, cAddress, c.subCode, sb.subName, mb.maName, ci.cLogoImage, ci.cCoverImage, ci.cLogoOriginalFilename, ci.cCoverOriginalFilename
+			from company c
+		  	join sub_bu_class sb on c.subCode=sb.subCode
+		  	join main_bu_class mb on sb.maCode=mb.maCode
+		  	join com_image ci on c.cSerial=ci.cSerial
+		  	where mId=#{mId}
+	</select>
+	
+	<!-- 기업 정보 수정 -->
+	<update id="updateCompany" parameterType="com.final_project.company.Company">
+		update company set cCeo=#{cCeo}, cName=#{cName}, cPeople=#{cPeople}, 
+			cCreated=#{cCreated}, cSize=#{cSize}, cTel=#{cTel}, cProfit=#{cProfit}, 
+			cIntro=#{cIntro}, subCode=#{subCode}, cDescription=#{cDescription}, 
+			cAddress=#{cAddress}
+			where cSerial=#{cSerial}
+	</update>
+	
+	<!-- 기업 이미지 수정 -->
+	<update id="updateComImage" parameterType="com.final_project.company.Company">
+		update com_image set cLogoImage=#{cLogoImage, jdbcType=VARCHAR}, 
+			cLogoOriginalFilename=#{cLogoOriginalFilename, jdbcType=VARCHAR}, 
+			cCoverImage=#{cCoverImage, jdbcType=VARCHAR}, 
+			cCoverOriginalFilename=#{cCoverOriginalFilename, jdbcType=VARCHAR}
+			where cSerial=#{cSerial}
+	</update>
+	
+	<!-- 채용 등록 -->
+	<insert id="insertComImploy" parameterType="com.final_project.company.Employ">
+		insert into com_employ(ceNum, ceSubject, cePeople, ceType, ceStart, ceEnd, 
+			cePay, cePlace, cePrefere, ceEtc, resumeForm, resumeFile, resumeOriginalName, 
+			cSerial, atCode, subCode)
+  			values(com_employ_seq.nextval, #{ceSubject}, #{cePeople}, #{ceType}, 
+  				#{ceStart}, #{ceEnd}, #{cePay}, #{cePlace}, #{cePrefere}, #{ceEtc}, 
+  				#{resumeForm}, #{resumeFile, jdbcType=VARCHAR}, 
+  				#{resumeOriginalName, jdbcType=VARCHAR}, #{cSerial}, #{atCode}, 
+  				#{subCode})
+	</insert>
 </mapper>
 
 

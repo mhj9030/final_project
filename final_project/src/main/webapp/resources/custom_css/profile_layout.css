@@ -276,3 +276,24 @@ a {
 	border-color: #46bbdc;
 	color: #fff;
 }
+
+.setting{
+	margin-top : 30px;
+	text-align: center;
+}
+
+a:HOVER {
+	text-decoration: none;
+	color: #525252;
+	outline: 0 !important;
+}
+
+.panel-info .panel-heading, .panel-info .panel-footer, .panel-info.panel-colorful-cus{
+	background: rgba(157, 84, 255, 0.96);
+	color:#fff;
+	border-color: transparent;
+}
+
+.bo {
+	border-top : 1px solid #aaa !important;
+}

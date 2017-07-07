@@ -6,7 +6,7 @@
 
 <!-- 회원정보 불러오기 -->
 <select id="readProfile" resultType="com.final_project.profile.Profile" parameterType="String">
-SELECT m.mid, mname, TO_CHAR(mbirth, 'YYYY-MM-DD')mbirth,
+SELECT m.mid, mname, mpwd, TO_CHAR(mbirth, 'YYYY-MM-DD')mbirth,
 	 mgender, p.prophoto, p.procover, p.prointro
 		FROM member m
 			LEFT OUTER JOIN profile p ON m.mid = p.mid

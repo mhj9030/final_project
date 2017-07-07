@@ -5,6 +5,7 @@ public class SessionInfo {
 	private String userId;
 	private String userName;
 	private int memberLevel;
+	private String cSerial;
 	
 	public int getMemberIdx() {
 		return memberIdx;
@@ -29,5 +30,11 @@ public class SessionInfo {
 	}
 	public void setMemberLevel(int memberLevel) {
 		this.memberLevel = memberLevel;
+	}
+	public String getcSerial() {
+		return cSerial;
+	}
+	public void setcSerial(String cSerial) {
+		this.cSerial = cSerial;
 	}
 }
