@@ -14,6 +14,9 @@
 
 
 $(function() {
+	
+	
+	
 	listPage(1);
 /* 채용정보 상세검색 */
 
@@ -64,7 +67,7 @@ $("#main_class").change(function() {
 	//기본적으로startpay select에 넣어놓는값
 	var s = "";
 	for(var i=15; i<=99; i++) {
-		s+="<option value='"+i*1000000+"'>"+i*100+"만원</option>"
+		s+="<option value='"+i*100+"'>"+i*100+"만원</option>"
 	}
 	$("#startpay").html(s);
 	//sbar + mbar + ebar =100이다. sbar 가  0이면 +1더해서 100만원  sbar만큼 빼서 mbar가 99여야한다.
@@ -90,7 +93,7 @@ $("#main_class").change(function() {
 		
 		var e = "";
 		for(var i=$("#startpay option").index($("#startpay option:selected"))+16; i<=99; i++) {
-			e+="<option value='"+i*1000000+"'>"+i*100+"만원</option>"
+			e+="<option value='"+i*100+"'>"+i*100+"만원</option>"
 		}
 		e+="<option value='100000000'>1억</option>"
 		$("#endpay").html(e);

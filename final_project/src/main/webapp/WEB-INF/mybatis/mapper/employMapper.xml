@@ -60,10 +60,10 @@
 			
 			<trim prefix="WHERE" prefixOverrides="AND |OR "> 
 			    <if test="startpay != null">
-			        AND cePay &gt; #{startpay}
+			        AND TO_NUMBER(substr(cePay,1,4)) &gt; #{startpay}
 			    </if>
 			    <if test="endpay != null">
-			        AND cePay &lt; #{endpay}
+			        AND TO_NUMBER(substr(cePay,6,4)) &lt; #{endpay}
 			    </if>
 			    <if test="cePrefere!='우대사항'">
 			        AND INSTR(cePrefere, #{cePrefere}) &gt; 0
