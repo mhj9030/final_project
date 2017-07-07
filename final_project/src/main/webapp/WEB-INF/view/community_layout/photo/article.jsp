@@ -112,7 +112,11 @@ function sendLikePhoto(ptnum) {
 
 <script type="text/javascript">
 	$(function(){
-		listPage(1);		
+		listPage(1);
+		var focus = "${focus}";
+		if(focus==1){
+			$("#replyContent").focus();
+		}
 	});
 
 	function listPage(page){

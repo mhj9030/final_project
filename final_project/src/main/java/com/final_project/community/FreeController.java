@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.final_project.common.FileManager;
 import com.final_project.common.MyUtilBootstrap;
@@ -169,10 +170,11 @@ public class FreeController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
-		map.put("frnum", frnum);
+		map.put("groupNum", dto.getGroupNum());
+		map.put("orderNo", dto.getOrderNo());
 
-		//Free preReadDto = service.preReadFree(map);
-		//Free nextReadDto = service.nextReadFree(map);
+		Free preReadDto = service.preReadFree(map);
+		Free nextReadDto = service.nextReadFree(map);
 
 		String query = "page=" + page;
 		if (searchValue.length() != 0) {
@@ -182,8 +184,8 @@ public class FreeController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
-		//model.addAttribute("preReadDto", preReadDto);
-		//model.addAttribute("nextReadDto", nextReadDto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
 
 		return ".community_layout.free.article";
 	}
@@ -236,4 +238,122 @@ public class FreeController {
 
 		return "redirect:/community/free?page="+page;
 	}
+	
+	@RequestMapping(value = "/community/free/delete")
+	public String delete(
+			@RequestParam int frnum, 
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "community";
+
+		service.deleteFree(frnum, pathname, info.getUserId());
+
+		String query = "page=" + page;
+
+		return "redirect:/community/free?" + query;
+	}
+
+	@RequestMapping(value = "/community/free/update", method = RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int frnum, 
+			@RequestParam String page,
+			Model model, 
+			HttpSession session) throws Exception {
+
+		String query = "page=" + page;
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		Free dto = service.readFree(frnum);
+		if (dto == null) {
+			return "redirect:/commuinty/free?" + query;
+		}
+
+		if (!info.getUserId().equals(dto.getmId())) {
+			return "redirect:/commuinty/free?" + query;
+		}
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "update");
+
+		return ".community_layout.free.created";
+	}
+
+	@RequestMapping(value = "/community/free/update", method = RequestMethod.POST)
+	public String updateSubmit(
+			Free dto, 
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		String query = "page=" + page;
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "community";
+
+		service.updateFree(dto, pathname);
+
+		return "redirect:/community/free?" + query;
+	}
+	
+	@RequestMapping(value = "/community/free/deleteFile")
+	public String deleteFile(
+			@RequestParam int frnum, 
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+
+		Free dto = service.readFree(frnum);
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "community";
+		if (dto.getSaveFilename() != null && dto.getSaveFilename().length() != 0) {
+			fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+
+			dto.setSaveFilename(" ");
+			dto.setOriginalFilename(" ");
+			service.updateFree(dto, pathname);
+		}
+		String query = "frnum=" + frnum + "&page=" + page;
+		return "redirect:/community/free/update?" + query;
+	}
+	
+	@RequestMapping(value = "/community/free/insertLikeFree", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertLikeFree(
+			Free dto, 
+			@RequestParam(value = "frnum") int frnum, 
+			HttpSession session) throws Exception {
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String state = "true";
+
+		dto.setFrnum(frnum);
+		dto.setmId(info.getUserId());
+		int result = service.insertLikeFree(dto);
+		if (result == 0)
+			state = "false";
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
+
+	@RequestMapping(value = "/community/free/countLikeFree", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> countLikePhoto(
+			@RequestParam(value="frnum") int frnum) throws Exception {
+
+		String state = "true";
+		int countLikeFree = service.countLikeFree(frnum);
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		model.put("countLikeFree", countLikeFree);
+
+		return model;
+	}
+
 }
