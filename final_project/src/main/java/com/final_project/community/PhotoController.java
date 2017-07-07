@@ -88,7 +88,7 @@ public class PhotoController {
 		}
 
 		listUrl = cp + "/community/photo?" + query;
-		articleUrl = cp + "/community/photo/article?page=" + current_page + "&" + query;
+		articleUrl = cp + "/community/photo/article?page=" + current_page + query;
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 
@@ -156,6 +156,7 @@ public class PhotoController {
 	public String article(
 			@RequestParam(value = "ptnum") int ptnum,
 			@RequestParam(value = "page") String page,
+			@RequestParam(value = "focus", defaultValue="") int focus,
 			@RequestParam(value = "searchKey", defaultValue = "subject") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
 			Model model) throws Exception {
@@ -183,6 +184,7 @@ public class PhotoController {
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
+		model.addAttribute("focus", focus);
 		model.addAttribute("query", query);
 		model.addAttribute("preReadDto", preReadDto);
 		model.addAttribute("nextReadDto", nextReadDto);

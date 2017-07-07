@@ -68,7 +68,7 @@
 						<tr>
 							<td class="input_info">제목</td>
 							<td colspan="3">
-								<input type="text" name="subject" value="" required="required">
+								<input type="text" name="subject" value="${dto.subject}" required="required">
 							</td>
 						</tr>
 
@@ -80,12 +80,22 @@
 						</tr>
 
 						<tr>
-							<td class="input_info">첨부</td>
+							<td class="input_info">첨부파일</td>
 							<td colspan="3">
 								<input type="file" name="upload">
 							</td>
 						</tr>
-				
+						<c:if test="${mode=='update'}" >
+							<tr height="40" style="border-bottom: 1px solid #cccccc;">
+						    	<td width="100" style="text-align: center;">기존파일</td>
+						        <td style="padding-left:10px;">
+						        	${dto.originalFilename}
+						            <c:if test="${not empty dto.originalFilename}">
+						            	| <a href="<%=cp%>/community/free/deleteFile?frnum=${dto.frnum}&page=${page}">삭제</a>
+						            </c:if>
+						        </td>
+						    </tr>
+						</c:if>	
 				
 					</tbody>
 					<tfoot>

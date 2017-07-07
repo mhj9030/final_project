@@ -89,4 +89,66 @@
 		FROM free_bbs f JOIN member m ON f.mId=m.mId 
 		WHERE frnum = #{frnum}	
 	</select>
+	
+	<select id="preReadFree" resultType="com.final_project.community.Free" 
+				parameterType="map">
+		SELECT tb.* FROM (
+				SELECT frnum, subject 
+				         FROM free_bbs f
+				         JOIN member m ON f.mId = m.mId
+	                    <where>
+	                         <if test="searchValue != null and searchValue != '' ">
+				                  <include refid="where-list"/>
+			                 </if>
+			               <![CDATA[
+			                 AND (( groupNum = #{groupNum} AND orderNo < #{orderNo})
+	                         OR (groupNum > #{groupNum} ))
+			                 ]]>
+		                </where>
+					ORDER BY groupNum ASC, orderNo DESC
+				) tb WHERE ROWNUM=1
+	</select>
+
+	<!-- 다음글 -->
+	<select id="nextReadFree" resultType="com.final_project.community.Free" 
+				parameterType="map">
+			SELECT tb.* FROM (
+				SELECT frnum, subject 
+				         FROM free_bbs f
+				         JOIN member m ON f.mId = m.mId		
+	                    <where>
+	                         <if test="searchValue != null and searchValue != '' ">
+				                  <include refid="where-list"/>
+			                 </if>
+			               <![CDATA[
+			                 AND (( groupNum = #{groupNum} AND orderNo > #{orderNo})
+	                         OR (groupNum < #{groupNum} ))
+			                 ]]>
+		                </where>
+					ORDER BY groupNum DESC, orderNo ASC
+				) tb WHERE ROWNUM=1
+	</select>
+	
+	<update id="deleteFree" parameterType="Integer">
+		UPDATE free_bbs SET state = 1 
+		WHERE frnum IN 
+		(SELECT frnum FROM free_bbs START WITH frnum=#{frnum} CONNECT BY PRIOR frnum = parent)
+	</update>
+	
+	<update id="updateFree" parameterType="com.final_project.community.Free">
+		UPDATE free_bbs SET subject=#{subject}, content=#{content}, 
+							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
+							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
+							WHERE frnum = #{frnum}
+	</update>
+	
+	<insert id="insertLikeFree" parameterType="com.final_project.community.Free">
+	INSERT INTO free_like(frnum, mId) VALUES (#{frnum}, #{mId})
+	</insert>
+
+	<select id="countLikeFree" resultType="Integer" parameterType="Integer">
+	   SELECT  NVL(COUNT(*), 0) countLikeFree
+	        FROM free_like WHERE frnum=#{frnum}
+	</select>
+	
 </mapper>
