@@ -34,11 +34,22 @@
 <hr>
 
 
+<div class= "footer-bar">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/claim/list'">목록</button>
+			<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/main/update?num=${dto.claimNum}&page=${page}'">수정</button>
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/claim/delete?num=${dto.claimNum}'">삭제</button>
+			</c:if>
+			</div>
+	</div>
+
+
 
 
 
 <!-- 댓글용 text-center -->
-<div class="text-center">
+<!-- <div class="text-center">
 	
 	
 	<hr>
@@ -61,6 +72,6 @@
 	
 		
 	
-</div>
+</div> -->
 
 </div>

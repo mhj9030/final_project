@@ -40,7 +40,7 @@
 <div class="text-right">
 
 <button class="btn"><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
-<button class="btn"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
+<button class="btn"onclick="javascript:history.back();"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
 </div>
 
 </div>

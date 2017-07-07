@@ -202,7 +202,7 @@ public class NoticeController {
 		
 		service.deleteNotice(map);
 		
-		return "redirect:/notice/list";
+		return "redirect:/help_layout/notice/list";
 	}
 	
 	
