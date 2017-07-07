@@ -88,9 +88,9 @@
 						</c:if>
 						
 						<tr>
-							<td colspan="4" style="text-align: center; color: #FF572;">
-								사진과 관련된 태그를 단어로 써주세요.(EX) 사람, 동물, 아빠, 엄마<br>
-								대표사진은 다운로드가 가능하지만 추가사진은 게시만 가능합니다.(다운X)
+							<td colspan="4" style="text-align: center;">
+								<span style=" color: rgba(255, 0, 0, 0.87);">사진과 관련된 태그를 단어로 써주세요.(EX) 사람, 동물, 아빠, 엄마<br>
+								대표사진은 다운로드가 가능하지만 추가사진은 게시만 가능합니다.(다운X)</span>
 							</td>
 						</tr>
 						
