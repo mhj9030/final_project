@@ -23,7 +23,7 @@ public class CreatedController {
 		model.addAttribute("created", "on");
 		model.addAttribute("mode", "created");
 		
-		return ".company_layout.created.container";
+		return ".company_layout.created.created";
 	}
 	
 	@RequestMapping(value="/company/created", method=RequestMethod.POST)
@@ -57,7 +57,7 @@ public class CreatedController {
 		model.addAttribute("mode", "update");
 		model.addAttribute("created", "on");
 		
-		return ".company_layout.created.container";
+		return ".company_layout.created.created";
 	}
 	
 	@RequestMapping(value="/company/update", method=RequestMethod.POST)
