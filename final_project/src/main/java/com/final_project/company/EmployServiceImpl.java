@@ -26,7 +26,7 @@ public class EmployServiceImpl implements EmployService{
 				dto.setResumeOriginalName(dto.getUpload().getOriginalFilename());
 			}
 			
-			dao.insertData("company.insertComImploy", dto);
+			dao.insertData("company.insertComEmploy", dto);
 		} catch (Exception e) {
 			throw e;
 		}

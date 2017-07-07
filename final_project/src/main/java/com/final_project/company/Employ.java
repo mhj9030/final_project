@@ -4,7 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Employ {
 	private int ceNum, cePeople;
-	private String ceSubject, ceType, ceStart, ceEnd;
+	private String ceSubject, ceType;
+	private String ceStart, ceEnd, ceP​eriod;
 	private String cePay, cePayMin, cePayMax;
 	private String cePlace, cePrefere, ceEtc;
 	private String resumeForm, resumeFile, resumeOriginalName;

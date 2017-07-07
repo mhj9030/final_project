@@ -108,7 +108,7 @@
 	</update>
 	
 	<!-- 채용 등록 -->
-	<insert id="insertComImploy" parameterType="com.final_project.company.Employ">
+	<insert id="insertComEmploy" parameterType="com.final_project.company.Employ">
 		insert into com_employ(ceNum, ceSubject, cePeople, ceType, ceStart, ceEnd, 
 			cePay, cePlace, cePrefere, ceEtc, resumeForm, resumeFile, resumeOriginalName, 
 			cSerial, atCode, subCode)
@@ -118,6 +118,18 @@
   				#{resumeOriginalName, jdbcType=VARCHAR}, #{cSerial}, #{atCode}, 
   				#{subCode})
 	</insert>
+	
+	<!-- 채용 리스트 -->
+	<select id="listComEmploy">
+		select * from(
+			select rownum rnum, tb.* from(
+		    	select ceSubject, ceStart, ceEnd
+		        	from com_employ
+				<![CDATA[
+				)tb where rownum<=#{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
 </mapper>
 
 
