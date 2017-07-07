@@ -22,7 +22,6 @@ public class TalentServiceImpl implements TalentService{
 			mainType = dao.getListData("talent.mainClass");
 		} catch (Exception e) {
 			System.out.println(e.toString());
-			//e.printStackTrace();
 		}
 		
 		return mainType;
@@ -36,7 +35,6 @@ public class TalentServiceImpl implements TalentService{
 			list = dao.getListData("talent.subClass", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
-			//e.printStackTrace();
 		}
 		
 		return list;
@@ -44,26 +42,41 @@ public class TalentServiceImpl implements TalentService{
 
 	@Override
 	public int dataCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Talent> listBoard() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("talent.dataCount");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override
 	public List<Talent> listBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Talent> list = new ArrayList<>();
+		
+		try {
+			list = dao.getListData("talent.searchList", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int dataCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("talent.dataCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override

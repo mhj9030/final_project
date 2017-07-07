@@ -20,7 +20,7 @@
 	<!-- 검색 -->
 	<div class="search_list">
 		<form name="searchForm">
-			<table>
+			<table class="table">
 				<tr>
 					<td width="15%">검색</td>
 					<td width="25%" align="center">
@@ -44,7 +44,7 @@
 	</div>
 	
 	<!-- 열람 -->
-	<div class="resume_list">
+	<div id="resume_list">
 		<c:forEach begin="1" end="8" step="1">
 		<div class="marketDiv">
 			<div style="text-align: center;">

@@ -14,7 +14,7 @@
 	
 	<!-- 검색 -->
 	<div class="search_list">
-		<table>
+		<table class="table">
 			<tr>
 				<td width="15%">검색</td>
 				<td width="25%" align="center">
