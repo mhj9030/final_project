@@ -14,6 +14,8 @@
 
 
 $(function() {
+	
+	$("#collapseOne").hide();
 	listPage(1);
 /* 채용정보 상세검색 */
 
