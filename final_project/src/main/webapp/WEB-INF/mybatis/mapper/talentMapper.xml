@@ -9,4 +9,48 @@
 	<select id="subClass" parameterType="map" resultType="com.final_project.talent.Talent">
 		select subCode, subName from sub_class where maCode=#{mainCode}
 	</select>
+	
+	<sql id="where-list">
+		<if test="mainCode!='' and mainCode!=null">
+			mc.maCode=#{mainCode} 
+		</if>
+		<if test="list!=null">
+			and
+			<foreach item="subCode" collection="list" separator="or">
+				s.subCode=#{subCode} 
+			</foreach>
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		select nvl(count(*), 0)
+		from member m
+		join resume r on m.mId=r.mId
+		left join intro i on r.rNum=i.rNum
+		join interest_job ij on m.mId=ij.mId
+		join sub_class s on ij.subCode=s.subCode
+		join main_class mc on s.maCode=mc.maCode
+		where resumeType=0 
+		<if test="(mainCode!='' and mainCode!=null) and list!=null">
+			and <include refid="where-list" />
+		</if>
+	</select>
+	
+	<select id="searchList" parameterType="map" resultType="com.final_project.talent.Talent">
+		select * from(
+			select rownum, tb.* from(
+				select m.mId, r.rNum, rName, s.subCode, mc.maCode
+				from member m
+				join resume r on m.mId=r.mId
+				left join intro i on r.rNum=i.rNum
+				join interest_job ij on m.mId=ij.mId
+				join sub_class s on ij.subCode=s.subCode
+				join main_class mc on s.maCode=mc.maCode
+				where resumeType=0 
+				<if test="(mainCode!='' and mainCode!=null) and list!=null">
+					and <include refid="where-list" />
+				</if>
+			)tb where <![CDATA[rownum<=#{end} 
+		)where rownum>=#{start}]]>
+	</select>
 </mapper>

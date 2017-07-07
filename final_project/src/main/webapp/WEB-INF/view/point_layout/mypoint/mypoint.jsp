@@ -7,16 +7,6 @@
 	String cp=request.getContextPath();
 %>
 
-<script type="text/javascript">
-$(document).ready(function() {
-	if('${pointType}'=='적립'){
-		$("select option:eq(1)").attr("selected", "selected");
-	}else if('${pointType}'=='사용'){
-		$("select option:eq(2)").attr("selected", "selected");
-	} 
-});
-</script>
-
 <div class="page_body">
 	<div class="page_head">
 		<h3>| 나의 포인트</h3><hr>
@@ -101,3 +91,40 @@ $(document).ready(function() {
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	if('${pointType}'=='적립'){
+		$("select option:eq(1)").attr("selected", "selected");
+	}else if('${pointType}'=='사용'){
+		$("select option:eq(2)").attr("selected", "selected");
+	} 
+});
+
+$(function(){
+	$("body").on("change", "#endDate", function(){
+		var startdate = $("#startDate").val().split(".");
+		var enddate = $("#endDate").val().split(".");
+		
+		if(startdate==""){
+			alert("시작날짜를 먼저 입력해주세요");
+			$("#endDate").val("");
+			return;
+		}
+		
+		if(startdate[0]-enddate[0]>0) {
+			alert("종료날짜는 시작날짜 이상만 가능합니다.");
+			$("#endDate").val("");	
+			return;
+		} else if(startdate[1]-enddate[1]>0) {
+			alert("종료날짜는 시작날짜 이상만 가능합니다.");
+			$("#endDate").val("");	
+			return;
+		} else if(startdate[2]-enddate[2]>0) {
+			alert("종료날짜는 시작날짜 이상만 가능합니다.");
+			$("#endDate").val("");	
+			return;
+		}
+	});
+});
+</script>

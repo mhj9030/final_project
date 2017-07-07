@@ -33,7 +33,7 @@
 	<hr>
 	
 	<div class="point_bbs_list">
-		<table>
+		<table class="table">
 			<caption>공지사항</caption>
 			<thead>
 				<tr>
