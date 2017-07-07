@@ -93,24 +93,17 @@ public class NoticeServiceImpl implements NoticeService{
 		return result;
 	}
 
+	
 	@Override
-	public int deleteNotice(int num, String pathname, String mId) {
-		int result=0;
-
-		try{
-			Notice dto=readNotice(num);
-			if(dto!=null) {
-				if(! dto.getmId().equals(mId) && ! mId.equals("admin@a.com"))
-					return result;
-				
-			}
-			
-			// 댓글, 좋아요/싫어요 는 ON DELETE CASCADE 로 자동 삭제
-			
-			dao.deleteData("notice.deleteNotice", num);
-			result=1;
-		} catch(Exception e) {
+	public int deleteNotice(Map<String, Object> map) {
+			int result = 0;
+		
+		try {
+			result = dao.getIntValue("notice.deleteNotice", map);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		return result;
 	}
 	

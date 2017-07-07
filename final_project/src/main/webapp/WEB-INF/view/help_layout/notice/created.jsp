@@ -44,7 +44,7 @@
 						<tr>
 							<td class="input_info">작성자명</td>
 							<td colspan="3">
-								${sessionScope.member.mName}
+								${sessionScope.member.userName}
 								
 							</td>
 						</tr>
@@ -63,12 +63,6 @@
 							</td>
 						</tr>
 
-						<tr>
-							<td class="input_info">첨부</td>
-							<td colspan="3">
-								<input type="file" name="upload">
-							</td>
-						</tr>
 
 				
 					</tbody>

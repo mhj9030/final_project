@@ -11,20 +11,7 @@
 
 <!-- 중앙정렬용 center-block  -->
 <script type="text/javascript">
-function deleteNotice() {
-	 <c:if test="${sessionScope.member.mId=='admin@a.com' || sessionScope.member.mId==dto.mId}"> 
-	  var num = "${dto.num}";
-	  var page = "${page}";
-	  var query = "num="+num+"&page="+page;
-	  var url = "<%=cp%>/help_layout/notice/delete?" + query;
 
-	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
-	  	location.href=url;
-	 </c:if>     
-	  <c:if test="${sessionScope.member.mId!='admin' && sessionScope.member.mId!=dto.mId}">
-	  alert("게시물을 삭제할 수  없습니다.");
-	</c:if>
-	}
 </script>
 
 
@@ -45,10 +32,16 @@ function deleteNotice() {
 </pre>
 </div>
 <hr>
-<%-- <c:if test="${sessionScope.member.mId==dto.mId || sessionScope.member.mId=='admin@a.com'}">				    
-	          <button type="button" class="btn" onclick="deleteNotice();">삭제</button>
-</c:if> --%>
-<button type="button" class="btn" onclick="deleteNotice();">삭제</button>
+<div class= "footer-bar">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/notice/list'">목록</button>
+			<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/main/update?num=${dto.notNum}&page=${page}'">수정</button>
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/delete?num=${dto.notNum}'">삭제</button>
+			</c:if>
+			</div>
+		</div>
+
 
 
 
