@@ -99,7 +99,15 @@ public class EmployController {
 	}
 	
 	@RequestMapping("/employ/article")
-	public  String article() {
+	public  String article(
+			@RequestParam int ceNum,
+			Model model) {
+		
+		//받아와야할것 제목 날짜 조회수 내용
+		//채용테이블 제목 인원 고용형태 시작일 마감일 연봉 무대사항 비고 이력서양식(첨부) 
+		//기업이름 위치 학력 소분류
+		Employ employ = service.read_com_employ(ceNum);
+		model.addAttribute("employ",employ);
 		
 		return ".employ_layout.employ.article";
 		
