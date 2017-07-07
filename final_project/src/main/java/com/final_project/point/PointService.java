@@ -17,4 +17,8 @@ public interface PointService {
 	public Point mypoint(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);
 	public List<Point> readlist(Map<String, Object> map);
+	
+	// save, use point
+	public int savaPoint(Map<String, Object> map);
+	public int usePoint(Map<String, Object> map);
 }

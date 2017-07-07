@@ -148,7 +148,7 @@ function listPrint(data){
 		out += '	</div>';
 		out += '	<div>';
 		out += '		이름: ' + data.list[i].rName + '<br>';
-		out += '		관심직종: ${a}<br>';
+		out += '		관심직종: ' + data.list[i].subTypes + '<br>';
 		out += '		<a href="<%=cp%>/talent/main/article?mId=' + data.list[i].mId + '&rNum=' + data.list[i].rName + '">이력서 보러가기</a>';
 		out += '	</div>';
 		out += '</div>';

@@ -72,7 +72,7 @@ public class TalentController {
 		//model.addAttribute("list", list);
 		//model.addAttribute("paging", paging);
 		
-		return ".talent_layout.main.container";
+		return ".talent_layout.main.list";
 	}
 	
 	@ResponseBody

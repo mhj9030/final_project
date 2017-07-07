@@ -1,6 +1,7 @@
 package com.final_project.talent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,22 @@ public class TalentServiceImpl implements TalentService{
 		
 		try {
 			list = dao.getListData("talent.searchList", map);
+			
+			for(Talent t:list){
+				Map<String, Object> map2 = new HashMap<>();
+				map2.put("mId", t.getmId());
+				System.out.println(map2.get("mId"));
+				List<Talent> subType = null;
+				subType = dao.getListData("talent.searchSub", map2);
+				String s = "";
+				for(Talent ss:subType){
+					if(s != ""){
+						s += ", ";
+					}
+					s += ss.getSubName();
+				}
+				t.setSubTypes(s);
+			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

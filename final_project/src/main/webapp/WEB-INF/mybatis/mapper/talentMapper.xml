@@ -53,4 +53,13 @@
 			)tb where <![CDATA[rownum<=#{end} 
 		)where rownum>=#{start}]]>
 	</select>
+	
+	<select id="searchSub" parameterType="map" resultType="com.final_project.talent.Talent">
+		select m.mId, subName, maName
+		from member m
+		join interest_job ij on m.mId=ij.mId
+		join sub_class s on ij.subCode=s.subCode
+		join main_class mc on s.maCode=mc.maCode
+		where m.mId=#{mId}
+	</select>
 </mapper>
