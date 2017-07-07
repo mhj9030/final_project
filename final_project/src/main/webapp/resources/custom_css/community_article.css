@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+.community_article_wrap{
+	width: 800px;
+	min-height: 650px;
+	margin : 30px auto;
+	border: 1px solid #ccc;
+}
+
+.community_article_wrap .article_subject{
+	text-align: center;
+    height: 70px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.community_article_wrap .article_create{
+	height: 40px;
+    padding: 10px;
+	
+}
+
+.community_article_wrap .article_hitCount{
+	text-align : right;
+	height: 40px;
+    padding: 10px;
+	
+}
+
+.community_article_wrap .article_content{
+	height: 500px;
+    padding: 15px;
+	
+}
+
+.community_article_wrap .article_pre{
+	width: 400px;
+}
+
+.community_article_wrap .article_next{
+	text-align : right;
+	width: 400px;
+}
+
+.community_article_wrap .article_btns{
+	text-align: right;
+	padding-right : 30px;
+    margin: 30px 0px 10px;
+}
+.community_article_wrap .article_reply_wrap{
+	width: 800px;
+	text-align: center;
+}
+
+.community_article_wrap .article_reply_wrap textarea{
+    height: 98px;
+}
+    
+.community_article_wrap .article_reply_wrap button{
+	vertical-align: top;
+    height: 98px;
+}
+
+.community_article_wrap .community_listReply{
+	width: 700px;
+	margin: 0px auto;
+}

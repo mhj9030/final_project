@@ -15,7 +15,7 @@
 		
 		<div class="list-body" align="center">
 			<div>
-				<div align="right">1개(1/10 페이지)</div>
+				<div align="right">${dataCount}개(${page}/${total_page} 페이지)</div>
 
 				<table class="table table-hover free_list_table">
 					<thead>
@@ -26,31 +26,40 @@
 							<th width="100">작성일</th>
 							<th width="60">조회수</th>
 							<th width="60">추천수</th>
+							<th width="60">파일</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<tr align="center">
-							<td>1</td>
-							<td align="left"><a href="#">공무원 소식1</a></td>
-							<td>관리자</td>
-							<td>2017-06-27</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr align="center">
-							<td>2</td>
-							<td align="left"><a href="#">공무원 소식2</a></td>
-							<td>관리자</td>
-							<td>2017-06-27</td>
-							<td>0</td>
-							<td>0</td>
-						</tr>
+						<c:forEach var="dto" items="${list}">
+							<tr align="center">
+								<td>${dto.listNum}</td>
+								
+								<td align="left">
+									<c:forEach var="n" begin="1" end="${dto.depth}">
+	                                	&nbsp;&nbsp;
+	                            	</c:forEach>
+		                            <c:if test="${dto.depth!=0}">
+		                                <img src='<%=cp%>/resources/image/re.gif'>
+		                            </c:if>
+									<a href="${articleUrl}&frnum=${dto.frnum}">${dto.subject}</a>
+								</td>
+								<td>${dto.mName}</td>
+								<td>${dto.created}</td>
+								<td>${dto.hitCount}</td>
+								<td>${dto.likeCount}</td>
+								<td>
+									<c:if test="${not empty dto.saveFilename}">
+										<button>1</button>
+									</c:if>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 
 				<div>
-					<div>1 2 3</div>
+					<div>${paging}</div>
 				</div>
 
 				<div class= "footer-bar" >
@@ -61,7 +70,7 @@
 						<form name="searchForm" method="post" class="form-inline">
 							<select class="form-control input-sm" name="searchKey">
 								<option value="subject">제목</option>
-								<option value="userName">작성자</option>
+								<option value="mName">작성자</option>
 								<option value="content">내용</option>
 								<option value="created">등록일</option>
 							</select> <input type="text" class="form-control input-sm input-search"
@@ -73,7 +82,7 @@
 					</div>
 					<div class = "footer-bar-submit">
 						<button type="button" class="btn btn-default"
-							onclick="#">
+							onclick="javascript:location.href='<%=cp%>/community/free/created'">
 							 글쓰기
 						</button>
 					</div>

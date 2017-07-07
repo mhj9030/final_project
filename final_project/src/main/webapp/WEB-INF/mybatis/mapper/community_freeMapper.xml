@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="community_free">
+	<select id="maxfrnum" resultType="Integer">
+		SELECT NVL(MAX(frnum), 0) FROM free_bbs
+	</select>
+	
+	<insert id="insertFree" parameterType="com.final_project.community.Free">
+		INSERT INTO free_bbs(frnum, subject, content, mid, groupNum, orderNo, depth, parent, 
+								saveFilename, originalFilename) 
+		VALUES (FREE_BBS_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{groupNum}, #{orderNo}, #{depth}, #{parent},  
+				#{saveFilename, jdbcType=VARCHAR}, #{originalFilename, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="updateOrderNo" parameterType="map">
+		UPDATE free_bbs SET orderNo=orderNo+1
+	   	<![CDATA[
+	          WHERE groupNum = #{groupNum} AND orderNo > #{orderNo}
+		]]>            
+	</update>
+	
+	<sql id="where-list">
+	  <if test="searchKey=='mName'">
+	      mName=#{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='content'">
+	      DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+          OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+	  </if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM free_bbs f JOIN member m ON f.mId = m.mId 
+	    <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     	<![CDATA[
+	     		AND state = 0
+	     	]]>
+	    </where>  
+	</select>
+	
+	<select id="listFree" parameterType="map" resultType="com.final_project.community.Free">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT f.frnum, m.mId, mName, subject, TO_CHAR(f.created, 'YYYY-MM-DD') created,  
+					   hitCount, saveFilename, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount, groupNum, depth, parent, orderNo   
+				FROM free_bbs f JOIN member m ON f.mId=m.mId 
+				LEFT OUTER JOIN
+				(
+					SELECT frnum, COUNT(*) replyCount FROM free_re 
+					WHERE answer=0 
+					GROUP BY frnum
+				) r ON f.frnum=r.frnum 
+				LEFT OUTER JOIN
+				(
+					SELECT frnum, COUNT(*) likeCount FROM free_like 
+					GROUP BY frnum
+				) l ON f.frnum=l.frnum
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+	     				AND state = 0
+	     			]]>
+	    		</where>
+	    		ORDER BY groupNum DESC, orderNo ASC
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
+	</select>
+	
+	<update id="updatehitCount" parameterType="Integer">
+		UPDATE free_bbs SET hitCount = hitCount + 1 WHERE frnum = #{frnum}
+	</update>
+	
+	<select id="readFree" parameterType="Integer" resultType="com.final_project.community.Free">
+		SELECT f.frnum, subject, content, created, hitCount, f.mId, mName, saveFilename, originalFilename, groupNum, depth, orderNo, parent 
+		FROM free_bbs f JOIN member m ON f.mId=m.mId 
+		WHERE frnum = #{frnum}	
+	</select>
+</mapper>

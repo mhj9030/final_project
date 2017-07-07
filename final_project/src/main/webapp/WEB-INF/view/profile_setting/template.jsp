@@ -32,6 +32,9 @@
 <!-- Bootstrap JS -->
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 
+<!-- Profile JS -->
+<script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
+
 <!-- Font Awesome CSS -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 

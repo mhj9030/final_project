@@ -8,6 +8,7 @@ public class Profile {
 	private String mbirth;
 	private String mgender;
 	private String mcreated;
+	private String mpwd;
 
 	// 프로필 테이블 정보
 	private String proPhoto;
@@ -76,6 +77,14 @@ public class Profile {
 
 	public void setProIntro(String proIntro) {
 		this.proIntro = proIntro;
+	}
+
+	public String getMpwd() {
+		return mpwd;
+	}
+
+	public void setMpwd(String mpwd) {
+		this.mpwd = mpwd;
 	}
 
 }
