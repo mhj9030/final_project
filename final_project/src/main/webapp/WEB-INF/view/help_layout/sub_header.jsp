@@ -10,10 +10,12 @@
 <div class="wrap_wide cmenu">
     <div class="wrap">
 		<ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class=""><a href="#">게시판1</a></li>
-            <li role="presentation" class=""><a href="#">게시판2</a></li>
-            <li role="presentation" class=""><a href="#">게시판3</a></li>
-            <li role="presentation" class=""><a href="#">게시판4</a></li>
+            <li role="presentation" class="${notice}"><a href="<%=cp%>/help_layout/notice/list">공지사항</a></li>
+            <li role="presentation" class="${faq}"><a href="<%=cp%>/help/faq">FAQ</a></li>
+            <li role="presentation" class="${qa}"><a href="<%=cp%>/help_layout/qa/list">질문과답변</a></li>
+            <li role="presentation" class="${claim}"><a href="<%=cp%>/help_layout/claim/list">문의하기</a></li>
+            <li role="presentation" class="${event}"><a href="<%=cp%>/help_layout/event/list">이벤트</a></li>
+            <li role="presentation" class="${survey}"><a href="<%=cp%>/help/survey">설문</a></li>
         </ul>
     </div>
 </div>

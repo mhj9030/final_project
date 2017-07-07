@@ -106,6 +106,18 @@
 			cCoverOriginalFilename=#{cCoverOriginalFilename, jdbcType=VARCHAR}
 			where cSerial=#{cSerial}
 	</update>
+	
+	<!-- 채용 등록 -->
+	<insert id="insertComImploy" parameterType="com.final_project.company.Employ">
+		insert into com_employ(ceNum, ceSubject, cePeople, ceType, ceStart, ceEnd, 
+			cePay, cePlace, cePrefere, ceEtc, resumeForm, resumeFile, resumeOriginalName, 
+			cSerial, atCode, subCode)
+  			values(com_employ_seq.nextval, #{ceSubject}, #{cePeople}, #{ceType}, 
+  				#{ceStart}, #{ceEnd}, #{cePay}, #{cePlace}, #{cePrefere}, #{ceEtc}, 
+  				#{resumeForm}, #{resumeFile, jdbcType=VARCHAR}, 
+  				#{resumeOriginalName, jdbcType=VARCHAR}, #{cSerial}, #{atCode}, 
+  				#{subCode})
+	</insert>
 </mapper>
 
 

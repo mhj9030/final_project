@@ -88,7 +88,7 @@ public class SearchController {
         model.addAttribute("paging", paging);
 		model.addAttribute("search", "on");
 		
-		return ".company_layout.search.container";
+		return ".company_layout.search.list";
 	}
 	
 	@RequestMapping("/company/search/article")
