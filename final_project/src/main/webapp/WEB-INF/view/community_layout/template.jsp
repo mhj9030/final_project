@@ -14,7 +14,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>사이트 타이틀</title>
 
-
 <!-- Bootstrap CSS -->
 <link href="<%=cp%>/resources/css/bootstrap.min.css" rel="stylesheet">
 <!-- Main_layout CSS -->
@@ -35,6 +34,7 @@
 <link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
 
 
+
 <!-- 본인의 css영역 -->
 <!-- community_review_list CSS -->
 <link href="<%=cp%>/resources/custom_css/community_review_list.css" rel="stylesheet">
@@ -50,7 +50,10 @@
 <link href="<%=cp%>/resources/custom_css/community_free_list.css" rel="stylesheet">
 <!-- community_photo_list CSS -->
 <link href="<%=cp%>/resources/custom_css/community_photo_list.css" rel="stylesheet">
-
+<!-- article_form CSS -->
+<link href="<%=cp%>/resources/custom_css/community_article.css" rel="stylesheet">
+<!-- reply_form CSS -->
+<link href="<%=cp%>/resources/custom_css/community_reply.css" rel="stylesheet">
 
 </head>
 <body>
