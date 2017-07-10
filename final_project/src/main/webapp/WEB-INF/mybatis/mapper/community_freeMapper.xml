@@ -89,4 +89,132 @@
 		FROM free_bbs f JOIN member m ON f.mId=m.mId 
 		WHERE frnum = #{frnum}	
 	</select>
+	
+	<select id="preReadFree" resultType="com.final_project.community.Free" 
+				parameterType="map">
+		SELECT tb.* FROM (
+				SELECT frnum, subject 
+				         FROM free_bbs f
+				         JOIN member m ON f.mId = m.mId
+	                    <where>
+	                         <if test="searchValue != null and searchValue != '' ">
+				                  <include refid="where-list"/>
+			                 </if>
+			               <![CDATA[
+			                 AND (( groupNum = #{groupNum} AND orderNo < #{orderNo})
+	                         OR (groupNum > #{groupNum} ))
+			                 ]]>
+		                </where>
+					ORDER BY groupNum ASC, orderNo DESC
+				) tb WHERE ROWNUM=1
+	</select>
+
+	<!-- 다음글 -->
+	<select id="nextReadFree" resultType="com.final_project.community.Free" 
+				parameterType="map">
+			SELECT tb.* FROM (
+				SELECT frnum, subject 
+				         FROM free_bbs f
+				         JOIN member m ON f.mId = m.mId		
+	                    <where>
+	                         <if test="searchValue != null and searchValue != '' ">
+				                  <include refid="where-list"/>
+			                 </if>
+			               <![CDATA[
+			                 AND (( groupNum = #{groupNum} AND orderNo > #{orderNo})
+	                         OR (groupNum < #{groupNum} ))
+			                 ]]>
+		                </where>
+					ORDER BY groupNum DESC, orderNo ASC
+				) tb WHERE ROWNUM=1
+	</select>
+	
+	<update id="deleteFree" parameterType="Integer">
+		UPDATE free_bbs SET state = 1 
+		WHERE frnum IN 
+		(SELECT frnum FROM free_bbs START WITH frnum=#{frnum} CONNECT BY PRIOR frnum = parent)
+	</update>
+	
+	<update id="updateFree" parameterType="com.final_project.community.Free">
+		UPDATE free_bbs SET subject=#{subject}, content=#{content}, 
+							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
+							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
+							WHERE frnum = #{frnum}
+	</update>
+	
+	<insert id="insertLikeFree" parameterType="com.final_project.community.Free">
+	INSERT INTO free_like(frnum, mId) VALUES (#{frnum}, #{mId})
+	</insert>
+
+	<select id="countLikeFree" resultType="Integer" parameterType="Integer">
+	   SELECT  NVL(COUNT(*), 0) countLikeFree
+	        FROM free_like WHERE frnum=#{frnum}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.final_project.community.FreeReply">
+		INSERT INTO free_re(replyNum, frnum, mId, content, answer) 
+		VALUES (FREE_RE_SEQ.NEXTVAL, #{frnum}, #{mId}, #{content}, #{answer})
+	</insert>
+	
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) replyCount FROM free_re 
+		WHERE frnum = #{frnum} AND answer = 0 
+	</select>
+	
+	<select id="listReply" parameterType="map" resultType="com.final_project.community.FreeReply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT tbreply.replyNum, frnum, mId, mName, content, created, 
+						tbreply.answer, NVL(answerCount, 0) answerCount 
+				FROM
+				(
+					(
+						SELECT replyNum, r.frnum, r.mId, mName, r.content, r.created, answer  
+						FROM free_re r JOIN member m ON r.mId=m.mId 
+						WHERE frnum = #{frnum} AND answer = 0
+					) tbreply
+					LEFT OUTER JOIN
+					(
+						SELECT answer, COUNT(*) answerCount 
+						FROM free_re 
+						GROUP BY answer 
+					) tbanswer ON tbreply.replyNum=tbanswer.answer
+				) 
+				ORDER BY replyNum DESC
+	<![CDATA[
+			)tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>			
+	</select>
+	
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM free_re WHERE
+	    <if test="mode == 'frnum' ">
+			 frnum=#{frnum}
+		</if>
+	    <if test="mode == 'reply' ">
+			 replyNum IN 
+               (SELECT replyNum FROM free_re START WITH  replyNum = #{replyNum}
+	            CONNECT BY PRIOR replyNum = answer)
+		</if>
+	    <if test="mode == 'answer' ">
+			 replyNum=#{replyNum}
+		</if>
+	</delete>
+
+    <!-- 댓글별 답글 리스트 -->
+	<select id="listReplyAnswer" resultType="com.final_project.community.FreeReply" parameterType="Integer">
+     SELECT replyNum, frnum, r.mId, mName, content, created, answer
+	          FROM free_re r 
+	          JOIN member m ON r.mId=m.mId
+              WHERE answer=#{answer}
+              ORDER BY replyNum DESC
+	</select>
+	
+    <!-- 댓글별 답글 개수 -->
+	<select id="replyCountAnswer" resultType="Integer" parameterType="Integer">
+	   SELECT NVL(COUNT(*), 0)
+	        FROM free_re WHERE answer=#{answer}
+	</select>
+	
 </mapper>

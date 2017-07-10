@@ -32,7 +32,7 @@
 
 					<tbody>
 						<c:forEach var="dto" items="${list}">
-							<tr align="center">
+							<tr align="center" height="41">
 								<td>${dto.listNum}</td>
 								
 								<td align="left">
@@ -42,7 +42,7 @@
 		                            <c:if test="${dto.depth!=0}">
 		                                <img src='<%=cp%>/resources/image/re.gif'>
 		                            </c:if>
-									<a href="${articleUrl}&frnum=${dto.frnum}">${dto.subject}</a>
+									<a href="${articleUrl}&frnum=${dto.frnum}">${dto.subject}[${dto.replyCount}]</a>
 								</td>
 								<td>${dto.mName}</td>
 								<td>${dto.created}</td>
@@ -50,7 +50,7 @@
 								<td>${dto.likeCount}</td>
 								<td>
 									<c:if test="${not empty dto.saveFilename}">
-										<button>1</button>
+										<a href="<%=cp%>/community/free/download?frnum=${dto.frnum}"><img width="24" src="<%=cp%>/resources/image/download-2-icon.png"></a>
 									</c:if>
 								</td>
 							</tr>

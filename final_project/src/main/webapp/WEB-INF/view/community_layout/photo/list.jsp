@@ -78,7 +78,7 @@ function sendLikePhoto(ptnum) {
 					<button class="btn btn-default btn-sm" title="추천하기" onclick="sendLikePhoto(${dto.ptnum});">
 						<i class="glyphicon glyphicon-heart"></i>
 					</button>
-					<button class="btn btn-default btn-sm" title="댓글수" style="padding-right: 30px;">
+					<button class="btn btn-default btn-sm" title="댓글수" style="padding-right: 30px;" onclick="javascript:location.href='${articleUrl}&ptnum=${dto.ptnum}&focus=1'">
 						<i class="glyphicon glyphicon-comment"></i><span><b>&nbsp;${dto.replyCount}</b></span>
 					</button>
 				</div>

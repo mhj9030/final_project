@@ -105,77 +105,169 @@ public class FreeServiceImpl implements FreeService{
 
 	@Override
 	public Free preReadFree(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Free dto = null;
+		
+		try {
+			dto = dao.getReadData("community_free.preReadFree", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public Free nextReadFree(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Free dto = null;
+		
+		try {
+			dto = dao.getReadData("community_free.nextReadFree", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public int updateFree(Free dto, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+
+		try{
+			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
+				String newFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+		
+				if (newFilename != null) {
+					// 이전 파일 지우기
+					if(dto.getSaveFilename().length()!=0 && dto.getSaveFilename()!=null) {
+						fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+					}
+					
+					dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+					dto.setSaveFilename(newFilename);
+				}
+			}
+			
+			result= dao.updateData("community_free.updateFree", dto);
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int deleteFree(int frnum, String pathname, String mId) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		try {
+			Free dto= readFree(frnum);
+			if(dto!=null) {
+				if(! dto.getmId().equals(mId) && ! mId.equals("admin@a.com"))
+					return result;
+				
+				if(dto.getSaveFilename()!=null&&dto.getSaveFilename().length()!=0) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+			}
+			
+			
+			result = dao.deleteData("community_free.deleteFree", frnum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int insertLikeFree(Free dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.insertData("community_free.insertLikeFree", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int countLikeFree(int frnum) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.getIntValue("community_free.countLikeFree", frnum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int insertReply(FreeReply dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		try {
+			result = dao.insertData("community_free.insertReply", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override
 	public List<FreeReply> listReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FreeReply> list = null;
+		
+		try {
+			list = dao.getListData("community_free.listReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<FreeReply> listReplyAnswer(int answer) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FreeReply> list=null;
+		try {
+			list=dao.getListData("community_free.listReplyAnswer", answer);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 	@Override
 	public int replyDataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.getIntValue("community_free.replyDataCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int replyCountAnswer(int answer) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.getIntValue("community_free.replyCountAnswer", answer);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int deleteReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.deleteData("community_free.deleteReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
-
-
-
-
 }

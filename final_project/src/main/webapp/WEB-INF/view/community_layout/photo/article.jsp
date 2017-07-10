@@ -112,7 +112,11 @@ function sendLikePhoto(ptnum) {
 
 <script type="text/javascript">
 	$(function(){
-		listPage(1);		
+		listPage(1);
+		var focus = "${focus}";
+		if(focus==1){
+			$("#replyContent").focus();
+		}
 	});
 
 	function listPage(page){
@@ -384,7 +388,18 @@ function sendLikePhoto(ptnum) {
 			<td class="article_hitCount">${dto.created} | 조회 ${dto.hitCount}</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: right;"><button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/photo/download?ptnum=${dto.ptnum}'">다운로드</button></td>
+			<td colspan="2" style="text-align: right;">
+				<c:if test="${not empty dto.originalFilename }">
+						<button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/photo/download?ptnum=${dto.ptnum}'">
+							${dto.originalFilename} 다운로드(클릭)
+						</button>
+					</c:if>
+					<c:if test="${empty dto.originalFilename }">
+						<button class="btn btn-block btn-info" onclick="emptydown();">
+							파일이없습니다.
+						</button>
+					</c:if>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2" class="photo_article_cover"><img src="<%=cp%>/uploads/community/${dto.saveFilename}"></td> 

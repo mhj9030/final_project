@@ -41,7 +41,7 @@ $(function(){
 
 // 게시물 공감 개수
 function countLikeFree(frnum) {
-	var url="<%=cp%>/community/free/countLikePhoto";
+	var url="<%=cp%>/community/free/countLikeFree";
 	var query="frnum="+frnum;
 	$.ajax({
 		type:"post"
@@ -370,6 +370,10 @@ function sendLikeFree(frnum) {
 		}
 	}
 	
+	function emptydown(){
+		alert("다운로드 받을 파일이 없습니다.");	
+	}
+	
 </script>
 
 
@@ -384,15 +388,24 @@ function sendLikeFree(frnum) {
 			<td class="article_hitCount">${dto.created} | 조회 ${dto.hitCount}</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: right;"><button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/free/download?frnum=${dto.frnum}'">다운로드</button></td>
+			<td colspan="2" style="text-align: right;">
+					<c:if test="${not empty dto.originalFilename }">
+						<button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/free/download?frnum=${dto.frnum}'">
+							${dto.originalFilename} 다운로드(클릭)
+						</button>
+					</c:if>
+					<c:if test="${empty dto.originalFilename }">
+						<button class="btn btn-block btn-info" onclick="emptydown();">
+							파일이없습니다.
+						</button>
+					</c:if>
+				
+			</td>
 		</tr>
-		<%-- <tr>
-			<td colspan="2" class="photo_article_cover"><img src="<%=cp%>/uploads/community/${dto.saveFilename}"></td> 
-		</tr> --%>
 		<tr>
 			<td colspan="2" class="photo_article_content">${dto.content}</td>
 		</tr>
-		<%-- <tr>
+		<tr>
 			<td class="article_pre"> ◀이전글 
 				<c:if test="${not empty preReadDto}">
 			    	<a href="<%=cp%>/community/free/article?${query}&frnum=${preReadDto.frnum}">${preReadDto.subject}</a>
@@ -404,9 +417,13 @@ function sendLikeFree(frnum) {
 			    </c:if>
 				 다음글▶  
 			</td>
-		</tr> --%>
+		</tr>
 		<tr>
-			<td colspan="2"><span onclick="sendLikeFree(${dto.frnum});" class="btn btn-block btn-danger"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;<span id="countLikeFree">${countLikeFree}</span></span></td>
+			<td colspan="2">
+				<span onclick="sendLikeFree(${dto.frnum});" class="btn btn-block btn-danger">
+					<span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;<span id="countLikeFree">${countLikeFree}</span>
+				</span>
+			</td>
 		</tr>
 	</table>
 	
