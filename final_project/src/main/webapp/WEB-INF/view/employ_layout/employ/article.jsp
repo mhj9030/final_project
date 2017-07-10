@@ -27,12 +27,13 @@
   color:gray;
   margin-right:10px;
   }
+
   </style>
 <div id="title"class="text-center">
-<h1>유저해빗 Unity SDK 개발자 구인</h1>
+<h1>${employ.ceSubject}</h1>
 </div>
 <div class="text-right">
-<h5>날짜 2017-06-27 조회수:58 </h5>
+<h5>최종수정일 ${employ.modyTime} 조회수:58 </h5>
 </div>
 <hr>
 <div style="text-align: center;">
@@ -40,7 +41,7 @@
 <div class="text-right">
 
 <button class="btn"><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
-<button class="btn"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
+<button class="btn" onclick="javascript:history.back();"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
 </div>
 
 </div>
@@ -83,7 +84,9 @@
 	<hr>
 	<pre>
 	채용 상세
-
+	
+	고용인원
+	${employ.cePeople }
 	■ 자격 요건
 	- 3개월 이상 근무 가능하신 분
 	- 인센티브 제도를 이해하는 분
@@ -101,11 +104,11 @@
       	<h3>마케팅 & 세일즈 인턴/신입</h3>
       	<hr>
       	<table style="margin:0 auto;">
-      	<tr><th>채용 분야</th><td>마케팅</td></tr>
-      	<tr><th>고용 형태</th><td>인턴, 신입</td></tr>
-      	<tr><th>연봉</th><td>1,000 - 2,400 만원</td></tr>
-      	<tr><th>마감일</th><td>2017-07-29</td></tr>
-      	<tr><th>수정일</th><td>2017-07-06</td></tr>
+      	<tr><th>채용 분야</th><td>${employ. subname}</td></tr>
+      	<tr><th>고용 형태</th><td>${employ.ceType}</td></tr>
+      	<tr><th>연봉</th><td>${employ.cePay } 만원</td></tr>
+      	<tr><th>시작일</th><td>${employ.ceStart}</td></tr>
+      	<tr><th>마감일</th><td>${employ.ceEnd}</td></tr>
       	</table>
       	</div>
       	
@@ -116,13 +119,13 @@
 		<div class="col-md-8">
 	<pre>
 	우대사항
-	- 영어
+	- ${employ.cePrefere}
 	
 	자격증
 	-정보처리기사
 	
 	기술(비고)
-	-세일즈 경험자
+	-${employ.ceETC }
 	</pre>
 	<hr>
 	</div>

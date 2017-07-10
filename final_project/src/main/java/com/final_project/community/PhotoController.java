@@ -156,7 +156,7 @@ public class PhotoController {
 	public String article(
 			@RequestParam(value = "ptnum") int ptnum,
 			@RequestParam(value = "page") String page,
-			@RequestParam(value = "focus", defaultValue="") int focus,
+			@RequestParam(value = "focus", defaultValue="0") int focus,
 			@RequestParam(value = "searchKey", defaultValue = "subject") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
 			Model model) throws Exception {

@@ -203,41 +203,71 @@ public class FreeServiceImpl implements FreeService{
 
 	@Override
 	public int insertReply(FreeReply dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		try {
+			result = dao.insertData("community_free.insertReply", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override
 	public List<FreeReply> listReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FreeReply> list = null;
+		
+		try {
+			list = dao.getListData("community_free.listReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<FreeReply> listReplyAnswer(int answer) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FreeReply> list=null;
+		try {
+			list=dao.getListData("community_free.listReplyAnswer", answer);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 	@Override
 	public int replyDataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.getIntValue("community_free.replyDataCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int replyCountAnswer(int answer) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.getIntValue("community_free.replyCountAnswer", answer);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
 	public int deleteReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.deleteData("community_free.deleteReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
-
-
-
-
 }

@@ -32,7 +32,7 @@
 
 <!-- 본인의 css영역 -->
 <!-- community_review_list CSS -->
-<link href="<%=cp%>/resources/custom_css/point_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/point_layout.css" rel="stylesheet">
 <!-- created_form CSS -->
 <link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
 
