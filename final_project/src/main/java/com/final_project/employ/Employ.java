@@ -8,10 +8,11 @@ private int macode, subcode;
 private String maname,subname;
 
 //company 회사번호 회사명 회사사진
+private int cNum;
 private String cSerial,cName,cLogoimage;
 //employ_com 공고번호 제목 지원자격 근무조건 마감일등록일
-private int ceNum;
-private String ceSubject, ability, ceType,cePrefere;
+private int ceNum,cePeople;
+private String ceSubject, ability, ceType,cePrefere,ceETC;
 private Date ceStart, ceEnd;
 //sub_class
 private int liCode;
@@ -20,6 +21,25 @@ private String license;
 
 
 
+
+public int getCePeople() {
+	return cePeople;
+}
+public void setCePeople(int cePeople) {
+	this.cePeople = cePeople;
+}
+public String getCeETC() {
+	return ceETC;
+}
+public void setCeETC(String ceETC) {
+	this.ceETC = ceETC;
+}
+public int getcNum() {
+	return cNum;
+}
+public void setcNum(int cNum) {
+	this.cNum = cNum;
+}
 public String getSubname() {
 	return subname;
 }

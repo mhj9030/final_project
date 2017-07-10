@@ -50,7 +50,7 @@
 <!-- 검색 -->
 <select id="list_com_employ"
 				resultType="com.final_project.employ.Employ" parameterType="Integer">
-			select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage
+			select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,C.cNum,cePeople,ceETC
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
@@ -90,6 +90,15 @@
 
 </select>
 
-
+<select id="read_com_employ"
+				resultType="com.final_project.employ.Employ" parameterType="Integer">
+	select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC
+			from com_employ CE
+			JOIN ability_type A ON A.atCode = CE.atCode
+			JOIN company C ON C.cSerial = CE.cSerial
+			JOIN com_image CI ON C.cSerial=CI.cSerial
+      JOIN sub_class L ON CE.subCode=L.subCode
+      where ceNum=#{ceNum}
+</select>
 
 </mapper>

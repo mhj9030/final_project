@@ -155,10 +155,9 @@ $("#main_class").change(function() {
 });
 
 
-
-
-
-
+function imageError(image) {
+	image.src="<%=cp%>/resources/image/profile_img.jpg";
+}
 
 
 function listPage(page) {
@@ -189,13 +188,14 @@ function ajaxHTML(url, type, query) {
 				var ceEnd=data.celist[idx].ceEnd;
 				var cSerial=data.celist[idx].cSerial;
 				var cLogoimage=data.celist[idx].cLogoimage;
+				var cNum = data.celist[idx].cNum;
 				
 				
 				out+="<div class='row'>";
 				out+="<div class='col-md-12'>";
 				out+="<div class='col-md-2 center-block' >";
-				out+="<img src='<%=cp%>/resources/image/profile_img.jpg' alt='<%=cp%>/resources/image/profile_img.jpg' class='img-responsive' style='max-height: 100px; margin:auto;'>";
-				out+="<div class='container'><a href='C.cSerial'>회사명 "+cName+"</a></div>";
+				out+="<img src='<%=cp%>/uploads/company/"+cLogoimage+"' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'>";
+				out+="<div class='container'><a href='<%=cp%>/company/search/article?page=1&cNum="+cNum+"'>회사명 "+cName+"</a></div>";
 				out+="</div>";
 				out+="<div class='col-md-4'>";
 				out+="<a href='<%=cp%>/employ/article?ceNum="+ceNum+"'>"+ceSubject+"</a>";
@@ -277,7 +277,7 @@ function ajaxHTML(url, type, query) {
   	
   		<div class="row">
   			<div class="col-md-12">
-  			<h1>전체 채용정보</h1><hr>
+  			<h3>|전체 채용정보</h3><hr>
   			
   			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
 	  			지역별<br><br><br><br><br>
@@ -319,7 +319,7 @@ function ajaxHTML(url, type, query) {
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <form name="employForm" id="employForm">
 	      <div class="panel-body">
 	       			<!-- 채용정보 상세검색 -->

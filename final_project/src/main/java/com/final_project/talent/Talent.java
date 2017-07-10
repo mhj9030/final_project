@@ -6,7 +6,9 @@ public class Talent {
 	private String mainName, subName;
 	// 인재 리스트
 	private int rNum;
-	private String mId, rName, rPhoto, subTypes;
+	private String mId, rName, rPhoto, subTypes, apply;
+	// 자기소개
+	private String intro1, intro2, intro3, intro4;
 	
 	public int getMainCode() {
 		return mainCode;
@@ -61,5 +63,35 @@ public class Talent {
 	}
 	public void setSubTypes(String subTypes) {
 		this.subTypes = subTypes;
+	}
+	public String getApply() {
+		return apply;
+	}
+	public void setApply(String apply) {
+		this.apply = apply;
+	}
+	public String getIntro1() {
+		return intro1;
+	}
+	public void setIntro1(String intro1) {
+		this.intro1 = intro1;
+	}
+	public String getIntro2() {
+		return intro2;
+	}
+	public void setIntro2(String intro2) {
+		this.intro2 = intro2;
+	}
+	public String getIntro3() {
+		return intro3;
+	}
+	public void setIntro3(String intro3) {
+		this.intro3 = intro3;
+	}
+	public String getIntro4() {
+		return intro4;
+	}
+	public void setIntro4(String intro4) {
+		this.intro4 = intro4;
 	}
 }

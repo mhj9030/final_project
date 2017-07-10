@@ -35,11 +35,6 @@
 						<div id="subType" style="padding-left: 25px; padding-button: 25px; text-align: left;"></div>
 					</td>
 				</tr>
-				<!-- <tr>
-					<td colspan="5"></td>
-					<td width="12%"><button class="btn btn-primary" type="submit">조회하기</button></td>
-					<td width="12%"><button class="btn btn-primary" type="submit" onclick="submitCheck();">조회하기</button></td>
-				</tr> -->
 			</tbody>
 			</table>
 		</form>
@@ -47,16 +42,6 @@
 	<br><br>
 	<!-- 리스트 -->
 	<div id="talent_list">
-		<%-- <div class="marketDiv">
-			<div style="text-align: center;">
-				<img src="<%=cp%>/../../${dto.photo}" width="100px" height="140px" />
-			</div>
-			<div>
-				이름: ${dto.rName}<br>
-				관심직종: ${a}<br>
-				<a href="<%=cp%>/talent/main/article?mId=${dto.mId}&rNum=${dto.rNum}">이력서 보러가기</a>
-			</div>
-		</div> --%>
 	</div>
 	<div class="paging">
 		${paging}
@@ -71,8 +56,8 @@ $(document).ready(function() {
 	$("#subType").html('직종을 선택해 주세요.');
 });
 
-$('button[name="mainName"]').on("click", function(){
-	$('input:radio[name="mainCode"][value="' + $(this).val() + '"]').attr("checked", "true");
+$("body").on("click", 'button[name="mainName"]', function(){
+	$('input:radio[name="mainCode"][value="' + $(this).val() + '"]').prop("checked", true);
 	for(var i=0;i<10;i++)
 		$('button[name="mainName"][value="' + i + '"]').attr("class", "btn");
 	$(this).attr("class", "btn btn-info");
@@ -144,12 +129,12 @@ function listPrint(data){
 	for(var i=0; i<data.list.length; i++){
 		out += '<div class="marketDiv">';
 		out += '	<div style="text-align: center;">';
-		out += '		<img src="" width="100px" height="140px" />';//data.list[i].photo
+		out += '		<img src="" width="110px" height="140px" />';//data.list[i].photo
 		out += '	</div>';
 		out += '	<div>';
-		out += '		이름: ' + data.list[i].rName + '<br>';
-		out += '		관심직종: ' + data.list[i].subTypes + '<br>';
-		out += '		<a href="<%=cp%>/talent/main/article?mId=' + data.list[i].mId + '&rNum=' + data.list[i].rName + '">이력서 보러가기</a>';
+		out += '		이름: ' + data.list[i].rName + '(' + data.list[i].rNum + ')<br>';
+		out += '		관심직종: ' + data.list[i].subTypes + '<br><br>';
+		out += '		<a href="<%=cp%>/talent/main/article?mId=' + data.list[i].mId + '&rNum=' + data.list[i].rNum + '">이력서 보러가기</a>';
 		out += '	</div>';
 		out += '</div>';
 	}

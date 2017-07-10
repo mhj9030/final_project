@@ -14,4 +14,5 @@ public interface EmployService {
 	public List<Employ> list_cePrefere();
 	public List<Employ> list_ceType();
 	public List<Employ> list_ability();
+	public Employ read_com_employ(int ceNum);
 }
