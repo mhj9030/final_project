@@ -1,17 +1,25 @@
 package com.final_project.employ;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.omg.IOP.Encoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.final_project.member.SessionInfo;
+
 
 @Controller("employ.EmployController")
 public class EmployController {
@@ -98,6 +106,7 @@ public class EmployController {
 		return model;
 	}
 	
+	
 	@RequestMapping("/employ/article")
 	public  String article(
 			@RequestParam int ceNum,
@@ -111,6 +120,40 @@ public class EmployController {
 		
 		return ".employ_layout.employ.article";
 		
+	}
+	
+	//json으로 값 보내기
+	
+	@RequestMapping("/employ/applyForm")
+	@ResponseBody
+	public  Map<String, Object> applyForm(int ceNum, HttpSession session) {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		List<Resume> resumeList = service.read_resume("zxc@gmail.com");
+		
+		Map<String, Object> model = new HashMap<>();
+		Employ employ = service.read_com_employ(ceNum);
+		model.put("employ",employ);
+		model.put("resumeList", resumeList);
+		return	model;
+	}
+	
+	
+	@RequestMapping("/employ/apply")
+	@ResponseBody
+	public int apply(int ceNum, int rNum) {
+		int result=0;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("ceNum", ceNum);
+		map.put("rNum", rNum);
+		result = service.apply_resume(map);
+		
+		return result;
+	}
+	
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public void exception(SQLIntegrityConstraintViolationException e) {
+		System.out.println("무결성오류");
 	}
 
 }

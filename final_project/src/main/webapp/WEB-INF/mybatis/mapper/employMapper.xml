@@ -50,7 +50,7 @@
 <!-- 검색 -->
 <select id="list_com_employ"
 				resultType="com.final_project.employ.Employ" parameterType="Integer">
-			select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,C.cNum,cePeople,ceETC
+			select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,C.cNum,cePeople,ceETC,cePay, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
@@ -91,8 +91,8 @@
 </select>
 
 <select id="read_com_employ"
-				resultType="com.final_project.employ.Employ" parameterType="Integer">
-	select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC
+				parameterType="Integer" resultType="com.final_project.employ.Employ">
+	select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
@@ -100,5 +100,17 @@
       JOIN sub_class L ON CE.subCode=L.subCode
       where ceNum=#{ceNum}
 </select>
+
+
+<select id="read_resume"
+				resultType="com.final_project.employ.Resume" parameterType="String">
+	select rNum, rName from resume where mid=#{mId}
+</select>
+
+<insert id="apply_resume" parameterType="map">
+	INSERT INTO applicant(rNum, ceNum) VALUES(#{rNum},#{ceNum})
+</insert>
+
+
 
 </mapper>
