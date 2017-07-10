@@ -6,6 +6,16 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script>
+	function searchList(searchValue){
+		var f=document.searchForm;
+		
+		f.searchValue.value=searchValue;
+		
+		f.action="${listUrl}";
+		f.submit();
+	}
+</script>
 
 <div class="employ-body">
 	<div class="page-header">
@@ -15,46 +25,41 @@
 	</div>
 	
 	<div>
-		<div align="right">1개(1/10 페이지)</div>
+		<div align="right">${dataCount}개(${page}/${total_page} 페이지)</div>
 		
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th width="60">번호</th>
 					<th>제목</th>
-					<th width="100">작성자</th>
-					<th width="100">작성일</th>
-					<th width="60">조회수</th>
+					<th width="100">시작일</th>
+					<th width="100">마감일</th>
 				</tr>
 			</thead>
-
-			<tbody>
-				<tr align="center">
-					<td>1</td>
-					<td align="left"><a href="#">공무원 소식1</a></td>
-					<td>관리자</td>
-					<td>2017-06-27</td>
-					<td>0</td>
-				</tr>
-			</tbody>		
+			
+			<c:forEach var="dto" items="${list}">
+				<tbody>
+					<tr align="center">
+						<td>${dto.listNum}</td>
+						<td align="left"><a href="${articleUrl}&ceNum=${dto.ceNum}">${dto.ceSubject}</a></td>
+						<td>${dto.ceStart}</td>
+						<td>${dto.ceEnd}</td>
+					</tr>
+				</tbody>
+			</c:forEach>	
 		</table>
 		
 		<div align="center">
-			<div>1 2 3</div>
+			<div>${paging}</div>
 		</div>
 		
 		<div class= "footer-bar" >
 			<div class = "foorter-bar-refresh">
-				<button type="button" class="btn btn-default btn-sm wbtn" onclick="#">새로고침</button>
+				<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/company/employ';">새로고침</button>
 			</div>
 			<div class = "footer-search-bar">
 				<form name="searchForm" method="post" class="form-inline">
-					<select class="form-control input-sm" name="searchKey">
-						<option value="subject">제목</option>
-						<option value="userName">작성자</option>
-						<option value="content">내용</option>
-						<option value="created">등록일</option>
-					</select> <input type="text" class="form-control input-sm input-search"
+					<input type="text" class="form-control input-sm input-search"
 						name="searchValue">
 					<button type="button" class="btn btn-info btn-sm btn-search"
 						onclick="searchList();">

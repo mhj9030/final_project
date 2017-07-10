@@ -1,5 +1,8 @@
 package com.final_project.company;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +33,44 @@ public class EmployServiceImpl implements EmployService{
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	@Override
+	public List<Employ> listComEmploy(Map<String, Object> map) throws Exception {
+		List<Employ> list=null;
+		
+		try {
+			list=dao.getListData("company.listComEmploy", map);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int dataCount(Map<String, Object> map) throws Exception {
+		int result=0;
+		
+		try {
+			result=dao.getIntValue("company.employCount", map);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Employ readEmploy(int ceNum) throws Exception {
+		Employ dto=null;
+		
+		try {
+			dto=dao.getReadData("company.readEmploy", ceNum);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return dto;
 	}
 }

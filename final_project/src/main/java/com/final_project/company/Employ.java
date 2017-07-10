@@ -3,9 +3,9 @@ package com.final_project.company;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Employ {
-	private int ceNum, cePeople;
+	private int ceNum, cePeople, listNum;
 	private String ceSubject, ceType;
-	private String ceStart, ceEnd, ceP​eriod;
+	private String ceStart, ceEnd;
 	private String cePay, cePayMin, cePayMax;
 	private String cePlace, cePrefere, ceEtc;
 	private String resumeForm, resumeFile, resumeOriginalName;
@@ -126,5 +126,11 @@ public class Employ {
 	}
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
+	}
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
 	}
 }
