@@ -9,5 +9,7 @@
 
 
 <div>
-	
+	<c:forEach var="dto" items="${list}">
+		<input type="checkbox" value="${dto.cName}">${dto.cName} <br>
+	</c:forEach>
 </div>

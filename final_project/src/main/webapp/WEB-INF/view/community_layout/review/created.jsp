@@ -35,6 +35,31 @@
        	
        	return true;
   }
+  function searchCompany(){
+	  var searchCompany = document.getElementById("searchCompany").value;
+	  var query = "searchCompany="+searchCompany;
+	  
+	  $.ajax({
+			type:"post"
+			,url:"<%=cp%>/community/review/companyList"
+			,data:query
+			,success:function(data) {
+				$("#company-list").html(data);
+			}
+			,beforeSend : function(jqXHR) {
+		          jqXHR.setRequestHeader("AJAX", true);
+		      }
+		    ,error : function(jqXHR) {
+		          if (jqXHR.status == 401) {
+		          	 console.log(jqXHR);
+		          } else if (jqXHR.status == 403) {
+		              login();
+		          } else {
+		          	 console.log(jqXHR.responseText);
+		          }
+		      }
+		 });
+  }
 </script>
 
 <div class="created_form">
@@ -112,7 +137,7 @@
         <h4 class="modal-title" id="myModalLabel">기업찾기</h4>
       </div>
       <div class="modal-body">
-        <input type="text"><button onclick="searchCompany();">1</button>
+        <input type="text" id="searchCompany"><button onclick="searchCompany();">1</button>
         <div id="company-list"></div>
       </div>
       <div class="modal-footer">
