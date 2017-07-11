@@ -9,120 +9,194 @@
 
 <div class="page_body .container-fluid ">
 	<div class="page_head">
-		<h3>| 인재검색</h3><hr>
+		<h3>| 인재 검색 열람</h3><hr>
 	</div>
 	<div id="resume_div">
 		<table class="table">
-			<caption>인적사항</caption>
+			<caption>▶ 인적사항</caption>
 			<tr>
-				<td rowspan="4">사진</td>
+				<td rowspan="4">
+					<img src="" width="110px" height="140px" />
+				</td>
 				<td>이름</td>
-				<td>홍길동${dto.rName}</td>
+				<td>${introList.rName}</td>
 				<td>영어</td>
-				<td>...${dto.engName}</td>
+				<td>${introList.engName}</td>
 			</tr>
 			<tr>
 				<td>생년월인</td>
-				<td>1990. 10. 10${dto.brith}</td>
+				<td>${introList.mBirth}</td>
 				<td>폰번호</td>
-				<td>010 - 1234 - 5678${dto.phone}</td>
+				<td>${introList.phone}</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td>.${dto.email}</td>
+				<td>${introList.email}</td>
 				<td>병역</td>
-				<td>.${dto.army}</td>
+				<td>${introList.army}</td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="3">.${dto.addr}<br>.${dto.addr2}</td>
+				<td colspan="3">${introList.addr}<br>${introList.addr2}</td>
 			</tr>
 		</table>
 		
+		<table id="academy" class="table" style="height: 60px;">
+			<caption>▶ 학력</caption>
+			<tr>
+				<td>학교명</td>
+				<td>재학기간</td>
+				<td>비고</td>
+			</tr>
+		<c:if test="${empty abilityList}">
+			<tr>
+				<td colspan="3">해당사항없음</td>
+			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${abilityList}">
+			<tr>
+				<td>${dto.acName}</td>
+				<td>${dto.termtime}</td>
+				<td>${dto.memo}</td>
+			</tr>
+		</c:forEach>
+		</table>
+		
 		<table id="license" class="table" style="height: 60px;">
-			<caption>자격증</caption>
+			<caption>▶ 자격증</caption>
 			<tr>
 				<td>자격증명</td>
 				<td>취득일</td>
 				<td>발급기관</td>
 			</tr>
+		<c:if test="${empty licenseList}">
 			<tr>
-				<td>정보처리기사</td>
-				<td>2017.05.08</td>
-				<td>한국산업인력공단</td>
+				<td colspan="3">해당사항없음</td>
 			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${licenseList}">
+			<tr>
+				<td>${dto.license}</td>
+				<td>${dto.expStart}</td>
+				<td>${dto.liGC}</td>
+			</tr>
+		</c:forEach>
 		</table>
 		
-		<table id="license" class="table" style="height: 60px;">
-			<caption>외국어 점수</caption>
+		<table id="language" class="table" style="height: 60px;">
+			<caption>▶ 외국어 점수</caption>
 			<tr>
 				<td>외국어시험명</td>
 				<td>외국어 점수</td>
 			</tr>
+		<c:if test="${empty languageList}">
 			<tr>
-				<td>토익</td>
-				<td>700</td>
+				<td colspan="2">해당사항없음</td>
 			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${languageList}">
+			<tr>
+				<td>${dto.language}</td>
+				<td>${dto.laScore}</td>
+			</tr>
+		</c:forEach>
 		</table>
 		
-		<table id="license" class="table" style="height: 60px;">
-			<caption>경력</caption>
+		<table id="career" class="table" style="height: 60px;">
+			<caption>▶ 경력</caption>
 			<tr>
 				<td>회사명</td>
 				<td>직무</td>
 				<td>직급</td>
 			</tr>
+		<c:if test="${empty careerList}">
 			<tr>
-				<td>kh정보교육원</td>
-				<td>상담</td>
-				<td>팀장</td>
+				<td colspan="3">해당사항없음</td>
 			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${careerList}">
+			<tr>
+				<td>${dto.company}</td>
+				<td>${dto.part}</td>
+				<td>${dto.memo}</td>
+			</tr>
+		</c:forEach>
 		</table>
 		
-		<table id="license" class="table" style="height: 60px;">
-			<caption>수상</caption>
+		<table id="award" class="table" style="height: 60px;">
+			<caption>▶ 수상</caption>
 			<tr>
-				<td>대회명</td>
+				<td>개최</td>
 				<td>수상명</td>
+				<td>수상일</td>
 			</tr>
+		<c:if test="${empty awardList}">
 			<tr>
-				<td>~대회</td>
-				<td>대상</td>
+				<td colspan="3">해당사항없음</td>
 			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${awardList}">
+			<tr>
+				<td>${dto.awAgency}</td>
+				<td>${dto.awSector}</td>
+				<td>${dto.awDate}</td>
+			</tr>
+		</c:forEach>
+		</table>
+		
+		<table id="project" class="table" style="height: 60px;">
+			<caption>▶ 프로젝트</caption>
+			<tr>
+				<td>자격증명</td>
+				<td>취득일</td>
+				<td>발급기관</td>
+			</tr>
+		<c:if test="${empty projectList}">
+			<tr>
+				<td colspan="3">해당사항없음</td>
+			</tr>
+		</c:if>
+		<c:forEach var="dto" items="${projectList}">
+			<tr>
+				<td>${dto.prName}</td>
+				<td>${dto.expStart} ~ ${dto.expEnd}</td>
+				<td>${dto.memo}</td>
+			</tr>
+		</c:forEach>
 		</table>
 		
 		<table id="intro" class="table">
-			<caption>자기소개</caption>
+			<caption>▶ 자기소개</caption>
 			<tr height="100px">
-				<td>.${dto.intro1}</td>
+				<td>${introList.intro1}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
-			<caption>지원동기</caption>
+			<caption>▶ 지원동기</caption>
 			<tr height="100px">
-				<td>.${dto.intro2}</td>
+				<td>${introList.intro2}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
-			<caption>성장배경</caption>
+			<caption>▶ 성장배경</caption>
 			<tr height="100px">
-				<td>.${dto.intro3}</td>
+				<td>${introList.intro3}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
-			<caption>???</caption>
+			<caption>▶ ???</caption>
 			<tr>
-				<td>.${dto.intro4}</td>
+				<td>${introList.intro4}</td>
 			</tr>
 		</table>
 		<hr>
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/talent/main'">목록</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/resume/storagy'">목록</button>
 		</div>
 	</div>
 </div>

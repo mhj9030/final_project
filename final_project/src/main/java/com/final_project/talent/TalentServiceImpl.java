@@ -99,8 +99,92 @@ public class TalentServiceImpl implements TalentService{
 	}
 
 	@Override
-	public Talent readList(Map<String, Object> map) {
+	public Talent readIntro(Map<String, Object> map) {
 		Talent dto = null;
+		
+		try {
+			dto = dao.getReadData("readIntro", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return dto;
+	}
+
+	@Override
+	public List<Talent> readAbility(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("readAbility", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> readLicense(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("readLicense", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> readLanguage(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("readLanguage", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<Talent> readProject(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("readProject", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> readAward(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("readAward", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Talent> readCareer(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("readCareer", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

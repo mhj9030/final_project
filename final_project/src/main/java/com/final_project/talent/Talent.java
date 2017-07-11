@@ -6,10 +6,23 @@ public class Talent {
 	private String mainName, subName;
 	// 인재 리스트
 	private int rNum;
-	private String mId, rName, rPhoto, subTypes, apply;
+	private String mId, mBirth, rName, rPhoto, subTypes, apply;
+	private String engName, pay, addr, addr2, phone, email, army;
 	// 자기소개
 	private String intro1, intro2, intro3, intro4;
-	
+	// 학교
+	private String acName, termtime, memo;
+	// 자격증
+	private String license, expStart, expEnd, liGC;
+	// 언어
+	private String language, laScore;
+	// 프로젝트
+	private String prName;//, expStart, expEnd, memo;
+	// 수상
+	private String awAgency, awSector, awDate;//, memo;
+	// 경력
+	private String company, part, carStart, carEnd;//, memo;
+	//
 	public int getMainCode() {
 		return mainCode;
 	}
@@ -46,6 +59,12 @@ public class Talent {
 	public void setmId(String mId) {
 		this.mId = mId;
 	}
+	public String getmBirth() {
+		return mBirth;
+	}
+	public void setmBirth(String mBirth) {
+		this.mBirth = mBirth;
+	}
 	public String getrName() {
 		return rName;
 	}
@@ -70,6 +89,48 @@ public class Talent {
 	public void setApply(String apply) {
 		this.apply = apply;
 	}
+	public String getEngName() {
+		return engName;
+	}
+	public void setEngName(String engName) {
+		this.engName = engName;
+	}
+	public String getPay() {
+		return pay;
+	}
+	public void setPay(String pay) {
+		this.pay = pay;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getArmy() {
+		return army;
+	}
+	public void setArmy(String army) {
+		this.army = army;
+	}
 	public String getIntro1() {
 		return intro1;
 	}
@@ -93,5 +154,107 @@ public class Talent {
 	}
 	public void setIntro4(String intro4) {
 		this.intro4 = intro4;
+	}
+	public String getAcName() {
+		return acName;
+	}
+	public void setAcName(String acName) {
+		this.acName = acName;
+	}
+	public String getTermtime() {
+		return termtime;
+	}
+	public void setTermtime(String termtime) {
+		this.termtime = termtime;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	public String getLicense() {
+		return license;
+	}
+	public void setLicense(String license) {
+		this.license = license;
+	}
+	public String getExpStart() {
+		return expStart;
+	}
+	public void setExpStart(String expStart) {
+		this.expStart = expStart;
+	}
+	public String getExpEnd() {
+		return expEnd;
+	}
+	public void setExpEnd(String expEnd) {
+		this.expEnd = expEnd;
+	}
+	public String getLiGC() {
+		return liGC;
+	}
+	public void setLiGC(String liGC) {
+		this.liGC = liGC;
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	public String getLaScore() {
+		return laScore;
+	}
+	public void setLaScore(String laScore) {
+		this.laScore = laScore;
+	}
+	public String getPrName() {
+		return prName;
+	}
+	public void setPrName(String prName) {
+		this.prName = prName;
+	}
+	public String getAwAgency() {
+		return awAgency;
+	}
+	public void setAwAgency(String awAgency) {
+		this.awAgency = awAgency;
+	}
+	public String getAwSector() {
+		return awSector;
+	}
+	public void setAwSector(String awSector) {
+		this.awSector = awSector;
+	}
+	public String getAwDate() {
+		return awDate;
+	}
+	public void setAwDate(String awDate) {
+		this.awDate = awDate;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getPart() {
+		return part;
+	}
+	public void setPart(String part) {
+		this.part = part;
+	}
+	public String getCarStart() {
+		return carStart;
+	}
+	public void setCarStart(String carStart) {
+		this.carStart = carStart;
+	}
+	public String getCarEnd() {
+		return carEnd;
+	}
+	public void setCarEnd(String carEnd) {
+		this.carEnd = carEnd;
 	}
 }

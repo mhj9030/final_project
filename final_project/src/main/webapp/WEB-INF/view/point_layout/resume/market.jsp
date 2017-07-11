@@ -25,9 +25,9 @@
 					<td width="15%">검색</td>
 					<td width="25%" align="center">
 						<select name="mainCode" id="mainCode" class="form-control" onchange="onChange()">
-							<option value="">대분류</option>
-						<c:forEach var="dto1" items="${mainType}">
-							<option value="${dto1.mainCode}">${dto1.mainName}</option>
+							<option value="0">대분류</option>
+						<c:forEach var="dto" items="${mainType}">
+							<option value="${dto.mainCode}">${dto.mainName}</option>
 						</c:forEach>
 						</select> 
 					</td>
@@ -46,8 +46,11 @@
 	
 	<!-- 열람 -->
 	<div id="resume_list">
+		<c:if test="${empty list}">
+			<div style="text-align: center;"> 검색 결과가 없습니다.</div>
+		</c:if>
 		<c:forEach var="dto" items="${list}">
-		<form name="reintro${dto.rNum}" action="" method="get">
+		<form name="reintro${dto.rNum}" method="get">
 			<div class="marketDiv">
 				<div style="text-align: center;">
 					<img src="" width="110px" height="140px" />
@@ -57,8 +60,7 @@
 					<%-- 지원분야: ${dto.apply}<br> --%>
 					관심직종: ${dto.subTypes}<br>
 					<input type="hidden" name="rNum" value="${dto.rNum}">
-					<input type="hidden" name="rName" value="${dto.rName}">
-					<button class="btn btn-primary" onclick="usePoint(${dto.rNum});">-3000p</button>
+					<button class="btn btn-primary" onclick="usePoint(${dto.rNum})">-3000p</button>
 				</div>
 			</div>
 		</form>
@@ -69,13 +71,10 @@
 <script>
 $(document).ready(function() {
 	if('${mainCode}'!=""){
-		$("#mainCode option:eq(${mainCode})").attr("selected", "selected");
-		
+		$('#mainCode').val('${mainCode}');
 		onChange();
-		
-		if('${subCode}'!=""){
-			$("#subCode option:eq(${subCode})").attr("selected", "selected");
-		}
+	}else{
+		$('#mainCode').val('0');
 	}
 });
 
@@ -101,7 +100,10 @@ function subPrint(data){
 		var out = '<select name="subCode" id="subCode" class="form-control">';
 		out += '<option value="">소분류</option>';
 		for(var i=0; i<data.subType.length; i++){
-			out += '<option value="' + data.subType[i].subCode + '">' + data.subType[i].subName + '</option>';
+			if(data.subType[i].subCode=='${subCode}')
+				out += '<option value="' + data.subType[i].subCode + '" selected="selected">' + data.subType[i].subName + '</option>';
+			else
+				out += '<option value="' + data.subType[i].subCode + '">' + data.subType[i].subName + '</option>';
 		}
 		out += '</select>';
 		
@@ -135,8 +137,8 @@ function usePoint(num) {
 		});
 		
 		if(confirm("이력서를 바로 열람하시겠습니까?")){
-			var url = "<%=cp%>/point/storagy/article?";
-			location.href=url;
+			var url = "<%=cp%>/point/storagy/article?rNum=" + num;
+			location.href = url;
 		}
 	}else{
 		alert("포인트가 부족합니다.");

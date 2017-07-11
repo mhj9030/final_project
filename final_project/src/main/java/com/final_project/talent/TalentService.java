@@ -16,5 +16,11 @@ public interface TalentService {
 	//
 	public List<Talent> interestList(List<Talent> list);
 	// 게시물 보기
-	public Talent readList(Map<String, Object> map);
+	public Talent readIntro(Map<String, Object> map);
+	public List<Talent> readAbility(Map<String, Object> map);
+	public List<Talent> readLicense(Map<String, Object> map);
+	public List<Talent> readLanguage(Map<String, Object> map);
+	public List<Talent> readProject(Map<String, Object> map);
+	public List<Talent> readAward(Map<String, Object> map);
+	public List<Talent> readCareer(Map<String, Object> map);
 }
