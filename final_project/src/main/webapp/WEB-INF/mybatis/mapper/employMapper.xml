@@ -104,7 +104,7 @@
 
 <select id="read_resume"
 				resultType="com.final_project.employ.Resume" parameterType="String">
-	select rNum, rName from resume where mid=#{mId}
+	select rNum, rName,apply,pay,addr,addr2,hopelocation,phone,email from resume where mid=#{mId}
 </select>
 
 <insert id="apply_resume" parameterType="map">

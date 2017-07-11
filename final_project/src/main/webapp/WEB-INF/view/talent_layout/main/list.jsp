@@ -126,17 +126,21 @@ function subPrint(data){
 function listPrint(data){
 	var out = "";
 	
-	for(var i=0; i<data.list.length; i++){
-		out += '<div class="marketDiv">';
-		out += '	<div style="text-align: center;">';
-		out += '		<img src="" width="110px" height="140px" />';//data.list[i].photo
-		out += '	</div>';
-		out += '	<div>';
-		out += '		이름: ' + data.list[i].rName + '(' + data.list[i].rNum + ')<br>';
-		out += '		관심직종: ' + data.list[i].subTypes + '<br><br>';
-		out += '		<a href="<%=cp%>/talent/main/article?mId=' + data.list[i].mId + '&rNum=' + data.list[i].rNum + '">이력서 보러가기</a>';
-		out += '	</div>';
-		out += '</div>';
+	if(data.list.length!=0){
+		for(var i=0; i<data.list.length; i++){
+			out += '<div class="marketDiv">';
+			out += '	<div style="text-align: center;">';
+			out += '		<img src="" width="110px" height="140px" />';//data.list[i].photo
+			out += '	</div>';
+			out += '	<div>';
+			out += '		이름: ' + data.list[i].rName + '(' + data.list[i].rNum + ')<br>';
+			out += '		관심직종: ' + data.list[i].subTypes + '<br><br>';
+			out += '		<a href="<%=cp%>/talent/main/article?mId=&rNum=' + data.list[i].rNum + '">이력서 보러가기</a>';
+			out += '	</div>';
+			out += '</div>';
+		}
+	}else{
+		out = '<div style="text-align: center;"> 검색 결과가 없습니다.</div>';	
 	}
 	
 	$("#talent_list").html(out);
