@@ -19,7 +19,7 @@
             		<a href="<%=cp%>/company/update">기업정보수정</a>
             	</c:if>           	
             </li>
-            <li role="presentation" class="${employHead}"><a href="<%=cp%>/company/employ">채용관리</a></li>
+            <li role="presentation" class="${employ}"><a href="<%=cp%>/company/employ">채용관리</a></li>
             <li role="presentation" class="${applicant}"><a href="<%=cp%>/company/applicant">지원자현황</a></li>
             <li role="presentation" class="${inquiry}"><a href="<%=cp%>/company/inquiry">기업문의</a></li>
             <li role="presentation" class="${gover_news}"><a href="<%=cp%>/company/gover_news">공무원소식</a></li>

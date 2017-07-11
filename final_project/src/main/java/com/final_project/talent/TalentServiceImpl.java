@@ -1,6 +1,7 @@
 package com.final_project.talent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,24 @@ public class TalentServiceImpl implements TalentService{
 		
 		return list;
 	}
+	
+	@Override
+	public List<Talent> interestList(List<Talent> list) {
+		System.out.println("interestList");
+		try {
+			for(Talent dto:list){
+				Map<String, Object> map = new HashMap<>();
+				map.put("mId", dto.getmId());
+				map.put("rNum", dto.getrNum());
+				Talent jobs = dao.getReadData("talent.searchSub", map);
+				dto.setSubTypes(jobs.getSubTypes());
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
@@ -81,7 +100,7 @@ public class TalentServiceImpl implements TalentService{
 
 	@Override
 	public Talent readList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Talent dto = null;
+		return dto;
 	}
 }

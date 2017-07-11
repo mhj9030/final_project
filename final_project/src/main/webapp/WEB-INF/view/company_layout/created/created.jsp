@@ -99,16 +99,16 @@
 	}
 	
 	function serialCheck(){
-		var cSerial1=$("#serial1").val();
-		var cSerial2=$("#serial2").val();
-		var cSerial3=$("#serial3").val();
+		var cSerial1=$("#cSerial1").val();
+		var cSerial2=$("#cSerial2").val();
+		var cSerial3=$("#cSerial3").val();
 		
 		var cSerial=cSerial1+"-"+cSerial2+"-"+cSerial3;	
 		
 		var url="<%=cp%>/company/serialCheck";
-		var query="serial="+cSerial
+		var query="cSerial="+cSerial
 		$.ajax({
-			type:"post",
+			type:"POST",
 			url:url,
 			data:query,
 			dataType:"JSON",
@@ -116,9 +116,10 @@
 				var passed=data.passed;
 				
 				if(passed=="true"){
-					var str="<span style='color:blue; font-weight:bold;'>"+cSerial+"</span> 사용 가능한 번호입니다.";
+					var str="<span style='color:blue; font-weight:bold;'>"+cSerial+" 사용 가능한 번호입니다.</span>";
+					$(".serial-help-block").html(str);
 				} else{
-					var str="<span style='color:red; font-weight: bold;'>"+cSerial+"</span> 이미 등록된 번호입니다.";
+					var str="<span style='color:red; font-weight: bold;'>"+cSerial+" 이미 등록된 번호입니다.</span>";
 					$(".serial-help-block").html(str);
 					$("#serial1").val("");
 					$("#serial2").val("");
@@ -149,10 +150,10 @@
 			    <input id="cSerial2" name="cSerial2" type="text" class="form-control" value="${dto.cSerial2}">
 			  </div>
 			  <div class="col-xs-3">
-			    <input id="cSerial3" name="cSerial3" type="text" class="form-control" value="${dto.cSerial3}">
+			    <input id="cSerial3" name="cSerial3" type="text" class="form-control" value="${dto.cSerial3}" onchange="serialCheck();">
 			  </div>
-			  <p class=serial-help-block></p>
 			</div>
+			<p class=serial-help-block style="margin-top: 5px;"></p>
 		</div>
 		
   		<div class="form-group">

@@ -72,17 +72,16 @@ public class TalentController {
 		//model.addAttribute("list", list);
 		//model.addAttribute("paging", paging);
 		
-		return ".talent_layout.main.container";
+		return ".talent_layout.main.list";
 	}
 	
 	@ResponseBody
 	@RequestMapping("/talent/main/subType")
 	public Map<String, Object> subType(@RequestParam(value="mainCode")int mainCode) throws Exception {
-		List<Talent> subType;
 		Map<String, Object> map = new HashMap<>();
-		
 		map.put("mainCode", mainCode);
-		subType = service.subType(map);
+		
+		List<Talent> subType = service.subType(map);
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("subType", subType);
@@ -125,16 +124,27 @@ public class TalentController {
 		
 		List<Talent> list;
 		list = service.listBoard(map);
+		list = service.interestList(list);
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("list", list);
-		model.put("subCode", subCode);
 		
 		return model;
 	}
 	
 	@RequestMapping("/talent/main/article")
 	public String article(){
+		Map<String, Object> map = new HashMap<>();
+		
+		Talent dto;
+		dto = service.readList(map);
+		
+		List<Talent> list = new ArrayList<>();
+		list.add(dto);
+		list = service.interestList(list);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("list", list);
 		
 		return ".talent_layout.main.article";
 	}

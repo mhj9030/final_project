@@ -115,19 +115,25 @@ public class CreatedServiceImpl implements CreatedService{
 	}
 	
 	@Override
-	public Company readCompanyId(String mId) throws Exception {
+	public Company readCompanySerial(String cSerial) throws Exception {
 		Company dto=null;
 		
 		try {
-			dto=dao.getReadData("company.readCompanyId", mId);
+			dto=dao.getReadData("company.readCompanySerial", cSerial);
 			
-			dto.setcSerial1(dto.getcSerial().split("-")[0]);
-			dto.setcSerial2(dto.getcSerial().split("-")[1]);
-			dto.setcSerial3(dto.getcSerial().split("-")[2]);
-			
-			dto.setcTel1(dto.getcTel().split("-")[0]);
-			dto.setcTel2(dto.getcTel().split("-")[1]);
-			dto.setcTel3(dto.getcTel().split("-")[2]);
+			if(dto!=null){
+				if(dto.getcSerial()!=null){
+					dto.setcSerial1(dto.getcSerial().split("-")[0]);
+					dto.setcSerial2(dto.getcSerial().split("-")[1]);
+					dto.setcSerial3(dto.getcSerial().split("-")[2]);
+				}
+				
+				if(dto.getcTel()!=null){
+					dto.setcTel1(dto.getcTel().split("-")[0]);
+					dto.setcTel2(dto.getcTel().split("-")[1]);
+					dto.setcTel3(dto.getcTel().split("-")[2]);
+				}
+			}
 		} catch (Exception e) {
 			throw e;
 		}

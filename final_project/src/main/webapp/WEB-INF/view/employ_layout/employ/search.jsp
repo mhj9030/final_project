@@ -8,7 +8,46 @@
 %>
 <!-- Bootstrap CSS -->
 <link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet">
-
+<style type="text/css">
+  .apply {
+	background-color:#5bc0de;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	font-weight:normal;
+	font-style:normal;
+	height:35px;
+	line-height:35px;
+	width:80px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:0px 0px 50px #528ecc;
+}.apply:hover {
+	background-color:#378de5;
+	color:#ffffff;
+	text-decoration:none;
+}.apply:active {
+	background-color:#5bc0de;
+	color:#ffffff;
+	text-decoration:none;
+	position:relative;
+	top:1px;
+}
+</style>
 
 <script type="text/javascript">
 
@@ -154,11 +193,74 @@ $("#main_class").change(function() {
 	
 });
 
+function apply(ceNum) {
+	var rNum = $("#resume option:selected").val();
+	var url="<%=cp%>/employ/apply?ceNum="+ceNum+"&rNum="+rNum;
+	
+	$.ajax({
+		type:"GET"
+		,url:url
+		,success:function(data) {
+			
+			if(data==0) {	        
+		        $("#apply_result").html("<h5>이미 입사지원한 공고입니다.</h5><br><a>입사지원현황 바로가기</a><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+			} else {
+
+		        $("#apply_result").html("<h5>입사지원이 완료되었습니다.</h5><br><a>입사지원현황 바로가기</a><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+			}
+		}
+		,error : function() {
+			$("#apply_result").html("<h5>이미 입사지원한 공고입니다.</h5><br><a>입사지원현황 바로가기</a><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+		}
+		
+	})
+}
+
+function loadSimpleInfo(ceNum) {
+	$("#apply_result").html("제출할 이력서를 선택해주세요<select id='resume'></select><br><button type='button' class='btn btn-info' style='margin-right:1px;' id='apply'>제출</button><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+	$("#resume option").remove();
+	var url="<%=cp%>/employ/applyForm?ceNum="+ceNum;
+	$.ajax({
+		type:"GET"
+		,url:url
+		,success:function(data) {
+			$("#subname").text(data.employ.subname);
+			$("#ceType1").text(data.employ.ceType);
+			$("#ceStart").text(data.employ.ceStart);
+			$("#ceEnd").text(data.employ.ceEnd);
+			$("#ceNum").text(data.employ.ceNum);
+			$("#cePay").text(data.employ.cePay);
+			$("#cName").text(data.employ.cName);
+			$("#article").attr("onclick","location.href='<%=cp%>/employ/article?ceNum="+ceNum+"'");
+			
+			$("#apply").attr("onclick","apply("+ceNum+");");
+	
+			for(var i=0; i<=data.resumeList.length; i++) {
+				if(data.resumeList[i]!=undefined && data.resumeList[i].rNum!=undefined)
+					$("#resume").append("<option value='"+data.resumeList[i].rNum+"'>"+data.resumeList[i].rName+"</option>");
+			}
+			
 
 
+		}
+		,error : function(jqXHR) {
+			
+	        if (jqXHR.status == 401) {
+	        	 console.log(jqXHR);
+	        } else if (jqXHR.status == 403) {
+	        } else {
+	        	 console.log(jqXHR.responseText);
+	        }
+	    }
+	});
+	
+	
+	
+}
 
-
-
+function imageError(image) {
+	image.src="<%=cp%>/resources/image/profile_img.jpg";
+}
 
 
 function listPage(page) {
@@ -189,13 +291,14 @@ function ajaxHTML(url, type, query) {
 				var ceEnd=data.celist[idx].ceEnd;
 				var cSerial=data.celist[idx].cSerial;
 				var cLogoimage=data.celist[idx].cLogoimage;
+				var cNum = data.celist[idx].cNum;
 				
 				
 				out+="<div class='row'>";
 				out+="<div class='col-md-12'>";
 				out+="<div class='col-md-2 center-block' >";
-				out+="<img src='<%=cp%>/resources/image/profile_img.jpg' alt='<%=cp%>/resources/image/profile_img.jpg' class='img-responsive' style='max-height: 100px; margin:auto;'>";
-				out+="<div class='container'><a href='C.cSerial'>회사명 "+cName+"</a></div>";
+				out+="<img src='<%=cp%>/uploads/company/"+cLogoimage+"' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'>";
+				out+="<div class='container'><a href='<%=cp%>/company/search/article?page=1&cNum="+cNum+"'>회사명 "+cName+"</a></div>";
 				out+="</div>";
 				out+="<div class='col-md-4'>";
 				out+="<a href='<%=cp%>/employ/article?ceNum="+ceNum+"'>"+ceSubject+"</a>";
@@ -206,8 +309,8 @@ function ajaxHTML(url, type, query) {
 				out+="<div class='col-md-2'> ";
 				out+="근무조건 "+ceType;
 				out+="</div>";
-				out+="<div class='col-md-2'>";
-				out+="등록일 "+ceStart+" 마감일 "+ ceEnd +"<br>";
+				out+="<div class='col-md-2' style='text-align:center;'>";
+				out+="등록일 "+ceStart+" 마감일 "+ ceEnd +"<br><br>   <a class='apply' onclick='javascript:loadSimpleInfo("+ceNum+")' data-toggle='modal' data-target='.bs-example-modal-sm'>즉시지원</a>";
 				out+="</div>";
 				out+="</div>";
 				out+="</div>";
@@ -271,13 +374,13 @@ function ajaxHTML(url, type, query) {
 	<div class="jumbotron">
   
 	</div>
-	
+		
 	
   		
   	
   		<div class="row">
   			<div class="col-md-12">
-  			<h1>전체 채용정보</h1><hr>
+  			<h3>|전체 채용정보</h3><hr>
   			
   			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
 	  			지역별<br><br><br><br><br>
@@ -319,7 +422,7 @@ function ajaxHTML(url, type, query) {
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <form name="employForm" id="employForm">
 	      <div class="panel-body">
 	       			<!-- 채용정보 상세검색 -->
@@ -593,4 +696,48 @@ function ajaxHTML(url, type, query) {
 	
 	</div>	
 	
+	<!-- 즉시지원 모달 -->
+	
+
+		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		     			<div class="modal-header" style="background:#5bc0de ;color:white;">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <div id="cName">삼성전자</div><h4 class="modal-title">빠른 온라인 입사지원</h4>
+					      </div>
+					      <div class="modal-body" style="text-align: center; height:200px;">
+					        
+					        <div><br>
+					        	<table style="margin:0 auto;">
+							      	<tr><th>채용 분야</th><td id="subname">${employ. subname}</td></tr>
+							      	<tr><th>고용 형태</th><td id="ceType1">${employ.ceType}</td></tr>
+							      	<tr><th>연봉</th><td id="cePay">${employ.cePay } 만원</td></tr>
+							      	<tr><th>시작일</th><td id="ceStart">${employ.ceStart}</td></tr>
+							      	<tr><th>마감일</th><td id="ceEnd">${employ.ceEnd}</td></tr>
+						      	</table> 
+						      	<br>
+									<div style="float:right;">
+										<button type="button" class="btn btn-info" style="margin-right:1px;" id="article">상세보기</button>
+										<button class="btn btn-info"><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
+									</div>
+							</div>
+					        
+					      </div>
+					      <div class="modal-footer" style="text-align: center" id="apply_result">
+					      	제출할 이력서를 선택해주세요
+					      	<select id="resume">
+					      	
+					      	</select>
+					      	
+					      	<button type="button" class="btn btn-info" style="margin-right:1px;" id="apply">제출</button>
+					      	
+					      	
+					        <hr>
+					        <button type="button" class="btn btn-default" data-dismiss="modal">채용정보 계속보기</button>
+					        
+					    </div>
+		    </div>
+		  </div>
+		</div>
 </div>

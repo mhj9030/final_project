@@ -17,12 +17,6 @@ div{
 	//border: 1px solid #cccccc;
 }
 
-h3{
-	font-family: 맑은 고딕, 돋움;
-	font-weight: bold;
-	font-size: 20px;
-}
-
 .form-control{
 	height: 35px;
 	width: 150px;
@@ -90,14 +84,14 @@ h3{
 	margin: 0px auto 15px;
 	padding-top: 50px;
 	width: 100%;
-	height: 100%;
+	height: 700px;
 }
 
 #talent_list{
 	margin: 0px auto 15px;
 	padding-top: 50px;
 	width: 100%;
-	height: 100%;
+	height: 700px;
 }
 
 .marketDiv{

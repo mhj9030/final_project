@@ -7,10 +7,5 @@
 	String cp=request.getContextPath();
 %>
 
-<div class="wrap_wide cmenu">
-    <div class="wrap">
-		<ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class="${main}"><a href="<%=cp%>/talent/main">인재검색</a></li>
-        </ul>
-    </div>
-</div>
+
+<div>기업문의</div>

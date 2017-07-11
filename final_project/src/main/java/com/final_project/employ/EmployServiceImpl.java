@@ -130,6 +130,45 @@ public class EmployServiceImpl implements EmployService{
 		return list;
 	}
 
+	@Override
+	public Employ read_com_employ(int ceNum) {
+		Employ employ = new Employ();
+		
+		try {
+			employ=dao.getReadData("employ.read_com_employ",ceNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return employ;
+	}
+
+	@Override
+	public List<Resume> read_resume(String mId) {
+		List<Resume> resume = null;
+		
+		try {
+			resume=dao.getListData("employ.read_resume",mId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return resume;
+	}
+
+	@Override
+	public int apply_resume(Map<String, Object>  map) {
+		int result = 0;
+		
+		try {
+			result = dao.insertData("employ.apply_resume", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
 	
 
 	

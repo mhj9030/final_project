@@ -34,9 +34,17 @@ ${dto.content}
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main'">목록</button>
 			<c:if test="${sessionScope.member.userId=='admin@a.com'}">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main/update?num=${dto.poNum}&page=${page}'">수정</button>
-				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main/delete?num=${dto.poNum}'">삭제</button>
+				<button type="button" class="btn btn-default" onclick="deleteCheck('<%=cp%>/point/main/delete?num=${dto.poNum}')">삭제</button>
 			</c:if>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+function deleteCheck(url){
+	if(confirm("게시글을 삭제하시겠습니까?")){
+		location.href=url;
+	}
+}
+</script>

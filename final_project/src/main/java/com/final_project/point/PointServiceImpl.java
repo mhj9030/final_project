@@ -138,4 +138,31 @@ public class PointServiceImpl implements PointService{
 		
 		return list;
 	}
+
+	@Override
+	/** history-적립이유, point-포인트액수, mId-적립아이디 map으로 보내면 됨 */
+	public int savaPoint(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			map.put("classify", "적립");
+			result = dao.insertData("point.savaPoint", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int usePoint(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			map.put("classify", "사용");
+			result = dao.insertData("point.usePoint", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
