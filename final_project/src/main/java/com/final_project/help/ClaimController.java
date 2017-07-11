@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
@@ -125,7 +126,6 @@ public class ClaimController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		dto.setmId(info.getUserId());
 		
-		//dto.setmId("admin@a.com");
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"";
 		
@@ -184,7 +184,113 @@ public class ClaimController {
 		return ".help_layout.claim.article";
 	}
 	
+	
+	@RequestMapping(value="/claim/delete", method=RequestMethod.GET)
+	public String delete(@RequestParam(value="num")int num) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("claimNum", num);
+		
+		service.deleteClaim(map);
+		
+		return "redirect:/help_layout/claim/list";
+	}
+	
+	@RequestMapping(value="/claim/update", method=RequestMethod.GET)
+	public String updateForm(@RequestParam("num")int num, @RequestParam("page")int page, Model model) {
+		Claim dto;
+		Map<String, Object> map = new HashMap<>();
 
+		map.put("claimNum", num);
+		dto= service.readClaim(num);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "update");
+		model.addAttribute("dto", dto);
+		
+		return ".help_layout.claim.created";
+	}
+	
+	@RequestMapping(value="/claim/update", method=RequestMethod.POST)
+	public String updateSubmit(@RequestParam("num")int num, @RequestParam("page")int page, Claim dto, Model model) {
+		
+		dto.setClaimNum(num);
+		
+		int result= service.updateClaim(dto);
+		System.out.println(result);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("page", page);
+		
+		return "redirect:/claim/article";
+	}
+	
+	//댓글
+	@RequestMapping(value="/claim/createdReply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createdReply(ClaimReply dto,
+			HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state="true";
+		
+		dto.setmId(info.getUserId());
+		
+		int result=service.insertReply(dto);
+		if(result==0)
+			state="false";
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
+	
+	
+	@RequestMapping(value="/claim/listReply")
+	public String listReply(
+			@RequestParam int claimNum,
+			@RequestParam(value="pageNo", defaultValue="1") int current_page,
+			Model model
+			) throws Exception {
+		
+		int rows=5;
+		int total_page=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("claimNum", claimNum);
+		System.out.println(claimNum+"listReply");
+		dataCount=service.replyDataCount(map);
+		total_page=util.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		
+		int start=(current_page-1)*rows+1;
+		int end=current_page*rows;
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<ClaimReply> list=service.listReply(map);
+		Iterator<ClaimReply> it=list.iterator();
+		
+		while(it.hasNext()) {
+			ClaimReply vo=it.next();
+			vo.setReplyAnswer(util.htmlSymbols(vo.getReplyAnswer()));
+			System.out.println(vo.getReplyAnswer());
+		}
+		
+		String paging=util.paging(current_page, total_page);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		
+		return "/help_layout/claim/listReply";
+	}
+	
+	
+
+	
 	
 	
 }

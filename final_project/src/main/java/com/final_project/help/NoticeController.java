@@ -205,6 +205,39 @@ public class NoticeController {
 		return "redirect:/help_layout/notice/list";
 	}
 	
+	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
+	public String updateForm(@RequestParam("num")int num, @RequestParam("page")int page, Model model) {
+		Notice dto;
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("notNum", num);
+		dto= service.readNotice(num);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "update");
+		model.addAttribute("dto", dto);
+		
+		return ".help_layout.notice.created";
+	}
+	
+	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
+	public String updateSubmit(@RequestParam("num")int num, @RequestParam("page")int page, Notice dto, Model model) {
+		
+			
+		dto.setNotNum(num);
+		int result= service.updateNotice(dto);
+		System.out.println(result);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("page", page);
+		
+		return "redirect:/notice/article";
+	}
+	
+	
+	
+
 	
 	
 	

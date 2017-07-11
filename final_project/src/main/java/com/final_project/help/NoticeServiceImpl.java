@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.final_project.common.dao.CommonDAO;
+import com.final_project.point.Point;
 
 @Service("help.noticeService")
 public class NoticeServiceImpl implements NoticeService{
@@ -79,19 +80,6 @@ public class NoticeServiceImpl implements NoticeService{
 		}
 		return result;
 	}
-	@Override
-	public int updateNotice(Notice dto, String pathname) {
-		int result=0;
-
-		try{
-		
-			dao.updateData("notice.updateNotice", dto);
-			result=1;
-		} catch(Exception e) {
-			System.out.println(e.toString());
-		}
-		return result;
-	}
 
 	
 	@Override
@@ -100,6 +88,19 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		try {
 			result = dao.getIntValue("notice.deleteNotice", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int updateNotice(Notice dto) {
+		int result = 0;
+		
+		try {
+			result = dao.updateData("notice.updateNotice", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -72,8 +72,7 @@
 						<tr>
 							<td colspan="4" style="text-align: center;">
 								<button>확인 </button>
-								
-								<button type="button" onclick="">취소</button> 
+								<button type="button" onclick="javascript: history.back();">취소</button>
 							</td>
 						</tr>
 					</tfoot>
