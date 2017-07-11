@@ -188,7 +188,7 @@
 	<select id="listCompanyName" parameterType="map" resultType="com.final_project.company.Company">
 		select cName from company
 		<if test="searchCompany!=null and searchCompany!='' ">
-			instr(cName, #{searchCompany})&gt;=1
+			where instr(cName, #{searchCompany})&gt;=1
 		</if>
 	</select>
 </mapper>
