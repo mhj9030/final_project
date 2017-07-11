@@ -156,6 +156,25 @@
 			where ceNum=#{ceNum}
 	</select>
 	
+	<!-- 채용 삭제 -->
+	<delete id="deleteComEmploy">
+		delete from applicant
+  			where ceNum=#{ceNum}
+		delete from com_employ
+  			where ceNum=#{ceNum}
+	</delete>
+	
+	<!-- 채용 수정 -->
+	<update id="updateComEmploy" parameterType="com.final_project.company.Employ">
+		update com_imploy set ceSubject=#{ceSubject}, cePeople=#{cePeople}, ceType=#{ceType}
+			ceStart=#{ceStart}, ceEnd=#{ceEnd}, cePay=#{cePay}, cePlace=#{cePlace} 
+			cePrefere=#{cePrefere}, ceEtc=#{ceEtc}, resumeForm=#{resumeForm}, 
+			resumeFile=#{resumeFile, jdbcType=VARCHAR}, 
+			resumeOriginalName=#{resumeOriginalName, jdbcType=VARCHAR}, atCode=#{atCode}, 
+  			subCode=#{subCode}
+  			where ceNum=#{ceNum}
+	</update>
+	
 	<!-- 지원자 현황 리스트 -->
 	<select id="listApplicant" 
 		parameterType="map" resultType="com.final_project.company.Applicant">
@@ -186,7 +205,7 @@
 	
 	<!-- 기업명 리스트 -->
 	<select id="listCompanyName" parameterType="map" resultType="com.final_project.company.Company">
-		select cName from company
+		select cNum, cName from company
 		<if test="searchCompany!=null and searchCompany!='' ">
 			where instr(cName, #{searchCompany})&gt;=1
 		</if>

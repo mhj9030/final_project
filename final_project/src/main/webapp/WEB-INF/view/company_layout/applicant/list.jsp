@@ -19,12 +19,59 @@
 			data:query,
 			dataType:"JSON",
 			success:function(data){
+				var dataCount=data.dataCount;	
+				var paging=data.paging;
 				
+				var out="<div class='list-header' style='margin-top: 30px;'>";
+				out+="<div align='left'><h4>전체 지원자("+dataCount+")</h4></div>";
+				out+="	<div class='chk_info' align='right'>";
+				out+="		<input type='radio' name='order' value='recent' checked='checked'> 최신순";
+				out+="		<input type='radio' name='order' value='name'> 이름순";
+				out+="	</div>";
+				out+="</div>";
+				if(dataCount!=0){
+					for(var idx=0; idx<data.list.length; idx++){
+						var proPhoto=data.list[idx].proPhoto;
+						var mName=data.list[idx].mName;
+						var mGender=data.list[idx].mGender;
+						var proIntro=data.list[idx].proIntro;
+						var mId=data.list[idx].mId;
+						
+						out+="<div class='list-item'>";
+						out+="	<div class='item-image'>";
+						if(proPhoto!=null){
+							out+="<img width='80px' src='<%=cp%>/uploads/member/"+proPhoto+"'>";
+						} else{
+							out+="<img width='80px' src='<%=cp%>/resources/image/profile_img.jpg'>";
+						}
+						out+="	</div>";
+						out+="	<div class='item-content'>";
+						out+="		<div class='content-name' style='margin-top: 5px; margin-bottom: 7px;'>";
+						out+="			<strong>"+mName+"</strong><span> "+mGender+"</span>";
+						out+="		</div>";
+						out+="		<div class='content-info' align='right'>";
+						out+="			<a href='<%=cp%>/profile?id="+mId+"'>프로필 보기</a>";
+						out+="			<a href='#'>&nbsp;&nbsp;이력서 보기</a>";
+						out+="		</div>";
+						if(proIntro!=null){
+							out+="<div class='content-intro'>"+proIntro+"</div>";
+						} else{
+							out+="<div class='content-intro'>자기소개가 없습니다.</div>";
+						}
+						out+="		<div class='content-email'><h5>"+mId+"</h5></div></div>";
+						out+="	</div>";
+					}
+				}
+				out+="<div class='page'>";
+				out+="	<div>"+paging+"</div>";
+				out+="</div>";
+				
+				$("#listApplicant").html(out);
 			}
 		});
 	}
 </script>
-<div class="list-body" align="center" style="height: auto;">
+<div class="applicant-body" align="center">
 	<div class="page-header">
 		<h1 align="left">
 			| 지원자 현황 <small></small>
@@ -57,37 +104,5 @@
 		<input type="hidden" name="ceNum">
 	</form>
 	
-	<div class="list">
-		<div class="list-header" style="margin-top: 30px;">
-			<div class="subject" align="left">
-				<h4>전체 지원자(${dataCount})</h4>
-			</div>
-			<div class="chk_info" align="right">
-				<input type="radio" name="order" value="recent" checked="checked"> 최신순
-				<input type="radio" name="order" value="name"> 이름순
-			</div>
-		</div>
-		
-		<%-- <c:forEach var="dto" items="${list}"> --%>
-			<div class="list-item">
-				<div class="item-image">
-					<img width="80px" src="<%=cp%>/resources/image/profile_img.jpg">
-				</div>
-				<div class="item-content">
-					<div class="content-name" style="margin-top: 5px; margin-bottom: 7px;">
-						<strong>홍길동</strong><span> 남</span>
-					</div>
-					<div class="content-info" align="right">
-						<a href="#">프로필 보기</a>
-						<a href="#">&nbsp;&nbsp;이력서 보기</a>
-					</div>
-					<div class="content-intro">자기소개가 없습니다.</div>
-					<div class="content-email"><h5>phj375@naver.com</h5></div>
-				</div>
-			</div>
-		<%-- </c:forEach> --%>
-		<div class="page">
-			<div>1 2 3</div>
-		</div>
-	</div>
+	<div id="listApplicant" class="list"></div>
 </div>
