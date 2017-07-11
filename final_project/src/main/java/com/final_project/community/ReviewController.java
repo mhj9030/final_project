@@ -21,7 +21,7 @@ import oracle.net.aso.h;
 @Controller("community.reviewController")
 public class ReviewController {
 	@Autowired
-	private SearchService service;
+	private SearchService cservice;
 	
 	
 	@RequestMapping("/community/review")
@@ -35,7 +35,7 @@ public class ReviewController {
 	@RequestMapping(value = "/community/review/created", method = RequestMethod.GET)
 	public String createdForm(Model model) throws Exception {
 		
-		List<Company> list = service.listCompanyName(); 
+		
 		
 		
 		
@@ -49,11 +49,11 @@ public class ReviewController {
 			Model model,
 			@RequestParam(value="searchCompany", defaultValue="") String searchCompany
 			) throws Exception {
-		List<Company> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("searchCompany", searchCompany);
 		
+		List<Company> list = cservice.listCompanyName(map);
 		
 		
 		model.addAttribute("list", list);
