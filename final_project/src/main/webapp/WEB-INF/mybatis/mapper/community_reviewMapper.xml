@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="community_review">
+	<insert id="insertReview" parameterType="com.final_project.community.Review">
+		INSERT INTO meet(ibnum, subject, content, mid, company, pass) 
+		VALUES (MEET_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{company}, #{pass})
+	</insert>
+
+	<sql id="where-list">
+	  <if test="searchKey=='mName'">
+	       mName = #{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='company'">
+	      INSTR(company, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+          OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+	  </if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM meet 
+	    <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     	<![CDATA[
+	     		AND state = 0
+	     	]]>
+	    </where>  
+	</select>
+	
+	<select id="listReview" parameterType="map" resultType="com.final_project.community.Review">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT v.ibnum, m.mId, mName, subject, TO_CHAR(v.created, 'YYYY-MM-DD') created, company, pass,  
+					   hitCount, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount, pro.prophoto 
+				FROM meet v JOIN member m ON v.mId=m.mId 
+				LEFT OUTER JOIN
+				(
+					SELECT ibnum, COUNT(*) replyCount FROM meet_re 
+					WHERE answer=0 
+					GROUP BY ibnum
+				) r ON v.ibnum=r.ibnum 
+				LEFT OUTER JOIN
+				(
+					SELECT ibnum, COUNT(*) likeCount FROM meet_like 
+					GROUP BY ibnum
+				) l ON v.ibnum=l.ibnum
+				LEFT OUTER JOIN
+				(
+					SELECT p.mId, prophoto from profile p
+				) pro ON v.mId = pro.mId
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+	     				AND state = 0
+	     			]]>
+	    		</where>
+	    		ORDER BY ibnum DESC
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
+	</select>
+</mapper>

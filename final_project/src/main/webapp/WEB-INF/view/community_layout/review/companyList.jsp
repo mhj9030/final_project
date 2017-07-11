@@ -9,7 +9,18 @@
 
 
 <div>
-	<c:forEach var="dto" items="${list}">
-		<input type="checkbox" value="${dto.cName}">${dto.cName} <br>
-	</c:forEach>
+	<form name="company_form">
+		<c:if test="${not empty list}">
+			<div style="overflow-y: scroll; height: 200px;">
+				<c:forEach var="dto" items="${list}">
+					<div style="font-weight: bold; margin: 10px;">
+						<input type="radio" name="companyName_radio" value="${dto.cName}">${dto.cName}
+					</div>
+				</c:forEach>
+			</div>
+		</c:if>
+		<c:if test="${empty list}">
+			<span style="color:red;">찾는 기업은 등록되어 있지 않습니다.</span>
+		</c:if>
+	</form>
 </div>

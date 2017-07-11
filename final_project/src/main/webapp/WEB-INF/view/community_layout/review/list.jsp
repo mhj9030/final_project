@@ -20,47 +20,51 @@
 	</div>
 	
 	<table class="table review_list_table">
+		<c:forEach var="dto" items="${list}">
 		<tr>
 			<td width="110">
-				<img src="<%=cp%>/resources/image/Desert.jpg" style="width:100px; height: 100px;"> 
+				<c:if test="${not empty dto.prophoto}">
+					<img src="<%=cp%>/resources/image/Desert.jpg" style="width:100px; height: 100px;">
+				</c:if>
+				<c:if test="${empty dto.prophoto}">
+					<img src="<%=cp%>/resources/image/profile_img.jpg" style="width:100px; height: 100px;">
+				</c:if>
+			</td>
+			<td class="review_table_td">
+				<div style="line-height: 30px;"><strong style="font-size: 20px;">${dto.subject}</strong></div>
+				<div style="color:#949494;">
+					<div style="line-height: 15px; height: 15px; margin-bottom: 5px;"><i class="glyphicon glyphicon-map-marker"></i><a href="<%=cp%>/company/search/article?page=1&"${dto.cNum}>${dto.company}</a></div>
+					<div style="line-height: 15px; height: 15px;"><small style="text-align: right;">${dto.created} | 조회수 : ${dto.hitCount} | 추천 : ${dto.likeCount}</small></div>
+				</div>
+				<div style="line-height: 30px; font-size: 13px;"><strong>이름 : ${dto.mName}</strong> </div>
 			</td>
 			<td>
-				<div>이름 : 홍길동</div>
-				<div>면접 본 기업 : 삼성전자</div>
-				<div>제목 ㅠ.ㅠ</div>
-			</td>
-			<td>
-				<div>2017-06-27 | 조회수 : 0 | 추천 : 0</div>
-				<div>결과 : 불합격</div>
-				<div>
-					<button class="btn btn-info">후기보기</button>
+				<div style="height:100px; text-align: center; padding: 10px;">
+					<div style="height: 50%;">
+						<c:if test="${dto.pass=='불합격'}">
+							<button class="btn btn-sm btn-danger" style="width: 100px; border-radius: 0px;">${dto.pass}</button>
+						</c:if>
+						<c:if test="${dto.pass=='합격'}">
+							<button class="btn btn-sm btn-success" style="width: 100px; border-radius: 0px;">${dto.pass}</button>
+						</c:if>
+						<c:if test="${dto.pass=='비공개'}">
+							<button class="btn btn-sm btn-default" style="width: 100px; border-radius: 0px;">${dto.pass}</button>
+						</c:if>
+					</div>
+					<div style="height: 50%;">
+						<button class="btn btn-sm" style="width: 100px; border-radius: 0px;">후기보기</button>
+					</div>
 				</div>
 			</td>
 		</tr>
-		<tr>
-			<td width="110">
-				<img src="<%=cp%>/resources/image/Desert.jpg" style="width:100px; height: 100px;"> 
-			</td>
-			<td>
-				<div>이름 : 홍길동</div>
-				<div>면접 본 기업 : 삼성전자</div>
-				<div>제목 ㅠ.ㅠ</div>
-			</td>
-			<td>
-				<div>2017-06-27 | 조회수 : 0 | 추천 : 0</div>
-				<div>결과 : 불합격</div>
-				<div>
-					<button class="btn btn-info">후기보기</button>
-				</div>
-			</td>
-		</tr>
+		</c:forEach>
 	</table>
 	
 	<div style="text-align: center;">
-		1 2 3...
+		${paging}
 	</div>
 	
-	<div class= "footer-bar" >
+	<div class= "footer-bar" style="height: 50px; margin: 0px;">
 		<div class = "foorter-bar-refresh">
 			<button type="button" class="btn btn-default btn-sm wbtn" onclick="#">새로고침</button>
 		</div>
@@ -69,8 +73,8 @@
 			<form name="searchForm" method="post" class="form-inline">
 				<select class="form-control input-sm" name="searchKey">
 					<option value="subject">제목</option>
-					<option value="userName">작성자</option>
-					<option value="content">내용</option>
+					<option value="mName">작성자</option>
+					<option value="company">기업명</option>
 					<option value="created">등록일</option>
 				</select> <input type="text" class="form-control input-sm input-search"
 					name="searchValue">

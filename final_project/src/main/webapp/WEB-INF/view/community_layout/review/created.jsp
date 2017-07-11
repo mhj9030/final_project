@@ -17,13 +17,22 @@
   function check() {
         var f = document.boardForm;
  
-    	var str = f.subject.value;
+        var str = f.company.value;
+        if(!str || str=="<p>&nbsp;</p>") {
+       	 alert("면접 본 기업을 등록하세요. ");
+           f.content.focus();
+           return false;
+       }
+        
+        var str = f.subject.value;
         if(!str) {
             alert("제목을 입력하세요. ");
             f.subject.focus();
             return false;
         }
+
         
+        var str = f.content.value;
         if(!str || str=="<p>&nbsp;</p>") {
         	 alert("내용을 입력하세요. ");
             f.content.focus();
@@ -31,7 +40,7 @@
         }
 
     	
-       	f.action = "<%=cp%>/community/reivew/created";
+       	f.action = "<%=cp%>/community/review/created";
        	
        	return true;
   }
@@ -77,9 +86,20 @@
 				<table class="table">
 					<tbody>
 						<tr>
+							<td class="input_info">기업명</td>
+							<td colspan="3">
+								<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">
+									면접 본 기업 찾기
+								</button>
+								<span>${company}</span>
+								<input type="hidden" name="company" value="${company}">
+							</td>
+						</tr>
+						
+						<tr>
 							<td class="input_info">작성자명</td>
 							<td colspan="3">
-								<input type="text" name="name" value="" required="required">
+								<input type="text" name="name" value="${sessionScope.member.userName}" required="required">
 							</td>
 						</tr>
 
@@ -89,38 +109,29 @@
 								<input type="text" name="subject" value="" required="required">
 							</td>
 						</tr>
-						
 						<tr>
-							<td class="input_info">기업명</td>
-							<td colspan="3">
-								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-									면접 본 기업 찾기
-								</button>
+							<td colspan="4" style="text-align: center;">
+								<input style="width: 30px;" type="radio" name="pass" value="합격"> <span style="color:blue;">합격</span>
+								<input style="width: 30px;" type="radio" name="pass" value="불합격"> <span style="color:red;">불합격</span>
+								<input style="width: 30px;" type="radio" name="pass" value="비공개"> <span style="color:gray;">비공개</span>
 							</td>
+							
 						</tr>
-
+						
 						<tr>
 							<td class="input_info">내용</td>
 							<td colspan="3">
-								<textarea id="content" name="content" rows="15" style="width : 800px;">
+								<textarea id="content" name="content" rows="15" style="width : 800px;" required="required">
 								</textarea>
 							</td>
 						</tr>
-
-						<tr>
-							<td class="input_info">첨부</td>
-							<td colspan="3">
-								<input type="file" name="upload">
-							</td>
-						</tr>
-
-				
 					</tbody>
 					<tfoot>
 						<tr>
 							<td colspan="4" style="text-align: center;">
-								<button type="submit">확인 </button>
-								<button type="button" onclick="">취소</button> 
+								<button class="btn btn-default" type="submit">확인 </button>
+								<button class="btn btn-default" type="reset">다시 입력</button>
+								<button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/community/review'">취소</button> 
 							</td>
 						</tr>
 					</tfoot>
@@ -129,6 +140,7 @@
 		</form>
 	</div>
 </div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -137,18 +149,43 @@
         <h4 class="modal-title" id="myModalLabel">기업찾기</h4>
       </div>
       <div class="modal-body">
-        <input type="text" id="searchCompany"><button onclick="searchCompany();">1</button>
+        <div style="margin-bottom: 20px;">
+	        <input type="text" id="searchCompany" height="35">
+	        	<button class="btn btn-xs btn-primary" onclick="searchCompany();" style="margin-left: 10px;">
+	        		찾기
+	        	</button>
+        </div>
+        	
         <div id="company-list"></div>
+        
+        <div style="margin-top: 20px">
+        	등록되어 있지 않는 기업은 직접 입력해주세요.
+        	<input type="text" name="directCompany">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">선택</button>
+        <button type="button" class="btn btn-primary" onclick="submitCompany();">선택</button>
       </div>
     </div>
   </div>
 </div>
 
+
 <script type="text/javascript">
+function submitCompany(){
+	var company = $("input[type=radio][name=companyName_radio]:checked").val();
+	
+	if(company!=null){
+		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(company);
+		location.href=url;
+	}else{
+		var directcompany = $("input[type=text][name=directCompany]").val();
+		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(directcompany);
+		location.href=url;
+	}
+}
+
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
@@ -163,7 +200,7 @@ nhn.husky.EZCreator.createInIFrame({
 		fOnAppLoad : function() {
 			//예제 코드
 			oEditors.getById["content"].exec("PASTE_HTML",
-					["꼭 다 기입하지 않으셔도 되지만 성심껏 기입해주세요!!!<br><br>Q1.기업명?<br>-<br><br>Q2.지원시기는?<br>-<br><br>Q3.어떤 준비를 했나요?<br>-<br><br>Q4.가장 기억의 남는 질문은?<br>-<br><br>Q5.합격했다면 그 비결은?<br>-<br><br>Q6.앞으로의 계획?<br>-<br><br>"]);
+					["아래의 질문에 대한 답변을 기입해주세요!!!<br><br>Q1.기업명?<br>-<br><br>Q2.지원시기는?<br>-<br><br>Q3.어떤 준비를 했나요?<br>-<br><br>Q4.가장 기억의 남는 질문은?<br>-<br><br>Q5.합격했다면 그 비결은?<br>-<br><br>Q6.앞으로의 계획?<br>-<br><br>Q7.마지막으로 하고싶은 말은?<br>-<br><br>"]);
 			setDefaultFont();
 		},
 		fCreator : "createSEditor2"
