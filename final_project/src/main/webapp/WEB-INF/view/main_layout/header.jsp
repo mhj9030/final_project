@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -33,7 +34,7 @@ function navloginCheck() {
                 <li><a href="<%=cp%>/talent/main">인재</a></li>
                 <li><a href="<%=cp%>/community/review">커뮤니티</a></li>
                 <li><a href="<%=cp%>/point/main">포인트</a></li>
-                <li><a href="<%=cp%>/help/main">고객센터</a></li>
+                <li><a href="<%=cp%>/help_layout/notice/list">고객센터</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty sessionScope.member }">

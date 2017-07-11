@@ -96,4 +96,14 @@
 			)tb where <![CDATA[rownum <= #{end}
 		)where rnum >= #{start}]]>
 	</select>
+	
+	<insert id="savePoint" parameterType="map">
+		insert into point(poNum, classify, history, point, mid) 
+		values(point_seq.nextval, #{classify}, #{history}, #{point}, #{mId})
+	</insert>
+	
+	<insert id="usePoint" parameterType="map">
+		insert into point(poNum, classify, history, point, mid) 
+		values(point_seq.nextval, #{classify}, #{history}, #{point}, #{mId})
+	</insert>
 </mapper>

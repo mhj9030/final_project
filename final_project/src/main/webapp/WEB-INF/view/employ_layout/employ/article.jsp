@@ -27,12 +27,32 @@
   color:gray;
   margin-right:10px;
   }
+
   </style>
+  
+<script type="text/javascript">
+$(function() {
+	/* ${member.userId} */
+	<%-- $.ajax({
+		type:"get"
+		,data:"admin@a.com"
+		,url:"<%=cp%>/employ/detailapplyForm"
+		,success:function(data) {
+			//resume List뿌려주면서 바뀌는부분
+			
+			//회원 이력서 정보 뿌려주는 부분
+		}
+		,error:
+		
+	});  --%>
+});
+
+</script>
 <div id="title"class="text-center">
-<h1>유저해빗 Unity SDK 개발자 구인</h1>
+<h1>${employ.ceSubject}</h1>
 </div>
 <div class="text-right">
-<h5>날짜 2017-06-27 조회수:58 </h5>
+<h5>최종수정일 ${employ.modyTime} 조회수:58 </h5>
 </div>
 <hr>
 <div style="text-align: center;">
@@ -83,7 +103,9 @@
 	<hr>
 	<pre>
 	채용 상세
-
+	
+	고용인원
+	${employ.cePeople }
 	■ 자격 요건
 	- 3개월 이상 근무 가능하신 분
 	- 인센티브 제도를 이해하는 분
@@ -93,7 +115,7 @@
 
 	<div class="col-md-4">
 		<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="528">
-        <li class="active"><a href="#section1">지원하기</a></li>
+        <li class="active"><a data-toggle='modal' data-target='.bs-example-modal-lg'>지원하기</a></li>
         <li><a href="#section2">연락하기</a></li>
         <li><a href="#section3">기업상세정보</a></li>
         
@@ -101,11 +123,11 @@
       	<h3>마케팅 & 세일즈 인턴/신입</h3>
       	<hr>
       	<table style="margin:0 auto;">
-      	<tr><th>채용 분야</th><td>마케팅</td></tr>
-      	<tr><th>고용 형태</th><td>인턴, 신입</td></tr>
-      	<tr><th>연봉</th><td>1,000 - 2,400 만원</td></tr>
-      	<tr><th>마감일</th><td>2017-07-29</td></tr>
-      	<tr><th>수정일</th><td>2017-07-06</td></tr>
+      	<tr><th>채용 분야</th><td>${employ. subname}</td></tr>
+      	<tr><th>고용 형태</th><td>${employ.ceType}</td></tr>
+      	<tr><th>연봉</th><td>${employ.cePay } 만원</td></tr>
+      	<tr><th>시작일</th><td>${employ.ceStart}</td></tr>
+      	<tr><th>마감일</th><td>${employ.ceEnd}</td></tr>
       	</table>
       	</div>
       	
@@ -116,13 +138,13 @@
 		<div class="col-md-8">
 	<pre>
 	우대사항
-	- 영어
+	- ${employ.cePrefere}
 	
 	자격증
 	-정보처리기사
 	
 	기술(비고)
-	-세일즈 경험자
+	-${employ.ceETC }
 	</pre>
 	<hr>
 	</div>
@@ -140,7 +162,68 @@
 </div>
 
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		     			<div class="modal-header" style="background:#5bc0de ;color:white;">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title"> 상세 온라인 입사지원</h4>
+					      </div>
+					      <div class="modal-body" style="text-align: center; height:700px;">
+					        유커넥 - 개발팀 하드웨어·소프트웨어 정규직 채용<br>
+							신입/경력 (년수무관) / 대학교졸업(4년) 이상 / 서울 / 3,400~3,600만원 / ~09.11 (월) 까지 - <a>채용정보 상세보기</a>
+					        <hr>
+					        <div>
+					        	제출할 이력서를 선택해주세요
+					      	<select id="resume">
+					      	
+					      	</select>
+					        <br>
+					        	<table class="table" style="margin:0 auto;">
+							      	<tr><th>지원 분야</th><td id="subname">${employ. subname}</td></tr>
+							      	<tr><th>고용 형태</th><td id="ceType">${employ.ceType}</td></tr>
+							      	<tr><th>희망 연봉</th><td id="cePay">${employ.cePay } 만원</td></tr>
+							      	<tr><th>희망 근무지</th><td id="caddress">${employ.ceStart}</td></tr>
+						      	</table> 
+						      	<br>
+								
+							</div>
+							
+									
+						      		
+						      		
+						      		<h3 style="text-align: left;">연락처 확인</h3>
+						      		<table class="table" style="margin:0 auto;">
+								      	<tr><th>이메일</th><td id="email">${employ.ceType}</td></tr>
+								      	<tr><th>휴대폰</th><td id="phone">${employ.ceType}</td></tr>
+								      	<tr><th>주소</th><td id="address">${employ.ceType}</td></tr>
+						      		</table>
+						      		
+						      		<h3 style="text-align: left;">파일첨부</h3>
+									<table class="table" style="margin:0 auto;">
+								      	<tr><th style="line-height:34px;">파일명</th>
+								      	<td id="subname"><input class="form-control" type="file"></td></tr>
+						      		</table>
+						      		
+						      		
+									<div style="float:right;">
+										<button type="button" class="btn btn-info" style="margin-right:1px;" id="article">이력서 수정하기</button>
+							        	<button type="button" class="btn btn-info" style="margin-right:1px;" id="apply">제출</button>
+							        </div>
+					      </div>
+					      <div class="modal-footer" style="text-align: center" id="apply_result">
+					      	
+					      	
+					      	
+					      	
+					      	
 
+					        <button type="button" class="btn btn-default" data-dismiss="modal">채용정보 계속보기</button>
+					        
+					    </div>
+		    </div>
+		  </div>
+		</div>
 
 
 
