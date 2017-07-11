@@ -47,7 +47,7 @@
 			</div>
 			<div class="col-xs-10" style="text-align: left">
 				<div class="search-content" style="margin-top: 7px;">
-					<span id="employ-subject"></span>
+					<span id="employ-subject">원하는 채용 정보를 선택하세요.</span>
 				</div>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 	<div class="list">
 		<div class="list-header" style="margin-top: 30px;">
 			<div class="subject" align="left">
-				<h4>전체 지원자(10)</h4>
+				<h4>전체 지원자(${dataCount})</h4>
 			</div>
 			<div class="chk_info" align="right">
 				<input type="radio" name="order" value="recent" checked="checked"> 최신순

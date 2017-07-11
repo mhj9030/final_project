@@ -7,5 +7,5 @@ public interface SearchService {
 	public List<Company> listCompany(Map<String, Object> map) throws Exception;
 	public int dataCount(Map<String, Object> map) throws Exception;
 	public Company readCompanyNum(int cNum) throws Exception;
-	public List<Company> listCompanyName() throws Exception;
+	public List<Company> listCompanyName(Map<String, Object> map) throws Exception;
 }
