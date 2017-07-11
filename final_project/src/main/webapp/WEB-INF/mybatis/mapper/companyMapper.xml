@@ -160,7 +160,8 @@
 	<select id="listApplicant" 
 		parameterType="map" resultType="com.final_project.company.Applicant">
 		
-		select m.mId, a.rNum, ceNum, appDate, m.mName, m.mGender, p.proPhoto, p.proIntro from applicant a
+		select m.mId, a.rNum, ceNum, appDate, m.mName, m.mGender, 
+			p.proPhoto, p.proIntro from applicant a
 	    	join resume r on a.rnum=r.rnum
 	    	join member m on r.mid=m.mid
 	    	left outer join profile p on p.mid=m.mid
