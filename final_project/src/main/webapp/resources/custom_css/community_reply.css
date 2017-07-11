@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+.community_reply_table{
+	box-sizing: border-box;
+}
+
+
+.community_reply_table>tbody>tr>td, 
+.community_reply_table>tbody>tr>th, 
+.community_reply_table>tfoot>tr>td, 
+.community_reply_table>tfoot>tr>th, 
+.community_reply_table>thead>tr>td, 
+.community_reply_table>thead>tr>th{
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border: 0px;
+}
+
+.community_reply_table .community_reply_info{
+	text-align: right;
+    padding-right: 20px;
+    margin-bottom: 15px;
+}
+
+.community_reply_top_tr{
+	border-top: 2px solid #ccc;
+}
+
+.community_reply_table .community_reply_name{
+	padding-left: 20px; 
+}
+
+.community_reply_table .community_reply_created{
+	text-align: right;
+	padding-right: 20px;
+    
+}
+
+.community_reply_table .community_reply_content{
+	padding-left: 20px; 
+}
+
+.community_reply_table .replyAnswer{
+	background: rgba(206, 151, 151, 0.11);
+	display: none;
+}
+
+.replyAnswer textarea{
+	padding: 0px;
+}
+
+.community_listReply .answerbtn{
+	float: left;
+	height: 102px;
+}

@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+
+table{
+	border-collapse: inherit;
+	border-top: 1px solid #cccccc;
+}
+
+th{
+	text-align: center;
+}
+
+tr, td, th{
+	border-bottom: 1px solid #cccccc;
+}
+
+div{
+	//border: 1px solid #cccccc;
+}
+
+.form-control{
+	height: 35px;
+	width: 150px;
+	text-align: center;
+}
+
+.page_body{
+	clear:both;
+    margin: 0px auto;
+    min-height: 500px;
+    width: 900px;
+}
+
+.page_head{
+	padding-top: 20px;
+}
+
+.point_intro{
+	margin: 0px auto 15px;
+	padding-top: 40px;
+	padding-left: 120px;
+	width: 900px;
+	height: 400px;
+	font-size: 14px;
+}
+
+.point_intro div{
+	float: left;
+}
+
+.point_bbs_list table{
+	margin: 0px auto 15px;
+	width: 80%;
+}
+
+.mypoint_list{
+	margin: 0px auto 15px;
+	width: 90%;
+	height: 120px;
+}
+
+.search_list table{
+	margin: 0px auto 15px;
+	border-collapse: inherit;
+	width: 90%;
+	text-align: center;
+}
+
+.search_list table tr{
+	margin: 0px auto 15px;
+	height: 50px;
+}
+
+.point_list{
+	margin: 0px auto 15px;
+	//border: 1px solid #cccccc;
+	width: 90%;
+}
+
+.point_list tr{
+	height: 100px;
+}
+
+#resume_list{
+	margin: 0px auto 15px;
+	padding-top: 50px;
+	width: 100%;
+	height: 700px;
+}
+
+#talent_list{
+	margin: 0px auto 15px;
+	padding-top: 50px;
+	width: 100%;
+	height: 700px;
+}
+
+.marketDiv{
+	float:left;
+	padding-left: 20px;
+	width: 448px;
+	height: 220px;
+}
+
+.marketDiv div{
+	float:left;
+	padding-top: 20px;
+	width: 200px;
+	height: 180px;
+	background: #f4feff;
+	box-shadow: 2px 2px 2px;
+	line-height: 180%;
+}
+
+.paging{
+	margin: 0px auto 15px;
+	text-align: center;
+}
+
+span button{
+	font-size: 5px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	background: #eef1f2;
+	height: 30px;
+}
+
+#resume_div table{
+	margin: 0px auto 15px;
+	width: 80%;
+	box-shadow: 2px 2px 2px;
+	text-align: center;
+}
+
+#resume_div table caption{
+	font-weight: bold;
+}

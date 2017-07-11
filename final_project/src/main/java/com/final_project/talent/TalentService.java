@@ -10,10 +10,11 @@ public interface TalentService {
 	public List<Talent> subType(Map<String, Object> map);
 	// 일반 리스트
 	public int dataCount();
-	public List<Talent> listBoard();
 	// 검색용
 	public int dataCount(Map<String, Object> map);
 	public List<Talent> listBoard(Map<String, Object> map);
+	//
+	public List<Talent> interestList(List<Talent> list);
 	// 게시물 보기
 	public Talent readList(Map<String, Object> map);
 }

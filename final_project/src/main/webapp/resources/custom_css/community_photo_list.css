@@ -2,13 +2,12 @@
 
 .photo_list_wrap{
 	width: 1000px;
-	min-height: 550px;
+	height: 1050px;
 	margin: 30px auto 0px;
 	box-sizing: border-box;
 }
 
 .photo_list_wrap h3{
-	font-size: 20px;
 	font-weight: bold;
 }
 
@@ -67,6 +66,9 @@
 	height: 35px;
 	border-bottom : 1px solid #ccc;
 	text-align: center;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .photo_list .photo_list_create{
 	margin : 0px auto;
@@ -75,10 +77,34 @@
 	height: 25px;
 }
 
+.photo_list .photo_list_create>i{
+	color: red;
+}
+
 .photo_list_paging{
 	margin: 0px auto;
     clear: both;
     width: 810px;
     height: 40px;
     text-align: center;
+}
+
+.photo_list_wrap .photo_search_wrap{
+	margin-top : 20px;
+	height: 50px;
+}
+
+
+.photo_article_cover{
+	text-align: center;
+	width : 73%;
+}
+
+.photo_article_cover>img{
+	margin : 0px;
+	max-width: 780px;
+}
+
+.photo_article_content{
+	height: 200px;
 }

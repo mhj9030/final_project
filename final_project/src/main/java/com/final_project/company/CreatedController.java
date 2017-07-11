@@ -1,6 +1,8 @@
 package com.final_project.company;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.final_project.member.SessionInfo;
 
@@ -23,7 +27,7 @@ public class CreatedController {
 		model.addAttribute("created", "on");
 		model.addAttribute("mode", "created");
 		
-		return ".company_layout.created.container";
+		return ".company_layout.created.created";
 	}
 	
 	@RequestMapping(value="/company/created", method=RequestMethod.POST)
@@ -43,7 +47,7 @@ public class CreatedController {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		Company dto=service.readCompanyId(info.getUserId());
+		Company dto=service.readCompanySerial(info.getcSerial());
 		
 		if(dto==null){
 			return "redirect:/company/search";
@@ -57,7 +61,7 @@ public class CreatedController {
 		model.addAttribute("mode", "update");
 		model.addAttribute("created", "on");
 		
-		return ".company_layout.created.container";
+		return ".company_layout.created.created";
 	}
 	
 	@RequestMapping(value="/company/update", method=RequestMethod.POST)
@@ -69,6 +73,25 @@ public class CreatedController {
 		service.updateCompany(dto, pathname);
 		
 		return "redirect:/company/search";
+	}
+	
+	@RequestMapping(value="/company/serialCheck")
+	@ResponseBody
+	public Map<String, Object> serialCheck(
+			@RequestParam String cSerial
+			) throws Exception{
+		
+		String passed="false";
+		Company dto=service.readCompanySerial(cSerial);
+		
+		if(dto==null)
+			passed="true";
+		
+		Map<String, Object> model = new HashMap<>(); 
+		
+		model.put("passed", passed);
+		
+		return model;
 	}
 }
 

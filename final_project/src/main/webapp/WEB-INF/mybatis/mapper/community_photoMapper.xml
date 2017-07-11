@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="community_photo">
+	<insert id="insertPhoto" parameterType="com.final_project.community.Photo">
+		INSERT INTO photo_bbs(ptnum, subject, content, mid, saveFilename, originalFilename) 
+		VALUES (PHOTO_BBS_SEQ.NEXTVAL, #{subject}, #{content}, #{mId},  
+				#{saveFilename, jdbcType=VARCHAR}, #{originalFilename, jdbcType=VARCHAR})
+	</insert>
+	
+	<sql id="where-list">
+	  <if test="searchKey=='mName'">
+	      mName=#{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='content'">
+	      DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+          OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+	  </if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM photo_bbs p JOIN member m ON p.mId = m.mId 
+	    <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     	<![CDATA[
+	     		AND state = 0
+	     	]]>
+	    </where>  
+	</select>
+	
+	<select id="listPhoto" parameterType="map" resultType="com.final_project.community.Photo">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT p.ptnum, m.mId, mName, subject, TO_CHAR(p.created, 'YYYY-MM-DD') created,  
+					   hitCount, saveFilename, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount  
+				FROM photo_bbs p JOIN member m ON p.mId=m.mId 
+				LEFT OUTER JOIN
+				(
+					SELECT ptnum, COUNT(*) replyCount FROM photo_re 
+					WHERE answer=0 
+					GROUP BY ptnum
+				) r ON p.ptnum=r.ptnum 
+				LEFT OUTER JOIN
+				(
+					SELECT ptnum, COUNT(*) likeCount FROM photo_like 
+					GROUP BY ptnum
+				) l ON p.ptnum=l.ptnum
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+	     				AND state = 0
+	     			]]>
+	    		</where>
+	    		ORDER BY ptnum DESC
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
+	</select>
+	
+	<update id="updatehitCount" parameterType="Integer">
+		UPDATE photo_bbs SET hitCount = hitCount + 1 WHERE ptnum = #{ptnum}
+	</update>
+	
+	<select id="readPhoto" parameterType="Integer" resultType="com.final_project.community.Photo">
+		SELECT p.ptnum, subject, content, created, hitCount, p.mId, mName, saveFilename, originalFilename 
+		FROM photo_bbs p JOIN member m ON p.mId=m.mId 
+		WHERE ptnum = #{ptnum}	
+	</select>
+	
+	<select id="preReadPhoto" parameterType="map" resultType="com.final_project.community.Photo">
+		SELECT tb.* FROM(
+			SELECT ptnum, subject 
+			FROM photo_bbs p JOIN member m ON p.mId=m.mId 
+			<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+		                 AND (ptnum > #{ptnum}) AND state = 0
+		            ]]>
+	    	</where>
+	    	ORDER BY ptnum ASC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadPhoto" parameterType="map" resultType="com.final_project.community.Photo">
+		SELECT tb.* FROM(
+			SELECT ptnum, subject 
+			FROM photo_bbs p JOIN member m ON p.mId=m.mId 
+			<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+		                 AND (ptnum < #{ptnum}) AND state = 0
+		            ]]>
+	    	</where>
+	    	ORDER BY ptnum DESC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<update id="deletePhoto" parameterType="Integer">
+		UPDATE Photo_bbs SET state = 1 WHERE ptnum=#{ptnum}
+	</update>
+	
+	<update id="updatePhoto" parameterType="com.final_project.community.Photo">
+		UPDATE photo_bbs SET subject=#{subject}, content=#{content}, 
+							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
+							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
+							WHERE ptnum = #{ptnum}
+	</update>
+	
+	<insert id="insertLikePhoto" parameterType="com.final_project.community.Photo">
+	INSERT INTO photo_like(ptnum, mId) VALUES (#{ptnum}, #{mId})
+	</insert>
+
+	<select id="countLikePhoto" resultType="Integer" parameterType="Integer">
+	   SELECT  NVL(COUNT(*), 0) countLikePhoto
+	        FROM photo_like WHERE ptnum=#{ptnum}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.final_project.community.PhotoReply">
+		INSERT INTO photo_re(replyNum, ptnum, mId, content, answer) 
+		VALUES (PHOTO_RE_SEQ.NEXTVAL, #{ptnum}, #{mId}, #{content}, #{answer})
+	</insert>
+	
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) replyCount FROM photo_re 
+		WHERE ptnum = #{ptnum} AND answer = 0 
+	</select>
+	
+	<select id="listReply" parameterType="map" resultType="com.final_project.community.PhotoReply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT tbreply.replyNum, ptnum, mId, mName, content, created, 
+						tbreply.answer, NVL(answerCount, 0) answerCount 
+				FROM
+				(
+					(
+						SELECT replyNum, r.ptnum, r.mId, mName, r.content, r.created, answer  
+						FROM photo_re r JOIN member m ON r.mId=m.mId 
+						WHERE ptnum = #{ptnum} AND answer = 0
+					) tbreply
+					LEFT OUTER JOIN
+					(
+						SELECT answer, COUNT(*) answerCount 
+						FROM photo_re 
+						GROUP BY answer 
+					) tbanswer ON tbreply.replyNum=tbanswer.answer
+				) 
+				ORDER BY replyNum DESC
+	<![CDATA[
+			)tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>			
+	</select>
+	
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM photo_re WHERE
+	    <if test="mode == 'ptnum' ">
+			 ptnum=#{ptnum}
+		</if>
+	    <if test="mode == 'reply' ">
+			 replyNum IN 
+               (SELECT replyNum FROM photo_re START WITH  replyNum = #{replyNum}
+	            CONNECT BY PRIOR replyNum = answer)
+		</if>
+	    <if test="mode == 'answer' ">
+			 replyNum=#{replyNum}
+		</if>
+	</delete>
+
+    <!-- 댓글별 답글 리스트 -->
+	<select id="listReplyAnswer" resultType="com.final_project.community.PhotoReply" parameterType="Integer">
+     SELECT replyNum, ptnum, r.mId, mName, content, created, answer
+	          FROM photo_re r 
+	          JOIN member m ON r.mId=m.mId
+              WHERE answer=#{answer}
+              ORDER BY replyNum DESC
+	</select>
+	
+    <!-- 댓글별 답글 개수 -->
+	<select id="replyCountAnswer" resultType="Integer" parameterType="Integer">
+	   SELECT NVL(COUNT(*), 0)
+	        FROM photo_re WHERE answer=#{answer}
+	</select>
+	
+</mapper>

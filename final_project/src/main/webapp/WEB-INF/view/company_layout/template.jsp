@@ -38,6 +38,8 @@
 <link href="<%=cp%>/resources/custom_css/company_created.css" rel="stylesheet">
 <!-- company_employ.css -->
 <link href="<%=cp%>/resources/custom_css/company_employ.css" rel="stylesheet">
+<!-- company_applicant.css -->
+<link href="<%=cp%>/resources/custom_css/company_applicant.css" rel="stylesheet">
 
 
 </head>
