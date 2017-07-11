@@ -39,12 +39,11 @@ public class ApplicantController {
 	}
 	
 	@RequestMapping("/company/applicant/list")
-	@ResponseBody
-	public String list(
+	public Map<String, Object> list(
 			@RequestParam(value="ceNum", defaultValue="") int ceNum,
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(value="order", defaultValue="recent") String order,
-			Model model, HttpServletRequest req) throws Exception {
+			HttpServletRequest req) throws Exception {
 		
 		String cp = req.getContextPath();
 		int rows = 10; // 한 화면에 보여주는 게시물 수
@@ -71,18 +70,16 @@ public class ApplicantController {
         
         String paging=myUtil.paging(current_page, total_page, listUrl);
         
-        model.addAttribute("list", list);
-        model.addAttribute("page", current_page);
-        model.addAttribute("dataCount", dataCount);
-        model.addAttribute("total_page", total_page);
-        model.addAttribute("paging", paging);
+        Map<String, Object> model = new HashMap<>();
+        
+        model.put("list", list);
+        model.put("page", current_page);
+        model.put("dataCount", dataCount);
+        model.put("total_page", total_page);
+        model.put("paging", paging);
 		
-		model.addAttribute("applicant", "on");
-		
-		return null;
+		return model;
 	}
-	
-	
 }
 
 

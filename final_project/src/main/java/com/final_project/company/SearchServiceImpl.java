@@ -53,11 +53,11 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<Company> listCompanyName() throws Exception {
+	public List<Company> listCompanyName(Map<String, Object> map) throws Exception {
 		List<Company> list=null;
 		
 		try {
-			list=dao.getListData("company.listCompanyName");
+			list=dao.getListData("company.listCompanyName", map);
 		} catch (Exception e) {
 			throw e;
 		}
