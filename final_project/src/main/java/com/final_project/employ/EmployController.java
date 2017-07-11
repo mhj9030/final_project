@@ -151,6 +151,19 @@ public class EmployController {
 		return result;
 	}
 	
+	@RequestMapping("/employ/detailapplyForm")
+	@ResponseBody
+	public  Map<String, Object> detailapplyForm(int ceNum, HttpSession session) {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		List<Resume> resumeList = service.read_resume("zxc@gmail.com");
+		
+		Map<String, Object> model = new HashMap<>();
+		Employ employ = service.read_com_employ(ceNum);
+		model.put("employ",employ);
+		model.put("resumeList", resumeList);
+		return	model;
+	}
+	
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
 	public void exception(SQLIntegrityConstraintViolationException e) {
 		System.out.println("무결성오류");
