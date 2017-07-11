@@ -78,15 +78,15 @@
 		  	where cNum=#{cNum}
 	</select>
 	
-	<!-- 기업 정보 가져오기(유저 아이디) -->
-	<select id="readCompanyId" parameterType="String" resultType="com.final_project.company.Company">
+	<!-- 기업 정보 가져오기(사업자 번호) -->
+	<select id="readCompanySerial" parameterType="String" resultType="com.final_project.company.Company">
 		select c.cSerial, mId, cNum, cCeo, cName, cPeople, to_char(cCreated, 'YYYY-MM-DD') cCreated, cSize, cTel, cProfit, 
 			cIntro, cDescription, cAddress, c.subCode, sb.subName, mb.maName, ci.cLogoImage, ci.cCoverImage, ci.cLogoOriginalFilename, ci.cCoverOriginalFilename
 			from company c
 		  	join sub_bu_class sb on c.subCode=sb.subCode
 		  	join main_bu_class mb on sb.maCode=mb.maCode
 		  	join com_image ci on c.cSerial=ci.cSerial
-		  	where mId=#{mId}
+		  	where c.cSerial=#{cSerial}
 	</select>
 	
 	<!-- 기업 정보 수정 -->
@@ -108,7 +108,7 @@
 	</update>
 	
 	<!-- 채용 등록 -->
-	<insert id="insertComImploy" parameterType="com.final_project.company.Employ">
+	<insert id="insertComEmploy" parameterType="com.final_project.company.Employ">
 		insert into com_employ(ceNum, ceSubject, cePeople, ceType, ceStart, ceEnd, 
 			cePay, cePlace, cePrefere, ceEtc, resumeForm, resumeFile, resumeOriginalName, 
 			cSerial, atCode, subCode)
@@ -118,6 +118,79 @@
   				#{resumeOriginalName, jdbcType=VARCHAR}, #{cSerial}, #{atCode}, 
   				#{subCode})
 	</insert>
+	
+	<!-- 채용 수 -->
+	<select id="employCount" parameterType="map" resultType="Integer">
+		select nvl(count(*), 0) from com_employ
+  			where cSerial=#{cSerial}
+  			<if test="searchValue!=null and searchValue!='' ">
+	     		and instr(ceSubject, #{searchValue})&gt;=1
+	     	</if>
+	</select>
+	
+	<!-- 채용 리스트 -->
+	<select id="listComEmploy" parameterType="map" resultType="com.final_project.company.Employ">
+		select * from(
+			select rownum rnum, tb.* from(
+		    	select ceNum, ceSubject, to_char(ceStart, 'YYYY-MM-DD') ceStart, to_char(ceEnd, 'YYYY-MM-DD') ceEnd
+		        	from com_employ
+		        	where cSerial=#{cSerial}
+		        	<if test="searchValue!=null and searchValue!='' ">
+	     				and instr(ceSubject, #{searchValue})&gt;=1
+	     			</if>
+		<![CDATA[
+			)tb where rownum<=#{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 채용 정보 가져오기 -->
+	<select id="readEmploy" parameterType="Integer" 
+		resultType="com.final_project.company.Employ">
+		select ceNum, ceSubject, cePeople, ceType, 
+			to_char(ceStart, 'YYYY-MM-DD') ceStart, 
+			to_char(ceEnd, 'YYYY-MM-DD') ceEnd, cePay, cePrefere, 
+			ceEtc, resumeForm, cSerial, atCode, subCode, cePlace, 
+			resumeFile, resumeOriginalName
+			from com_employ
+			where ceNum=#{ceNum}
+	</select>
+	
+	<!-- 지원자 현황 리스트 -->
+	<select id="listApplicant" 
+		parameterType="map" resultType="com.final_project.company.Applicant">
+		select * from(
+			select rownum rrnum, tb.* from(
+		    	select m.mId, a.rNum, ceNum, appDate, m.mName, m.mGender, p.proPhoto, p.proIntro from applicant a
+			    	join resume r on a.rnum=r.rnum
+			    	join member m on r.mid=m.mid
+			    	left outer join profile p on p.mid=m.mid
+			    	where ceNum=#{ceNum}
+		<![CDATA[
+			)tb where rownum<=#{end}
+		)where rrnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 지원자 수 -->
+	<select id="applicantCount" parameterType="Integer" resultType="Integer">
+		select nvl(count(*), 0) from applicant
+  			where ceNum=#{ceNum}
+	</select>
+	
+	<!-- 지원자 현황 : 채용 리스트 -->
+	<select id="applicantListEmploy" parameterType="String" resultType="com.final_project.company.Employ">
+		select ceNum, ceSubject from com_employ
+ 			where cSerial=#{cSerial}
+	</select> 
+	
+	<!-- 기업명 리스트 -->
+	<select id="listCompanyName" parameterType="map" resultType="com.final_project.company.Company">
+		select cName from company
+		<if test="searchCompany!=null and searchCompany!='' ">
+			where instr(cName, #{searchCompany})&gt;=1
+		</if>
+	</select>
 </mapper>
 
 

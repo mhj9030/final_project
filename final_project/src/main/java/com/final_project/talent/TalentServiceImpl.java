@@ -60,21 +60,23 @@ public class TalentServiceImpl implements TalentService{
 		
 		try {
 			list = dao.getListData("talent.searchList", map);
-			
-			for(Talent t:list){
-				Map<String, Object> map2 = new HashMap<>();
-				map2.put("mId", t.getmId());
-				System.out.println(map2.get("mId"));
-				List<Talent> subType = null;
-				subType = dao.getListData("talent.searchSub", map2);
-				String s = "";
-				for(Talent ss:subType){
-					if(s != ""){
-						s += ", ";
-					}
-					s += ss.getSubName();
-				}
-				t.setSubTypes(s);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<Talent> interestList(List<Talent> list) {
+		System.out.println("interestList");
+		try {
+			for(Talent dto:list){
+				Map<String, Object> map = new HashMap<>();
+				map.put("mId", dto.getmId());
+				map.put("rNum", dto.getrNum());
+				Talent jobs = dao.getReadData("talent.searchSub", map);
+				dto.setSubTypes(jobs.getSubTypes());
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -98,7 +100,7 @@ public class TalentServiceImpl implements TalentService{
 
 	@Override
 	public Talent readList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Talent dto = null;
+		return dto;
 	}
 }

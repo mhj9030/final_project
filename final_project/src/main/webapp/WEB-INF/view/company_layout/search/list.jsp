@@ -304,7 +304,7 @@
 					</div>
 					<div class="content-employ" align="right">
 							<c:if test="${dto.employ_cnt>0}">
-								<a href="#">채용진행 : ${dto.employ_cnt}</a>
+								<a href="<%=cp%>/employ/main">채용진행 : ${dto.employ_cnt}</a>
 							</c:if>
 						</div>
 					<div class="content-intro"><h5>${dto.cDescription}</h5></div>

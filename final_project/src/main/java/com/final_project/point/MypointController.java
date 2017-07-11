@@ -40,7 +40,6 @@ public class MypointController {
 		map.put("startDate", startDate.replace("-", ""));
 		map.put("endDate", endDate.replace("-", ""));
 		map.put("pointType", pointType);
-		System.out.println(map.get("pointType"));
 		
 		int total_page = 0;
 		int rows = 10;
