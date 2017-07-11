@@ -12,6 +12,6 @@ public class ApplicantController {
 		
 		model.addAttribute("applicant", "on");
 		
-		return ".company_layout.applicant.container";
+		return ".company_layout.applicant.list";
 	}
 }
