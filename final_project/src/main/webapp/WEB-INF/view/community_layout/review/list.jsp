@@ -80,7 +80,7 @@
 			</form>
 		</div>
 		<div class = "footer-bar-submit">
-			<button type="button" class="btn btn-default" onclick="#">
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/review/created'">
 				 글쓰기
 			</button>
 		</div>
