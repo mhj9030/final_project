@@ -51,4 +51,17 @@ public class SearchServiceImpl implements SearchService{
 		
 		return dto;
 	}
+
+	@Override
+	public List<Company> listCompanyName() throws Exception {
+		List<Company> list=null;
+		
+		try {
+			list=dao.getListData("company.listCompanyName");
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return list;
+	}
 }

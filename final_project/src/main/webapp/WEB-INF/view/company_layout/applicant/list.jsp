@@ -6,6 +6,24 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script>
+	function searchList(ceNum, ceSubject){
+		$("#employ-subject").html(ceSubject);
+		
+		var url="<%=cp%>/company/applicant/list";
+		var query="ceNum="+ceNum;
+		
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:query,
+			dataType:"JSON",
+			success:function(data){
+				
+			}
+		});
+	}
+</script>
 <div class="list-body" align="center" style="height: auto;">
 	<div class="page-header">
 		<h1 align="left">
@@ -21,19 +39,23 @@
 				    	채용 선택 <span class="caret"></span>
 				  	</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">2017년 SI사업부 시스템 유지보수 및 기술지원 신입(인턴) 채용</a></li>
-						<li><a href="#">2017년 SW설계 및 구매 신입/경력사원 모집</a></li>
-						<li><a href="#">2018년 쿠팡맨 모집</a></li>
+						<c:forEach var="dto" items="${listEmploy}">
+							<li><a href="#" onclick="searchList('${dto.ceNum}', '${dto.ceSubject}'); return false">${dto.ceSubject}</a></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
 			<div class="col-xs-10" style="text-align: left">
 				<div class="search-content" style="margin-top: 7px;">
-					2017년 SI사업부 시스템 유지보수 및 기술지원 신입(인턴) 채용
+					<span id="employ-subject"></span>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<form name="searchForm" action="" method="post">
+		<input type="hidden" name="ceNum">
+	</form>
 	
 	<div class="list">
 		<div class="list-header" style="margin-top: 30px;">
@@ -59,7 +81,7 @@
 						<a href="#">프로필 보기</a>
 						<a href="#">&nbsp;&nbsp;이력서 보기</a>
 					</div>
-					<div class="content-intro"><h5>자기소개가 없습니다.</h5></div>
+					<div class="content-intro">자기소개가 없습니다.</div>
 					<div class="content-email"><h5>phj375@naver.com</h5></div>
 				</div>
 			</div>
