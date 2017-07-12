@@ -26,8 +26,6 @@ public class MemberController {
 			throws Exception {
 		
 		String cp = req.getContextPath();
-		
-		System.out.println(state);
 
 		// 로그인 정보 가져오기
 		Member dto = service.readMember(mid);

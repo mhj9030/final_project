@@ -23,9 +23,23 @@
 
 .form-horizontal {
 	margin: 0 auto;
-	margin-top: 200px;
-	max-width: 400px;
 	padding: 15px;
+}
+
+.form-horizontal.pwd {
+	margin: 0 auto;
+	padding: 15px;
+	width: 500px;
+	margin-top: 200px;
+	min-height: 540px;
+	
+}
+
+.form-horizontal-ss {
+	margin: 0 auto;
+	padding: 15px;
+	height: auto;
+	min-height: 200px;
 }
 
 .form-horizontal .form-group img {
@@ -39,7 +53,6 @@
 }
 
 .form-horizontal .form-group p {
-
 	text-align: center;
 }
 
@@ -277,8 +290,8 @@ a {
 	color: #fff;
 }
 
-.setting{
-	margin-top : 30px;
+.setting {
+	margin-top: 30px;
 	text-align: center;
 }
 
@@ -288,12 +301,25 @@ a:HOVER {
 	outline: 0 !important;
 }
 
-.panel-info .panel-heading, .panel-info .panel-footer, .panel-info.panel-colorful-cus{
+.panel-info .panel-heading, .panel-info .panel-footer, .panel-info.panel-colorful-cus
+	{
 	background: rgba(157, 84, 255, 0.96);
-	color:#fff;
+	color: #fff;
 	border-color: transparent;
 }
 
 .bo {
-	border-top : 1px solid #aaa !important;
+	border-top: 1px solid #aaa !important;
+}
+
+.date.inline {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.form-control.inline {
+	display: inline-block;
+	width: auto;
+	margin-right: 10px;
+	vertical-align: top;
 }
