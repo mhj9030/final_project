@@ -132,12 +132,13 @@
 	<select id="listComEmploy" parameterType="map" resultType="com.final_project.company.Employ">
 		select * from(
 			select rownum rnum, tb.* from(
-		    	select ceNum, ceSubject, to_char(ceStart, 'YYYY-MM-DD') ceStart, to_char(ceEnd, 'YYYY-MM-DD') ceEnd
+		    	select ceNum, ceSubject
 		        	from com_employ
 		        	where cSerial=#{cSerial}
 		        	<if test="searchValue!=null and searchValue!='' ">
 	     				and instr(ceSubject, #{searchValue})&gt;=1
 	     			</if>
+	     			order by ceNum desc
 		<![CDATA[
 			)tb where rownum<=#{end}
 		)where rnum>=#{start}
@@ -201,6 +202,7 @@
 	<select id="applicantListEmploy" parameterType="String" resultType="com.final_project.company.Employ">
 		select ceNum, ceSubject from com_employ
  			where cSerial=#{cSerial}
+ 			order by ceNum desc
 	</select> 
 	
 	<!-- 기업명 리스트 -->
@@ -210,6 +212,12 @@
 		<if test="searchCompany!=null and searchCompany!='' ">
 			and instr(cName, #{searchCompany})&gt;=1
 		</if>
+	</select>
+	
+	<!--  -->
+	<select id="searchCompanyName" parameterType="Integer" resultType="String">
+		select cName from company
+			where cNum=#{cNum}
 	</select>
 </mapper>
 
