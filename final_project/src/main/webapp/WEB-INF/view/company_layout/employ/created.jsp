@@ -33,6 +33,11 @@
 			$("select[id=subCode"+maCode+"]").show();
 			$("select[id=subCode"+maCode+"]").removeAttr("disabled");
 		});
+		
+		if("${mode}"=="update"){
+			$("#ceType[value='${dto.ceType}']").attr("selected", "selected");
+			$("#atCode[value='${dto.atCode}']").attr("selected", "selected");
+		}
 	});
 
 	function check(){
@@ -51,24 +56,24 @@
 <div class="created-body">
 	<div class="page-header">
 		<h1 align="left">
-			| 채용등록 <small></small>
+			${mode=='update'?'| 채용수정':'| 채용등록'} <small></small>
 		</h1>
 	</div>
 	
 	<form name="employForm" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>제목</label>
-			<input name="ceSubject" type="text" class="form-control" placeholder="제목" value="">
+			<input name="ceSubject" type="text" class="form-control" placeholder="제목" value="${dto.ceSubject}">
 		</div>
 
 		<div class="form-group">
 			<label>고용 인원수</label>
-			<input name="cePeople" type="number" class="form-control" placeholder="인원수">
+			<input name="cePeople" type="number" class="form-control" placeholder="인원수" value="${dto.cePeople}">
 		</div>
 		
 		<div class="form-group">
 			<label>고용 형태</label>
-			<select name="ceType" class="form-control" style="width: 150px;">
+			<select id="ceType" name="ceType" class="form-control" style="width: 150px;">
 			  <option value="정규직" selected="selected">정규직</option>
 			  <option value="계약직">계약직</option>
 			  <option value="인턴직">인턴직</option>
@@ -79,22 +84,22 @@
 		
 		<div class="form-group">
     		<label>시작일</label>
-    		<input name="ceStart" type="date" class="form-control" placeholder="시작일" value="">
+    		<input name="ceStart" type="date" class="form-control" placeholder="시작일" value="${dto.ceStart}">
   		</div>
   		
   		<div class="form-group">
     		<label>마감일</label>
-    		<input name="ceEnd" type="date" class="form-control" placeholder="마감일" value="">
+    		<input name="ceEnd" type="date" class="form-control" placeholder="마감일" value="${dto.ceEnd}">
   		</div>
   		
   		<div class="form-group">
     		<label>연봉</label>
     		<div class="row">
     			<div class="col-xs-2">
-    				<input name="cePayMin" type="number" class="form-control" placeholder="최소" value="" style="margin-right: 50px;">
+    				<input name="cePayMin" type="number" class="form-control" placeholder="최소" value="${dto.cePayMin}" style="margin-right: 50px;">
     			</div>
     			<div class="col-xs-2">
-    				<input name="cePayMax" type="number" class="form-control" placeholder="최대" value="">
+    				<input name="cePayMax" type="number" class="form-control" placeholder="최대" value="${dto.cePayMax}">
     			</div>
     		</div>
   		</div>
@@ -230,7 +235,7 @@
   		
   		<div class="form-group">
   			<label>학력</label>
-  			<select name="atCode" class="form-control" style="width: 150px;">
+  			<select id="atCode" name="atCode" class="form-control" style="width: 150px;">
   				<option value="1">고졸</option>
 			 	<option value="2">대졸</option>
 			 	<option value="3">대학원졸</option>
@@ -239,19 +244,19 @@
   		
   		<div class="form-group" style="clear: both;">
     		<label>우대사항</label>
-    		<textarea name="cePrefere" class="form-control" rows="5"></textarea>
+    		<textarea name="cePrefere" class="form-control" rows="5">${dto.cePrefere}</textarea>
   		</div>
   		
   		<div class="form-group">
     		<label>비고</label>
-    		<textarea name="ceEtc" class="form-control" rows="5"></textarea>
+    		<textarea name="ceEtc" class="form-control" rows="5">${dto.ceEtc}</textarea>
   		</div>
   		
   		<div class="form-group">
     		<label>근무지</label><br>
     		<div class="row">
     			<div class="col-xs-10">
-    				<input name="cePlace" type="text" class="form-control" id="sample5_address" placeholder="근무지" readonly="readonly" value="">
+    				<input name="cePlace" type="text" class="form-control" id="sample5_address" placeholder="근무지" readonly="readonly" value="${dto.cePlace}">
     			</div>
     			<div class="col-xs-2">
     				<input type="button" class="btn btn-default" onclick="sample5_execDaumPostcode()" value="주소 검색">
@@ -297,7 +302,7 @@
 	    });
 	
 	 	// 주소로 좌표를 검색합니다
-	    geocoder.addr2coord('${dto.cAddress}', function(status, result) {
+	    geocoder.addr2coord('${dto.cePlace}', function(status, result) {
 
 	        // 정상적으로 검색이 완료됐으면 
 	         if (status === daum.maps.services.Status.OK) {
@@ -312,7 +317,7 @@
 
 	            // 인포윈도우로 장소에 대한 설명을 표시합니다
 	            var infowindow = new daum.maps.InfoWindow({
-	                content: '<div style="width:150px;text-align:center;padding:6px 0;">${dto.cName}</div>'
+	                content: '<div style="width:150px;text-align:center;padding:6px 0;"></div>'
 	            });
 	            infowindow.open(map, marker);
 

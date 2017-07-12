@@ -1,11 +1,12 @@
 package com.final_project.point;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class PointMarketController {
 	@RequestMapping(value="/point/market", method=RequestMethod.GET)
 	public String marketList(@RequestParam(value="page", defaultValue="0")int current_page, 
 			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
-			@RequestParam(value="subCode", defaultValue="0")int subCode, 
+			@RequestParam(value="subCode", defaultValue="0")String subCode, 
 			HttpSession session, Model model) throws Exception{
 		Point dto = new Point();
 		
@@ -46,10 +47,17 @@ public class PointMarketController {
 		dto = pService.mypoint(map);
 		
 		List<Talent> mainType = new ArrayList<>();
+		List<String> subCodes;
+		try{
+			subCodes = Arrays.asList(subCode);
+		}catch (NullPointerException e) {
+			subCodes = Arrays.asList("");
+		}
+		
 		mainType = tService.mainType();
 		
 		map.put("mainCode", mainCode);
-		map.put("subCode", subCode);
+		map.put("list", subCodes);
 		
 		int total_page = 0;
 		int rows = 6;
@@ -98,7 +106,8 @@ public class PointMarketController {
 	@ResponseBody
 	@RequestMapping("/point/market/usePoint")
 	public void usePoint(HttpSession session, 
-			@RequestParam int mypoint) throws Exception {
+			@RequestParam int mypoint, 
+			@RequestParam String seller) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> model = new HashMap<>();
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -111,8 +120,13 @@ public class PointMarketController {
 			map.put("history", "이력서 열람");
 			map.put("point", 3000);
 			map.put("mId", info.getUserId());
-			
 			pService.usePoint(map);
+			
+			map = new HashMap<>();
+			map.put("history", "공개 이력서 열람");
+			map.put("point", 300);
+			map.put("mId", seller);
+			pService.savaPoint(map);
 			
 			// 이력서 보러가기
 			model.put("state", 1);
@@ -120,31 +134,32 @@ public class PointMarketController {
 			// 포인트가 부족합니다.
 			model.put("state", 0);
 		}
-		
+		System.out.println(model.get("state"));
 		return ;
 	}
 	
-	@RequestMapping(value="/point/market", method=RequestMethod.POST)
-	public String searchList(@RequestParam(value="page", defaultValue="0")int current_page){
-		
-		return "/point/market";
-	}
-	
-	@RequestMapping("/point/storagy")
+	@RequestMapping(value="/point/storagy", method=RequestMethod.GET)
 	public String storagy(@RequestParam(value="page", defaultValue="0")int current_page, 
 			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
-			@RequestParam(value="subCode", defaultValue="0")int subCode, 
-			Model model) throws Exception {
+			@RequestParam(value="subCode", defaultValue="0")String subCode, 
+			HttpServletRequest req, Model model) throws Exception {
 		List<Talent> mainType = new ArrayList<>();
+		List<String> subCodes;
+		try{
+			subCodes = Arrays.asList(subCode);
+		}catch (NullPointerException e) {
+			subCodes = Arrays.asList("");
+		}
+		
 		mainType = tService.mainType();
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("mainCode", mainCode);
-		map.put("subCode", subCode);
+		map.put("list", subCodes);
 		
 		int total_page = 0;
 		int rows = 6;
-		int dataCount = tService.dataCount();
+		int dataCount = tService.dataCount(map);
 		
 		if(dataCount != 0)
 			total_page = util.pageCount(rows, dataCount);
@@ -172,7 +187,35 @@ public class PointMarketController {
 	}
 	
 	@RequestMapping("/point/storagy/article")
-	public String acticle() throws Exception {
+	public String acticle(@RequestParam(value="page", defaultValue="0")int page, 
+			@RequestParam("rNum") int rNum, Model model) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("rNum", rNum);
+		
+		Talent introList = tService.readIntro(map);
+		List<Talent> abilityList = null;
+		abilityList = tService.readAbility(map);
+		List<Talent> licenseList = null;
+		licenseList = tService.readLicense(map);
+		List<Talent> languageList = null;
+		languageList = tService.readLanguage(map);
+		List<Talent> projectList = null;
+		projectList = tService.readProject(map);
+		List<Talent> awardList = null;
+		awardList = tService.readAward(map);
+		List<Talent> careerList = null;
+		careerList = tService.readCareer(map);
+		
+		model.addAttribute("rNum", rNum);
+		model.addAttribute("page", page);
+		model.addAttribute("introList", introList);
+		model.addAttribute("abilityList", abilityList);
+		model.addAttribute("licenseList", licenseList);
+		model.addAttribute("languageList", languageList);
+		model.addAttribute("projectList", projectList);
+		model.addAttribute("awardList", awardList);
+		model.addAttribute("careerList", careerList);
+		
 		return ".point_layout.resume.article";
 	}
 }

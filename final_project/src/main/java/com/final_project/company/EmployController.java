@@ -148,6 +148,34 @@ public class EmployController {
 		
 		return ".company_layout.employ.article";
 	}
+	
+	@RequestMapping(value="/company/employ/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int ceNum,
+			@RequestParam String page,
+			Model model) throws Exception{
+		
+		Employ dto=service.readEmploy(ceNum);
+		if(dto==null) {
+			return "redirect:/company/employ?page="+page;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("employ", "on");
+		model.addAttribute("mode", "created");
+				
+		return ".company_layout.employ.created";
+	}
+	
+	@RequestMapping(value="/company/employ/update", method=RequestMethod.POST)
+	public String updateSubmit(Employ dto, @RequestParam String page, HttpSession session) throws Exception{
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"employ";
+		
+		service.updateComEmploy(dto, pathname);
+		
+		return "redirect:/company/employ?page="+page;
+	}
 }
 
 

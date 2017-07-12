@@ -16,7 +16,10 @@
 
   function check() {
         var f = document.boardForm;
- 
+ 		
+        var temp = "${cNum}";
+        alert(temp);
+        
         var str = f.company.value;
         if(!str || str=="<p>&nbsp;</p>") {
        	 alert("면접 본 기업을 등록하세요. ");
@@ -91,8 +94,19 @@
 								<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">
 									면접 본 기업 찾기
 								</button>
-								<span>${company}</span>
-								<input type="hidden" name="company" value="${company}">
+								<span>
+									<c:if test="${not empty company}">
+										${company}
+										<input type="hidden" name="company" value="${company}">
+									</c:if>
+									<c:if test="${not empty directcompany}">
+										${directcompany}
+										<input type="hidden" name="directcompany" value="${directcompany}">
+									</c:if>
+								</span>
+								
+								
+								<input type="hidden" name="cNum" value="${cNum}">
 							</td>
 						</tr>
 						
@@ -175,9 +189,10 @@
 <script type="text/javascript">
 function submitCompany(){
 	var company = $("input[type=radio][name=companyName_radio]:checked").val();
+	var cNum = $("input[type=hidden][name=companyNum]").val();
 	
 	if(company!=null){
-		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(company);
+		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(company)+"&cNum="+cNum;
 		location.href=url;
 	}else{
 		var directcompany = $("input[type=text][name=directCompany]").val();

@@ -22,7 +22,7 @@
 			포인트를 모아서 포인트 마켓을 이용해보세요~<br>
 			포인트는 회사 면접 후기 글과 각 종 댓글, 이력서 공개를 통하여 얻을 수 있으며 공개된 이력서를 열람하는데 사용하실 수 있습니다.
 		</div>
-		<div style="font-size: 7px; font-color: gray; width: 620px;">
+		<div style="font-size: 8px; font-color: gray; width: 620px;">
 			※ 주의사항<br>
 			본 포인트는 현금처럼 사용하실 수 없습니다.<br>
 			공개된 이력서는 포인트 일부를 차감하여 열람하실 수 있습니다.<br>

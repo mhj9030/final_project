@@ -15,6 +15,18 @@
 		f.action="${listUrl}";
 		f.submit();
 	}
+	
+	function updateEmploy(ceNum){
+		var page=${page};
+		var query="ceNum="+ceNum+"&page="+page;
+		var url="<%=cp%>/company/employ/update?"+query;
+		
+		location.href=url;
+	}
+	
+	function deleteEmploy(){
+		
+	}
 </script>
 
 <div class="employ-body">
@@ -32,8 +44,8 @@
 				<tr>
 					<th width="60">번호</th>
 					<th>제목</th>
-					<th width="100">시작일</th>
-					<th width="100">마감일</th>
+					<th width="80">수정</th>
+					<th width="80">삭제</th>
 				</tr>
 			</thead>
 			
@@ -41,9 +53,13 @@
 				<tbody>
 					<tr align="center">
 						<td>${dto.listNum}</td>
-						<td align="left"><a href="${articleUrl}&ceNum=${dto.ceNum}">${dto.ceSubject}</a></td>
-						<td>${dto.ceStart}</td>
-						<td>${dto.ceEnd}</td>
+						<td align="left"><a href="<%=cp%>/employ/article?ceNum=${dto.ceNum}">${dto.ceSubject}</a></td>
+						<td>
+							<button type="button" class="btn btn-default btn-xs" onclick="updateEmploy('${dto.ceNum}')">수정</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-default btn-xs">삭제</button>
+						</td>
 					</tr>
 				</tbody>
 			</c:forEach>	

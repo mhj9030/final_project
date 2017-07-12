@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="community_review">
 	<insert id="insertReview" parameterType="com.final_project.community.Review">
-		INSERT INTO meet(ibnum, subject, content, mid, company, pass) 
-		VALUES (MEET_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{company}, #{pass})
+		INSERT INTO meet(ibnum, subject, content, mid, pass, cNum, directcompany) 
+		VALUES (MEET_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{pass}, #{cNum}, #{directcompany})
 	</insert>
 
 	<sql id="where-list">
@@ -38,7 +38,7 @@
 	<select id="listReview" parameterType="map" resultType="com.final_project.community.Review">
 		SELECT * FROM( 
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT v.ibnum, m.mId, mName, subject, TO_CHAR(v.created, 'YYYY-MM-DD') created, company, pass,  
+				SELECT v.ibnum, m.mId, mName, subject, TO_CHAR(v.created, 'YYYY-MM-DD') created, company, pass, v.cNum,   
 					   hitCount, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount, pro.prophoto 
 				FROM meet v JOIN member m ON v.mId=m.mId 
 				LEFT OUTER JOIN
@@ -56,6 +56,10 @@
 				(
 					SELECT p.mId, prophoto from profile p
 				) pro ON v.mId = pro.mId
+				LEFT OUTER JOIN
+				(
+					SELECT cNum, cName company from company
+				) c ON v.cNum = c.cNum
 				<where>
 			     	<if test="searchValue!=null and searchValue!='' ">
 			     	    <include refid="where-list"/>

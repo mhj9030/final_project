@@ -117,7 +117,6 @@ public class PointServiceImpl implements PointService{
 			
 		} catch (Exception e) {
 			System.out.println("mypoint: " + e.toString());
-			e.printStackTrace();
 		}
 		
 		point.setMypoint(mypoint);

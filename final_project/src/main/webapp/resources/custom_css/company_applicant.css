@@ -1,5 +1,69 @@
 @CHARSET "UTF-8";
 
+.applicant-body{
+	clear:both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    min-height: 655px;
+    padding-top: 20px;
+    width: 800px;
+    height: auto;
+}
+
+.page-header h1{
+	margin-left: 10px;
+}
+
+.table-hover thead{
+	text-align: center;
+}
+
+.table-hover th{
+	text-align: center;
+}
+
+.list-comp{
+	width: 100%; 
+	margin: 10px auto;
+}
+
+.list-search{
+	width: 100%;
+	text-align: center;
+}
+
+.list-searchList{
+	margin-right: 5px; 
+}
+
+.input-group{
+	width: 300px;
+}
+
+.footer-bar {
+	margin-top : 60px;
+	clear: both;
+}
+
+.footer-bar .foorter-bar-refresh {
+	float: left;
+	width: 20%;
+	min-width: 85px;
+}
+
+.footer-bar .footer-search-bar {
+	float: left; 
+ 	width: 60%;
+ 	text-align: center;
+}
+
+.footer-bar .footer-bar-submit {
+	float: left;
+	width: 20%;
+	min-width: 85px;
+	text-align: right;
+}
+
 .content-name strong{
 	font-size: 20px;
 }

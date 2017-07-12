@@ -15,6 +15,7 @@
 				<c:forEach var="dto" items="${list}">
 					<div style="font-weight: bold; margin: 10px;">
 						<input type="radio" name="companyName_radio" value="${dto.cName}">${dto.cName}
+						<input type="hidden" name="companyNum" value="${dto.cNum}">
 					</div>
 				</c:forEach>
 			</div>

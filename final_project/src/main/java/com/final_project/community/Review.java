@@ -3,10 +3,16 @@ package com.final_project.community;
 
 public class Review {
 	private int ibnum, listNum, cNum;
-	private String mName, mId, subject, content, created, company, pass, prophoto;
+	private String mName, mId, subject, content, created, company, pass, prophoto, directcompany;
 	private int hitCount, replyCount, likeCount;
 	
 	
+	public String getDirectcompany() {
+		return directcompany;
+	}
+	public void setDirectcompany(String directcompany) {
+		this.directcompany = directcompany;
+	}
 	public int getcNum() {
 		return cNum;
 	}

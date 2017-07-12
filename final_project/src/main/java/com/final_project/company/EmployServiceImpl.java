@@ -67,10 +67,43 @@ public class EmployServiceImpl implements EmployService{
 		
 		try {
 			dto=dao.getReadData("company.readEmploy", ceNum);
+			
+			if(dto!=null){
+				if(dto.getCePay()!=null){
+					dto.setCePayMin(dto.getCePay().split("~")[0]);
+					dto.setCePayMax(dto.getCePay().split("~")[1]);
+				}
+			}
 		} catch (Exception e) {
 			throw e;
 		}
 		
 		return dto;
+	}
+
+	@Override
+	public void updateComEmploy(Employ dto, String pathname) throws Exception {
+		try {
+			if(dto.getCePayMin()!=null && dto.getCePayMin().length()!=0 &&
+					dto.getCePayMax() != null && dto.getCePayMax().length()!=0)
+				dto.setCePay(dto.getCePayMin() + "~" + dto.getCePayMin());
+			
+			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()){
+				String newFilename=fileManager.doFileUpload(dto.getUpload(), pathname);
+				
+				if (newFilename != null){
+					if(dto.getResumeFile().length()!=0 && dto.getResumeFile()!=null){
+						fileManager.doFileDelete(dto.getResumeFile(), pathname);
+					}
+					
+					dto.setResumeOriginalName(dto.getUpload().getOriginalFilename());
+					dto.setResumeFile(newFilename);
+				}
+			}
+			
+			dao.updateData("company.updateComEmploy", dto);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 }
