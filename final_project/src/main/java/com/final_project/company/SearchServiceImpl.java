@@ -64,4 +64,17 @@ public class SearchServiceImpl implements SearchService{
 		
 		return list;
 	}
+
+	@Override
+	public String searchCompanyName(int cNum) throws Exception {
+		String cName=null;
+		
+		try {
+			cName=dao.getReadData("company.searchCompanyName", cNum);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return cName;
+	}
 }

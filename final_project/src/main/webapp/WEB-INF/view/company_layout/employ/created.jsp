@@ -35,8 +35,13 @@
 		});
 		
 		if("${mode}"=="update"){
-			$("#ceType[value='${dto.ceType}']").attr("selected", "selected");
-			$("#atCode[value='${dto.atCode}']").attr("selected", "selected");
+			$("#ceType").val("${dto.ceType}").attr("selected", "selected");
+			$("#atCode").val("${dto.atCode}").attr("selected", "selected");
+			
+			$(".sub-form-control").hide();
+			$("select[name=subCode]").attr("disabled", "disabled");
+			
+			$("#ceType").val("${dto.ceType}").attr("selected", "selected");
 		}
 	});
 
