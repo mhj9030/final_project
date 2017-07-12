@@ -299,7 +299,17 @@
   		
   		<div class="form-group">
     		<label>매출액</label>
-    		<input name="cProfit" type="number" class="form-control" placeholder="매출액(단위 : 만원)" value="${dto.cProfit}">
+    		<div class="row">
+			  <div class="col-xs-2">
+			    <input id="cProfit1" name="cProfit1" type="text" class="form-control" placeholder="조" value="${dto.cProfit1}">
+			  </div>
+			  <div class="col-xs-2">
+			    <input id="cProfit2" name="cProfit2" type="text" class="form-control" placeholder="억" value="${dto.cProfit2}">
+			  </div>
+			  <div class="col-xs-2">
+			    <input id="cProfit3" name="cProfit3" type="text" class="form-control" placeholder="만" value="${dto.cProfit3}">
+			  </div>
+			</div>
   		</div>
   		
   		<div class="form-group">
@@ -378,7 +388,7 @@
     		</div>
   		</div>
   		
-  		<button type="button" class="btn btn-default" onclick="check();">등록</button>
+  		<button type="button" class="btn btn-default" onclick="check();">${mode=='update'?'수정':'등록'}</button>
   		<c:if test="${mode=='update'}">
 			<input type="hidden" name="cLogoImage" value="${dto.cLogoImage}">        	
 			<input type="hidden" name="cCoverImage" value="${dto.cCoverImage}">

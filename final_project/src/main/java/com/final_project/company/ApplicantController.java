@@ -65,6 +65,7 @@ public class ApplicantController {
         map.put("start", start);
         map.put("end", end);
         map.put("ceNum", ceNum);
+        map.put("order", order);
 		
         List<Applicant> list=service.listApplicant(map);
         
