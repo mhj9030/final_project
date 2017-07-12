@@ -49,7 +49,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-		자유게시판  |  글올리기
+			문의하기
 		</h3>
 	</div>
 
