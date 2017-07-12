@@ -14,8 +14,8 @@
 			<div style="overflow-y: scroll; height: 200px;">
 				<c:forEach var="dto" items="${list}">
 					<div style="font-weight: bold; margin: 10px;">
-						<input type="radio" name="companyName_radio" value="${dto.cName}">${dto.cName}
-						<input type="hidden" name="companyNum" value="${dto.cNum}">
+						<input type="radio" name="companyNum" value="${dto.cNum}">${dto.cName}
+						<input type="hidden" name="companyName${dto.cNum}" value="${dto.cName}">
 					</div>
 				</c:forEach>
 			</div>

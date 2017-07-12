@@ -4,7 +4,7 @@
 <mapper namespace="community_review">
 	<insert id="insertReview" parameterType="com.final_project.community.Review">
 		INSERT INTO meet(ibnum, subject, content, mid, pass, cNum, directcompany) 
-		VALUES (MEET_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{pass}, #{cNum}, #{company})
+		VALUES (MEET_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{pass}, #{cNum}, #{directcompany, jdbcType=VARCHAR})
 	</insert>
 
 	<sql id="where-list">

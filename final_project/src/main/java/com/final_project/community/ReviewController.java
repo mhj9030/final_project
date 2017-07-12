@@ -106,17 +106,20 @@ public class ReviewController {
 	@RequestMapping(value = "/community/review/created", method = RequestMethod.GET)
 	public String createdForm(
 			Model model, HttpServletRequest req, 
-			@RequestParam(value="company", defaultValue="") String company,
 			@RequestParam(value="directcompany", defaultValue="") String directcompany,
+			@RequestParam(value="cName", defaultValue="") String cName,
 			@RequestParam(value="cNum", defaultValue="0") int cNum
 			) throws Exception {
-		
-		if(company.length()!=0){
-			model.addAttribute("company", company);
-		}else if(directcompany.length()!=0){
-			model.addAttribute("company", directcompany);
+		if(directcompany.length()!=0){
+			
+			
 		}
+		
+		
+		if(directcompany.length()!=0)
+			model.addAttribute("directcompany", directcompany);
 
+		
 		model.addAttribute("cNum", cNum);
 		model.addAttribute("mode", "created");
 

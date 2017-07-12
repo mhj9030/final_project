@@ -162,7 +162,7 @@ public class EmployController {
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("employ", "on");
-		model.addAttribute("mode", "created");
+		model.addAttribute("mode", "update");
 				
 		return ".company_layout.employ.created";
 	}

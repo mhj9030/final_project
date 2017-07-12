@@ -188,11 +188,11 @@
 
 <script type="text/javascript">
 function submitCompany(){
-	var company = $("input[type=radio][name=companyName_radio]:checked").val();
-	var cNum = $("input[type=hidden][name=companyNum]").val();
+	var cNum = $("input[type=radio][name=companyNum]:checked").val();
 	
-	if(company!=null){
-		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(company)+"&cNum="+cNum;
+	
+	if(cNum!=null){
+		var url = "<%=cp%>/community/review/created?cNum="+cNum;
 		location.href=url;
 	}else{
 		var directcompany = $("input[type=text][name=directCompany]").val();

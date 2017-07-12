@@ -206,8 +206,9 @@
 	<!-- 기업명 리스트 -->
 	<select id="listCompanyName" parameterType="map" resultType="com.final_project.company.Company">
 		select cNum, cName from company
+			where cNum>0
 		<if test="searchCompany!=null and searchCompany!='' ">
-			where instr(cName, #{searchCompany})&gt;=1
+			and instr(cName, #{searchCompany})&gt;=1
 		</if>
 	</select>
 </mapper>
