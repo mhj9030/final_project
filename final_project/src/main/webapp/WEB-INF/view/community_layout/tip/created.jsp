@@ -35,11 +35,9 @@
     	
         var mode="${mode}";
         if(mode=="created")
-    		f.action="<%=cp%>/community/free/created";
+    		f.action="<%=cp%>/community/tip/created";
     	else if(mode=="update")
-    		f.action="<%=cp%>/community/free/update";
-    	else if(mode=="follow")
-    		f.action="<%=cp%>/community/free/follow";		
+    		f.action="<%=cp%>/community/tip/update";
 
        	
        	return true;
@@ -49,7 +47,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-			문의하기
+		취업꿀팁  |  글올리기
 		</h3>
 	</div>
 
@@ -69,6 +67,29 @@
 							<td class="input_info">제목</td>
 							<td colspan="3">
 								<input type="text" name="subject" value="${dto.subject}" required="required">
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="input_info">말머리 설정</td>
+							<td colspan="3">
+								<select name="type">
+									<option value="서비스업">서비스업</option>
+									<option value="제조/화학">제조/화학</option>
+									<option value="의료/복지">의료/복지</option>
+									<option value="판매/유통">판매/유통</option>
+									<option value="교육업">교육업</option>
+									<option value="건설업">건설업</option>
+									<option value="IT/통신">IT/통신</option>
+									<option value="미디어/디자인">미디어/디자인</option>
+									<option value="은행/금융업">은행/금융업</option>
+									<option value="기관/협회">기관/협회</option>
+									<option value="직장인">직장인</option>
+									<option value="공무원">공무원</option>
+									<option value="취준생">취준생</option>
+									<option value="알바생">알바생</option>
+									<option value="기타">기타</option>
+								</select>
 							</td>
 						</tr>
 
@@ -103,17 +124,11 @@
 							<td colspan="4" style="text-align: center;">
 								<button type="submit" class="btn btn-default">${mode=='update'?'수정완료':'등록하기'}</button>
 								<button type="reset" class="btn btn-default">다시입력</button>
-								<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/free';">${mode=='update'?'수정취소':'등록취소'}</button> 
-								<c:if test="${mode=='follow'}">
-                                      <input type="hidden" name="page" value="${page}">
-                                      <input type="hidden" name="groupNum" value="${dto.groupNum}">
-                                      <input type="hidden" name="orderNo" value="${dto.orderNo}">
-                                      <input type="hidden" name="depth" value="${dto.depth}">
-                                      <input type="hidden" name="parent" value="${dto.frnum}">
-                                  </c:if>
+								<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/tip';">${mode=='update'?'수정취소':'등록취소'}</button> 
+								
                                   <c:if test="${mode=='update'}">
                                       <input type="hidden" name="page" value="${page}">
-                                      <input type="hidden" name="frnum" value="${dto.frnum}">
+                                      <input type="hidden" name="jtnum" value="${dto.jtnum}">
                                   </c:if>
 							</td>
 						</tr>
