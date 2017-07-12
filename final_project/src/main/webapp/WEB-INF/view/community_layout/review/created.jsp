@@ -196,7 +196,8 @@ function submitCompany(){
 		location.href=url;
 	}else{
 		var directcompany = $("input[type=text][name=directCompany]").val();
-		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(directcompany);
+		cNum = 0;
+		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(directcompany)+"&cNum="+cNum;
 		location.href=url;
 	}
 }

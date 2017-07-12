@@ -33,7 +33,14 @@
 			<td class="review_table_td">
 				<div style="line-height: 30px;"><strong style="font-size: 20px;">${dto.subject}</strong></div>
 				<div style="color:#949494;">
-					<div style="line-height: 15px; height: 15px; margin-bottom: 5px;"><i class="glyphicon glyphicon-map-marker"></i><a href="<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}">${dto.company}</a></div>
+					<div style="line-height: 15px; height: 15px; margin-bottom: 5px;"><i class="glyphicon glyphicon-map-marker"></i>
+						<c:if test="${dto.cNum!=0}">
+							<a href="<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}">${dto.company}</a>
+						</c:if>
+						<c:if test="${dto.cNum==0}">
+							${dto.directcompany}
+						</c:if>	
+					</div>
 					<div style="line-height: 15px; height: 15px;"><small style="text-align: right;">${dto.created} | 조회수 : ${dto.hitCount} | 추천 : ${dto.likeCount}</small></div>
 				</div>
 				<div style="line-height: 30px; font-size: 13px;"><strong>이름 : ${dto.mName}</strong> </div>

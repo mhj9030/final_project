@@ -114,7 +114,7 @@ public class ReviewController {
 		if(company.length()!=0){
 			model.addAttribute("company", company);
 		}else if(directcompany.length()!=0){
-			model.addAttribute("directcompany", directcompany);
+			model.addAttribute("company", directcompany);
 		}
 
 		model.addAttribute("cNum", cNum);
