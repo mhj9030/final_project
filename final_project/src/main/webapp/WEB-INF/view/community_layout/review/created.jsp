@@ -17,8 +17,6 @@
   function check() {
         var f = document.boardForm;
  		
-        var temp = "${cNum}";
-        alert(temp);
         
         var str = f.company.value;
         if(!str || str=="<p>&nbsp;</p>") {
@@ -91,22 +89,27 @@
 						<tr>
 							<td class="input_info">기업명</td>
 							<td colspan="3">
-								<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">
+								
+								<c:if test="${mode=='created'}">
+									<button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">
 									면접 본 기업 찾기
-								</button>
+									</button>
+								</c:if>
 								<span>
-									<c:if test="${not empty company}">
-										${company}
-										<input type="hidden" name="company" value="${company}">
+									<c:if test="${not empty dto.directcompany}">
+										${dto.directcompany}
 									</c:if>
 									<c:if test="${not empty directcompany}">
 										${directcompany}
 										<input type="hidden" name="directcompany" value="${directcompany}">
+										<input type="hidden" name="cNum" value="${cNum}">
 									</c:if>
 								</span>
 								
-								
-								<input type="hidden" name="cNum" value="${cNum}">
+								<c:if test="${mode=='update'}">
+									<input type="hidden" name="directcompany" value="${dto.directcompany}">
+									<input type="hidden" name="cNum" value="${dto.cNum}">
+								</c:if>
 							</td>
 						</tr>
 						
@@ -120,7 +123,7 @@
 						<tr>
 							<td class="input_info">제목</td>
 							<td colspan="3">
-								<input type="text" name="subject" value="" required="required">
+								<input type="text" name="subject" value="${dto.subject}" required="required">
 							</td>
 						</tr>
 						<tr>
@@ -136,6 +139,7 @@
 							<td class="input_info">내용</td>
 							<td colspan="3">
 								<textarea id="content" name="content" rows="15" style="width : 800px;" required="required">
+								${dto.content}
 								</textarea>
 							</td>
 						</tr>
@@ -143,9 +147,9 @@
 					<tfoot>
 						<tr>
 							<td colspan="4" style="text-align: center;">
-								<button class="btn btn-default" type="submit">확인 </button>
+								<button class="btn btn-default" type="submit">${mode=='update'?'수정완료':'등록하기'}</button>
 								<button class="btn btn-default" type="reset">다시 입력</button>
-								<button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/community/review'">취소</button> 
+								<button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/community/review'">${mode=='update'?'수정취소':'등록취소'}</button> 
 							</td>
 						</tr>
 					</tfoot>
@@ -189,15 +193,13 @@
 <script type="text/javascript">
 function submitCompany(){
 	var cNum = $("input[type=radio][name=companyNum]:checked").val();
-	
-	
 	if(cNum!=null){
 		var url = "<%=cp%>/community/review/created?cNum="+cNum;
 		location.href=url;
 	}else{
 		var directcompany = $("input[type=text][name=directCompany]").val();
 		cNum = 0;
-		var url = "<%=cp%>/community/review/created?company="+encodeURIComponent(directcompany)+"&cNum="+cNum;
+		var url = "<%=cp%>/community/review/created?directcompany="+encodeURIComponent(directcompany)+"&cNum="+cNum;
 		location.href=url;
 	}
 }
@@ -214,11 +216,15 @@ nhn.husky.EZCreator.createInIFrame({
 			}
 		}, //boolean
 		fOnAppLoad : function() {
-			//예제 코드
-			oEditors.getById["content"].exec("PASTE_HTML",
-					["아래의 질문에 대한 답변을 기입해주세요!!!<br><br>Q1.기업명?<br>-<br><br>Q2.지원시기는?<br>-<br><br>Q3.어떤 준비를 했나요?<br>-<br><br>Q4.가장 기억의 남는 질문은?<br>-<br><br>Q5.합격했다면 그 비결은?<br>-<br><br>Q6.앞으로의 계획?<br>-<br><br>Q7.마지막으로 하고싶은 말은?<br>-<br><br>"]);
-			setDefaultFont();
-		},
+			var mode = "${mode}";				
+			if(mode=="created"){
+				//예제 코드
+				oEditors.getById["content"].exec("PASTE_HTML",
+						["아래의 질문에 대한 답변을 기입해주세요!!!<br><br>Q1.기업명?<br>-<br><br>Q2.지원시기는?<br>-<br><br>Q3.어떤 준비를 했나요?<br>-<br><br>Q4.가장 기억의 남는 질문은?<br>-<br><br>Q5.합격했다면 그 비결은?<br>-<br><br>Q6.앞으로의 계획?<br>-<br><br>Q7.마지막으로 하고싶은 말은?<br>-<br><br>"]);
+				setDefaultFont();
+			}
+			
+				},
 		fCreator : "createSEditor2"
 	});
 

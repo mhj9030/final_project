@@ -13,7 +13,7 @@ public interface ReviewService {
 	public Review preReadReview(Map<String, Object> map); // 뉴스이전글
 	public Review nextReadReview(Map<String, Object> map); // 뉴스다음글
 	public int updateReview(Review dto); // 뉴스수정
-	public int deleteReview(int ibnum, String mId); // 뉴스 삭제
+	public int deleteReview(int ibnum); // 뉴스 삭제
 	
 	public int insertLikeReview(Review dto); // 뉴스좋아요추가
 	public int countLikeReview(int ibnum); // 뉴스좋아요갯수

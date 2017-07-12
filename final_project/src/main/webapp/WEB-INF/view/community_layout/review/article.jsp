@@ -7,21 +7,21 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-	function deletePhoto() {
-		  var ptnum = "${dto.ptnum}";
+	function deleteReview() {
+		  var ibnum = "${dto.ibnum}";
 		  var page = "${page}";
-		  var query = "ptnum="+ptnum+"&page="+page;
-		  var url = "<%=cp%>/community/photo/delete?" + query;
+		  var query = "ibnum="+ibnum+"&page="+page;
+		  var url = "<%=cp%>/community/review/delete?" + query;
 	
 		  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
 		  	location.href=url;
 	}
 
-	function updatePhoto() {
-		  var ptnum = "${dto.ptnum}";
+	function updateReview() {
+		  var ibnum = "${dto.ibnum}";
 		  var page = "${page}";
-		  var query = "ptnum="+ptnum+"&page="+page;
-		  var url = "<%=cp%>/community/photo/update?" + query;
+		  var query = "ibnum="+ibnum+"&page="+page;
+		  var url = "<%=cp%>/community/review/update?" + query;
 		  location.href=url;
 		
 	
@@ -34,24 +34,24 @@ function login() {
 }
 
 $(function(){
-	countLikePhoto(${dto.ptnum});
+	countLikeReview(${dto.ibnum});
 });
 
 
 
 // 게시물 공감 개수
-function countLikePhoto(ptnum) {
-	var url="<%=cp%>/community/photo/countLikePhoto";
-	var query="ptnum="+ptnum;
+function countLikeReview(ibnum) {
+	var url="<%=cp%>/community/review/countLikeReview";
+	var query="ibnum="+ibnum;
 	$.ajax({
 		type:"post"
 		,url:url
 		,data:query
 		,dataType:"json"
 		,success:function(data) {
-			var count=data.countLikePhoto;
+			var count=data.countLikeReview;
 			
-			$("#countLikePhoto").html(count);
+			$("#countLikeReview").html(count);
 		}
 		,beforeSend : function(jqXHR) {
 	        jqXHR.setRequestHeader("AJAX", true);
@@ -69,7 +69,7 @@ function countLikePhoto(ptnum) {
 }
 
 
-function sendLikePhoto(ptnum) {
+function sendLikeReview(ibnum) {
 	var uid="${sessionScope.member.userId}";
 	if(! uid) {
 		login();
@@ -80,16 +80,16 @@ function sendLikePhoto(ptnum) {
 	if(! confirm(msg))
 		return;
 	
-	var query="ptnum="+ptnum;
+	var query="ibnum="+ibnum;
 	$.ajax({
 		type:"post"
-		,url:"<%=cp%>/community/photo/insertLikePhoto"
+		,url:"<%=cp%>/community/review/insertLikeReview"
 		,data:query
 		,dataType:"json"
 		,success:function(data) {
 			var state=data.state;
 			if(state=="true") {
-				countLikePhoto(ptnum);
+				countLikeReview(ibnum);
 			} else if(state=="false") {
 				alert("좋아요는 한번만 가능합니다. !!!");
 			}
@@ -120,30 +120,30 @@ function sendLikePhoto(ptnum) {
 	});
 
 	function listPage(page){
-		var url = "<%=cp%>/community/photo/listReply";
-		var ptnum = "${dto.ptnum}";
+		var url = "<%=cp%>/community/review/listReply";
+		var ibnum = "${dto.ibnum}";
 		
 		// text/html
-		$.post(url, {ptnum:ptnum, pageNo:page}, function(data){
+		$.post(url, {ibnum:ibnum, pageNo:page}, function(data){
 			$("#listReply").html(data);
 		});
 	}
 	
 	function sendReply(){
-		var ptnum = "${dto.ptnum}";
+		var ibnum = "${dto.ibnum}";
 		var content = $("#replyContent").val().trim();
 		if(! content){
 			$("#replyContent").focus();
 			return;
 		}
 		
-		var query = "ptnum="+ptnum;
+		var query = "ibnum="+ibnum;
 		query += "&content="+content;
 		query += "&answer=0";
 		
 		$.ajax({
 			type:"post"
-			,url:"<%=cp%>/community/photo/insertReply"
+			,url:"<%=cp%>/community/review/insertReply"
 			,data:query
 			,dataType:"json"
 			,success:function(data) {
@@ -175,7 +175,7 @@ function sendLikePhoto(ptnum) {
 	function listAnswer(answer) {
 		var listReplyAnswerId="#listReplyAnswer"+answer;
 		
-		var url="<%=cp%>/community/photo/listReplyAnswer";
+		var url="<%=cp%>/community/review/listReplyAnswer";
 		var query="answer="+answer+"&tmp="+new Date().getTime();
 		$.ajax({
 			type:"get"
@@ -207,7 +207,7 @@ function sendLikePhoto(ptnum) {
 		}
 		
 		if(confirm("게시물을 삭제하시겠습니까 ? ")) {	
-			var url="<%=cp%>/community/photo/deleteReply";
+			var url="<%=cp%>/community/review/deleteReply";
 			var query="replyNum="+replyNum+"&mode=reply";
 			$.ajax({
 				type:"post"
@@ -265,20 +265,20 @@ function sendLikePhoto(ptnum) {
 			return;
 		}
 		
-		var ptnum="${dto.ptnum}";
+		var ibnum="${dto.ibnum}";
 		var content=$("#answerContent"+replyNum).val().trim();
 		if(! content) {
 			$("#answerContent"+replyNum).focus();
 			return;
 		}
 		
-		var query="ptnum="+ptnum;
+		var query="ibnum="+ibnum;
 		query+="&content="+encodeURIComponent(content);
 		query+="&answer="+replyNum;	
 		
 		$.ajax({
 			type:"post"
-			,url:"<%=cp%>/community/photo/insertReply"
+			,url:"<%=cp%>/community/review/insertReply"
 			,data:query
 			,dataType:"json"
 			,success:function(data) {
@@ -309,7 +309,7 @@ function sendLikePhoto(ptnum) {
 
 	// 댓글별 답글 개수
 	function countAnswer(answer) {
-		var url="<%=cp%>/community/photo/replyCountAnswer";
+		var url="<%=cp%>/community/review/replyCountAnswer";
 		var query="answer="+answer;
 		$.ajax({
 			type:"post"
@@ -346,7 +346,7 @@ function sendLikePhoto(ptnum) {
 		}
 		
 		if(confirm("게시물을 삭제하시겠습니까 ? ")) {	
-			var url="<%=cp%>/community/photo/deleteReply";
+			var url="<%=cp%>/community/review/deleteReply";
 			var query="replyNum="+replyNum+"&mode=answer";
 			$.ajax({
 				type:"post"
@@ -388,21 +388,17 @@ function sendLikePhoto(ptnum) {
 			<td class="article_hitCount">${dto.created} | 조회 ${dto.hitCount}</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: right;">
-				<c:if test="${not empty dto.originalFilename }">
-						<button class="btn btn-block btn-info" onclick="javascript:location.href='<%=cp%>/community/photo/download?ptnum=${dto.ptnum}'">
-							${dto.originalFilename} 다운로드(클릭)
-						</button>
-					</c:if>
-					<c:if test="${empty dto.originalFilename }">
-						<button class="btn btn-block btn-info" onclick="emptydown();">
-							파일이없습니다.
-						</button>
-					</c:if>
+			<td colspan="2">
+				<c:if test="${dto.pass=='불합격'}">
+					<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-ok"></span>${dto.pass}</a>
+				</c:if>
+				<c:if test="${dto.pass=='합격'}">
+					<a href="#" class="btn btn-info"><span class="glyphicon glyphicon-ok"></span>${dto.pass}</a>
+				</c:if>
+				<c:if test="${dto.pass=='비공개'}">
+					<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>${dto.pass}</a>
+				</c:if>
 			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="photo_article_cover"><img src="<%=cp%>/uploads/community/${dto.saveFilename}"></td> 
 		</tr>
 		<tr>
 			<td colspan="2" class="photo_article_content">${dto.content}</td>
@@ -410,30 +406,30 @@ function sendLikePhoto(ptnum) {
 		<tr>
 			<td class="article_pre"> ◀이전글 
 				<c:if test="${not empty preReadDto}">
-			    	<a href="<%=cp%>/community/photo/article?${query}&ptnum=${preReadDto.ptnum}">${preReadDto.subject}</a>
+			    	<a href="<%=cp%>/community/review/article?${query}&ibnum=${preReadDto.ibnum}">${preReadDto.subject}</a>
 			    </c:if>
 			</td>
 			<td class="article_next">
 				<c:if test="${not empty nextReadDto}">
-			    	<a href="<%=cp%>/community/photo/article?${query}&ptnum=${nextReadDto.ptnum}">${nextReadDto.subject}</a>
+			    	<a href="<%=cp%>/community/review/article?${query}&ibnum=${nextReadDto.ibnum}">${nextReadDto.subject}</a>
 			    </c:if>
 				 다음글▶  
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><span onclick="sendLikePhoto(${dto.ptnum});" class="btn btn-block btn-danger"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;<span id="countLikePhoto">${countLikePhoto}</span></span></td>
+			<td colspan="2"><button onclick="sendLikeReview(${dto.ibnum});" class="btn btn-block btn-danger"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;<span id="countLikeReview">${countLikeReview}</span></button></td>
 		</tr>
 	</table>
 	
 	<div class="article_btns">
 		<c:if test="${sessionScope.member.userId == dto.mId}">
-			<button class="btn btn-warning" onclick="updatePhoto();">수정</button>
+			<button class="btn btn-warning" onclick="updateReview();">수정</button>
 		</c:if>
 		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
-			<button class="btn btn-warning" onclick="deletePhoto();">삭제</button>
+			<button class="btn btn-warning" onclick="deleteReview();">삭제</button>
 		</c:if>
-		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/photo?${query}'">목록</button>
-		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/photo'">최신목록</button>
+		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/review?${query}'">목록</button>
+		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/review'">최신목록</button>
 	</div>
 	
 	<div class="article_reply_wrap">
