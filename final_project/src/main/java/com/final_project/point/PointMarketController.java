@@ -113,28 +113,26 @@ public class PointMarketController {
 			@RequestParam int mypoint, 
 			@RequestParam String seller, 
 			@RequestParam("rNum") int rNum) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> model = new HashMap<>();
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		// 포인트 use나 save 사용시 유의 사항
-		// 종류가 하나라면 컨트롤러에서 map을 생성해 던지고 마켓서비스에서 usePoint만 부름
-		// 종류가 여러개라면 마켓서비스에 usePoint에서 map도 같이 설정해야함
 		
-		// 포인트 사용
+		map.put("mId", info.getUserId());
+		Point dto = pService.mypoint(map);
+		
 		if(mypoint-3000 >= 0){
 			map.put("history", "이력서 열람");
 			map.put("point", 3000);
-			map.put("mId", info.getUserId());
+			map.put("total", dto.getMypoint()-500);
 			pService.usePoint(map);
 			
 			map.put("rNum", rNum);
 			pService.buyResume(map);
 			
-			Map<String, Object> map2 = new HashMap<>();
-			map2.put("history", "공개 이력서 열람");
-			map2.put("point", 300);
-			map2.put("mId", seller);
-			pService.savePoint(map2);
+			map.put("history", "공개 이력서 열람");
+			map.put("point", 300);
+			map.put("mId", seller);
+			pService.savePoint(map);
 			System.out.println("savePoint");
 			
 			// 이력서 보러가기
@@ -158,10 +156,8 @@ public class PointMarketController {
 		if(subCode!=null && ! subCode.equals("") ){
 			List<String> subCodes = Arrays.asList(subCode);
 			map.put("list", subCodes);
-			System.out.println(">>> subCodes");
 		}else{
 			map.put("list", null);
-			System.out.println(">>> null");
 		}
 		
 		mainType = tService.mainType();

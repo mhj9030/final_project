@@ -22,7 +22,7 @@
 						<div style="height: 90px; padding-left: 25px; text-align: left;">
 						<c:forEach var="dto" items="${mainType}">
 							<span class="button-checkbox">
-						        <button type="button" name="mainName" class="btn" value="${dto.mainCode}">${dto.mainName}</button>
+						        <button type="button" name="mainName" class="btn btn-xs" value="${dto.mainCode}">${dto.mainName}</button>
 						        <input type="radio" name="mainCode" class="hidden" value="${dto.mainCode}" />
 						    </span>
 						</c:forEach>
@@ -40,9 +40,11 @@
 		</form>
 	</div>
 	<br><br>
+	
 	<!-- 리스트 -->
 	<div id="talent_list">
 	</div>
+	
 	<div class="paging">
 		${paging}
 	</div>
@@ -59,8 +61,8 @@ $(document).ready(function() {
 $("body").on("click", 'button[name="mainName"]', function(){
 	$('input:radio[name="mainCode"][value="' + $(this).val() + '"]').prop("checked", true);
 	for(var i=0;i<10;i++)
-		$('button[name="mainName"][value="' + i + '"]').attr("class", "btn");
-	$(this).attr("class", "btn btn-info");
+		$('button[name="mainName"][value="' + i + '"]').attr("class", "btn btn-xs");
+	$(this).attr("class", "btn btn-info btn-xs");
 	query = $("form[name=searchForm]").serialize();
 	
 	$.ajax({
@@ -81,11 +83,11 @@ $("body").on("click", 'button[name="mainName"]', function(){
 function isCheck(data) {
 	if($('input:checkbox[name="subCode"][value="' + data + '"]').is(":checked")){
 		$('input:checkbox[name="subCode"][value="' + data + '"]').attr("checked", false);
-		$('button[name="subName"][value="' + data + '"]').attr("class", "btn");
+		$('button[name="subName"][value="' + data + '"]').attr("class", "btn btn-xs");
 		cc--;
 	}else{
 		$('input:checkbox[name="subCode"][value="' + data + '"]').attr("checked", true);
-		$('button[name="subName"][value="' + data + '"]').attr("class", "btn btn-info");
+		$('button[name="subName"][value="' + data + '"]').attr("class", "btn btn-info btn-xs");
 		cc++;
 	}
 	
@@ -111,9 +113,13 @@ function list(query){
 function subPrint(data){
 	var out = "";
 	if(data.subType.length!=0){
+		out += '<span class="button-checkbox">';
+		out += '<button type="button" name="subName" class="btn btn-xs"> 전체 </button>';
+		out += '<input type="checkbox" name="subCode" class="hidden" value="" />';
+		out += '</span>';
 		for(var i=0; i<data.subType.length; i++){
 			out += '<span class="button-checkbox">';
-			out += '<button type="button" name="subName" class="btn" value="' + data.subType[i].subCode + '" onclick="isCheck(' + data.subType[i].subCode + ');">' + data.subType[i].subName + '</button>';
+			out += '<button type="button" name="subName" class="btn btn-xs" value="' + data.subType[i].subCode + '" onclick="isCheck(' + data.subType[i].subCode + ');">' + data.subType[i].subName + '</button>';
 			out += '<input type="checkbox" name="subCode" class="hidden" value="' + data.subType[i].subCode + '" />';
 			out += '</span>';
 		}
@@ -131,12 +137,12 @@ function listPrint(data){
 		for(var i=0; i<data.list.length; i++){
 			out += '<div class="marketDiv">';
 			out += '	<div style="text-align: center;">';
-			out += '		<img src="" width="110px" height="140px" />';//data.list[i].photo
+			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />';//data.list[i].photo
 			out += '	</div>';
 			out += '	<div>';
 			out += '		이름: ' + data.list[i].rName + '(' + data.list[i].rNum + ')<br>';
-			out += '		관심직종: ' + data.list[i].subTypes + '<br><br>';
-			out += '		<a href="<%=cp%>/talent/main/article?mId=&rNum=' + data.list[i].rNum + '">이력서 보러가기</a>';
+			out += '		관심직종<br>' + data.list[i].subTypes + '<br>';
+			out += '		<a href="<%=cp%>/talent/main/article?mId=&rNum=' + data.list[i].rNum + '">[ 이력서 보러가기 ]</a>';
 			out += '	</div>';
 			out += '</div>';
 		}
