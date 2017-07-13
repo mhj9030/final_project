@@ -70,6 +70,7 @@ $("body").on("click", 'button[name="mainName"]', function(){
 		dataType: "json",
 		success: function(data){
 			subPrint(data);
+			listPrint(data);
 		},
 		error:function(e){
 			console.log(e);

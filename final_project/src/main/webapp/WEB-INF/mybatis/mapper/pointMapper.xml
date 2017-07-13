@@ -25,6 +25,22 @@
 		where poNum=#{poNum}
 	</select>
 	
+	<select id="preRead" parameterType="map" resultType="com.final_project.point.Point">
+		select rownum, tb.* from( 
+			select poNum, subject from point_intro
+			where poNum <![CDATA[>]]> #{poNum} 
+			order by poNum asc 
+		) tb where rownum=1
+	</select>
+	
+	<select id="nextRead" parameterType="map" resultType="com.final_project.point.Point">
+		select rownum, tb.* from( 
+			select poNum, subject from point_intro
+			where poNum <![CDATA[<]]> #{poNum} 
+			order by poNum desc 
+		) tb where rownum=1
+	</select>
+	
 	<insert id="insertBoard" parameterType="com.final_project.point.Point">
 		insert into point_intro(poNum, subject, content, mId) 
 		values(point_intro_seq.nextval, #{subject}, #{content}, #{mId})
@@ -105,5 +121,10 @@
 	<insert id="usePoint" parameterType="map">
 		insert into point(poNum, classify, history, point, mid) 
 		values(point_seq.nextval, #{classify}, #{history}, #{point}, #{mId})
+	</insert>
+	
+	<insert id="buyResume" parameterType="map">
+		insert into storagy(stNum, rNum, mid) 
+		values(storagy_seq.nextval, #{rNum}, #{mId})
 	</insert>
 </mapper>

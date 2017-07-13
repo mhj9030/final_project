@@ -58,6 +58,10 @@
 		</div>
 		</c:forEach>
 	</div>
+	
+	<div class="paging">
+		${paging}
+	</div>
 </div>
 
 <script>

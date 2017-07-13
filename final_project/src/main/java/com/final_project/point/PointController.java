@@ -83,9 +83,13 @@ public class PointController {
 
 		map.put("poNum", num);
 		dto = service.readBoard(map);
+		Point preReadDto = service.preRead(map);
+		Point nextReadDto = service.nextRead(map);
 		
 		model.addAttribute("page", page);
 		model.addAttribute("dto", dto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
 		
 		return ".point_layout.main.article";
 	}

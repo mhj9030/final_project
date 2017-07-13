@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
@@ -75,5 +76,18 @@ public class MypointController {
 		model.addAttribute("pointType", pointType);
 		
 		return ".point_layout.mypoint.mypoint";
+	}
+	
+	
+	@RequestMapping("/point/saveEvent")
+	public String saveEvent(){
+		return ".point_layout.saveEvent.random";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/point/randomPoint")
+	public String randomPoint(){
+		
+		return ".point_layout.saveEvent.random";
 	}
 }
