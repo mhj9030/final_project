@@ -45,6 +45,24 @@ public class SearchServiceImpl implements SearchService{
 		
 		try {
 			dto=dao.getReadData("company.readCompanyNum", cNum);
+			
+			if(dto.getcProfit()!=null){
+				dto.setcProfit1(dto.getcProfit().split(",")[0]);
+				dto.setcProfit2(dto.getcProfit().split(",")[1]);
+				dto.setcProfit3(dto.getcProfit().split(",")[2]);
+				
+				dto.setcProfit("");
+				
+				if(dto.getcProfit1()!=null && dto.getcProfit1().length()!=0){
+					dto.setcProfit(dto.getcProfit()+dto.getcProfit1()+"조 ");
+				}
+				if(dto.getcProfit()!=null && dto.getcProfit2().length()!=0){
+					dto.setcProfit(dto.getcProfit()+dto.getcProfit2()+"억 ");
+				}
+				if(dto.getcProfit()!=null && dto.getcProfit3().length()!=0){
+					dto.setcProfit(dto.getcProfit()+dto.getcProfit3()+"만원");
+				}
+			}
 		} catch (Exception e) {
 			throw e;
 		}

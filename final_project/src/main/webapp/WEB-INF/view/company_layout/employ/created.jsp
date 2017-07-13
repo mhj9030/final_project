@@ -9,15 +9,15 @@
 <script type="text/javascript" src="<%=cp%>/resources/js/jquery-3.1.0.min.js"></script>
 <script>
 	$(function(){
-		$("input[name=upload]").hide();
+		$("#upload-form").hide();
 		
 		$("#resumeForm").change(function(){
 			var resumeForm=$(this).find('option:selected').val();
 			
 			if(resumeForm=="기본"){
-				$("input[name=upload]").hide();
+				$("#upload-form").hide();
 			} else if(resumeForm=="첨부"){
-				$("input[name=upload]").show();
+				$("#upload-form").show();
 			}
 		});
 		
@@ -41,7 +41,14 @@
 			$(".sub-form-control").hide();
 			$("select[name=subCode]").attr("disabled", "disabled");
 			
-			$("#ceType").val("${dto.ceType}").attr("selected", "selected");
+			$("#maCode").val("${dto.maCode}").attr("selected", "selected");
+			$("#subCode"+"${dto.maCode}").show();
+			$("#subCode"+"${dto.maCode}").val("${dto.subCode}");
+			$("#subCode"+"${dto.maCode}").removeAttr("disabled");
+			
+			$("#resumeForm").val("${dto.resumeForm}").attr("selected", "selected");
+			if("${dto.resumeForm}"=="첨부")
+				$("#upload-form").show();
 		}
 	});
 
@@ -278,12 +285,27 @@
   			</select>
   		</div>
   		
-  		<div class="form-group">
-  			<input name="upload" type="file" value="등록파일">
-  		</div>
+  		<div id="upload-form" class="row">
+    		<div class="col-xs-3">
+    			<input name="upload" type="file" value="등록파일">
+    		</div>
+    			
+    		<div class="col-xs-2 original-filename">
+		    	<c:if test="${mode=='update'}">
+		    		<c:if test="${not empty dto.resumeOriginalName}">
+		    			<span>등록파일 : ${dto.resumeOriginalName}</span>
+		    		</c:if>
+		    	</c:if>
+		    </div>
+    	</div>
   		
   		<button type="button" class="btn btn-default" onclick="check();">등록</button>
 		<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/employ';">돌아가기</button>
+		<c:if test="${mode=='update'}">
+			<input type="hidden" name="ceNum" value="${dto.ceNum}">
+			<input type="hidden" name="resumeFile" value="${dto.resumeFile}">        	
+			<input type="hidden" name="resumeOriginalName" value="${dto.resumeOriginalName}">
+		</c:if>
 	</form>
 </div>
 
@@ -322,7 +344,7 @@
 
 	            // 인포윈도우로 장소에 대한 설명을 표시합니다
 	            var infowindow = new daum.maps.InfoWindow({
-	                content: '<div style="width:150px;text-align:center;padding:6px 0;"></div>'
+	                content: '<div style="width:150px;text-align:center;padding:6px 0;">${dto.cName}</div>'
 	            });
 	            infowindow.open(map, marker);
 

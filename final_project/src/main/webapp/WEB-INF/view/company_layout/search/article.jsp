@@ -42,7 +42,7 @@
 						<h1 align="left">| 기본 정보 <small></small></h1>
 					</div>
 					<div class="col-xs-7" style="margin-top: 30px; text-align: right;">
-						<button class="btn btn-default" type="button">문의하기</button>
+						<button class="btn btn-default" type="button" onclick="javascrpit:location.href='<%=cp%>/company/inquiry/created'">문의하기</button>
 					</div>
 				</div>
 			</div>
@@ -59,12 +59,12 @@
 		  				<td class="active" width="100">기업형태</td>
 		  				<td width="100">${dto.cSize}</td>
 		  				<td class="active" width="100">사원수</td>
-		  				<td width="100">${dto.cPeople}</td>
+		  				<td width="100">${dto.cPeople}명</td>
 		  			</tr>
 		  			
 		  			<tr align="center">
 		  				<td class="active" width="100">매출액</td>
-		  				<td width="100">${dto.cProfit} 만원</td>
+		  				<td width="100">${dto.cProfit}</td>
 		  				<td class="active" width="100">업종</td>
 		  				<td width="100">${dto.maName}</td>
 		  			</tr>
