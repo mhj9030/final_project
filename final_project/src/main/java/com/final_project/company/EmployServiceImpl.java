@@ -106,4 +106,21 @@ public class EmployServiceImpl implements EmployService{
 			throw e;
 		}
 	}
+
+	@Override
+	public void deleteComEmploy(int ceNum, String pathname) throws Exception {
+		try {
+			Employ dto=readEmploy(ceNum);
+			
+			if(dto!=null){
+				if(dto.getResumeFile()!=null && dto.getResumeFile().length()!=0){
+					fileManager.doFileDelete(dto.getResumeFile(), pathname);
+				}
+			}
+			
+			dao.deleteData("company.deleteComEmploy", ceNum);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

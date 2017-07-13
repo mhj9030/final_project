@@ -57,10 +57,10 @@
 			     		</if>
 					</where>
 					<if test="order=='recent'">
-						order by cNum asc
+						order by cNum desc
 					</if>
 					<if test="order=='employ'">
-						order by employ_cnt desc, cNum asc
+						order by employ_cnt desc, cNum desc
 					</if>
 		<![CDATA[
 				)tb where rownum<=#{end}
@@ -132,12 +132,13 @@
 	<select id="listComEmploy" parameterType="map" resultType="com.final_project.company.Employ">
 		select * from(
 			select rownum rnum, tb.* from(
-		    	select ceNum, ceSubject, to_char(ceStart, 'YYYY-MM-DD') ceStart, to_char(ceEnd, 'YYYY-MM-DD') ceEnd
+		    	select ceNum, ceSubject
 		        	from com_employ
 		        	where cSerial=#{cSerial}
 		        	<if test="searchValue!=null and searchValue!='' ">
 	     				and instr(ceSubject, #{searchValue})&gt;=1
 	     			</if>
+	     			order by ceNum desc
 		<![CDATA[
 			)tb where rownum<=#{end}
 		)where rnum>=#{start}
@@ -150,24 +151,24 @@
 		select ceNum, ceSubject, cePeople, ceType, 
 			to_char(ceStart, 'YYYY-MM-DD') ceStart, 
 			to_char(ceEnd, 'YYYY-MM-DD') ceEnd, cePay, cePrefere, 
-			ceEtc, resumeForm, cSerial, atCode, subCode, cePlace, 
+			ceEtc, resumeForm, ce.cSerial, atCode, ce.subCode, maCode, cePlace, cName,
 			resumeFile, resumeOriginalName
-			from com_employ
+			from com_employ ce
+      		join sub_class sc on ce.subCode=sc.subCode
+      		join company c on ce.cSerial=c.cSerial
 			where ceNum=#{ceNum}
 	</select>
 	
 	<!-- 채용 삭제 -->
 	<delete id="deleteComEmploy">
-		delete from applicant
-  			where ceNum=#{ceNum}
 		delete from com_employ
   			where ceNum=#{ceNum}
 	</delete>
 	
 	<!-- 채용 수정 -->
 	<update id="updateComEmploy" parameterType="com.final_project.company.Employ">
-		update com_imploy set ceSubject=#{ceSubject}, cePeople=#{cePeople}, ceType=#{ceType}
-			ceStart=#{ceStart}, ceEnd=#{ceEnd}, cePay=#{cePay}, cePlace=#{cePlace} 
+		update com_employ set ceSubject=#{ceSubject}, cePeople=#{cePeople}, ceType=#{ceType},
+			ceStart=#{ceStart}, ceEnd=#{ceEnd}, cePay=#{cePay}, cePlace=#{cePlace}, 
 			cePrefere=#{cePrefere}, ceEtc=#{ceEtc}, resumeForm=#{resumeForm}, 
 			resumeFile=#{resumeFile, jdbcType=VARCHAR}, 
 			resumeOriginalName=#{resumeOriginalName, jdbcType=VARCHAR}, atCode=#{atCode}, 
@@ -185,6 +186,12 @@
 			    	join member m on r.mid=m.mid
 			    	left outer join profile p on p.mid=m.mid
 			    	where ceNum=#{ceNum}
+			    	<if test="order=='recent'">
+						order by appDate desc
+					</if>
+					<if test="order=='name'">
+						order by m.mName asc, appDate desc
+					</if>
 		<![CDATA[
 			)tb where rownum<=#{end}
 		)where rrnum>=#{start}
@@ -201,14 +208,22 @@
 	<select id="applicantListEmploy" parameterType="String" resultType="com.final_project.company.Employ">
 		select ceNum, ceSubject from com_employ
  			where cSerial=#{cSerial}
+ 			order by ceNum desc
 	</select> 
 	
 	<!-- 기업명 리스트 -->
 	<select id="listCompanyName" parameterType="map" resultType="com.final_project.company.Company">
 		select cNum, cName from company
+			where cNum>0
 		<if test="searchCompany!=null and searchCompany!='' ">
-			where instr(cName, #{searchCompany})&gt;=1
+			and instr(cName, #{searchCompany})&gt;=1
 		</if>
+	</select>
+	
+	<!--  -->
+	<select id="searchCompanyName" parameterType="Integer" resultType="String">
+		select cName from company
+			where cNum=#{cNum}
 	</select>
 </mapper>
 

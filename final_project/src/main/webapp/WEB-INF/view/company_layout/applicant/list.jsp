@@ -7,6 +7,14 @@
 	String cp=request.getContextPath();
 %>
 <script>
+	$(function(){
+		$("input[name=order]").change(function(){
+			var order=$(this).val();
+
+			alert(order);
+		});
+	});
+
 	function searchList(ceNum, ceSubject){
 		$("#employ-subject").html(ceSubject);
 		
@@ -23,7 +31,7 @@
 				var paging=data.paging;
 				
 				var out="<div class='list-header' style='margin-top: 30px;'>";
-				out+="<div align='left'><h4>전체 지원자("+dataCount+")</h4></div>";
+				out+="<div align='left' style='float: left;'><h4>전체 지원자("+dataCount+"명)</h4></div>";
 				out+="	<div class='chk_info' align='right'>";
 				out+="		<input type='radio' name='order' value='recent' checked='checked'> 최신순";
 				out+="		<input type='radio' name='order' value='name'> 이름순";
@@ -86,6 +94,9 @@
 				    	채용 선택 <span class="caret"></span>
 				  	</button>
 					<ul class="dropdown-menu" role="menu">
+						<c:if test="${empty listEmploy}">
+							<li><a href="#">진행 중인 채용 정보가 없습니다</a></li>
+						</c:if>
 						<c:forEach var="dto" items="${listEmploy}">
 							<li><a href="#" onclick="searchList('${dto.ceNum}', '${dto.ceSubject}'); return false">${dto.ceSubject}</a></li>
 						</c:forEach>
@@ -102,6 +113,7 @@
 	
 	<form name="searchForm" action="" method="post">
 		<input type="hidden" name="ceNum">
+		<input type="hidden" name="order">
 	</form>
 	
 	<div id="listApplicant" class="list"></div>

@@ -24,8 +24,13 @@
 		location.href=url;
 	}
 	
-	function deleteEmploy(){
+	function deleteEmploy(ceNum){
+		var page=${page};
+		var query="ceNum="+ceNum+"&page="+page;
+		var url="<%=cp%>/company/employ/delete?"+query;
 		
+		if(confirm("위 자료를 삭제 하시겠습니까?"))
+		  	location.href=url;
 	}
 </script>
 
@@ -58,7 +63,7 @@
 							<button type="button" class="btn btn-default btn-xs" onclick="updateEmploy('${dto.ceNum}')">수정</button>
 						</td>
 						<td>
-							<button type="button" class="btn btn-default btn-xs">삭제</button>
+							<button type="button" class="btn btn-default btn-xs" onclick="deleteEmploy('${dto.ceNum}')">삭제</button>
 						</td>
 					</tr>
 				</tbody>
