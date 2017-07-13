@@ -16,6 +16,22 @@
 			instr(subName, #{searchValue})=1
 		</if>
 	</sql>
+	
+	<sql id="inquiry-where-list">
+		<if test="searchKey=='cqSubject'">
+			and instr(cqSubject, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='mName'">
+			and instr(mName, #{searchValue})=1
+		</if>
+		<if test="searchKey=='cqContent'">
+			and instr(cqContent, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='cqCreated'">
+			and (to_char(cqCreated, 'YYYY-MM-DD')=#{searchValue}
+				or to_char(cqCreated, 'YYYYMMDD')=#{searchValue})
+		</if>
+	</sql>
 
 	<!-- 기업 등록 -->
 	<insert id="insertCompany" parameterType="com.final_project.company.Company">
@@ -220,10 +236,63 @@
 		</if>
 	</select>
 	
-	<!--  -->
+	<!-- 기업명 찾기 -->
 	<select id="searchCompanyName" parameterType="Integer" resultType="String">
 		select cName from company
 			where cNum=#{cNum}
+	</select>
+	
+	<!-- 기업 문의 등록 -->
+	<insert id="insertInquiry" parameterType="com.final_project.company.Inquiry">
+		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum)
+  			values(COMPANY_QU_SEQ.CURRVAL, #{cqSubject}, #{cqContent}, 0, 0, COMPANY_QU_SEQ.nextval, #{mId}, #{cNum})
+	</insert>
+	
+	<!-- 기업 문의 답변 등록 -->
+	<insert id="insertAnswerInquiry" parameterType="com.final_project.company.Inquiry">
+		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum)
+			values(company_qu_seq.nextval, #{cqSubject}, #{cqContent}, 1, 1, #{cqNum}, #{mId}, #{cNum})
+	</insert>
+	
+	<!-- 기업 문의 Count -->
+	<select id="inquiryCount" parameterType="map" resultType="Integer">
+		select nvl(count(*), 0) from company_qu cq
+			join member m on cq.mId=m.mId
+ 			where cNum=#{cNum}
+ 			<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="inquiry-where-list"/>
+	     	</if>
+	</select>
+	
+	<!-- 기업 문의 리스트 -->
+	<select id="listInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
+		select * from(
+			select rownum rnum, tb.* from(
+		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName
+            from company_qu cq
+            join member m on cq.mId=m.mId
+            where cNum=#{cNum}
+            <if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="inquiry-where-list"/>
+	     	</if>
+	     	order by cqGroupNum desc, cqNum asc
+		<![CDATA[
+			)tb where rownum<=#{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 기업 문의 가져오기 -->
+	<select id="readInquiry" parameterType="Integer" resultType="com.final_project.company.Inquiry">
+		select cqNum, cqSubject, cqContent, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, 
+			cqIsq, cqDepth, cqGroupNum, cq.mId, cNum, mName
+			from company_qu cq
+			join member m on cq.mId=m.mId
+			where cqNum=#{cqNum}
+	</select>
+	
+	<!-- 기업 문의 이전글 -->
+	<select id="preReadInquiry">
 	</select>
 </mapper>
 
