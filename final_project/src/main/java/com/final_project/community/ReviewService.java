@@ -7,6 +7,7 @@ import java.util.Map;
 public interface ReviewService {
 	public int insertReview(Review dto); //뉴스추가
 	public List<Review> listReview(Map<String, Object> map); //뉴스리스트
+	public List<Review> listReviewLike(Map<String, Object> map);//뉴스리스트 좋아요순
 	public int dataCount(Map<String, Object> map); //총 뉴스갯수
 	public Review readReview(int ibnum); // 뉴스읽기
 	public int updateHitCount(int ibnum); // 뉴스 조회수 
