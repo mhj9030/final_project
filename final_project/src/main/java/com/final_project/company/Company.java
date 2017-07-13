@@ -12,7 +12,8 @@ public class Company {
 	private int cNum;
 	private String cSerial, cSerial1, cSerial2, cSerial3; 
 	private String cCeo, cName, mId;
-	private int cPeople, cProfit, subCode;
+	private int cPeople, subCode;
+	private String cProfit, cProfit1, cProfit2, cProfit3;
 	private String subName, maName;
 	private String cCreated, cSize, cIntro, cDescription, cAddress;
 	private String cTel, cTel1, cTel2, cTel3;
@@ -99,12 +100,6 @@ public class Company {
 	}
 	public void setcPeople(int cPeople) {
 		this.cPeople = cPeople;
-	}
-	public int getcProfit() {
-		return cProfit;
-	}
-	public void setcProfit(int cProfit) {
-		this.cProfit = cProfit;
 	}
 	public int getSubCode() {
 		return subCode;
@@ -195,5 +190,29 @@ public class Company {
 	}
 	public void setcAddress(String cAddress) {
 		this.cAddress = cAddress;
+	}
+	public String getcProfit() {
+		return cProfit;
+	}
+	public void setcProfit(String cProfit) {
+		this.cProfit = cProfit;
+	}
+	public String getcProfit1() {
+		return cProfit1;
+	}
+	public void setcProfit1(String cProfit1) {
+		this.cProfit1 = cProfit1;
+	}
+	public String getcProfit2() {
+		return cProfit2;
+	}
+	public void setcProfit2(String cProfit2) {
+		this.cProfit2 = cProfit2;
+	}
+	public String getcProfit3() {
+		return cProfit3;
+	}
+	public void setcProfit3(String cProfit3) {
+		this.cProfit3 = cProfit3;
 	}
 }

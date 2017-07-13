@@ -40,7 +40,10 @@
 <link href="<%=cp%>/resources/custom_css/company_employ.css" rel="stylesheet">
 <!-- company_applicant.css -->
 <link href="<%=cp%>/resources/custom_css/company_applicant.css" rel="stylesheet">
-
+<!-- company_employ_created.css -->
+<link href="<%=cp%>/resources/custom_css/company_employ_created.css" rel="stylesheet">
+<!-- created_form.css -->
+<link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
 
 </head>
 <body>

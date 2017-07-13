@@ -148,6 +148,50 @@ public class EmployController {
 		
 		return ".company_layout.employ.article";
 	}
+	
+	@RequestMapping(value="/company/employ/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int ceNum,
+			@RequestParam(value="page", defaultValue="1") int page,
+			Model model) throws Exception{
+		
+		Employ dto=service.readEmploy(ceNum);
+		if(dto==null) {
+			return "redirect:/company/employ?page="+page;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("employ", "on");
+		model.addAttribute("mode", "update");
+				
+		return ".company_layout.employ.created";
+	}
+	
+	@RequestMapping(value="/company/employ/update", method=RequestMethod.POST)
+	public String updateSubmit(Employ dto, @RequestParam(value="page", defaultValue="1") int page, HttpSession session) throws Exception{
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"employ";
+		
+		service.updateComEmploy(dto, pathname);
+		
+		return "redirect:/company/employ?page="+page;
+	}
+	
+	@RequestMapping(value="/company/employ/delete")
+	public String delete(
+			@RequestParam int ceNum,
+			@RequestParam int page,
+			HttpSession session
+			) throws Exception{
+		
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"employ";
+		
+		service.deleteComEmploy(ceNum, pathname);
+		
+		return "redirect:/company/employ?page="+page;
+	}
 }
 
 

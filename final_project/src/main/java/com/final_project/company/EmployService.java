@@ -8,4 +8,6 @@ public interface EmployService {
 	public List<Employ> listComEmploy(Map<String, Object> map) throws Exception;
 	public int dataCount(Map<String, Object> map) throws Exception;
 	public Employ readEmploy(int ceNum) throws Exception;
+	public void updateComEmploy(Employ dto, String pathname) throws Exception;
+	public void deleteComEmploy(int ceNum, String pathname) throws Exception;
 }

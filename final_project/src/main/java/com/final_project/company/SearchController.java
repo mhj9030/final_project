@@ -94,7 +94,7 @@ public class SearchController {
 	@RequestMapping("/company/search/article")
 	public String article(
 			@RequestParam(value="cNum") int cNum,
-			@RequestParam(value="page") String page,
+			@RequestParam(value="page", defaultValue="1") String page,
 			@RequestParam(value="searchKey", defaultValue="cName") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			Model model) throws Exception{

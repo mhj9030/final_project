@@ -2,7 +2,7 @@
 
 .tip_list_wrap{
 	width: 800px;
-	min-height: 550px;
+	min-height: 700px;
 	margin: 30px auto;
 }
 
@@ -18,6 +18,15 @@
 	margin-bottom: 40px;
 }
 
+.tip_list_wrap .list-body{
+	width: 700px;
+	margin: 0px auto;
+}
+
+.list-body1{
+	width:700px;
+	margin:0px auto;
+}
 
 .tip_search_wrap{
 	width : 800px;
@@ -44,17 +53,18 @@
 }
 
 .tip_list_table{
-	width: 800px;
+	width: 700px;
 	margin: 10px auto 20px;
 	border-collapse: collapse;
 }
 
 
 .row {
-  width: 100%;
+  width: 700px;
   height : 200px;
   text-align: center;
   border: 4px double #ccc;
+  margin: 0px auto;
 }
 
 .row .row_header{
@@ -189,6 +199,7 @@ input[type="checkbox"] + label:after {
   top: 2px;
   left: 2px;
 }
+
 
 
 

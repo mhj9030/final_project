@@ -39,8 +39,9 @@ public class ApplicantController {
 	}
 	
 	@RequestMapping("/company/applicant/list")
+	@ResponseBody
 	public Map<String, Object> list(
-			@RequestParam(value="ceNum", defaultValue="") int ceNum,
+			@RequestParam int ceNum,
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(value="order", defaultValue="recent") String order,
 			HttpServletRequest req) throws Exception {
@@ -63,6 +64,8 @@ public class ApplicantController {
         int end = current_page * rows;
         map.put("start", start);
         map.put("end", end);
+        map.put("ceNum", ceNum);
+        map.put("order", order);
 		
         List<Applicant> list=service.listApplicant(map);
         
@@ -73,9 +76,7 @@ public class ApplicantController {
         Map<String, Object> model = new HashMap<>();
         
         model.put("list", list);
-        model.put("page", current_page);
         model.put("dataCount", dataCount);
-        model.put("total_page", total_page);
         model.put("paging", paging);
 		
 		return model;
