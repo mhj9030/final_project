@@ -113,7 +113,20 @@ $("#job > div > a").mouseenter(function() {
 	});
 
 	$("#location").mouseleave(function() {
-		$("#location").html("");
+		var out="";
+			out+="<a>서울특별시</a><br>";
+			out+="<a>광주광역시</a><br>";
+			out+="<a>대전광역시</a><br>";
+			out+="<a>부산광역시</a><br>";
+			out+="<a>인천광역시</a><br>";
+			out+="<a>경기도</a><br>";
+			out+="<a>경상남도/경상북도</a><br>";
+			out+="<a>충청남도/충청북도</a><br>";
+			out+="<a>전라남도/전라북도</a><br>";
+			out+="<a>강원도</a><br>";
+			out+="<a>제주특별자치도</a><br>";
+			
+		$("#location").html(out);
 		$("#location").attr("style","height:424px;border-right:1px solid #F5F5F5;padding:20px;");
 		$("#job > div > a").parent().attr("class","target");
 	});
@@ -481,9 +494,40 @@ function ajaxHTML(url, type, query) {
 	  				
 	  				
 	  			</div>
-	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;" id="location"></div>
-	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"  id="ETC"></div>
-	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"id="com"></div>
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;" id="location">
+	  			<a>서울특별시</a><br>
+	  			<a>광주광역시</a><br>
+	  			<a>대전광역시</a><br>
+	  			<a>부산광역시</a><br>
+	  			<a>인천광역시</a><br>
+	  			<a>경기도</a><br>
+	  			<a>경상남도/경상북도</a><br>
+	  			<a>충청남도/충청북도</a><br>
+	  			<a>전라남도/전라북도</a><br>
+	  			<a>강원도</a><br>
+	  			<a>제주특별자치도</a><br>
+	  			</div>
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"  id="ETC">
+	  			<strong>근무조건</strong><br>
+	  			<c:forEach var="dto" items="${ceTlist}">
+		  	 			<a id="${dto.ceType}">${dto.ceType}</a><br>
+				</c:forEach>
+	  			<br>
+	  			<strong>자격증</strong><br>
+	  			<c:forEach var="dto" items="${lclist}">
+	  					<a id="${dto.license}">${dto.license}</a><br>
+				</c:forEach>
+				<br>
+	  			<strong>우대사항</strong><br>
+	  			<c:forEach var="dto" items="${cePlist}">
+	  				<a id="${dto.cePrefere}">${dto.cePrefere}</a><br>
+			    </c:forEach>
+	  			</div>
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"id="com">
+	  			<a>삼성전자</a><br>
+	  			<a>로켓펀치</a><br>
+	  			<a>KH정보교육원</a><br>
+	  			</div>
 	  		</div>
 	  		<br>
 	  		
