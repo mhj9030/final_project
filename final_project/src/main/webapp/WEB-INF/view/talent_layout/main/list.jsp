@@ -42,7 +42,7 @@
 	<br><br>
 	
 	<!-- 리스트 -->
-	<div id="talent_list">
+	<div id="talent_list" class="row">
 	</div>
 	
 	<div class="paging">
@@ -135,14 +135,16 @@ function listPrint(data){
 	
 	if(data.list.length!=0){
 		for(var i=0; i<data.list.length; i++){
-			out += '<div class="marketDiv">';
-			out += '	<div style="text-align: center;">';
+			out += '<div class="list-content col-sm-5">';
+			out += '	<div class="col-xs-6 col-sm-5">';
 			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />';//data.list[i].photo
 			out += '	</div>';
-			out += '	<div>';
-			out += '		이름: ' + data.list[i].rName + '(' + data.list[i].rNum + ')<br>';
-			out += '		관심직종<br>' + data.list[i].subTypes + '<br>';
-			out += '		<a href="<%=cp%>/talent/main/article?mId=&rNum=' + data.list[i].rNum + '">[ 이력서 보러가기 ]</a>';
+			out += '	<div class="col-xs-6 col-sm-7">';
+			out += '		<span>' + data.list[i].rName + '(' + data.list[i].rNum + ')</span>';
+			out += '		<p class="text-muted small">' + data.list[i].mId + '</p>';
+			out += '		<p class="small">관심분야<br>' + data.list[i].subTypes + '</p>';
+			out += '		<button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user" aria-hidden="true"></i> 프로필 </button>';
+			out += '		<button type="button" class="btn btn-primary btn-xs" onclick="article(' + data.list[i].rNum + ');"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 </button>';
 			out += '	</div>';
 			out += '</div>';
 		}
@@ -151,5 +153,9 @@ function listPrint(data){
 	}
 	
 	$("#talent_list").html(out);
+}
+
+function article(rNum) {
+	location.href = "<%=cp%>/point/storagy/article?rNum=" + rNum + "&page=${page}";
 }
 </script>
