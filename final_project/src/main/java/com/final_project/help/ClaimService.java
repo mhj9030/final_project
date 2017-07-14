@@ -11,6 +11,11 @@ public interface ClaimService {
 	public int updateHitCount(int num);
 	public Claim preReadClaim(Map<String, Object> map);
 	public Claim nextReadClaim(Map<String, Object> map);
+	public int updateClaim(Claim dto);
+	public int deleteClaim(Map<String, Object> map);
 	
+	public int replyDataCount(Map<String, Object> map);
 	public int insertReply(ClaimReply dto);
+	public List<ClaimReply>listReply(Map<String, Object> map);
+	
 }

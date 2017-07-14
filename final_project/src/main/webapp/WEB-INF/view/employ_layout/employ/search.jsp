@@ -47,16 +47,93 @@
 	position:relative;
 	top:1px;
 }
+
+.col-md-3 a {
+color:#666666;
+}
+.target:after {content:''; position:absolute; width:10px; height:px; border: 10px solid white;}
+.target a { padding:10px; padding:0;width:100px;border-radius:20px;}
+.target.go:after {border-color:transparent lightgray transparent transparent;reft:100px;position:absolute;left:225px}
 </style>
 
 <script type="text/javascript">
 
 
 $(function() {
+	detaillistPage(1);
+
+/*채용정보 분류별 검색*/
+//1차직종
+$("#location > a").click(function() {
+	alert("d");
+	if($(this).attr("id")=='j') {
+		$("#sub_class").append("<option value="+$(this).attr("id").substring(1)+">"+ $(this).attr("id").substring(1)+"</option>");
+		$("#sub_class option:selected").val("");
+	}
+});
+
+
+
+
+$("#job > div > a").mouseenter(function() {
+	$("#job > div > a").parent().attr("class","target");
+	$("#location").html("");
+	$("#location").attr("style","height:424px;border:3px solid lightgray;padding:20px;");
+		$(this).parent().attr("class","target go");
+		
+		//2차직종
+		var macode = $(this).parent().attr("id");
+		var subname = new Array();
+		var subcode = new Array();
+		<c:forEach items="${sjlist}" var="Employ">
+			if('j${Employ.macode}'==macode){
+			subcode.push("${Employ.subcode}");
+			subname.push("${Employ.subname}");
+			}
+		</c:forEach>
+
+		for (var i = 0; i < subname.length; i++) {
+			$("#location").append("<a id='j'>"+ subname[i]+"</a><br>");
+		}
+		
+		//2차업종
+		var macode = $(this).parent().attr("id");
+		var subname = new Array();
+		var subcode = new Array();
+		<c:forEach items="${sblist}" var="Employ">
+			if('b${Employ.macode}'==macode){
+			subcode.push("${Employ.subcode}");
+			subname.push("${Employ.subname}");
+			}
+		</c:forEach>
+		
+		for (var i = 0; i < subname.length; i++) {
+			$("#location").append("<a id='b'>"+ subname[i]+"</a><br>");
+		}
+	});
+
+	$("#location").mouseleave(function() {
+		var out="";
+			out+="<a>서울특별시</a><br>";
+			out+="<a>광주광역시</a><br>";
+			out+="<a>대전광역시</a><br>";
+			out+="<a>부산광역시</a><br>";
+			out+="<a>인천광역시</a><br>";
+			out+="<a>경기도</a><br>";
+			out+="<a>경상남도/경상북도</a><br>";
+			out+="<a>충청남도/충청북도</a><br>";
+			out+="<a>전라남도/전라북도</a><br>";
+			out+="<a>강원도</a><br>";
+			out+="<a>제주특별자치도</a><br>";
+			
+		$("#location").html(out);
+		$("#location").attr("style","height:424px;border-right:1px solid #F5F5F5;padding:20px;");
+		$("#job > div > a").parent().attr("class","target");
+	});
+	
+ 	
 	
 	
-	
-	listPage(1);
 /* 채용정보 상세검색 */
 
 /* 업종 선택*/
@@ -139,7 +216,7 @@ $("#main_class").change(function() {
 		$("#middlebar").width(mbar+'%');
 		
 		
-		listPage(1);
+		detaillistPage(page);
 	});
 	
 	//endpay가 변경되면
@@ -162,7 +239,7 @@ $("#main_class").change(function() {
 		$("#middlebar").width(mbar+'%');
 		$("#endbar").width(ebar+'%');
 		$("#listEmploy").html("");
-		listPage(1);
+		detaillistPage(1);
 	});
 	
 	
@@ -170,25 +247,28 @@ $("#main_class").change(function() {
 	
 	/* 검색,키워드 추가부분 */
 	$("#cePrefere").change(function() {
-		listPage(1);
+		detaillistPage(1);
 	});
 	$("#ceType").change(function() {
-		listPage(1);
+		detaillistPage(1);
 	});
 	$("#ability").change(function() {
-		listPage(1);
+		detaillistPage(1);
 	});
 	$("#license").change(function() {
-		listPage(1);
+		detaillistPage(1);
 	});
 	$("#sub_class").change(function() {
-		listPage(1);
+		detaillistPage(1);
 	});
 	$("#s_date").change(function() {
-		listPage(1);
+		detaillistPage(1);
 	});
 	$("#e_date").change(function() {
-		listPage(1);
+		detaillistPage(1);
+	});
+	$("#search").keyup(function() {
+		detaillistPage(1);
 	});
 	
 });
@@ -263,10 +343,10 @@ function imageError(image) {
 }
 
 
-function listPage(page) {
+function detaillistPage(page) {
 	var url="<%=cp%>/employ/list";
 	var query = $('form[name=employForm]').serialize();
-
+	query +="&page="+page;
 	ajaxHTML(url,"get",query);
 }
 
@@ -279,7 +359,7 @@ function ajaxHTML(url, type, query) {
 			
 			var out="";
 			
-			out="데이터 개수 : " + data.celist.length;
+
 			//받아온것 ceNum, ceSubject, ability, ceType, ceStart, ceEnd, cSerial, cName, cLogoimage
 			for(var idx=0; idx<data.celist.length; idx++) {
 				var ceNum=data.celist[idx].ceNum;
@@ -318,6 +398,7 @@ function ajaxHTML(url, type, query) {
 				
 				
 				
+				
 				/* <div class="row">
 				<div class="col-md-12">
 					<div class="col-md-2 center-block" > 
@@ -342,10 +423,14 @@ function ajaxHTML(url, type, query) {
 			
 			<hr> */
 			}
+			out = out.substring(0,out.length-11);
+			out+="<hr>";
+			out+="<div class='col-md-12 text-center'>"+data.paging+"</div>";
+			out+="</div>";
 			
 			
 			if($.trim(data)=="error") {
-				listPage(1);
+				detaillistPage(page);
 				return;
 			}
 			$("#listEmploy").html(out);
@@ -380,36 +465,74 @@ function ajaxHTML(url, type, query) {
   	
   		<div class="row">
   			<div class="col-md-12">
-  			<h3>|전체 채용정보</h3><hr>
-  			
-  			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			지역별<br><br><br><br><br>
-	  		</div>	
-  			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			직종별<br><br><br><br><br>
+  			<h3>|전체 채용정보</h3><hr style="margin-bottom: 0">
+	  			<div class="col-md-3"  style="background:#F5F5F5; font-weight:900; height:30px; width:25%;">
+		  			<span style="line-height:30px">직무/산업별 ＞</span>
+		  		</div>	
+	  			<div class="col-md-3" style="background:#F5F5F5; font-weight:900; height:30px; width:25%">
+		  			<span style="line-height:30px">지역별 ＞</span>
+		  		</div>
+		  		<div class="col-md-3" style="background:#F5F5F5; font-weight:900; height:30px; width:25%" >
+		  			<span style="line-height:30px">분류별 ＞</span>
+		  		</div>
+	  			<div class="col-md-3" style="background:#F5F5F5; font-weight:900; height:30px; width:25%" >
+		  			<span style="line-height:30px">기업별 ＞</span>
+		  		</div>
 	  		</div>
-	  		<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			업종별<br><br><br><br><br>
-	  		</div>
-  			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			기업별<br><br><br><br><br>
+	  		<div class="col-md-12" style="height:424px">
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;border-left:1px solid #F5F5F5;padding:20px;padding-top:0;" id="job" class="target go">
+	  				<strong>직무별(직종)</strong><br>
+	  				  
+					  <c:forEach var="dto" items="${mjlist}">
+					  <div class="targe" id="j${dto.macode}"><a>${dto.maname}</a></div>
+					  </c:forEach>
+					  <br>
+	  				<strong>산업별(업종)</strong><br>
+	  				<c:forEach var="dto" items="${mblist}">
+					  	<div class="targe" id="b${dto.macode}"><a >${dto.maname}</a></div>
+					  </c:forEach>
+	  				
+	  				
+	  			</div>
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;" id="location">
+	  			<a>서울특별시</a><br>
+	  			<a>광주광역시</a><br>
+	  			<a>대전광역시</a><br>
+	  			<a>부산광역시</a><br>
+	  			<a>인천광역시</a><br>
+	  			<a>경기도</a><br>
+	  			<a>경상남도/경상북도</a><br>
+	  			<a>충청남도/충청북도</a><br>
+	  			<a>전라남도/전라북도</a><br>
+	  			<a>강원도</a><br>
+	  			<a>제주특별자치도</a><br>
+	  			</div>
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"  id="ETC">
+	  			<strong>근무조건</strong><br>
+	  			<c:forEach var="dto" items="${ceTlist}">
+		  	 			<a id="${dto.ceType}">${dto.ceType}</a><br>
+				</c:forEach>
+	  			<br>
+	  			<strong>자격증</strong><br>
+	  			<c:forEach var="dto" items="${lclist}">
+	  					<a id="${dto.license}">${dto.license}</a><br>
+				</c:forEach>
+				<br>
+	  			<strong>우대사항</strong><br>
+	  			<c:forEach var="dto" items="${cePlist}">
+	  				<a id="${dto.cePrefere}">${dto.cePrefere}</a><br>
+			    </c:forEach>
+	  			</div>
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"id="com">
+	  			<a>삼성전자</a><br>
+	  			<a>로켓펀치</a><br>
+	  			<a>KH정보교육원</a><br>
+	  			</div>
 	  		</div>
 	  		<br>
-	  		<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			학력별<br><br><br><br><br>
-	  		</div>	
-  			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			연봉별<br><br><br><br><br>
-	  		</div>
-	  		<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			우대조건별<br><br><br><br><br>
-	  		</div>
-  			<div class="col-md-3" style="border-left: 5px solid #F5F5F5">
-	  			상세조건별<br><br><br><br><br>
-	  		</div>
 	  		
 	  		
-  			</div>
+  			
 	  		
   	</div>	
 	
@@ -578,7 +701,7 @@ function ajaxHTML(url, type, query) {
 					  </div>
 					  
 					  <div class="col-md-3">
-					  <input type="text" class="form-control" placeholder="검색키워드">
+					  <input type="text" class="form-control" placeholder="검색키워드:회사,제목" value="" id="search" name="search">
 					  </div>
 					</div>
 					
@@ -619,7 +742,7 @@ function ajaxHTML(url, type, query) {
 	
 		<div class="col-md-12" style="background: #5BC0DE;border-radius: 3px;padding: 20px;margin: 20px 0;color:white;max-height:15px;text-align: center;border-left-width: 5px solid #337AB7;">
 			<div class="col-md-2">
-				모든채용 (9)
+				모든채용 (${dataCount })
 			</div>
 			<div class="col-md-4">
 				제목
@@ -639,7 +762,7 @@ function ajaxHTML(url, type, query) {
 	<!-- 채용정보 -->
 	<!-- 검색을 누르면 ajax로 페이지가 바뀌어야한다. -->
 	<!-- 페이징으로한다. -->
-	<!-- 일단은 모든페이지 다나오게 한다.(listPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
+	<!-- 일단은 모든페이지 다나오게 한다.(detaillistPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
 	<div class="callout" style="padding: 20px;margin: 20px 0;border: 1px solid #eee; border-left-width: 5px;border-radius: 3px;">
 		
 		<div id="listEmploy"><!-- ajax나오는id -->
@@ -683,18 +806,7 @@ function ajaxHTML(url, type, query) {
 	
 	</div>	
 	
-	<div class="row">
-		<div class="col-md-12 text-center">
-			<ul class="pagination">
-			  <li><a href="#">1</a></li>
-			  <li style="background:#5BC0DE;color:white; "><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
-			</ul>
-		</div>
-	
-	</div>	
+
 	
 	<!-- 즉시지원 모달 -->
 	

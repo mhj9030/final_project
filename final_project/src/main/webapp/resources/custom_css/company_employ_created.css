@@ -1,5 +1,14 @@
 @CHARSET "UTF-8";
 
+.employ-created-body{
+	clear: both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    min-height: 500px;
+    padding-top: 20px;
+    width: 800px;
+}
+
 #upload-form{
 	margin-bottom: 20px;
 }

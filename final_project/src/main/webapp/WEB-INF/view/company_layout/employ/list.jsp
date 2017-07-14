@@ -34,11 +34,11 @@
 	}
 </script>
 
-<div class="employ-body">
+<div class="employ-list-body">
 	<div class="page-header">
-		<h1 align="left">
+		<h3 align="left">
 			| 채용관리 <small></small>
-		</h1>
+		</h3>
 	</div>
 	
 	<div>

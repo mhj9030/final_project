@@ -2,7 +2,7 @@
 
 .group_list_wrap{
 	width: 800px;
-	min-height: 550px;
+	min-height: 700px;
 	margin: 30px auto;
 	box-sizing: border-box;
 }
@@ -81,6 +81,7 @@
 }
 
 .group_list_wrap .group_row{
+	width : 800px;
 	margin: 0px 0px 10px;
 	border: 0px;
 	height: auto;

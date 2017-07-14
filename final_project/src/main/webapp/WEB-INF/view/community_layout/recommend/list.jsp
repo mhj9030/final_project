@@ -6,7 +6,13 @@
 <%
 	String cp=request.getContextPath();
 %>
-
+<script type="text/javascript">
+function searchList() {
+		var f=document.searchForm;
+		f.action="<%=cp%>/community/recommend";
+		f.submit();
+	}
+</script>
 
 <div class="recommend_list_wrap">
 	<h3>| 기업 추천 게시판</h3>
@@ -15,50 +21,40 @@
 		자신의 경험담 및 기업의 정보를 공유하고 기업을 추천합시다!!
 	</p>
 	<div class="recommend_list_tab">
-		<i class="glyphicon glyphicon-inbox"></i><span> 등록된 회사 : 700</span>&nbsp;&nbsp;&nbsp;&nbsp;
-		<i class="glyphicon glyphicon-edit"></i><span> 등록된 후기 : 800</span>
+		<i class="glyphicon glyphicon-inbox"></i><span> 등록된 회사 : ${dataCount}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+		<i class="glyphicon glyphicon-edit"></i><span> 등록된 후기 : ${total_goodCom}</span>
 		<form name="searchForm" method="post" class="form-inline recommend_search">
 			<input type="text" class="form-control input-sm input-search"
 			  		name="searchValue" placeholder="기업명을 입력하세요.">
 			<button type="button" class="btn btn-info btn-sm btn-search" onclick="searchList();"> 
 				검색
 			</button>
-			<button type="button" class="btn btn-info btn-sm btn-search" onclick=""> 
-				후기쓰기
-			</button>
 		</form>
 	</div>
 	
-	<table class="table recommend_list_table">
-		<tr>
-			<td rowspan="3" width="100" height="130"><img src="<%=cp%>/resources/image/Desert.jpg"></td>
-			<td colspan="2" class="recommend_list_company">삼성전자!!!</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="recommend_list_content">현재 170명의 회원들의 평점은 00점 입니다.</td>
-		</tr>
-		<tr>
-			<td class="recommend_list_created">2017-06-28</td>
-			<td class="recommend_list_hitCount">조회수 0</td>
-		</tr>
-		
-		<tr>
-			<td rowspan="3" width="100" height="130"><img src="<%=cp%>/resources/image/Desert.jpg"></td>
-			<td colspan="2" class="recommend_list_company">LG</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="recommend_list_content">현재 2000명의 회원들의 평점은 00점 입니다.</td>
-		</tr>
-		<tr>
-			<td class="recommend_list_created">2017-06-28</td>
-			<td class="recommend_list_hitCount">조회수 0</td>
-		</tr>
-		
+	<table class="table recommend_list_table" style="border-top: 2px solid #9e9999;">
+		<c:forEach var="dto" items="${list}">
+			<tr>
+				<td rowspan="3" width="100" height="130"><img src="<%=cp%>/uploads/company/${dto.cLogoImage}"></td>
+				<td colspan="2" class="recommend_list_company">${dto.cName}</td>
+				<td rowspan="2" style="text-align: center;">
+					<div><small>진행중인 채용공고</small></div>
+					<div style="height: 60px; font-size: 30px; padding: 10px;">
+						<i class="glyphicon glyphicon-inbox"></i>&nbsp;&nbsp;${dto.employCount}
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="recommend_list_content">현재 <strong style="font-weight:bold; color : blue;">${dto.gcCount}</strong>명의 회원들의 평점은 <strong style="color : red;">${dto.grade}</strong>점 입니다.</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="recommend_list_created">설립일 : ${dto.ccreated}</td>
+				<td style="text-align: center;"><strong><a style="text-decoration: underline; color:#337ab7;" href="${articleUrl}&cNum=${dto.cNum}">자세히 보기</a></strong></td>
+			</tr>
+		</c:forEach>
 	</table>
 	
 	<div style="text-align: center;">
-		1 2 3...
+		${paging}
 	</div>
-	
-	
 </div>

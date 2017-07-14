@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.final_project.common.MyUtil;
+import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
 
 
@@ -26,6 +28,8 @@ public class EmployController {
 	@Autowired
 	EmployService service;
 	
+	@Autowired
+	MyUtilBootstrap util;
 	
 	
 	@RequestMapping("/employ/main")
@@ -49,9 +53,10 @@ public class EmployController {
 		List<Employ> ceTlist = service.list_ceType();
 		//학력
 		List<Employ> lalist = service.list_ability();
-		
+		int dataCount = service.dataCount();
 		//지금 해야되는거 우대사항 학력 자격증 근무조건 컨트롤러로 받아와서 검색 바뀌게한다.
 		//한개 먼저한다. 우대사항
+		model.addAttribute("dataCount",dataCount);
 		
 		model.addAttribute("lalist",lalist);
 		model.addAttribute("sblist",sblist);
@@ -76,8 +81,11 @@ public class EmployController {
 	
 	@RequestMapping("/employ/list")
 	@ResponseBody
-	public Map<String, Object> list(
+	public Map<String, Object> list
+			(
 			EmployParams params
+			,@RequestParam(value="page", defaultValue="1") int current_page
+			,HttpSession session
 			) {
 
 		//리턴을 jsp페이지로 준다고 페이지가 꼭 바뀌는것은아니다. 위에서 했던것처럼..
@@ -92,15 +100,31 @@ public class EmployController {
 		map.put("subname", params.getSubname());
 		map.put("sdate",params.getSdate());
 		map.put("edate", params.getEdate());
+		map.put("search", params.getSearch());
 		/*map.put("license", params.getLicense());*/
 		//또 받아볼것 INSTR쓰는것 ceType근무조건 license자격증 cePrefere우대사항
+		
+		int rows=5;
+		int dataCount = service.dataCount();
+		int total_page = util.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		int start=(current_page-1)*rows+1;
+		int end=current_page*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
 		
 		List<Employ> celist = service.llist_com_employ(map);
 		Map<String, Object> model = new HashMap<>();
 		
+		String paging = util.paging(current_page, total_page);
 		
 		
 		
+		
+		
+		model.put("paging", paging);
 		
 		model.put("celist",celist);
 		return model;
@@ -128,7 +152,7 @@ public class EmployController {
 	@ResponseBody
 	public  Map<String, Object> applyForm(int ceNum, HttpSession session) {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		List<Resume> resumeList = service.read_resume("zxc@gmail.com");
+		List<Resume> resumeList = service.read_resume(info.getUserId());
 		
 		Map<String, Object> model = new HashMap<>();
 		Employ employ = service.read_com_employ(ceNum);
@@ -151,11 +175,27 @@ public class EmployController {
 		return result;
 	}
 	
+	@RequestMapping("/employ/scrap")
+	@ResponseBody
+	public int scrap(int ceNum, HttpSession session) {
+		System.out.println("ceNum"+ceNum);
+		int result=0;
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		Map<String, Object> map = new HashMap<>();
+		map.put("ceNum", ceNum);
+		map.put("mId", info.getUserId());
+		result = service.add_scrap(map);
+		
+		return result;
+	}
+	
 	@RequestMapping("/employ/detailapplyForm")
 	@ResponseBody
-	public  Map<String, Object> detailapplyForm(int ceNum, HttpSession session) {
+	public  Map<String, Object> detailapplyForm(
+			@RequestParam int ceNum
+			, HttpSession session) {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		List<Resume> resumeList = service.read_resume("zxc@gmail.com");
+		List<Resume> resumeList = service.read_resume(info.getUserId());
 		
 		Map<String, Object> model = new HashMap<>();
 		Employ employ = service.read_com_employ(ceNum);
