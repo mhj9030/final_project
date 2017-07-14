@@ -17,4 +17,6 @@ public interface EmployService {
 	public Employ read_com_employ(int ceNum);
 	public List<Resume> read_resume(String mId);
 	public int apply_resume(Map<String, Object> map);
+	public int dataCount();
+	public int add_scrap(Map<String, Object> map);
 }

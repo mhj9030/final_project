@@ -20,7 +20,7 @@
 				,url:url
 				,data:query
 				,success:function(data) {
-					$("#list-body").html(data);
+					$("#list-body1").html(data);
 				}
 				,beforeSend: function(e){
 					e.setRequestHeader("AJXA", true);

@@ -54,6 +54,8 @@
 <link href="<%=cp%>/resources/custom_css/community_article.css" rel="stylesheet">
 <!-- reply_form CSS -->
 <link href="<%=cp%>/resources/custom_css/community_reply.css" rel="stylesheet">
+<!-- recommend_article_form CSS -->
+<link href="<%=cp%>/resources/custom_css/community_recommend_article.css" rel="stylesheet">
 
 </head>
 <body>

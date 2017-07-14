@@ -132,11 +132,11 @@
 </script>
 
 
-<div class="created-body">
+<div class="created-created-body">
 	<div class="page-header">
-		<h1 align="left">
+		<h3 align="left">
 			${mode=='update'?'| 기업정보수정':'| 기업등록'}
-		</h1>
+		</h3>
 	</div>
 
 	<form name="companyForm" method="post" enctype="multipart/form-data">

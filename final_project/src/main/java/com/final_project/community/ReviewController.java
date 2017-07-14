@@ -39,6 +39,7 @@ public class ReviewController {
 	public String list(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "subject") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
+			@RequestParam(value = "type", defaultValue = "최신순") String type,
 			Model model, HttpServletRequest req) throws Exception {
 
 		String cp = req.getContextPath();
@@ -49,11 +50,13 @@ public class ReviewController {
 
 		if (req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue = URLDecoder.decode(searchValue, "utf-8");
+			type = URLDecoder.decode(type, "utf-8");
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
+		
 
 		dataCount = service.dataCount(map);
 		if (dataCount != 0)
@@ -66,8 +69,15 @@ public class ReviewController {
 		int end = current_page * rows;
 		map.put("start", start);
 		map.put("end", end);
+		
+		List<Review> list = null;
+		
+		if(type.equals("추천순")){
+			list = service.listReviewLike(map);
+		}else{
+			list = service.listReview(map);
+		}
 
-		List<Review> list = service.listReview(map);
 
 		int listNum, n = 0;
 		Iterator<Review> it = list.iterator();
@@ -78,19 +88,19 @@ public class ReviewController {
 			n++;
 		}
 
-		String query = "";
-		String listUrl = cp + "/community/review";
-		String articleUrl = cp + "/community/review/article?page=" + current_page;
+		String query = "type="+type;
 		if (searchValue.length() != 0) {
 			query += "&searchKey=" + searchKey + "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}
 
-		listUrl = cp + "/community/review?" + query;
-		articleUrl = cp + "/community/review/article?page=" + current_page + query;
+		String listUrl = cp + "/community/review?"+query;
+		String articleUrl = cp + "/community/review/article?page=" + current_page + "&" + query;
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 
 		model.addAttribute("list", list);
+		model.addAttribute("type", type	);
+		model.addAttribute("listUrl", listUrl);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
@@ -161,9 +171,11 @@ public class ReviewController {
 			@RequestParam(value = "page") String page,
 			@RequestParam(value = "searchKey", defaultValue = "subject") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
+			@RequestParam(value = "type", defaultValue = "") String type,
 			Model model) throws Exception {
 
 		searchValue = URLDecoder.decode(searchValue, "utf-8");
+		type = URLDecoder.decode(type, "utf-8");
 
 		service.updateHitCount(ibnum);
 
@@ -179,7 +191,7 @@ public class ReviewController {
 		Review preReadDto = service.preReadReview(map);
 		Review nextReadDto = service.nextReadReview(map);
 
-		String query = "page=" + page;
+		String query = "page=" + page + "&type=" + URLEncoder.encode(type, "utf-8");
 		if (searchValue.length() != 0) {
 			query += "&searchKey=" + searchKey + "&searchValue" + URLEncoder.encode(searchValue, "utf-8");
 		}

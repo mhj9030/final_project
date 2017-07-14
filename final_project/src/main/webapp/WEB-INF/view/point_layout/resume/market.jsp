@@ -14,7 +14,7 @@
 	
 	<!-- 나의 포인트 -->
 	<div style="height: 50px; text-align: center; font-size: 7;">
-		<b>${sessionScope.member.userName}</b> 님의 사용가능한 포인트 <b>${point.mypoint}</b> 원
+		<b>${sessionScope.member.userName}</b> 님의 사용가능한 포인트 <b>${point.mypoint}</b> 포인트
 	</div>
 	
 	<!-- 검색 -->
@@ -45,26 +45,32 @@
 	</div>
 	
 	<!-- 열람 -->
-	<div id="resume_list">
+	<div id="resume_list" class="row">
 		<c:if test="${empty list}">
 			<div style="text-align: center;"> 검색 결과가 없습니다.</div>
 		</c:if>
 		<c:forEach var="dto" items="${list}">
 		<form name="reintro${dto.rNum}" method="get">
-			<div class="marketDiv">
-				<div style="text-align: center;">
-					<img src="" width="110px" height="140px" />
+			<div class="list-content col-sm-5">
+				<div class="col-xs-6 col-sm-5">
+					<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />
 				</div>
-				<div>
-					이력서번호: ${dto.rNum} (${dto.rName})<br>
-					<%-- 지원분야: ${dto.apply}<br> --%>
-					관심직종: ${dto.subTypes}<br>
+				<div class="col-xs-6 col-sm-7">
+					<span>${dto.rName}(${dto.rNum})</span>
+					<p class="text-muted small">${dto.mId}</p>
+					<p class="small">관심분야<br>${dto.subTypes}</p>
+					<input type="hidden" name="seller" value="${dto.mId}">
 					<input type="hidden" name="rNum" value="${dto.rNum}">
-					<button class="btn btn-primary" onclick="usePoint(${dto.rNum})">-3000p</button>
+					<input type="hidden" name="mypoint" value="${point.mypoint}">
+					<button type="button" class="btn btn-primary btn-xs" onclick="usePoint(${dto.rNum})"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 (-3000p) </button>
 				</div>
 			</div>
 		</form>
 		</c:forEach>
+	</div>
+	
+	<div class="paging">
+		${paging}
 	</div>
 </div>
 
@@ -89,7 +95,7 @@ function onChange() {
 		success: function(data){
 			subPrint(data);
 		},
-		error:function(e){
+		error: function(e){
 			console.log(e);
 		}
 	});
@@ -125,21 +131,19 @@ function usePoint(num) {
 			data: query,
 			dataType: "json",
 			success: function(data){
-				if(data.state==0){
+				if(data.state=="1"){
+					if(confirm("이력서를 바로 열람하시겠습니까?")){
+						location.href="<%=cp%>/point/storagy/article?rNum=" + num + "&page=${page}";
+					}
+				}else{
 					alert("포인트가 부족합니다.");
-					return;
 				}
 			},
-			error:function(e){
-				console.log(e);
+			error: function(e){
+				alert("관리자에게 문의하세요.");
 				return;
 			}
 		});
-		
-		if(confirm("이력서를 바로 열람하시겠습니까?")){
-			var url = "<%=cp%>/point/storagy/article?rNum=" + num;
-			location.href = url;
-		}
 	}else{
 		alert("포인트가 부족합니다.");
 	}

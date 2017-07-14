@@ -28,6 +28,19 @@ ${dto.content}
 		</div>
 		<hr>
 		
+		<!-- 이전글 다음글 -->
+		
+		<div>
+		이전글 : <c:if test="${empty preReadDto}">이전글이 없습니다.</c:if>
+		<c:if test="${not empty preReadDto}">
+			<a href="<%=cp%>/point/main/article?num=${preReadDto.poNum}&page=${page}">${preReadDto.subject}</a>
+		</c:if><br>
+		다음글 : <c:if test="${empty nextReadDto}">다음글이 없습니다.</c:if>
+		<c:if test="${not empty nextReadDto}">
+			<a href="<%=cp%>/point/main/article?num=${nextReadDto.poNum}&page=${page}">${nextReadDto.subject}</a>
+		</c:if>
+		</div>
+		
 		<!-- 버튼 -->
 		<div class= "footer-bar">
 			<div style="text-align: right;">

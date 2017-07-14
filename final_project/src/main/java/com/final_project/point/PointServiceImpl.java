@@ -139,13 +139,13 @@ public class PointServiceImpl implements PointService{
 	}
 
 	@Override
-	/** history-적립이유, point-포인트액수, mId-적립아이디 map으로 보내면 됨 */
-	public int savaPoint(Map<String, Object> map) {
+	/* history-적립이유, point-포인트액수, mId-적립아이디 map으로 보내면 됨 */
+	public int savePoint(Map<String, Object> map) {
 		int result = 0;
 		
 		try {
 			map.put("classify", "적립");
-			result = dao.insertData("point.savaPoint", map);
+			result = dao.insertData("point.savePoint", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,5 +163,43 @@ public class PointServiceImpl implements PointService{
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public int buyResume(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.insertData("point.buyResume", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public Point preRead(Map<String, Object> map) {
+		Point dto = null;
+		
+		try {
+			dto = dao.getReadData("point.preRead", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public Point nextRead(Map<String, Object> map) {
+		Point dto = null;
+
+		try {
+			dto = dao.getReadData("point.nextRead", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 }

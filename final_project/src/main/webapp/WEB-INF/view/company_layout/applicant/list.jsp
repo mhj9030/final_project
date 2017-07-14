@@ -79,11 +79,11 @@
 		});
 	}
 </script>
-<div class="applicant-body" align="center">
+<div class="applicant-list-body" align="center">
 	<div class="page-header">
-		<h1 align="left">
+		<h3 align="left">
 			| 지원자 현황 <small></small>
-		</h1>
+		</h3>
 	</div>
 	
 	<div class="search" style="width: 800px; height: 34px;">

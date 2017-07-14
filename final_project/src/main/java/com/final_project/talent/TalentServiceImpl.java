@@ -59,6 +59,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = new ArrayList<>();
 		
 		try {
+			System.out.println(">>>> " + map.get("list"));
 			list = dao.getListData("talent.searchList", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -69,7 +70,6 @@ public class TalentServiceImpl implements TalentService{
 	
 	@Override
 	public List<Talent> interestList(List<Talent> list) {
-		System.out.println("interestList");
 		try {
 			for(Talent dto:list){
 				Map<String, Object> map = new HashMap<>();
@@ -103,7 +103,7 @@ public class TalentServiceImpl implements TalentService{
 		Talent dto = null;
 		
 		try {
-			dto = dao.getReadData("readIntro", map);
+			dto = dao.getReadData("talent.readIntro", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,7 +116,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = null;
 		
 		try {
-			list = dao.getListData("readAbility", map);
+			list = dao.getListData("talent.readAbility", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,7 +129,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = null;
 		
 		try {
-			list = dao.getListData("readLicense", map);
+			list = dao.getListData("talent.readLicense", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -142,7 +142,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = null;
 		
 		try {
-			list = dao.getListData("readLanguage", map);
+			list = dao.getListData("talent.readLanguage", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,7 +155,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = null;
 		
 		try {
-			list = dao.getListData("readProject", map);
+			list = dao.getListData("talent.readProject", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -168,7 +168,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = null;
 		
 		try {
-			list = dao.getListData("readAward", map);
+			list = dao.getListData("talent.readAward", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -180,7 +180,32 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = null;
 		
 		try {
-			list = dao.getListData("readCareer", map);
+			list = dao.getListData("talent.readCareer", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public int storagyDataCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("talent.storagyCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Talent> storagyResume(Map<String, Object> map) {
+		List<Talent> list = new ArrayList<>();
+		
+		try {
+			list = dao.getListData("talent.storagyResume", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

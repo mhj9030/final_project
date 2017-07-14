@@ -44,6 +44,10 @@
 <link href="<%=cp%>/resources/custom_css/company_employ_created.css" rel="stylesheet">
 <!-- created_form.css -->
 <link href="<%=cp%>/resources/custom_css/created_form.css" rel="stylesheet">
+<!-- company_inquiry_list.css -->
+<link href="<%=cp%>/resources/custom_css/company_inquiry_list.css" rel="stylesheet">
+<!-- company_inquiry_article.css -->
+<link href="<%=cp%>/resources/custom_css/company_inquiry_article.css" rel="stylesheet">
 
 </head>
 <body>
