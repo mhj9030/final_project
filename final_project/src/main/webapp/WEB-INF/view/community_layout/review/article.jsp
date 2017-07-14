@@ -38,7 +38,6 @@ $(function(){
 });
 
 
-
 // 게시물 공감 개수
 function countLikeReview(ibnum) {
 	var url="<%=cp%>/community/review/countLikeReview";

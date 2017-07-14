@@ -146,6 +146,19 @@ public class InquiryController {
 		
 		Inquiry dto=service.readInquiry(cqNum);
 		
+		dto.setCqContent(myUtil.htmlSymbols(dto.getCqContent()));
+		
+		Map<String, Object> map=new HashMap<>();
+		
+		map.put("cNum", dto.getcNum());
+		map.put("cqNum", cqNum);
+		map.put("cqGroupNum", dto.getCqGroupNum());
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		
+		Inquiry preReadDto=service.preReadInquiry(map);
+		Inquiry nextReadDto=service.nextReadInquiry(map);
+		
 		String query="page="+page;
 		if(searchValue.length()!=0) {
 			query+="&searchKey="+searchKey+"&searchValue="+URLEncoder.encode(searchValue, "utf-8");
@@ -156,6 +169,8 @@ public class InquiryController {
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 		model.addAttribute("inquiry", "on");
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
 		
 		return ".company_layout.inquiry.article";
 	}
@@ -184,6 +199,7 @@ public class InquiryController {
 		dto.setcNum(comDto.getcNum());
 		
 		service.insertAnswerInquiry(dto);
+		service.updateAnswerInquiry(cqNum);
 		
 		return "redirect:/company/inquiry";
 	}

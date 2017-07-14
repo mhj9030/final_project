@@ -68,4 +68,39 @@ public class InquiryServiceImpl implements InquiryService{
 			throw e;
 		}
 	}
+
+	@Override
+	public void updateAnswerInquiry(int cqNum) throws Exception {
+		try {
+			dao.insertData("company.updateAnswerInquiry", cqNum);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Override
+	public Inquiry preReadInquiry(Map<String, Object> map) throws Exception {
+		Inquiry preDto=null;
+		
+		try {
+			preDto=dao.getReadData("company.preReadInquiry", map);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return preDto;
+	}
+
+	@Override
+	public Inquiry nextReadInquiry(Map<String, Object> map) throws Exception {
+		Inquiry nextDto=null;
+		
+		try {
+			nextDto=dao.getReadData("company.nextReadInquiry", map);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return nextDto;
+	}
 }

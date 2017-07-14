@@ -69,7 +69,7 @@
 									<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
 								</c:if>
 								<c:if test="${mode=='answer'}">
-									<input type="text" name="cqSubject" value="RE : ${dto.cqSubject}" required="required">
+									<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
 								</c:if>
 							</td>
 						</tr>
@@ -97,11 +97,9 @@
 									<input type="hidden" name="page">
 								</c:if>
 								<c:if test="${mode=='answer'}">
-									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry">취소</button> 
+									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry'">취소</button> 
 									<input type="hidden" name="cqNum">
 								</c:if>
-								
-								
 							</td>
 						</tr>
 					</tfoot>

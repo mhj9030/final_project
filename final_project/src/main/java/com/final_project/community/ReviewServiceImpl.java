@@ -38,6 +38,19 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return list;
 	}
+	
+	@Override
+	public List<Review> listReviewLike(Map<String, Object> map) {
+		List<Review> list = null;
+		
+		try {
+			list = dao.getListData("community_review.listReviewLike", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
 
 	@Override
 	public int dataCount(Map<String, Object> map) {

@@ -14,11 +14,11 @@
 	}
 </script>
 
-<div class="list-body" align="center">
+<div class="inquiry-list-body" align="center">
 	<div class="page-header">
-		<h1 align="left">
+		<h3 align="left">
 			| 기업문의 <small></small>
-		</h1>
+		</h3>
 	</div>
 
 	<div>
@@ -45,9 +45,19 @@
 	                        </c:if>
 							<a href="${articleUrl}&cqNum=${dto.cqNum}">${dto.cqSubject}</a>
 						</td>
-						<td>${dto.mName}</td>
+						<c:if test="${dto.cqDepth==0}">
+							<td>${dto.mName}</td>
+						</c:if>
+						<c:if test="${dto.cqDepth==1}">
+							<td>${dto.cName}</td>
+						</c:if>
 						<td>${dto.cqCreated}</td>
-						<td>${dto.cqIsq=='1'?'Y':'N'}</td>
+						<c:if test="${dto.cqDepth==0}">
+							<td>${dto.cqIsq=='1'?'Y':'N'}</td>
+						</c:if>
+						<c:if test="${dto.cqDepth!=0}">
+							<td></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

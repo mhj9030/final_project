@@ -65,11 +65,11 @@
 		f.submit();
 	}
 </script>
-<div class="created-body">
+<div class="employ-created-body">
 	<div class="page-header">
-		<h1 align="left">
+		<h3 align="left">
 			${mode=='update'?'| 채용수정':'| 채용등록'} <small></small>
-		</h1>
+		</h3>
 	</div>
 	
 	<form name="employForm" method="post" enctype="multipart/form-data">
