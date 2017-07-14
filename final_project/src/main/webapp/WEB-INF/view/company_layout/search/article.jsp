@@ -23,7 +23,7 @@
 	}
 </script>
 
-<div class="article-body" align="center">
+<div class="search-article-body" align="center">
 	<div class="cover">
 		<div class="cover-back">
     		
@@ -54,7 +54,7 @@
 			<div class="page-header">
 				<div class="row">
 					<div class="col-xs-5">
-						<h1 align="left">| 기본 정보 <small></small></h1>
+						<h3 align="left">| 기본 정보 <small></small></h3>
 					</div>
 					<div class="col-xs-7" style="margin-top: 30px; text-align: right;">
 						<button class="btn btn-default" type="button" onclick="inquiry();">문의하기</button>
@@ -94,9 +94,9 @@
 		
 		<div class="intro">
 			<div class="page-header">
-				<h1 align="left">
+				<h3 align="left">
 					| 기업 소개 <small></small>
-				</h1>
+				</h3>
 			</div>
 			
 			<div class="intro-body">
@@ -106,9 +106,9 @@
 		
 		<div class="location">
 			<div class="page-header">
-				<h1 align="left">
+				<h3 align="left">
 					| 기업 위치 <small></small>
-				</h1>
+				</h3>
 			</div>
 			<h5>주소 : ${dto.cAddress}</h5>
 			<div id="map"></div>

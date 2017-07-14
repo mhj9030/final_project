@@ -14,11 +14,11 @@
 	}
 </script>
 
-<div class="list-body" align="center">
+<div class="inquiry-list-body" align="center">
 	<div class="page-header">
-		<h1 align="left">
+		<h3 align="left">
 			| 기업문의 <small></small>
-		</h1>
+		</h3>
 	</div>
 
 	<div>
