@@ -54,6 +54,7 @@
 				<if test="searchValue!=null and searchValue!='' ">
 	     	    	<include refid="where-list"/>
 	     		</if>
+	     		and cNum>0
 			</where>
 	</select>
 	
@@ -71,6 +72,7 @@
 						<if test="searchValue!=null and searchValue!='' ">
 			     	    	<include refid="where-list"/>
 			     		</if>
+			     		and cNum>0
 					</where>
 					<if test="order=='recent'">
 						order by cNum desc
@@ -329,7 +331,6 @@
 		)tb where rownum=1
 	</select>
 </mapper>
-
 
 
 
