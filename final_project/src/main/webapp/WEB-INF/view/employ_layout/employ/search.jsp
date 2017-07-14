@@ -67,7 +67,8 @@ $(function() {
 $("#location > a").click(function() {
 	alert("d");
 	if($(this).attr("id")=='j') {
-		$("#sub_class").append("<option value="+$(this).parent().attr("id").substring(1)+">"+ $(this).parent().attr("id").substring(1)+"</option>");
+		$("#sub_class").append("<option value="+$(this).attr("id").substring(1)+">"+ $(this).attr("id").substring(1)+"</option>");
+		$("#sub_class option:selected").val("");
 	}
 });
 
@@ -251,6 +252,9 @@ $("#main_class").change(function() {
 		detaillistPage(1);
 	});
 	$("#e_date").change(function() {
+		detaillistPage(1);
+	});
+	$("#search").keyup(function() {
 		detaillistPage(1);
 	});
 	
@@ -653,7 +657,7 @@ function ajaxHTML(url, type, query) {
 					  </div>
 					  
 					  <div class="col-md-3">
-					  <input type="text" class="form-control" placeholder="검색키워드">
+					  <input type="text" class="form-control" placeholder="검색키워드:회사,제목" value="" id="search" name="search">
 					  </div>
 					</div>
 					
