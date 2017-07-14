@@ -143,8 +143,13 @@ function scrap() {
 모바일 앱 사용자 행동 분석 솔루션 유저해빗을 개발하여 서비스 중인 데이터 기술 스타트업입니다. 
 <div class="text-right">
 
+<<<<<<< HEAD
+<button class="btn"><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
+<button class="btn"onclick="javascript:history.back();"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
+=======
 <button class="btn" data-toggle='modal' data-target='.bs-example-modal-sm'><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
 <button class="btn" onclick="javascript:history.back();"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
+>>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
 </div>
 
 </div>

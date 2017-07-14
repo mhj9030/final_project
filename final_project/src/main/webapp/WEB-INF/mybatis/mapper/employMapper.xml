@@ -84,6 +84,9 @@
 			    <if test="subname!='2차직종'">
 			        AND INSTR(L.subname, #{subname}) &gt; 0
 			    </if>
+			    <if test="search!=''">
+			        AND INSTR(ceSubject, #{search}) &gt; 0 OR INSTR(cName, #{search}) &gt; 0
+			    </if>
 			    <!-- <if test="subname!='2차업종'">
 			        AND INSTR(B.subname, #{subname}) &gt; 0
 			    </if> -->

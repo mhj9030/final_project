@@ -116,14 +116,6 @@ public class NoticeController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value="/help_layout/notice/created", method=RequestMethod.GET)
 	public String createdForm(
 			Model model
@@ -144,8 +136,8 @@ public class NoticeController {
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"";
 		
-		//dto.setmId(info.getUserId());
-		dto.setmId("admin@a.com");
+		dto.setmId(info.getUserId());
+		//dto.setmId("admin@a.com");
 		
 		service.insertNotice(dto, pathname);
 		return "redirect:/help_layout/notice/list";
@@ -202,20 +194,50 @@ public class NoticeController {
 		return ".help_layout.notice.article";
 	}
 	
-	@RequestMapping(value="/notice/delete")
-	public String delete(
-			@RequestParam int num,
-			@RequestParam String page,
-			HttpSession session) throws Exception {
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
+
+	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
+	public String delete(@RequestParam(value="num")int num) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("notNum", num);
 		
-		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "notice";		
- 	
-		service.deleteNotice(num, pathname, info.getUserId());
+		service.deleteNotice(map);
 		
-		return "redirect:/notice/list?page="+page;
+		return "redirect:/help_layout/notice/list";
 	}
+	
+	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
+	public String updateForm(@RequestParam("num")int num, @RequestParam("page")int page, Model model) {
+		Notice dto;
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("notNum", num);
+		dto= service.readNotice(num);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "update");
+		model.addAttribute("dto", dto);
+		
+		return ".help_layout.notice.created";
+	}
+	
+	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
+	public String updateSubmit(@RequestParam("num")int num, @RequestParam("page")int page, Notice dto, Model model) {
+		
+			
+		dto.setNotNum(num);
+		int result= service.updateNotice(dto);
+		System.out.println(result);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("page", page);
+		
+		return "redirect:/notice/article";
+	}
+	
+	
+	
+
 	
 	
 	

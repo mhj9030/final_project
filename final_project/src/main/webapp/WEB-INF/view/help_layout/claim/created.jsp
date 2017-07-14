@@ -39,14 +39,14 @@
 						<tr>
 							<td class="input_info">작성자명</td>
 							<td colspan="3">
-								${sessionScope.member.mName}
+								${sessionScope.member.userName}
 							</td>
 						</tr>
 						
 						<tr>
 							<td class="input_info">분류</td>
 							<td colspan="3">
-								<input type="radio" name="category" value="이력서문의" ${dto.category=="이력서문의"?"checked='checked'":""}  style="width:30px;">이력서 문의
+								<input type="radio" name="category" value="이력서문의" ${dto.category=="이력서문의"?"checked='checked'":""}  style="width:30px;" required="required">이력서 문의
 								<input type="radio" name="category" value="입사지원문의" ${dto.category=="입사지원문의"?"checked='checked'":""}  style="width:30px;">입사지원문의
 								<input type="radio" name="category" value="검색문의" ${dto.category=="검색문의"?"checked='checked'":""}  style="width:30px;">검색문의
 								<input type="radio" name="category" value="신고(불량기업)" ${dto.category=="신고(불량기업)"?"checked='checked'":""}  style="width:30px;">신고(불량기업)<br>
@@ -77,12 +77,7 @@
 							</td>
 						</tr>
 
-						<tr>
-							<td class="input_info">첨부</td>
-							<td colspan="3">
-								<input type="file" name="upload">
-							</td>
-						</tr>
+						
 
 				
 					</tbody>
@@ -93,7 +88,7 @@
 							<td colspan="4" style="text-align: center;">
 								<button>확인 </button>
 								
-								<button type="button" onclick="">취소</button> 
+								<button type="button" onclick="javascript: history.back();">취소</button>
 							</td>
 						</tr>
 					</tfoot>
