@@ -101,6 +101,7 @@ public class EmployController {
 		map.put("sdate",params.getSdate());
 		map.put("edate", params.getEdate());
 		map.put("search", params.getSearch());
+		map.put("cePlace", params.getCePlace());
 		/*map.put("license", params.getLicense());*/
 		//또 받아볼것 INSTR쓰는것 ceType근무조건 license자격증 cePrefere우대사항
 		

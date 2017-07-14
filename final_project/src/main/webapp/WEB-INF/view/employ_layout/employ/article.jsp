@@ -143,13 +143,10 @@ function scrap() {
 모바일 앱 사용자 행동 분석 솔루션 유저해빗을 개발하여 서비스 중인 데이터 기술 스타트업입니다. 
 <div class="text-right">
 
-<<<<<<< HEAD
-<button class="btn"><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
-<button class="btn"onclick="javascript:history.back();"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
-=======
+
 <button class="btn" data-toggle='modal' data-target='.bs-example-modal-sm'><i class="glyphicon glyphicon-tags"></i> <span>스크랩</span></button>
 <button class="btn" onclick="javascript:history.back();"><i class="glyphicon glyphicon-th-list"></i> <span>목록으로가기</span></button>
->>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
+
 </div>
 
 </div>
@@ -209,7 +206,7 @@ function scrap() {
         <li><a href="<%=cp%>/company/search/article?page=1&cNum=${employ.cNum}">기업상세정보</a></li>
         
         <div style="height:250px;text-align:center;border:1px solid lightgray;border-radius:4px;">
-      	<h3>마케팅 & 세일즈 인턴/신입</h3>
+      	<h3>${employ.ceSubject}</h3>
       	<hr>
       	<table style="margin:0 auto;">
       	<tr><th>채용 분야</th><td>${employ. subname}</td></tr>
@@ -296,7 +293,7 @@ function scrap() {
 						      		
 									<div style="float:right;">
 										<button type="button" class="btn btn-info" style="margin-right:1px;" id="article">이력서 수정하기</button>
-							        	<button type="button" class="btn btn-info" style="margin-right:1px;" id="apply" onclick="apply(${ceNum})">제출</button>
+							        	<button type="button" class="btn btn-info" style="margin-right:1px;" id="apply" onclick="apply(${param.ceNum})">제출</button>
 							        </div>
 					      </div>
 					      <div class="modal-footer" style="text-align: center" id="apply_result">
