@@ -48,14 +48,21 @@
 </select>
 
 <!-- 검색 -->
+<select id="dataCount" resultType="Integer">
+	   SELECT NVL(COUNT(*), 0) FROM com_employ
+</select>
 <select id="list_com_employ"
-				resultType="com.final_project.employ.Employ" parameterType="Integer">
+				resultType="com.final_project.employ.Employ" parameterType="map">
+			SELECT * FROM (
+		    SELECT ROWNUM rnum, tb.* FROM (
 			select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,C.cNum,cePeople,ceETC,cePay, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
 			JOIN com_image CI ON C.cSerial=CI.cSerial
 			JOIN sub_class L ON CE.subCode=L.subCode
+			JOIN sub_bu_class B ON  C.subcode = B.subcode
+
 			<!-- WHERE cePay &gt; #{startpay} AND cePay &lt; #{endpay} -->
 			
 			<trim prefix="WHERE" prefixOverrides="AND |OR "> 
@@ -75,8 +82,11 @@
 			        AND INSTR(ability, #{ability}) &gt; 0
 			    </if>
 			    <if test="subname!='2차직종'">
-			        AND INSTR(subname, #{subname}) &gt; 0
+			        AND INSTR(L.subname, #{subname}) &gt; 0
 			    </if>
+			    <!-- <if test="subname!='2차업종'">
+			        AND INSTR(B.subname, #{subname}) &gt; 0
+			    </if> -->
 			    <if test="sdate != ''">
 			        AND ceStart &gt; #{sdate}
 			    </if>
@@ -87,12 +97,16 @@
 			        AND INSTR(license, #{license}) &gt; 0
 			    </if> -->
 		  	</trim>
-
+			
+						<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+	]]>
 </select>
 
 <select id="read_com_employ"
 				parameterType="Integer" resultType="com.final_project.employ.Employ">
-	select ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime
+	select ceNum,cNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime,cePlace,cAddress
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
@@ -109,6 +123,10 @@
 
 <insert id="apply_resume" parameterType="map">
 	INSERT INTO applicant(rNum, ceNum) VALUES(#{rNum},#{ceNum})
+</insert>
+
+<insert id="add_scrap" parameterType="map">
+	INSERT INTO scrap(ceNum,scrapDate, mId) VALUES(#{ceNum},sysdate,#{mId})
 </insert>
 
 

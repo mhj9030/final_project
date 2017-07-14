@@ -169,6 +169,32 @@ public class EmployServiceImpl implements EmployService{
 		return result;
 	}
 
+	@Override
+	public int dataCount() {
+		int result=0;
+		
+		try {
+			result = dao.getIntValue("employ.dataCount");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int add_scrap(Map<String, Object> map) {
+		int result=0;
+		
+		try {
+			result = dao.insertData("employ.add_scrap",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
 	
 
 	

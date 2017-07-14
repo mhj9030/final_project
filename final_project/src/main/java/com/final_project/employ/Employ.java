@@ -9,10 +9,10 @@ private String maname,subname;
 
 //company 회사번호 회사명 회사사진
 private int cNum;
-private String cSerial,cName,cLogoimage;
+private String cSerial,cName,cLogoimage,cAddress;
 //employ_com 공고번호 제목 지원자격 근무조건 마감일등록일
 private int ceNum,cePeople;
-private String ceSubject, ability, ceType,cePrefere,ceETC,cePay,modyTime;
+private String ceSubject, ability, ceType,cePrefere,ceETC,cePay,modyTime,cePlace;
 private Date ceStart, ceEnd;
 //sub_class
 private int liCode;
@@ -22,6 +22,18 @@ private String license;
 
 
 
+public String getcAddress() {
+	return cAddress;
+}
+public void setcAddress(String cAddress) {
+	this.cAddress = cAddress;
+}
+public String getCePlace() {
+	return cePlace;
+}
+public void setCePlace(String cePlace) {
+	this.cePlace = cePlace;
+}
 public String getModyTime() {
 	return modyTime;
 }
