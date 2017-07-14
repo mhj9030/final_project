@@ -50,17 +50,22 @@
 			<div style="text-align: center;"> 검색 결과가 없습니다.</div>
 		</c:if>
 		<c:forEach var="dto" items="${list}">
-		<div class="list-content col-sm-5">
-			<div class="col-xs-6 col-sm-5">
-				<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />
+		<form name="reintro${dto.rNum}" method="get">
+			<div class="list-content col-sm-5">
+				<div class="col-xs-6 col-sm-5">
+					<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />
+				</div>
+				<div class="col-xs-6 col-sm-7">
+					<span>${dto.rName}(${dto.rNum})</span>
+					<p class="text-muted small">${dto.mId}</p>
+					<p class="small">관심분야<br>${dto.subTypes}</p>
+					<input type="hidden" name="seller" value="${dto.mId}">
+					<input type="hidden" name="rNum" value="${dto.rNum}">
+					<input type="hidden" name="mypoint" value="${point.mypoint}">
+					<button type="button" class="btn btn-primary btn-xs" onclick="usePoint(${dto.rNum})"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 (-3000p) </button>
+				</div>
 			</div>
-			<div class="col-xs-6 col-sm-7">
-				<span>${dto.rName}(${dto.rNum})</span>
-				<p class="text-muted small">${dto.mId}</p>
-				<p class="small">관심분야<br>${dto.subTypes}</p>
-				<button type="button" class="btn btn-primary btn-xs" onclick="article(${dto.rNum});"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 열람 </button>
-			</div>
-		</div>
+		</form>
 		</c:forEach>
 	</div>
 	
@@ -128,7 +133,6 @@ function usePoint(num) {
 			success: function(data){
 				if(data.state=="1"){
 					if(confirm("이력서를 바로 열람하시겠습니까?")){
-						alert(num);
 						location.href="<%=cp%>/point/storagy/article?rNum=" + num + "&page=${page}";
 					}
 				}else{
