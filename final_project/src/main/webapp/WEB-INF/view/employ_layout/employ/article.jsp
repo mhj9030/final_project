@@ -345,5 +345,4 @@ function scrap() {
 
 
 
->>>>>>> branch 'master' of https://github.com/mhj9030/final_project.git
 </div>
