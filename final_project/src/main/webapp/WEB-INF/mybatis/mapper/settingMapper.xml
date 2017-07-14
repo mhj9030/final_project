@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="setting">
+
+    <!-- 회원정보 추가  -->    
+
+	
+    <insert id="insertCareer" parameterType="com.final_project.setting.Setting">
+       INSERT INTO mem_career(mcnum, company, part, carstart, carend, memo, mid)
+       	VALUES (mem_career_seq.NEXTVAL, #{company}, #{part}, TO_DATE(#{carstart}, 'MM/DD/YYYY'), TO_DATE(#{carend}, 'MM/DD/YYYY'), #{memo}, #{mid} ) 
+    </insert>
+
+
+
+</mapper>

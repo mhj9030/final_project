@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="community_review">
+	<insert id="insertReview" parameterType="com.final_project.community.Review">
+		INSERT INTO meet(ibnum, subject, content, mid, pass, cNum, directcompany) 
+		VALUES (MEET_SEQ.NEXTVAL, #{subject}, #{content}, #{mId}, #{pass}, #{cNum}, #{directcompany, jdbcType=VARCHAR})
+	</insert>
+
+	<sql id="where-list">
+	  <if test="searchKey=='mName'">
+	       mName = #{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='company'">
+	      INSTR(company, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+          OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+	  </if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM meet 
+	    <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     	<![CDATA[
+	     		AND state = 0
+	     	]]>
+	    </where>  
+	</select>
+	
+	<select id="listReview" parameterType="map" resultType="com.final_project.community.Review">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT v.ibnum, m.mId, mName, subject, TO_CHAR(v.created, 'YYYY-MM-DD') created, company, pass, v.cNum, directcompany,    
+					   hitCount, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount, pro.prophoto 
+				FROM meet v JOIN member m ON v.mId=m.mId 
+				LEFT OUTER JOIN
+				(
+					SELECT ibnum, COUNT(*) replyCount FROM meet_re 
+					WHERE answer=0 
+					GROUP BY ibnum
+				) r ON v.ibnum=r.ibnum 
+				LEFT OUTER JOIN
+				(
+					SELECT ibnum, COUNT(*) likeCount FROM meet_like 
+					GROUP BY ibnum
+				) l ON v.ibnum=l.ibnum
+				LEFT OUTER JOIN
+				(
+					SELECT p.mId, prophoto from profile p
+				) pro ON v.mId = pro.mId
+				LEFT OUTER JOIN
+				(
+					SELECT cNum, cName company from company
+				) c ON v.cNum = c.cNum
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+	     				AND state = 0
+	     			]]>
+	    		</where>
+	    		ORDER BY ibnum DESC
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
+	</select>
+	
+	<update id="updatehitCount" parameterType="Integer">
+		UPDATE meet SET hitCount = hitCount + 1 WHERE ibnum = #{ibnum}
+	</update>
+	
+	<select id="readReview" parameterType="Integer" resultType="com.final_project.community.Review">
+		SELECT v.ibnum, subject, content, created, hitCount, v.mId, mName, directcompany, pass, cNum 
+		FROM meet v JOIN member m ON v.mId=m.mId 
+		WHERE ibnum = #{ibnum}	
+	</select>
+	
+	<select id="preReadReview" parameterType="map" resultType="com.final_project.community.Review">
+		SELECT tb.* FROM(
+			SELECT ibnum, subject 
+			FROM meet v JOIN member m ON v.mId=m.mId 
+			<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+		                 AND (ibnum > #{ibnum}) AND state = 0
+		            ]]>
+	    	</where>
+	    	ORDER BY ibnum ASC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadReview" parameterType="map" resultType="com.final_project.community.Review">
+		SELECT tb.* FROM(
+			SELECT ibnum, subject 
+			FROM meet v JOIN member m ON v.mId=m.mId 
+			<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+		                 AND (ibnum < #{ibnum}) AND state = 0
+		            ]]>
+	    	</where>
+	    	ORDER BY ibnum DESC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<update id="deleteReview" parameterType="Integer">
+		UPDATE meet SET state = 1 WHERE ibnum=#{ibnum}
+	</update>
+	
+	<update id="updateReview" parameterType="com.final_project.community.Review">
+		UPDATE meet SET subject=#{subject}, content=#{content}, pass=#{pass}  
+							WHERE ibnum = #{ibnum}
+	</update>
+	
+	<insert id="insertLikeReview" parameterType="com.final_project.community.Review">
+		INSERT INTO meet_like(ibnum, mId) VALUES (#{ibnum}, #{mId})
+	</insert>
+
+	<select id="countLikeReview" resultType="Integer" parameterType="Integer">
+	   SELECT  NVL(COUNT(*), 0) countLikeReview
+	        FROM meet_like WHERE ibnum=#{ibnum}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.final_project.community.ReviewReply">
+		INSERT INTO meet_re(replyNum, ibnum, mId, content, answer) 
+		VALUES (MEET_RE_SEQ.NEXTVAL, #{ibnum}, #{mId}, #{content}, #{answer})
+	</insert>
+	
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) replyCount FROM meet_re 
+		WHERE ibnum = #{ibnum} AND answer = 0 
+	</select>
+	
+	<select id="listReply" parameterType="map" resultType="com.final_project.community.ReviewReply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT tbreply.replyNum, ibnum, mId, mName, content, created, 
+						tbreply.answer, NVL(answerCount, 0) answerCount 
+				FROM
+				(
+					(
+						SELECT replyNum, r.ibnum, r.mId, mName, r.content, r.created, answer  
+						FROM meet_re r JOIN member m ON r.mId=m.mId 
+						WHERE ibnum = #{ibnum} AND answer = 0
+					) tbreply
+					LEFT OUTER JOIN
+					(
+						SELECT answer, COUNT(*) answerCount 
+						FROM meet_re 
+						GROUP BY answer 
+					) tbanswer ON tbreply.replyNum=tbanswer.answer
+				) 
+				ORDER BY replyNum DESC
+	<![CDATA[
+			)tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>			
+	</select>
+	
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM meet_re WHERE
+	    <if test="mode == 'ibnum' ">
+			 ibnum=#{ibnum}
+		</if>
+	    <if test="mode == 'reply' ">
+			 replyNum IN 
+               (SELECT replyNum FROM meet_re START WITH  replyNum = #{replyNum}
+	            CONNECT BY PRIOR replyNum = answer)
+		</if>
+	    <if test="mode == 'answer' ">
+			 replyNum=#{replyNum}
+		</if>
+	</delete>
+
+    <!-- 댓글별 답글 리스트 -->
+	<select id="listReplyAnswer" resultType="com.final_project.community.ReviewReply" parameterType="Integer">
+     SELECT replyNum, ibnum, r.mId, mName, content, created, answer
+	          FROM meet_re r 
+	          JOIN member m ON r.mId=m.mId
+              WHERE answer=#{answer}
+              ORDER BY replyNum DESC
+	</select>
+	
+    <!-- 댓글별 답글 개수 -->
+	<select id="replyCountAnswer" resultType="Integer" parameterType="Integer">
+	   SELECT NVL(COUNT(*), 0)
+	        FROM meet_re WHERE answer=#{answer}
+	</select>
+</mapper>

@@ -16,6 +16,22 @@
 			instr(subName, #{searchValue})=1
 		</if>
 	</sql>
+	
+	<sql id="inquiry-where-list">
+		<if test="searchKey=='cqSubject'">
+			and instr(cqSubject, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='mName'">
+			and instr(mName, #{searchValue})=1
+		</if>
+		<if test="searchKey=='cqContent'">
+			and instr(cqContent, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='cqCreated'">
+			and (to_char(cqCreated, 'YYYY-MM-DD')=#{searchValue}
+				or to_char(cqCreated, 'YYYYMMDD')=#{searchValue})
+		</if>
+	</sql>
 
 	<!-- 기업 등록 -->
 	<insert id="insertCompany" parameterType="com.final_project.company.Company">
@@ -57,10 +73,10 @@
 			     		</if>
 					</where>
 					<if test="order=='recent'">
-						order by cNum asc
+						order by cNum desc
 					</if>
 					<if test="order=='employ'">
-						order by employ_cnt desc, cNum asc
+						order by employ_cnt desc, cNum desc
 					</if>
 		<![CDATA[
 				)tb where rownum<=#{end}
@@ -132,12 +148,13 @@
 	<select id="listComEmploy" parameterType="map" resultType="com.final_project.company.Employ">
 		select * from(
 			select rownum rnum, tb.* from(
-		    	select ceNum, ceSubject, to_char(ceStart, 'YYYY-MM-DD') ceStart, to_char(ceEnd, 'YYYY-MM-DD') ceEnd
+		    	select ceNum, ceSubject
 		        	from com_employ
 		        	where cSerial=#{cSerial}
 		        	<if test="searchValue!=null and searchValue!='' ">
 	     				and instr(ceSubject, #{searchValue})&gt;=1
 	     			</if>
+	     			order by ceNum desc
 		<![CDATA[
 			)tb where rownum<=#{end}
 		)where rnum>=#{start}
@@ -150,11 +167,30 @@
 		select ceNum, ceSubject, cePeople, ceType, 
 			to_char(ceStart, 'YYYY-MM-DD') ceStart, 
 			to_char(ceEnd, 'YYYY-MM-DD') ceEnd, cePay, cePrefere, 
-			ceEtc, resumeForm, cSerial, atCode, subCode, cePlace, 
+			ceEtc, resumeForm, ce.cSerial, atCode, ce.subCode, maCode, cePlace, cName,
 			resumeFile, resumeOriginalName
-			from com_employ
+			from com_employ ce
+      		join sub_class sc on ce.subCode=sc.subCode
+      		join company c on ce.cSerial=c.cSerial
 			where ceNum=#{ceNum}
 	</select>
+	
+	<!-- 채용 삭제 -->
+	<delete id="deleteComEmploy">
+		delete from com_employ
+  			where ceNum=#{ceNum}
+	</delete>
+	
+	<!-- 채용 수정 -->
+	<update id="updateComEmploy" parameterType="com.final_project.company.Employ">
+		update com_employ set ceSubject=#{ceSubject}, cePeople=#{cePeople}, ceType=#{ceType},
+			ceStart=#{ceStart}, ceEnd=#{ceEnd}, cePay=#{cePay}, cePlace=#{cePlace}, 
+			cePrefere=#{cePrefere}, ceEtc=#{ceEtc}, resumeForm=#{resumeForm}, 
+			resumeFile=#{resumeFile, jdbcType=VARCHAR}, 
+			resumeOriginalName=#{resumeOriginalName, jdbcType=VARCHAR}, atCode=#{atCode}, 
+  			subCode=#{subCode}
+  			where ceNum=#{ceNum}
+	</update>
 	
 	<!-- 지원자 현황 리스트 -->
 	<select id="listApplicant" 
@@ -166,6 +202,12 @@
 			    	join member m on r.mid=m.mid
 			    	left outer join profile p on p.mid=m.mid
 			    	where ceNum=#{ceNum}
+			    	<if test="order=='recent'">
+						order by appDate desc
+					</if>
+					<if test="order=='name'">
+						order by m.mName asc, appDate desc
+					</if>
 		<![CDATA[
 			)tb where rownum<=#{end}
 		)where rrnum>=#{start}
@@ -182,14 +224,75 @@
 	<select id="applicantListEmploy" parameterType="String" resultType="com.final_project.company.Employ">
 		select ceNum, ceSubject from com_employ
  			where cSerial=#{cSerial}
+ 			order by ceNum desc
 	</select> 
 	
 	<!-- 기업명 리스트 -->
 	<select id="listCompanyName" parameterType="map" resultType="com.final_project.company.Company">
-		select cName from company
+		select cNum, cName from company
+			where cNum>0
 		<if test="searchCompany!=null and searchCompany!='' ">
-			where instr(cName, #{searchCompany})&gt;=1
+			and instr(cName, #{searchCompany})&gt;=1
 		</if>
+	</select>
+	
+	<!-- 기업명 찾기 -->
+	<select id="searchCompanyName" parameterType="Integer" resultType="String">
+		select cName from company
+			where cNum=#{cNum}
+	</select>
+	
+	<!-- 기업 문의 등록 -->
+	<insert id="insertInquiry" parameterType="com.final_project.company.Inquiry">
+		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum)
+  			values(COMPANY_QU_SEQ.CURRVAL, #{cqSubject}, #{cqContent}, 0, 0, COMPANY_QU_SEQ.nextval, #{mId}, #{cNum})
+	</insert>
+	
+	<!-- 기업 문의 답변 등록 -->
+	<insert id="insertAnswerInquiry" parameterType="com.final_project.company.Inquiry">
+		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum)
+			values(company_qu_seq.nextval, #{cqSubject}, #{cqContent}, 1, 1, #{cqNum}, #{mId}, #{cNum})
+	</insert>
+	
+	<!-- 기업 문의 Count -->
+	<select id="inquiryCount" parameterType="map" resultType="Integer">
+		select nvl(count(*), 0) from company_qu cq
+			join member m on cq.mId=m.mId
+ 			where cNum=#{cNum}
+ 			<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="inquiry-where-list"/>
+	     	</if>
+	</select>
+	
+	<!-- 기업 문의 리스트 -->
+	<select id="listInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
+		select * from(
+			select rownum rnum, tb.* from(
+		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName
+            from company_qu cq
+            join member m on cq.mId=m.mId
+            where cNum=#{cNum}
+            <if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="inquiry-where-list"/>
+	     	</if>
+	     	order by cqGroupNum desc, cqNum asc
+		<![CDATA[
+			)tb where rownum<=#{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 기업 문의 가져오기 -->
+	<select id="readInquiry" parameterType="Integer" resultType="com.final_project.company.Inquiry">
+		select cqNum, cqSubject, cqContent, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, 
+			cqIsq, cqDepth, cqGroupNum, cq.mId, cNum, mName
+			from company_qu cq
+			join member m on cq.mId=m.mId
+			where cqNum=#{cqNum}
+	</select>
+	
+	<!-- 기업 문의 이전글 -->
+	<select id="preReadInquiry">
 	</select>
 </mapper>
 

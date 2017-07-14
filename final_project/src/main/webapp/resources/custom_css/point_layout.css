@@ -135,3 +135,20 @@ span button{
 #resume_div table caption{
 	font-weight: bold;
 }
+
+div #mainCode{
+	width: 160px;
+}
+
+div #subCode{
+	width: 230px;
+}
+
+#pointEvent{
+	
+}
+
+#pointEvent div{
+	width: 100%;
+	text-align: center;
+}

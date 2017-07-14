@@ -14,6 +14,7 @@
             <li role="presentation" class="${mypoint}"><a href="<%=cp%>/point/mypoint">나의포인트</a></li>
             <li role="presentation" class="${market}"><a href="<%=cp%>/point/market">포인트마켓</a></li>
             <li role="presentation" class="${storagy}"><a href="<%=cp%>/point/storagy">이력서보관함</a></li>
+            <li role="presentation" class="${saveEvent}"><a href="<%=cp%>/point/saveEvent">포인트복권</a></li>
         </ul>
     </div>
 </div>

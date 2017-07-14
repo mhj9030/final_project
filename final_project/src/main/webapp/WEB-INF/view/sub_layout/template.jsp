@@ -168,7 +168,7 @@ $(function() {
       <input type="email" id="mid" name = "mid" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
 
       <input type="password" id="mpwd" name = "mpwd" class="form-control" placeholder="Password" required="required">
-
+	<input type="hidden" name="state" value="navlogin">
       <button class="sub-layout-btn" type="submit">로그인</button>
 </form>
       <div class="footer-login">

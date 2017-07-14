@@ -6,7 +6,22 @@
 <%
 	String cp=request.getContextPath();
 %>
-
+<script>
+	function inquiry(){
+		var f=document.inquiryForm;
+		
+		var cNum="${dto.cNum}";
+		var cName="${dto.cName}";
+		var page="${page}";
+		
+		f.cNum.value=cNum;
+		f.cName.value=cName;
+		f.page.value=page;
+		
+		f.action="<%=cp%>/company/inquiry/created";
+		f.submit();
+	}
+</script>
 
 <div class="article-body" align="center">
 	<div class="cover">
@@ -42,9 +57,14 @@
 						<h1 align="left">| 기본 정보 <small></small></h1>
 					</div>
 					<div class="col-xs-7" style="margin-top: 30px; text-align: right;">
-						<button class="btn btn-default" type="button">문의하기</button>
+						<button class="btn btn-default" type="button" onclick="inquiry();">문의하기</button>
 					</div>
 				</div>
+				<form name="inquiryForm" action="" method="post">
+					<input type="hidden" name="cNum">		
+       				<input type="hidden" name="cName">
+       				<input type="hidden" name="page">		
+				</form>
 			</div>
 			<table class="table table-condensed">
 				<tbody>
@@ -59,12 +79,12 @@
 		  				<td class="active" width="100">기업형태</td>
 		  				<td width="100">${dto.cSize}</td>
 		  				<td class="active" width="100">사원수</td>
-		  				<td width="100">${dto.cPeople}</td>
+		  				<td width="100">${dto.cPeople}명</td>
 		  			</tr>
 		  			
 		  			<tr align="center">
 		  				<td class="active" width="100">매출액</td>
-		  				<td width="100">${dto.cProfit} 만원</td>
+		  				<td width="100">${dto.cProfit}</td>
 		  				<td class="active" width="100">업종</td>
 		  				<td width="100">${dto.maName}</td>
 		  			</tr>

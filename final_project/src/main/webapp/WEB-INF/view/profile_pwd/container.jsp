@@ -26,7 +26,7 @@
 
 
 
-				<form name="pwdform" class="form-horizontal" method="post">
+				<form name="pwdform" class="form-horizontal pwd" method="post">
 					
 
 					<fieldset>

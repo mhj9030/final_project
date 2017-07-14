@@ -26,15 +26,23 @@
 .review_created{
 	float: right;
 	margin-bottom: 10px;
+	color:#d6d6d6
 }
 
 
 .review_list_table{
 	width: 700px;
 	margin: 10px auto 20px;
+	
 }
 
 .review_list_table div{
 	height : 30px;
 }
 
+.review_list_table>tbody>tr>td, .review_list_table>tbody>tr>th, .review_list_table>tfoot>tr>td, .review_list_table>tfoot>tr>th, .review_list_table>thead>tr>td, .review_list_table>thead>tr>th {
+	vertical-align: middle;
+	padding: 8px;
+    line-height: 40px;
+    border-top: 1px solid #ddd;
+}

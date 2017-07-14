@@ -49,7 +49,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-		자유게시판  |  글올리기
+			문의하기
 		</h3>
 	</div>
 
@@ -101,9 +101,9 @@
 					<tfoot>
 						<tr>
 							<td colspan="4" style="text-align: center;">
-								<button type="submit" class="btn btn-default">확인 </button>
+								<button type="submit" class="btn btn-default">${mode=='update'?'수정완료':'등록하기'}</button>
 								<button type="reset" class="btn btn-default">다시입력</button>
-								<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/free';">취소</button> 
+								<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/free';">${mode=='update'?'수정취소':'등록취소'}</button> 
 								<c:if test="${mode=='follow'}">
                                       <input type="hidden" name="page" value="${page}">
                                       <input type="hidden" name="groupNum" value="${dto.groupNum}">

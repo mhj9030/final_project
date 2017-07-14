@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.inquiry-article-body{
+	clear:both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    min-height: 500px;
+    padding-top: 20px;
+    width: 800px;
+    height: auto;
+}
+
+.page-header h1{
+	margin-left: 10px;
+	border-bottom: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

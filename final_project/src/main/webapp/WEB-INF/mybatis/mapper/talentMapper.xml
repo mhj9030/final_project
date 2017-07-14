@@ -41,8 +41,8 @@
 	</select>
 	
 	<select id="searchList" parameterType="map" resultType="com.final_project.talent.Talent">
-		select mId, rNum, rName, subTypes from(
-			select rownum, tb.* from(
+		select mId, rNum, rName, subTypes from( 
+			select rownum, tb.* from( 
 				select mId, r.rNum, rName, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes
 				from member m
 				join resume r on m.mId=r.mId
@@ -50,7 +50,7 @@
 				join interest_job ij on m.mId=ij.mId
 				join sub_class s on ij.subCode=s.subCode
 				join main_class mc on s.maCode=mc.maCode
-				where resumeType=1 
+				where resumeType=1
 			<if test="(mainCode!='' and mainCode!=null) and list!=null">
 				and (<include refid="where-list" />)
 			</if>
@@ -67,8 +67,95 @@
 		join sub_class s on ij.subCode=s.subCode 
 		join main_class mc on s.maCode=mc.maCode 
 		where resumeType=1 
-		and mId=#{mId} 
 		and r.rNum=#{rNum} 
 		group by mId, r.rNum
+	</select>
+	
+	<select id="readIntro" parameterType="map" resultType="com.final_project.talent.Talent">
+		select m.mId, to_char(mBirth,'YYYY-MM-DD') mBirth, r.rNum, rName, engName, pay, addr, addr2, phone, email, army, intro1, intro2, intro3, intro4
+		from member m
+		join resume r on m.mId=r.mId
+		left join intro i on r.rNum=i.rNum
+		where r.rNum=#{rNum}
+	</select>
+	
+	<select id="readAbility" parameterType="map" resultType="com.final_project.talent.Talent">
+		select acName, termtime, memo
+		from resume r
+		join member m on r.mId=m.mId
+		join ability a on m.mId=a.mId
+		join academy ac on a.acCode=ac.acCode
+		where rNum=#{rNum}
+	</select>
+	
+	<select id="readLicense" parameterType="map" resultType="com.final_project.talent.Talent">
+		select license, expStart, expEnd, liGC
+		from re_license rl 
+		left join mem_license ml on rl.liNum=ml.liNum
+		left join license l on ml.liCode=l.liCode
+		where rNum=#{rNum}
+	</select>
+	
+	<select id="readLanguage" parameterType="map" resultType="com.final_project.talent.Talent">
+		select language, laScore
+		from re_language rl 
+		left join mem_language ml on rl.laNum=ml.laNum
+		left join language l on ml.lanCode=l.lanCode
+		where rNum=#{rNum}
+	</select>
+	
+	<select id="readProject" parameterType="map" resultType="com.final_project.talent.Talent">
+		select prName, expStart, expEnd, memo
+		from re_project rp 
+		left join mem_project mp on rp.prNum=mp.prNum
+		where rNum=#{rNum}
+	</select>
+	
+	<select id="readAward" parameterType="map" resultType="com.final_project.talent.Talent">
+		select awAgency, awSector, awDate, memo
+		from re_award ra 
+		left join mem_award ma on ra.awNum=ma.awNum
+		where rNum=#{rNum}
+	</select>
+	
+	<select id="readCareer" parameterType="map" resultType="com.final_project.talent.Talent">
+		select company, part, carStart, carEnd, memo
+		from re_career rc 
+		left join mem_career mc on rc.mcNum=mc.mcNum
+		where rNum=#{rNum}
+	</select>
+	
+	<select id="storagyCount" parameterType="map" resultType="Integer">
+		select count(*) from(
+			select r.mId, r.rNum, rName, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes 
+			from storagy s 
+			left join resume r on s.rNum=r.rNum 
+			join interest_job ij on r.mId=ij.mId 
+			join sub_class s on ij.subCode=s.subCode 
+			join main_class mc on s.maCode=mc.maCode 
+			where s.mId=#{mId}
+		<if test="(mainCode!='' and mainCode!=null) and list!=null">
+			and <include refid="where-list" />
+		</if> 
+			group by r.mId, r.rNum, rName
+		)
+	</select>
+	
+	<select id="storagyResume" parameterType="map" resultType="com.final_project.talent.Talent">
+		select mId, rNum, rName from( 
+			select rownum, tb.* from( 
+				select r.mId, r.rNum, rName, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes 
+				from storagy s 
+				left join resume r on s.rNum=r.rNum 
+				join interest_job ij on r.mId=ij.mId 
+				join sub_class s on ij.subCode=s.subCode 
+				join main_class mc on s.maCode=mc.maCode 
+				where s.mId=#{mId}
+			<if test="(mainCode!='' and mainCode!=null) and list!=null">
+				and <include refid="where-list" />
+			</if>
+				group by r.mId, r.rNum, rName
+			)tb where <![CDATA[rownum<=#{end} 
+		)where rownum>=#{start}]]>
 	</select>
 </mapper>
