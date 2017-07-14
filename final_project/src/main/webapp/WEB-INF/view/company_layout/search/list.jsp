@@ -64,7 +64,7 @@
 	}	
 </script>
 
-<div class="list-body" align="center" style="height: auto;">
+<div class="search-list-body" align="center" style="height: auto;">
 	<div class="page-header">
 		<h1 align="left">
 			| 기업검색 <small></small>

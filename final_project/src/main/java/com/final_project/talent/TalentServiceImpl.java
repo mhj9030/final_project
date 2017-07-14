@@ -59,6 +59,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = new ArrayList<>();
 		
 		try {
+			System.out.println(">>>> " + map.get("list"));
 			list = dao.getListData("talent.searchList", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -69,7 +70,6 @@ public class TalentServiceImpl implements TalentService{
 	
 	@Override
 	public List<Talent> interestList(List<Talent> list) {
-		System.out.println("interestList");
 		try {
 			for(Talent dto:list){
 				Map<String, Object> map = new HashMap<>();
@@ -99,8 +99,117 @@ public class TalentServiceImpl implements TalentService{
 	}
 
 	@Override
-	public Talent readList(Map<String, Object> map) {
+	public Talent readIntro(Map<String, Object> map) {
 		Talent dto = null;
+		
+		try {
+			dto = dao.getReadData("talent.readIntro", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return dto;
+	}
+
+	@Override
+	public List<Talent> readAbility(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("talent.readAbility", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> readLicense(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("talent.readLicense", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> readLanguage(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("talent.readLanguage", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<Talent> readProject(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("talent.readProject", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> readAward(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("talent.readAward", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Talent> readCareer(Map<String, Object> map) {
+		List<Talent> list = null;
+		
+		try {
+			list = dao.getListData("talent.readCareer", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public int storagyDataCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("talent.storagyCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Talent> storagyResume(Map<String, Object> map) {
+		List<Talent> list = new ArrayList<>();
+		
+		try {
+			list = dao.getListData("talent.storagyResume", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 }

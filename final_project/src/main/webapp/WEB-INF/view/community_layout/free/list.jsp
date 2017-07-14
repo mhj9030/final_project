@@ -6,6 +6,15 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script type="text/javascript">
+	function searchList() {
+		var f=document.searchForm;
+		f.action="<%=cp%>/community/free";
+		f.submit();
+	}
+</script>
+	
+
 
 <div class="free_list_wrap">
 		<h3>| 자유게시판</h3>
@@ -64,7 +73,7 @@
 
 				<div class= "footer-bar" >
 					<div class = "foorter-bar-refresh">
-						<button type="button" class="btn btn-default btn-sm wbtn" onclick="#">새로고침</button>
+						<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/community/free'">새로고침</button>
 					</div>
 					<div class = "footer-search-bar">
 						<form name="searchForm" method="post" class="form-inline">

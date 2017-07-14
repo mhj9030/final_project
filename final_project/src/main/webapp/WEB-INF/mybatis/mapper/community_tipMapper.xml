@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="community_tip">
+	<insert id="insertTip" parameterType="com.final_project.community.Tip">
+		INSERT INTO jobtip_board(jtnum, subject, content, mid, saveFilename, originalFilename, type) 
+		VALUES (JOBTIP_BOARD_SEQ.NEXTVAL, #{subject}, #{content}, #{mId},  
+				#{saveFilename, jdbcType=VARCHAR}, #{originalFilename, jdbcType=VARCHAR}, #{type})
+	</insert>
+	
+	<sql id="where-list">
+	  <if test="list!=null">
+	       AND type IN 
+	       <foreach item="c" collection="list" separator="," open="(" close=")">
+	           #{c}
+	       </foreach>
+	  </if>
+	</sql>
+	
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM jobtip_board t JOIN member m ON t.mId = m.mId 
+	    <where>
+	     	<![CDATA[
+	     		state = 0
+	     	]]>
+	     	<include refid="where-list"/>
+	    </where>  
+	</select>
+	
+	<select id="listTip" parameterType="map" resultType="com.final_project.community.Tip">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT t.jtnum, t.mId, mName, subject, TO_CHAR(t.created, 'YYYY-MM-DD') created,  
+					   hitCount, saveFilename, type, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount  
+				FROM jobtip_board t JOIN member m ON t.mId=m.mId 
+				LEFT OUTER JOIN
+				(
+					SELECT jtnum, COUNT(*) replyCount FROM jobtip_re 
+					WHERE answer=0 
+					GROUP BY jtnum
+				) r ON t.jtnum=r.jtnum 
+				LEFT OUTER JOIN
+				(
+					SELECT jtnum, COUNT(*) likeCount FROM jobtip_like 
+					GROUP BY jtnum
+				) l ON t.jtnum=l.jtnum
+				<where>
+					<include refid="where-list"/>
+	     			<![CDATA[
+	     				AND state = 0
+	     			]]>
+	    		</where>
+	    		ORDER BY jtnum DESC
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
+	</select>
+	
+	<update id="updatehitCount" parameterType="Integer">
+		UPDATE jobtip_board SET hitCount = hitCount + 1 WHERE jtnum = #{jtnum}
+	</update>
+	
+	<select id="readTip" parameterType="Integer" resultType="com.final_project.community.Tip">
+		SELECT t.jtnum, subject, content, created, hitCount, t.mId, mName, saveFilename, originalFilename, type 
+		FROM jobtip_board t JOIN member m ON t.mId=m.mId 
+		WHERE jtnum = #{jtnum}	
+	</select>
+	
+	<select id="preReadTip" parameterType="map" resultType="com.final_project.community.Tip">
+		SELECT tb.* FROM(
+			SELECT jtnum, subject 
+			FROM jobtip_board t JOIN member m ON t.mId=m.mId 
+			<where>
+	     			<![CDATA[
+		                 (jtnum > #{jtnum}) AND state = 0
+		            ]]>
+		            <include refid="where-list"/>
+	    	</where>
+	    	ORDER BY jtnum ASC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadTip" parameterType="map" resultType="com.final_project.community.Tip">
+		SELECT tb.* FROM(
+			SELECT jtnum, subject 
+			FROM jobtip_board t JOIN member m ON t.mId=m.mId 
+			<where>
+	     			<![CDATA[
+		                 (jtnum < #{jtnum}) AND state = 0
+		            ]]>
+		            <include refid="where-list"/>
+	    	</where>
+	    	ORDER BY jtnum DESC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<update id="deleteTip" parameterType="Integer">
+		UPDATE jobtip_board SET state = 1 WHERE jtnum=#{jtnum}
+	</update>
+	
+	<update id="updateTip" parameterType="com.final_project.community.Tip">
+		UPDATE jobtip_board SET subject=#{subject}, content=#{content}, type=#{type}, 
+							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
+							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
+							WHERE jtnum = #{jtnum}
+	</update>
+	
+	<insert id="insertLikeTip" parameterType="com.final_project.community.Tip">
+	INSERT INTO jobtip_like(jtnum, mId) VALUES (#{jtnum}, #{mId})
+	</insert>
+
+	<select id="countLikeTip" resultType="Integer" parameterType="Integer">
+	   SELECT  NVL(COUNT(*), 0) countLikeTip
+	        FROM jobtip_like WHERE jtnum=#{jtnum}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.final_project.community.TipReply">
+		INSERT INTO jobtip_re(replyNum, jtnum, mId, content, answer) 
+		VALUES (JOBTIP_RE_SEQ.NEXTVAL, #{jtnum}, #{mId}, #{content}, #{answer})
+	</insert>
+	
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) replyCount FROM jobtip_re 
+		WHERE jtnum = #{jtnum} AND answer = 0 
+	</select>
+	
+	<select id="listReply" parameterType="map" resultType="com.final_project.community.TipReply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT tbreply.replyNum, jtnum, mId, mName, content, created, 
+						tbreply.answer, NVL(answerCount, 0) answerCount 
+				FROM
+				(
+					(
+						SELECT replyNum, r.jtnum, r.mId, mName, r.content, r.created, answer  
+						FROM jobtip_re r JOIN member m ON r.mId=m.mId 
+						WHERE jtnum = #{jtnum} AND answer = 0
+					) tbreply
+					LEFT OUTER JOIN
+					(
+						SELECT answer, COUNT(*) answerCount 
+						FROM jobtip_re 
+						GROUP BY answer 
+					) tbanswer ON tbreply.replyNum=tbanswer.answer
+				) 
+				ORDER BY replyNum DESC
+	<![CDATA[
+			)tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>			
+	</select>
+	
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM jobtip_re WHERE
+	    <if test="mode == 'jtnum' ">
+			 jtnum=#{jtnum}
+		</if>
+	    <if test="mode == 'reply' ">
+			 replyNum IN 
+               (SELECT replyNum FROM jobtip_re START WITH  replyNum = #{replyNum}
+	            CONNECT BY PRIOR replyNum = answer)
+		</if>
+	    <if test="mode == 'answer' ">
+			 replyNum=#{replyNum}
+		</if>
+	</delete>
+
+    <!-- 댓글별 답글 리스트 -->
+	<select id="listReplyAnswer" resultType="com.final_project.community.TipReply" parameterType="Integer">
+     SELECT replyNum, jtnum, r.mId, mName, content, created, answer
+	          FROM jobtip_re r 
+	          JOIN member m ON r.mId=m.mId
+              WHERE answer=#{answer}
+              ORDER BY replyNum DESC
+	</select>
+	
+    <!-- 댓글별 답글 개수 -->
+	<select id="replyCountAnswer" resultType="Integer" parameterType="Integer">
+	   SELECT NVL(COUNT(*), 0)
+	        FROM jobtip_re WHERE answer=#{answer}
+	</select>
+		
+</mapper>

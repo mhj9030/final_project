@@ -7,11 +7,11 @@ public class Employ {
 	private String ceSubject, ceType;
 	private String ceStart, ceEnd;
 	private String cePay, cePayMin, cePayMax;
-	private String cePlace, cePrefere, ceEtc;
+	private String cePlace, cePrefere, ceEtc, cName;
 	private String resumeForm, resumeFile, resumeOriginalName;
 	private MultipartFile upload; 
 	private String cSerial;
-	private int atCode, subCode;
+	private int atCode, subCode, maCode;
 
 	public int getCeNum() {
 		return ceNum;
@@ -132,5 +132,17 @@ public class Employ {
 	}
 	public void setListNum(int listNum) {
 		this.listNum = listNum;
+	}
+	public int getMaCode() {
+		return maCode;
+	}
+	public void setMaCode(int maCode) {
+		this.maCode = maCode;
+	}
+	public String getcName() {
+		return cName;
+	}
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 }

@@ -27,6 +27,8 @@ public class CreatedServiceImpl implements CreatedService{
 							dto.getcTel3() != null && dto.getcTel3().length()!=0)
 				dto.setcTel(dto.getcTel1() + "-" + dto.getcTel2() + "-" + dto.getcTel3());
 			
+			dto.setcProfit(dto.getcProfit1()+","+dto.getcProfit2()+","+dto.getcProfit3());
+			
 			dao.insertData("company.insertCompany", dto);
 			
 			for(int i=0; i<dto.getUpload().size(); i++){
@@ -78,6 +80,8 @@ public class CreatedServiceImpl implements CreatedService{
 					dto.getcTel2() != null && dto.getcTel2().length()!=0 &&
 							dto.getcTel3() != null && dto.getcTel3().length()!=0)
 				dto.setcTel(dto.getcTel1() + "-" + dto.getcTel2() + "-" + dto.getcTel3());
+			
+			dto.setcProfit(dto.getcProfit1()+","+dto.getcProfit2()+","+dto.getcProfit3());
 			
 			dao.updateData("company.updateCompany", dto);
 			
@@ -132,6 +136,24 @@ public class CreatedServiceImpl implements CreatedService{
 					dto.setcTel1(dto.getcTel().split("-")[0]);
 					dto.setcTel2(dto.getcTel().split("-")[1]);
 					dto.setcTel3(dto.getcTel().split("-")[2]);
+				}
+				
+				if(dto.getcProfit()!=null){
+					dto.setcProfit1(dto.getcProfit().split(",")[0]);
+					dto.setcProfit2(dto.getcProfit().split(",")[1]);
+					dto.setcProfit3(dto.getcProfit().split(",")[2]);
+
+					dto.setcProfit("");
+					
+					if(dto.getcProfit1()!=null && dto.getcProfit1().length()!=0){
+						dto.setcProfit(dto.getcProfit()+dto.getcProfit1()+"조 ");
+					}
+					if(dto.getcProfit2()!=null && dto.getcProfit2().length()!=0){
+						dto.setcProfit(dto.getcProfit()+dto.getcProfit2()+"억 ");
+					}
+					if(dto.getcProfit3()!=null && dto.getcProfit3().length()!=0){
+						dto.setcProfit(dto.getcProfit()+dto.getcProfit3()+"만원");
+					}
 				}
 			}
 		} catch (Exception e) {
