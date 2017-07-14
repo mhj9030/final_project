@@ -4,7 +4,7 @@ public class Inquiry {
 	private int listNum, cqNum, cNum;
 	private String cqSubject, cqContent, cqCreated;
 	private int cqIsq, cqDepth, cqGroupNum;
-	private String mId, mName;
+	private String mId, mName, cName;
 	
 	public int getCqNum() {
 		return cqNum;
@@ -71,5 +71,11 @@ public class Inquiry {
 	}
 	public void setmName(String mName) {
 		this.mName = mName;
+	}
+	public String getcName() {
+		return cName;
+	}
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 }

@@ -26,15 +26,25 @@
 			<td colspan="2" style="height: 300px;">${dto.cqContent}</td>
 		</tr>
 		<tr>
-			<td colspan="2">이전글 : </td>
+			<td colspan="2">이전글 : 
+				<c:if test="${not empty preReadDto}">
+			    	<a href="<%=cp%>/company/inquiry/article?${query}&cqNum=${preReadDto.cqNum}">${preReadDto.cqSubject}</a>
+			    </c:if>
+			</td>
 		</tr>
 		<tr>
-			<td colspan="2">다음글 : </td>
+			<td colspan="2">다음글 : 
+				<c:if test="${not empty nextReadDto}">
+			    	<a href="<%=cp%>/company/inquiry/article?${query}&cqNum=${nextReadDto.cqNum}">${nextReadDto.cqSubject}</a>
+			    </c:if>
+			</td>
 		</tr>
 	</table>
 	
 	<div style="text-align: right;">
-		<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry/answer?cqNum=${cqNum}';">답변</button>
+		<c:if test="${dto.cqDepth==0}">
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry/answer?cqNum=${cqNum}';">답변</button>
+		</c:if>
 		<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry';">뒤로</button>
 	</div>
 </div>

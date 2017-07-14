@@ -9,4 +9,7 @@ public interface InquiryService {
 	public List<Inquiry> listInquiry(Map<String, Object> map) throws Exception;
 	public Inquiry readInquiry(int cqNum) throws Exception;
 	public void insertAnswerInquiry(Inquiry dto) throws Exception;
+	public void updateAnswerInquiry(int cqNum) throws Exception;
+	public Inquiry preReadInquiry(Map<String, Object> map) throws Exception;
+	public Inquiry nextReadInquiry(Map<String, Object> map) throws Exception;
 }

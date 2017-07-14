@@ -268,10 +268,11 @@
 	<select id="listInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
 		select * from(
 			select rownum rnum, tb.* from(
-		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName
+		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName, cName
             from company_qu cq
             join member m on cq.mId=m.mId
-            where cNum=#{cNum}
+            join company c on cq.cNum=c.cNum
+            where cq.cNum=#{cNum}
             <if test="searchValue!=null and searchValue!='' ">
 	     	    <include refid="inquiry-where-list"/>
 	     	</if>
@@ -291,8 +292,41 @@
 			where cqNum=#{cqNum}
 	</select>
 	
+	<!-- 기업 문의 답변 수정 -->
+	<update id="updateAnswerInquiry" parameterType="Integer">
+		update company_qu set cqIsq=1 where cqNum=#{cqNum}
+	</update>
+	
 	<!-- 기업 문의 이전글 -->
-	<select id="preReadInquiry">
+	<select id="preReadInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
+		select tb.* from(
+			select cqNum, cqSubject from company_qu cq
+				join member m on cq.mId=m.mId
+				where cq.cNum=#{cNum}
+				<if test="searchValue!=null and searchValue!='' ">
+	     	    	<include refid="inquiry-where-list"/>
+	     		</if>
+			<![CDATA[
+				and ((cqGroupNum=#{cqGroupNum} and cqNum>#{cqNum}) or cqGroupNum<#{cqGroupNum})
+			]]>
+				order by cqGroupNum desc, cqNum asc
+		)tb where rownum=1
+	</select>
+	
+	<!-- 기업 문의 다음글 -->
+	<select id="nextReadInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
+		select tb.* from(
+			select cqNum, cqSubject from company_qu cq
+				join member m on cq.mId=m.mId
+				where cq.cNum=#{cNum}
+				<if test="searchValue!=null and searchValue!='' ">
+	     	    	<include refid="inquiry-where-list"/>
+	     		</if>
+			<![CDATA[
+				and ((cqGroupNum=#{cqGroupNum} and cqNum<#{cqNum}) or cqGroupNum>#{cqGroupNum})
+			]]>
+				order by cqGroupNum asc, cqNum desc
+		)tb where rownum=1
 	</select>
 </mapper>
 

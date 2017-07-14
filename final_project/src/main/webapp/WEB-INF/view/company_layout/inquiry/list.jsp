@@ -45,9 +45,19 @@
 	                        </c:if>
 							<a href="${articleUrl}&cqNum=${dto.cqNum}">${dto.cqSubject}</a>
 						</td>
-						<td>${dto.mName}</td>
+						<c:if test="${dto.cqDepth==0}">
+							<td>${dto.mName}</td>
+						</c:if>
+						<c:if test="${dto.cqDepth==1}">
+							<td>${dto.cName}</td>
+						</c:if>
 						<td>${dto.cqCreated}</td>
-						<td>${dto.cqIsq=='1'?'Y':'N'}</td>
+						<c:if test="${dto.cqDepth==0}">
+							<td>${dto.cqIsq=='1'?'Y':'N'}</td>
+						</c:if>
+						<c:if test="${dto.cqDepth!=0}">
+							<td></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
