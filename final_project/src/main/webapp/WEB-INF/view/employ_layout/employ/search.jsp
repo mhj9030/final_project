@@ -779,7 +779,7 @@ function ajaxHTML(url, type, query) {
 								<a href="ceNum">제목 ceSubject</a>
 						</div>
 						<div class="col-md-2"> 				
-								지원자격 ability
+								지원자격1 ability
 						</div>
 						<div class="col-md-2"> 				
 								근무조건 ceType
