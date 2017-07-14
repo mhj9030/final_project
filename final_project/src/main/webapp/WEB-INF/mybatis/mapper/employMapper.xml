@@ -96,6 +96,9 @@
 			    <if test="edate != ''">
 			        AND ceEnd &lt; #{edate}
 			    </if>
+			    <if test="cePlace != '지역'">
+			        AND INSTR(cePlace, #{cePlace}) &gt; 0
+			    </if>
 			    <!-- <if test="license!='자격증'">
 			        AND INSTR(license, #{license}) &gt; 0
 			    </if> -->
