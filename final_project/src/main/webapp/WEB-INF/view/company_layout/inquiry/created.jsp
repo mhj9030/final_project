@@ -24,11 +24,20 @@
             return false;
         }
 		
+		
+		
 		var mode="${mode}";
-		if(mode=="created")
-    		f.action="<%=cp%>/company/inquiry/created";
-    	else if(mode=="update")
+		if(mode=="created"){
+			f.cNum.value="${cNum}";
+			f.page.value="${page}";
+			f.action="<%=cp%>/company/inquiry/createdSubmit";
+		}else if(mode=="update")
     		f.action="<%=cp%>/company/inquiry/update";
+    	else if(mode=="answer"){
+    		f.cqNum.value="${dto.cqNum}";
+    		f.action="<%=cp%>/company/inquiry/answerSubmit";
+    	}
+    		
     	
     	f.submit();
 	}
@@ -37,7 +46,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-			| 문의하기
+			${mode=='answer'?'| 답변하기':'| 문의하기'}
 		</h3>
 	</div>
 	
@@ -45,24 +54,35 @@
 		<div>
 				<table class="table">
 					<tbody>
-						<tr>
-							<td class="input_info">기업명</td>
-							<td colspan="3">
-								<input type="text" name="name" value="" readonly="readonly">
-							</td>
-						</tr>
-
+						<c:if test="${mode=='created'}">
+							<tr>
+								<td class="input_info">기업명</td>
+								<td colspan="3">
+									<input type="text" name="cName" value="${cName}" readonly="readonly">
+								</td>
+							</tr>
+						</c:if>
 						<tr>
 							<td class="input_info">제목</td>
 							<td colspan="3">
-								<input type="text" name="cqSubject" value="${dto.subject}" required="required">
+								<c:if test="${mode=='created'}">
+									<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
+								</c:if>
+								<c:if test="${mode=='answer'}">
+									<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
+								</c:if>
 							</td>
 						</tr>
 
 						<tr>
 							<td class="input_info">내용</td>
 							<td colspan="3">
-								<textarea id="content" name="cqContent" rows="15" style="width : 800px;">${dto.content}</textarea>
+								<c:if test="${mode=='created'}">
+									<textarea id="content" name="cqContent" rows="15" style="width : 800px;">${dto.cqContent}</textarea>
+								</c:if>
+								<c:if test="${mode=='answer'}">
+									<textarea id="content" name="cqContent" rows="15" style="width : 800px;">${dto.cqContent} RE : </textarea>
+								</c:if>
 							</td>
 						</tr>
 					</tbody>
@@ -71,7 +91,15 @@
 							<td colspan="4" style="text-align: center;">
 								<button type="button" class="btn btn-default" onclick="check();">확인 </button>
 								<button type="reset" class="btn btn-default">다시입력</button>
-								<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/search/article?page=1&cNum=28';">취소</button> 
+								<c:if test="${mode=='created'}">
+									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/search/article?page=${page}&cNum=${cNum}';">취소</button> 
+									<input type="hidden" name="cNum">
+									<input type="hidden" name="page">
+								</c:if>
+								<c:if test="${mode=='answer'}">
+									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry'">취소</button> 
+									<input type="hidden" name="cqNum">
+								</c:if>
 							</td>
 						</tr>
 					</tfoot>

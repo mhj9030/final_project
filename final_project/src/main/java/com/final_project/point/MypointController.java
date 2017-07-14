@@ -3,6 +3,7 @@ package com.final_project.point;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
@@ -75,5 +77,46 @@ public class MypointController {
 		model.addAttribute("pointType", pointType);
 		
 		return ".point_layout.mypoint.mypoint";
+	}
+	
+	
+	@RequestMapping("/point/saveEvent")
+	public String saveEvent(){
+		return ".point_layout.saveEvent.random";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/point/saveEvent/randomPoint")
+	public Map<String, Object> randomPoint(HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("mId", info.getUserId());
+		Point dto = service.mypoint(map);
+		
+		int random = (int) (Math.random()*21) * 300;
+		
+		if(random == 0)
+			random = 100;
+		
+		System.out.println(random);
+		
+		if(dto.getMypoint()-500 >= 0){
+			map.put("history", "포인트 복권");
+			map.put("point", 500);
+			map.put("total", dto.getMypoint()-500);
+			service.usePoint(map);
+			
+			map.put("history", "포인트 복권 당첨포인트");
+			map.put("point", random);
+			service.savePoint(map);
+		}else{
+			// 포인트가 부족합니다.
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("point", random);
+		
+		return model;
 	}
 }

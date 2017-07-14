@@ -34,9 +34,9 @@ public class PointMarketController {
 	private MyUtilBootstrap util;
 	
 	@RequestMapping(value="/point/market", method=RequestMethod.GET)
-	public String marketList(@RequestParam(value="page", defaultValue="0")int current_page, 
+	public String marketList(@RequestParam(value="page", defaultValue="1")int current_page, 
 			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
-			@RequestParam(value="subCode", defaultValue="0")String subCode, 
+			@RequestParam(value="subCode", defaultValue="")String subCode, 
 			HttpSession session, Model model) throws Exception{
 		Point dto = new Point();
 		
@@ -47,17 +47,20 @@ public class PointMarketController {
 		dto = pService.mypoint(map);
 		
 		List<Talent> mainType = new ArrayList<>();
-		List<String> subCodes;
-		try{
-			subCodes = Arrays.asList(subCode);
-		}catch (NullPointerException e) {
-			subCodes = Arrays.asList("");
+		
+		if(subCode!=null && ! subCode.equals("") ){
+			List<String> subCodes = Arrays.asList(subCode);
+			map.put("list", subCodes);
+			System.out.println(">>> subCodes");
+		}else{
+			map.put("list", null);
+			System.out.println(">>> null");
 		}
 		
 		mainType = tService.mainType();
 		
-		map.put("mainCode", mainCode);
-		map.put("list", subCodes);
+		if(mainCode!=0)
+			map.put("mainCode", mainCode);
 		
 		int total_page = 0;
 		int rows = 6;
@@ -70,7 +73,7 @@ public class PointMarketController {
 			current_page = total_page;
 		
 		int start = (current_page - 1) * rows + 1;
-		int end = total_page * rows;
+		int end = current_page * rows;
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -91,7 +94,8 @@ public class PointMarketController {
 	
 	@ResponseBody
 	@RequestMapping("/point/market/subType")
-	public Map<String, Object> subType(@RequestParam(value="mainCode", defaultValue="0")int mainCode) throws Exception {
+	public Map<String, Object> subType(@RequestParam(value="page", defaultValue="1")int current_page, 
+			@RequestParam(value="mainCode", defaultValue="0")int mainCode) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mainCode", mainCode);
 		
@@ -105,28 +109,31 @@ public class PointMarketController {
 	
 	@ResponseBody
 	@RequestMapping("/point/market/usePoint")
-	public void usePoint(HttpSession session, 
+	public Map<String, Object> usePoint(HttpSession session, 
 			@RequestParam int mypoint, 
-			@RequestParam String seller) throws Exception {
+			@RequestParam String seller, 
+			@RequestParam("rNum") int rNum) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> model = new HashMap<>();
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		// 포인트 use나 save 사용시 유의 사항
-		// 종류가 하나라면 컨트롤러에서 map을 생성해 던지고 마켓서비스에서 usePoint만 부름
-		// 종류가 여러개라면 마켓서비스에 usePoint에서 map도 같이 설정해야함
 		
-		// 포인트 사용
+		map.put("mId", info.getUserId());
+		Point dto = pService.mypoint(map);
+		
 		if(mypoint-3000 >= 0){
 			map.put("history", "이력서 열람");
 			map.put("point", 3000);
-			map.put("mId", info.getUserId());
+			map.put("total", dto.getMypoint()-500);
 			pService.usePoint(map);
 			
-			map = new HashMap<>();
+			map.put("rNum", rNum);
+			pService.buyResume(map);
+			
 			map.put("history", "공개 이력서 열람");
 			map.put("point", 300);
 			map.put("mId", seller);
-			pService.savaPoint(map);
+			pService.savePoint(map);
+			System.out.println("savePoint");
 			
 			// 이력서 보러가기
 			model.put("state", 1);
@@ -134,32 +141,36 @@ public class PointMarketController {
 			// 포인트가 부족합니다.
 			model.put("state", 0);
 		}
-		System.out.println(model.get("state"));
-		return ;
+		
+		return model;
 	}
 	
 	@RequestMapping(value="/point/storagy", method=RequestMethod.GET)
-	public String storagy(@RequestParam(value="page", defaultValue="0")int current_page, 
+	public String storagy(@RequestParam(value="page", defaultValue="1")int current_page, 
 			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
-			@RequestParam(value="subCode", defaultValue="0")String subCode, 
-			HttpServletRequest req, Model model) throws Exception {
+			@RequestParam(value="subCode", defaultValue="")String subCode, 
+			HttpServletRequest req, HttpSession session, Model model) throws Exception {
 		List<Talent> mainType = new ArrayList<>();
-		List<String> subCodes;
-		try{
-			subCodes = Arrays.asList(subCode);
-		}catch (NullPointerException e) {
-			subCodes = Arrays.asList("");
+		Map<String, Object> map = new HashMap<>();
+		
+		if(subCode!=null && ! subCode.equals("") ){
+			List<String> subCodes = Arrays.asList(subCode);
+			map.put("list", subCodes);
+		}else{
+			map.put("list", null);
 		}
 		
 		mainType = tService.mainType();
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("mainCode", mainCode);
-		map.put("list", subCodes);
+		if(mainCode!=0)
+			map.put("mainCode", mainCode);
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		map.put("mId", info.getUserId());
 		
 		int total_page = 0;
 		int rows = 6;
-		int dataCount = tService.dataCount(map);
+		int dataCount = tService.storagyDataCount(map);
 		
 		if(dataCount != 0)
 			total_page = util.pageCount(rows, dataCount);
@@ -168,11 +179,12 @@ public class PointMarketController {
 			current_page = total_page;
 		
 		int start = (current_page - 1) * rows + 1;
-		int end = total_page * rows;
+		int end = current_page * rows;
+		
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<Talent> list = tService.listBoard(map);
+		List<Talent> list = tService.storagyResume(map);
 		list = tService.interestList(list);
 		
 		String paging = util.paging(current_page, total_page);
@@ -187,7 +199,7 @@ public class PointMarketController {
 	}
 	
 	@RequestMapping("/point/storagy/article")
-	public String acticle(@RequestParam(value="page", defaultValue="0")int page, 
+	public String acticle(@RequestParam(value="page", defaultValue="1")int page, 
 			@RequestParam("rNum") int rNum, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("rNum", rNum);

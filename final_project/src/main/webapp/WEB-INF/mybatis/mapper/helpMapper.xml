@@ -77,7 +77,10 @@
       <delete id="deleteNotice" parameterType="Integer">
             DELETE FROM notice WHERE notNum = #{notNum}
       </delete>
-	
+    <!-- 수정 -->  
+	<update id="updateNotice" parameterType="com.final_project.help.Notice">
+		UPDATE notice SET subject=#{subject}, content=#{content} where notNum=#{notNum}
+	</update>
 	
 	
 </mapper>

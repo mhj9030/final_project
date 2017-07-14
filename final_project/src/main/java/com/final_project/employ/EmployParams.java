@@ -4,10 +4,16 @@ package com.final_project.employ;
 
 public class EmployParams {
 	private int ceNum,startpay,endpay;
-	private String ceSubject,cName,ability,ceType,ceStart,ceEnd,cLogoimage,cePrefere,license,subname;
+	private String ceSubject,cName,ability,ceType,ceStart,ceEnd,cLogoimage,cePrefere,license,subname,search;
 	private  String sdate,edate;
 	
 	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public String getSdate() {
 		return sdate;
 	}

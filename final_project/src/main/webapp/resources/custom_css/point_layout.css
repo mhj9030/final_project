@@ -143,3 +143,12 @@ div #mainCode{
 div #subCode{
 	width: 230px;
 }
+
+#pointEvent{
+	
+}
+
+#pointEvent div{
+	width: 100%;
+	text-align: center;
+}

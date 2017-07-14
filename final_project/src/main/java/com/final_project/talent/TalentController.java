@@ -26,17 +26,12 @@ public class TalentController {
 	private MyUtilBootstrap util;
 	
 	@RequestMapping("/talent/main")
-	public String list(@RequestParam(value="page", defaultValue="0")int current_page, 
+	public String list(@RequestParam(value="page", defaultValue="1")int current_page, 
 			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
-			//String[] subCode, 
 			HttpServletRequest request, Model model) throws Exception {
 		List<Talent> mainType = new ArrayList<>();
 		
 		String[] subCode = request.getParameterValues("subCode");
-		System.out.println(subCode);
-		//List<String> codeList = Arrays.asList(subCode);
-		
-		//System.out.println(codeList);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("mainCode", mainCode);
@@ -52,34 +47,12 @@ public class TalentController {
 	
 	@ResponseBody
 	@RequestMapping("/talent/main/subType")
-	public Map<String, Object> subType(@RequestParam(value="mainCode")int mainCode) throws Exception {
+	public Map<String, Object> subType(@RequestParam(value="page", defaultValue="1")int current_page, 
+			@RequestParam(value="mainCode")int mainCode) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mainCode", mainCode);
 		
 		List<Talent> subType = service.subType(map);
-		
-		Map<String, Object> model = new HashMap<>();
-		model.put("subType", subType);
-		
-		return model;
-	}
-	
-	@ResponseBody
-	@RequestMapping("/talent/main/searchList")
-	public Map<String, Object> searchList(@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
-			String[] subCode, 
-			@RequestParam(value="page", defaultValue="0")int current_page
-			) throws Exception {
-		List<String> subCodes;
-		try{
-			subCodes = Arrays.asList(subCode);
-		}catch (NullPointerException e) {
-			subCodes = Arrays.asList("");
-		}
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("mainCode", mainCode);
-		map.put("list", subCodes);
 		
 		int total_page = 0;
 		int rows = 6;
@@ -92,25 +65,68 @@ public class TalentController {
 			current_page = total_page;
 		
 		int start = (current_page - 1) * rows + 1;
-		int end = total_page * rows;
+		int end = current_page * rows;
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<Talent> list;
-		list = service.listBoard(map);
+		List<Talent> list = service.listBoard(map);
 		list = service.interestList(list);
 		
-		//String paging = util.paging(current_page, total_page);
+		String paging = util.paging(current_page, total_page);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("subType", subType);
+		model.put("list", list);
+		model.put("paging", paging);
+		
+		return model;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/talent/main/searchList")
+	public Map<String, Object> searchList(@RequestParam(value="page", defaultValue="1")int current_page, 
+			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
+			String[] subCode) throws Exception {
+		List<String> subCodes;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mainCode", mainCode);
+		try{
+			subCodes = Arrays.asList(subCode);
+			map.put("list", subCodes);
+		}catch (NullPointerException e) {
+			map.put("list", null);
+		}
+		
+		int total_page = 0;
+		int rows = 6;
+		int dataCount = service.dataCount(map);
+		
+		if(dataCount != 0)
+			total_page = util.pageCount(rows, dataCount);
+		
+		if(current_page > total_page)
+			current_page = total_page;
+		
+		int start = (current_page - 1) * rows + 1;
+		int end = current_page * rows;
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<Talent> list = service.listBoard(map);
+		list = service.interestList(list);
+		
+		String paging = util.paging(current_page, total_page);
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("list", list);
-		//model.put("paging", paging);
+		model.put("paging", paging);
 		
 		return model;
 	}
 	
 	@RequestMapping("/talent/main/article")
-	public String article(@RequestParam(value="page", defaultValue="0")int page, 
+	public String article(@RequestParam(value="page", defaultValue="1")int page, 
 			@RequestParam("rNum") int rNum, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("rNum", rNum);

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="event">
+	<insert id="insertEvent" 
+	      parameterType="com.final_project.help.Event">
+	   INSERT INTO event(evtNum, mId, subject, imageFilename, content)
+	      VALUES (event_seq.NEXTVAL, #{mId}, #{subject},  
+	             #{imageFilename}, #{content})
+	</insert>
+	
+	<sql id="where-list">
+	  <if test="searchKey=='userName'">
+	      userName=#{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='content'">
+	      INSTR(content, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(p.created, 'YYYY-MM-DD') = #{searchValue}
+	  </if>
+	</sql>
+		
+	<select id="dataCount" resultType="Integer" parameterType="map">
+		SELECT NVL(COUNT(*), 0) FROM event p
+	        JOIN member m
+	        ON p.mId=m.mId
+	     <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     </where>		
+	</select>
+	
+	<select id="listEvent" parameterType="map"
+	     resultType="com.final_project.help.Event">
+			SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+				     SELECT evtNum,  p.mId, mName, subject, imageFilename, 
+	                    TO_CHAR(created, 'YYYY-MM-DD') created
+	                     FROM event p JOIN member m
+	                          ON p.mId = m.mId
+                    <where>
+                         <if test="searchValue != null and searchValue != ''">
+			                  <include refid="where-list"/>
+		                 </if>
+	                </where>
+		                ORDER BY evtNum DESC
+		<![CDATA[
+		        ) tb WHERE ROWNUM <= #{end}
+		    ) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+<!-- 	<select id="readPhoto" parameterType="Integer"
+	      resultType="com.sp.photo.Photo">
+	SELECT num, m.memberIdx, p.userId, userName, subject, imageFilename, content,
+	            created
+	             FROM photo p JOIN member2 m
+	                      ON p.userId = m.userId
+	             WHERE num=#{num}
+	</select> -->
+	
+
+
+
+
+</mapper>

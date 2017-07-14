@@ -6,9 +6,24 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script>
+	function inquiry(){
+		var f=document.inquiryForm;
+		
+		var cNum="${dto.cNum}";
+		var cName="${dto.cName}";
+		var page="${page}";
+		
+		f.cNum.value=cNum;
+		f.cName.value=cName;
+		f.page.value=page;
+		
+		f.action="<%=cp%>/company/inquiry/created";
+		f.submit();
+	}
+</script>
 
-
-<div class="article-body" align="center">
+<div class="search-article-body" align="center">
 	<div class="cover">
 		<div class="cover-back">
     		
@@ -39,12 +54,17 @@
 			<div class="page-header">
 				<div class="row">
 					<div class="col-xs-5">
-						<h1 align="left">| 기본 정보 <small></small></h1>
+						<h3 align="left">| 기본 정보 <small></small></h3>
 					</div>
 					<div class="col-xs-7" style="margin-top: 30px; text-align: right;">
-						<button class="btn btn-default" type="button" onclick="javascrpit:location.href='<%=cp%>/company/inquiry/created'">문의하기</button>
+						<button class="btn btn-default" type="button" onclick="inquiry();">문의하기</button>
 					</div>
 				</div>
+				<form name="inquiryForm" action="" method="post">
+					<input type="hidden" name="cNum">		
+       				<input type="hidden" name="cName">
+       				<input type="hidden" name="page">		
+				</form>
 			</div>
 			<table class="table table-condensed">
 				<tbody>
@@ -74,9 +94,9 @@
 		
 		<div class="intro">
 			<div class="page-header">
-				<h1 align="left">
+				<h3 align="left">
 					| 기업 소개 <small></small>
-				</h1>
+				</h3>
 			</div>
 			
 			<div class="intro-body">
@@ -86,9 +106,9 @@
 		
 		<div class="location">
 			<div class="page-header">
-				<h1 align="left">
+				<h3 align="left">
 					| 기업 위치 <small></small>
-				</h1>
+				</h3>
 			</div>
 			<h5>주소 : ${dto.cAddress}</h5>
 			<div id="map"></div>
