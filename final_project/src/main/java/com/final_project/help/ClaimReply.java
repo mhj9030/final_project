@@ -5,9 +5,6 @@ public class ClaimReply {
 	private String replyAnswer, date, mId, mName;
 	private int claimNum;
 	
-	
-	
-	
 	public String getmName() {
 		return mName;
 	}

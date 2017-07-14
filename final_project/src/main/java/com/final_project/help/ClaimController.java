@@ -101,7 +101,7 @@ public class ClaimController {
         model.addAttribute("page", current_page);
         model.addAttribute("dataCount", dataCount);
         model.addAttribute("total_page", total_page);
-        model.addAttribute("paging", paging);		
+        model.addAttribute("paging", paging);
 		
 		return ".help_layout.claim.list";
 	}

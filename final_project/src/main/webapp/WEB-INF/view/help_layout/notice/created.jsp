@@ -7,19 +7,7 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-  if(typeof String.prototype.trim !== 'function') {
-    String.prototype.trim = function() {
-        var TRIM_PATTERN = /(^\s*)|(\s*$)/g;
-        return this.replace(TRIM_PATTERN, "");
-    };
-  }
 
-  function check() {
-        var f = document.boardForm;
-        f.action = "<%=cp%>/help_layout/notice/${mode}";
-          
-          return true;
-  }
 </script>
 
 <div class="created_form">

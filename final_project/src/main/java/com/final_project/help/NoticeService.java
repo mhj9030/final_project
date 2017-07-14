@@ -3,8 +3,6 @@ package com.final_project.help;
 import java.util.List;
 import java.util.Map;
 
-import com.final_project.point.Point;
-
 public interface NoticeService {
 	public int insertNotice(Notice dto, String pathname);
 	public List<Notice> listNotice(Map<String, Object> map);
