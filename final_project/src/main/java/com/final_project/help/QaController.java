@@ -138,8 +138,8 @@ public class QaController {
 			HttpSession session
 			) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		
-		dto.setmId("admin@a.com");
+		dto.setmId(info.getUserId());
+		//dto.setmId("admin@a.com");
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"";
 		

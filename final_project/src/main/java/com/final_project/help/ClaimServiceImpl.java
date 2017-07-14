@@ -102,6 +102,35 @@ public class ClaimServiceImpl implements ClaimService{
 		return dto;
 	}
 	
+
+	
+	@Override
+	public int deleteClaim(Map<String, Object> map) {
+			int result = 0;
+		
+		try {
+			result = dao.getIntValue("claim.deleteClaim", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int updateClaim(Claim dto) {
+		int result = 0;
+		
+		try {
+			result = dao.updateData("claim.updateClaim", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
 	@Override
 	public int insertReply(ClaimReply dto) {
 		int result=0;
@@ -112,9 +141,29 @@ public class ClaimServiceImpl implements ClaimService{
 		}
 		return result;
 	}
+
+
+	@Override
+	public List<ClaimReply> listReply(Map<String, Object> map) {
+		List<ClaimReply> list=null;
+		try {
+			list=dao.getListData("claim.listReply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
-
-
+	@Override
+	public int replyDataCount(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.getIntValue("claim.replyDataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 
 	

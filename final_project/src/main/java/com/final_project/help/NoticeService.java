@@ -10,6 +10,7 @@ public interface NoticeService {
 	public Notice readNotice(int num);
 	public int updateHitCount(int num);
 	
-	public int updateNotice(Notice dto, String pathname);
-	public int deleteNotice(int num, String pathname, String userId);
+	public int deleteNotice(Map<String, Object> map);
+	public int updateNotice(Notice dto);
+	
 }
