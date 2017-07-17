@@ -6,6 +6,35 @@
 <%
 	String cp = request.getContextPath();
 %>
+<script type="text/javascript">
+	function searchList() {
+		var f=document.searchForm;
+		f.action="<%=cp%>/community/review";
+		f.submit();
+	}
+	
+	
+	function searchType(type) {
+		var f= document.type_form;
+		f.type.value=type;
+		f.action="<%=cp%>/community/review";
+		f.submit();
+	}
+	
+	$(function(){
+		var type = "${type}";
+		if(type=='최신순'){
+			btn = document.getElementById('newest_btn');
+			btn.disabled = "disabled";
+		}else if(type=='추천순'){
+			btn = document.getElementById('like_btn');
+			btn.disabled = "disabled";
+		}
+	});
+
+</script>
+
+
 
 
 <div class="review_list_wrap">
@@ -15,8 +44,11 @@
 	</p>
 	
 	<div class="review_select">
-		<input type="radio" name="review_list" value="최신순" checked="checked">최신순&nbsp;&nbsp;
-		<input type="radio" name="review_list" value="추천순">추천순
+		<form name="type_form">
+			<button class="btn btn-default btn-xs" id="newest_btn" onclick="searchType('최신순')">최신순</button>
+			<button class="btn btn-default btn-xs" id="like_btn" onclick="searchType('추천순')">추천순</button>
+			<input type="hidden" name="type" value="${type}">
+		</form>
 	</div>
 	
 	<table class="table review_list_table">

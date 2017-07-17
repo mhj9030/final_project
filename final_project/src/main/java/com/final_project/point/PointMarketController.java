@@ -82,6 +82,7 @@ public class PointMarketController {
 		
 		String paging = util.paging(current_page, total_page);
 		
+		model.addAttribute("page", current_page);
 		model.addAttribute("mainType", mainType);
 		model.addAttribute("mainCode", mainCode);
 		model.addAttribute("subCode", subCode);
@@ -189,6 +190,7 @@ public class PointMarketController {
 		
 		String paging = util.paging(current_page, total_page);
 		
+		model.addAttribute("page", current_page);
 		model.addAttribute("mainType", mainType);
 		model.addAttribute("mainCode", mainCode);
 		model.addAttribute("subCode", subCode);

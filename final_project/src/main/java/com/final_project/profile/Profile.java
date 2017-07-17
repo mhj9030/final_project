@@ -15,6 +15,28 @@ public class Profile {
 	private String proCover;
 	private String proIntro; // 자기소개
 
+	// 전문 분야
+	private String expertise;       
+	private String eid;
+	
+	
+
+	public String getEid() {
+		return eid;
+	}
+
+	public void setEid(String eid) {
+		this.eid = eid;
+	}
+
+	public String getExpertise() {
+		return expertise;
+	}
+
+	public void setExpertise(String expertise) {
+		this.expertise = expertise;
+	}
+
 	public String getMid() {
 		return mid;
 	}

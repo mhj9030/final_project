@@ -9,6 +9,10 @@
 <!-- Bootstrap CSS -->
 <link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
+h3{
+   margin-top: 40px;
+}
+/* 즉시지원버튼 */
   .apply {
 	background-color:#5bc0de;
 	-webkit-border-top-left-radius:0px;
@@ -51,31 +55,85 @@
 .col-md-3 a {
 color:#666666;
 }
+
+/* 직업선택화살표 */
 .target:after {content:''; position:absolute; width:10px; height:px; border: 10px solid white;}
 .target a { padding:10px; padding:0;width:100px;border-radius:20px;}
-.target.go:after {border-color:transparent lightgray transparent transparent;reft:100px;position:absolute;left:225px}
+.target.go:after {border-color:transparent lightgray transparent transparent;reft:100px;position:absolute;left:180px}
+
+
+/*추가된키워드*/
+
+}
+a .btn-info {
+text-decoration: none;
+}
+.btn-info {
+text-decoration: none;
+}
+.btn-info:hover {
+text-decoration: none;
+}
+.glyphicon-remove {
+height:16px;
+}
+.glyphicon-remove:hover {
+color: gray;
+}
 </style>
 
 <script type="text/javascript">
 
 
 $(function() {
-	detaillistPage(1);
+	listPage(1);
 
 /*채용정보 분류별 검색*/
-//1차직종
-$("#location > a").click(function() {
-	alert("d");
+//상세검색과 연결
+$(document).on("click","#location > a",function(){ 
+	//직종
 	if($(this).attr("id")=='j') {
-		$("#sub_class").append("<option value="+$(this).attr("id").substring(1)+">"+ $(this).attr("id").substring(1)+"</option>");
-		$("#sub_class option:selected").val("");
+		$("#sub_class").append("<option value="+$(this).text()+">"+ $(this).text()+"</option>");
+		$("#sub_class").val($(this).text()).prop("selected", true).change();
 	}
+	//업종
+	if($(this).attr("id")=='b') {
+		$("#sub_bu_class").append("<option value="+$(this).text()+">"+ $(this).text()+"</option>");
+		$("#sub_bu_class").val($(this).text()).prop("selected", true).change();
+	}
+});
+
+//지역
+$(document).on("click","#location > a:nth-child(n)",function(){ 
+	var index = ($(this).index()/2)+1;
+	if($(this).attr("id")!='b' && $(this).attr("id")!='j')	
+		$("#cePlace").find("option:eq("+index+")").prop("selected",true).change();
+});
+
+//근무조건
+$(document).on("click","#stype > a:nth-child(n)",function(){ 
+	var index = ($(this).index()/2);
+		$("#ceType").find("option:eq("+index+")").prop("selected",true).change();
+});
+//자격증
+$(document).on("click","#slicense > a:nth-child(n)",function(){ 
+	var index = ($(this).index()/2);
+		$("#license").find("option:eq("+index+")").prop("selected",true).change();
+});
+//우대사항
+$(document).on("click","#sprefere > a:nth-child(n)",function(){ 
+	var index = ($(this).index()/2);
+		$("#cePrefere").find("option:eq("+index+")").prop("selected",true).change();
 });
 
 
 
+//기업별
 
-$("#job > div > a").mouseenter(function() {
+
+
+$(document).on("mouseenter","#job > div > a",function(){ 
+//$("#job > div > a").mouseenter(function() {
 	$("#job > div > a").parent().attr("class","target");
 	$("#location").html("");
 	$("#location").attr("style","height:424px;border:3px solid lightgray;padding:20px;");
@@ -93,7 +151,7 @@ $("#job > div > a").mouseenter(function() {
 		</c:forEach>
 
 		for (var i = 0; i < subname.length; i++) {
-			$("#location").append("<a id='j'>"+ subname[i]+"</a><br>");
+			$("#location").append("<a id='j' >"+ subname[i]+"</a><br>");
 		}
 		
 		//2차업종
@@ -111,8 +169,8 @@ $("#job > div > a").mouseenter(function() {
 			$("#location").append("<a id='b'>"+ subname[i]+"</a><br>");
 		}
 	});
-
-	$("#location").mouseleave(function() {
+	$(document).on("mouseleave","#location",function(){ 	
+	//$("#location").mouseleave(function() {
 		var out="";
 			out+="<a>서울특별시</a><br>";
 			out+="<a>광주광역시</a><br>";
@@ -137,8 +195,19 @@ $("#job > div > a").mouseenter(function() {
 /* 채용정보 상세검색 */
 
 /* 업종 선택*/
-$("#main_bu_class").change(function() {
+
+$(document).on("change","#main_bu_class",function(){
+//$("#main_bu_class").change(function() {	
 	$("#sub_bu_class option").remove();
+	
+	if($("#main_bu_class option:selected").val()=="1차업종") {
+		$("#sub_bu_class").append("<option>2차업종</option><option>선택해주세요</option>");
+		$("#sub_bu_class").find("select option:eq(1)").prop("selected",true).change();
+		$("#sub_class").find("select option:eq(0)").prop("selected",true).change();
+		listPage(1);
+		return;
+	}
+	
 	//main_bu_class의 value값과 sblist의 mvalue값이 같은걸 저기에 넣어준다.
 		//선택된 인덱스를 골라준다.	
 			var macode = $("#main_bu_class option:selected").val();
@@ -154,10 +223,22 @@ $("#main_bu_class").change(function() {
 			for (var i = 0; i < subname.length; i++) {
 				$("#sub_bu_class").append("<option value="+subname[i]+">"+ subname[i]+"</option>");
 			}
+			
+	
 });
+
 /*직종선택*/
-$("#main_class").change(function() {
+$(document).on("change","#main_class",function(){
+//$("#main_class").change(function() {
 	$("#sub_class option").remove();
+	
+	if($("#main_class option:selected").val()=="1차직종") {
+		$("#sub_class").append("<option>2차직종</option><option>선택해주세요</option>");
+		$("#sub_class").find("select option:eq(1)").prop("selected",true).change();
+		$("#sub_class").find("select option:eq(0)").prop("selected",true).change();
+		listPage(1);
+		return;
+	}
 	//main_bu_class의 value값과 sblist의 mvalue값이 같은걸 저기에 넣어준다.
 		//선택된 인덱스를 골라준다.	
 			var macode = $("#main_class option:selected").val();
@@ -216,7 +297,7 @@ $("#main_class").change(function() {
 		$("#middlebar").width(mbar+'%');
 		
 		
-		detaillistPage(page);
+		listPage(1);
 	});
 	
 	//endpay가 변경되면
@@ -239,7 +320,7 @@ $("#main_class").change(function() {
 		$("#middlebar").width(mbar+'%');
 		$("#endbar").width(ebar+'%');
 		$("#listEmploy").html("");
-		detaillistPage(1);
+		listPage(1);
 	});
 	
 	
@@ -247,29 +328,69 @@ $("#main_class").change(function() {
 	
 	/* 검색,키워드 추가부분 */
 	$("#cePrefere").change(function() {
-		detaillistPage(1);
+		var seleted = $("#cePrefere option:selected").text();
+		if($("#cePrefere option:selected").text()!='우대사항')
+			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+		listPage(1);
+		
+		
 	});
 	$("#ceType").change(function() {
-		detaillistPage(1);
+		var seleted = $("#ceType option:selected").text();
+		if($("#ceType option:selected").text()!='근무조건')
+			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+		listPage(1);
 	});
 	$("#ability").change(function() {
-		detaillistPage(1);
+		var seleted = $("#ability option:selected").text();
+		if($("#ability option:selected").text()!='학력')
+			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+		listPage(1);
 	});
 	$("#license").change(function() {
-		detaillistPage(1);
+		var seleted = $("#license option:selected").text();
+		if($("#license option:selected").text()!='자격증')
+			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+		listPage(1);
 	});
 	$("#sub_class").change(function() {
-		detaillistPage(1);
+		var seleted = $("#sub_class option:selected").text();
+		if($("#sub_class option:selected").text()!='2차직종')
+			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+		listPage(1);
 	});
 	$("#s_date").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#e_date").change(function() {
-		detaillistPage(1);
+		listPage(1);
+	});
+	$("#cePlace").change(function() {
+		listPage(1);
 	});
 	$("#search").keyup(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
+	//키워드박스 요소 삭제
+		var stored = "stored";
+	$(document).on("click","#keywordbox > a > i",function(){
+		
+		stored = $(this).parent().text();
+		$(this).parent().remove();
+		var removeid = $("#employForm select option:contains('"+stored+"')").parent().attr("id")
+		if(removeid=='sub_class') {
+			$("#main_class").find("option:eq(0)").prop("selected",true).change();
+		} else {
+			$("#"+removeid).find("option:eq(0)").prop("selected",true).change();	
+		}
+			
+		
+		
+		
+			
+	});
+	
+	
 	
 });
 
@@ -343,7 +464,7 @@ function imageError(image) {
 }
 
 
-function detaillistPage(page) {
+function listPage(page) {
 	var url="<%=cp%>/employ/list";
 	var query = $('form[name=employForm]').serialize();
 	query +="&page="+page;
@@ -430,7 +551,7 @@ function ajaxHTML(url, type, query) {
 			
 			
 			if($.trim(data)=="error") {
-				detaillistPage(page);
+				listPage(page);
 				return;
 			}
 			$("#listEmploy").html(out);
@@ -455,7 +576,7 @@ function ajaxHTML(url, type, query) {
 </script>
 
 
-<div class="wrap">
+<div class="wrap" style="max-width:800px;">
 	<div class="jumbotron">
   
 	</div>
@@ -486,12 +607,10 @@ function ajaxHTML(url, type, query) {
 					  <c:forEach var="dto" items="${mjlist}">
 					  <div class="targe" id="j${dto.macode}"><a>${dto.maname}</a></div>
 					  </c:forEach>
-					  <br>
 	  				<strong>산업별(업종)</strong><br>
 	  				<c:forEach var="dto" items="${mblist}">
 					  	<div class="targe" id="b${dto.macode}"><a >${dto.maname}</a></div>
 					  </c:forEach>
-	  				
 	  				
 	  			</div>
 	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;" id="location">
@@ -507,21 +626,27 @@ function ajaxHTML(url, type, query) {
 	  			<a>강원도</a><br>
 	  			<a>제주특별자치도</a><br>
 	  			</div>
-	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"  id="ETC">
+	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;">
+	  			<div id="stype">
 	  			<strong>근무조건</strong><br>
 	  			<c:forEach var="dto" items="${ceTlist}">
 		  	 			<a id="${dto.ceType}">${dto.ceType}</a><br>
 				</c:forEach>
+				</div>
 	  			<br>
+	  			<div id="slicense">
 	  			<strong>자격증</strong><br>
 	  			<c:forEach var="dto" items="${lclist}">
 	  					<a id="${dto.license}">${dto.license}</a><br>
 				</c:forEach>
+				</div>
 				<br>
+				<div id="sprefere">
 	  			<strong>우대사항</strong><br>
 	  			<c:forEach var="dto" items="${cePlist}">
 	  				<a id="${dto.cePrefere}">${dto.cePrefere}</a><br>
 			    </c:forEach>
+			    </div>
 	  			</div>
 	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;"id="com">
 	  			<a>삼성전자</a><br>
@@ -586,14 +711,19 @@ function ajaxHTML(url, type, query) {
 								
 								</div>
 								<div class="col-md-3">
-									<select class="form-control">
+									<select class="form-control" id="cePlace" name="cePlace">
 									  <option>지역</option>
-									  <option>서울</option>
-									  <option>경기</option>
-									  <option>인천</option>
-									  <option>대전</option>
-									  <option>강원</option>
-									  <option>제주</option>
+									  <option value="서울">서울특별시</option>
+							  			<option value="광주">광주광역시</option>
+							  			<option value="대전">대전광역시</option>
+							  			<option value="부산">부산광역시</option>
+							  			<option value="인천">인천광역시</option>
+							  			<option value="경기">경기도</option>
+							  			<option value="경상">경상남도/경상북도</option>
+							  			<option value="충청">충청남도/충청북도</option>
+							  			<option value="전라">전라남도/전라북도</option>
+							  			<option value="강원">강원도</option>
+							  			<option value="제주">제주특별자치도</option>
 									</select>
 								</div>
 								
@@ -707,11 +837,7 @@ function ajaxHTML(url, type, query) {
 					
 					
 					
-					<div class="col-md-12">
-						<div class="col-md-12">
-					 		<textarea class="form-control" rows="" cols="" placeholder="추가된 키워드"></textarea>
-						</div>
-					</div>
+					
 					 
 					</div>
 					<!-- 채용정보 상세검색 끝 -->
@@ -720,8 +846,14 @@ function ajaxHTML(url, type, query) {
     </div>
   </div>
   
+  <div class="col-md-12" style="background:#F5F5F5; font-weight:900; height:30px;line-height:30px" >추가된 키워드</div>
+  <div class="col-md-12" style="height:100px;border:1px solid #F5F5F5;padding:20px;" id="keywordbox">
+							
+						
+						
+	</div>
+	<div>&nbsp;</div>
 	
-	<br><br><br><br><br>
 
 	
 	
@@ -762,7 +894,7 @@ function ajaxHTML(url, type, query) {
 	<!-- 채용정보 -->
 	<!-- 검색을 누르면 ajax로 페이지가 바뀌어야한다. -->
 	<!-- 페이징으로한다. -->
-	<!-- 일단은 모든페이지 다나오게 한다.(detaillistPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
+	<!-- 일단은 모든페이지 다나오게 한다.(listPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
 	<div class="callout" style="padding: 20px;margin: 20px 0;border: 1px solid #eee; border-left-width: 5px;border-radius: 3px;">
 		
 		<div id="listEmploy"><!-- ajax나오는id -->
@@ -778,7 +910,7 @@ function ajaxHTML(url, type, query) {
 								<a href="ceNum">제목 ceSubject</a>
 						</div>
 						<div class="col-md-2"> 				
-								지원자격 ability
+								지원자격1 ability
 						</div>
 						<div class="col-md-2"> 				
 								근무조건 ceType

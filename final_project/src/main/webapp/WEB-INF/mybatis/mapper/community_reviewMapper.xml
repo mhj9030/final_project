@@ -75,6 +75,45 @@
     ]]> 
 	</select>
 	
+	<select id="listReviewLike" parameterType="map" resultType="com.final_project.community.Review">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT v.ibnum, m.mId, mName, subject, TO_CHAR(v.created, 'YYYY-MM-DD') created, company, pass, v.cNum, directcompany,    
+					   hitCount, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount, pro.prophoto 
+				FROM meet v JOIN member m ON v.mId=m.mId 
+				LEFT OUTER JOIN
+				(
+					SELECT ibnum, COUNT(*) replyCount FROM meet_re 
+					WHERE answer=0 
+					GROUP BY ibnum
+				) r ON v.ibnum=r.ibnum 
+				LEFT OUTER JOIN
+				(
+					SELECT ibnum, COUNT(*) likeCount FROM meet_like 
+					GROUP BY ibnum
+				) l ON v.ibnum=l.ibnum
+				LEFT OUTER JOIN
+				(
+					SELECT p.mId, prophoto from profile p
+				) pro ON v.mId = pro.mId
+				LEFT OUTER JOIN
+				(
+					SELECT cNum, cName company from company
+				) c ON v.cNum = c.cNum
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	     			<![CDATA[
+	     				AND state = 0
+	     			]]>
+	    		</where>
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start} ORDER BY likeCount DESC, ibnum DESC
+    ]]> 
+	</select>
+	
 	<update id="updatehitCount" parameterType="Integer">
 		UPDATE meet SET hitCount = hitCount + 1 WHERE ibnum = #{ibnum}
 	</update>
