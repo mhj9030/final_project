@@ -27,7 +27,7 @@ div{
 	clear:both;
     margin: 0px auto;
     min-height: 500px;
-    width: 900px;
+    width: 800px;
 }
 
 .page_head{
@@ -94,23 +94,6 @@ div{
 	margin-left: 20px;
 	margin-right: 5%;
 	margin-bottom: 20px;
-}
-
-.marketDiv{
-	float:left;
-	padding-left: 20px;
-	width: 448px;
-	height: 220px;
-}
-
-.marketDiv div{
-	float:left;
-	padding-top: 20px;
-	width: 200px;
-	height: 180px;
-	background: #f4feff;
-	box-shadow: 2px 2px 2px;
-	line-height: 180%;
 }
 
 .paging{

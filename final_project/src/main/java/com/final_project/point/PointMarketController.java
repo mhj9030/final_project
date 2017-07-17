@@ -124,7 +124,7 @@ public class PointMarketController {
 		if(mypoint-3000 >= 0){
 			map.put("history", "이력서 열람");
 			map.put("point", 3000);
-			map.put("total", dto.getMypoint()-500);
+			map.put("total", dto.getMypoint()-3000);
 			pService.usePoint(map);
 			
 			map.put("rNum", rNum);

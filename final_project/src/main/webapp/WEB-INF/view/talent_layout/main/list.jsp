@@ -135,7 +135,7 @@ function listPrint(data){
 	
 	if(data.list.length!=0){
 		for(var i=0; i<data.list.length; i++){
-			out += '<div class="list-content col-sm-5">';
+			out += '<div class="list-content col-xs-5 col-sm-5">';
 			out += '	<div class="col-xs-6 col-sm-5">';
 			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />';//data.list[i].photo
 			out += '	</div>';

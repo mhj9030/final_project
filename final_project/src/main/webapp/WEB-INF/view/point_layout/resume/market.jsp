@@ -51,7 +51,7 @@
 		</c:if>
 		<c:forEach var="dto" items="${list}">
 		<form name="reintro${dto.rNum}" method="get">
-			<div class="list-content col-sm-5">
+			<div class="list-content col-xs-5 col-sm-5">
 				<div class="col-xs-6 col-sm-5">
 					<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />
 				</div>
