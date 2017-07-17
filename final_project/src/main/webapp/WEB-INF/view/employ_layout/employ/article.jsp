@@ -27,6 +27,9 @@
   color:gray;
   margin-right:10px;
   }
+h3{
+   margin-top: 40px;
+}
 
   </style>
   
@@ -155,7 +158,7 @@ function scrap() {
 
 
 <hr>
-<div class="wrapper center-block" style="max-width: 980px; border-left:1px;border-right:1px">
+<div class="wrapper center-block" style="max-width: 800px; border-left:1px;border-right:1px">
 
 
 <!-- 글내용  content -->
@@ -176,23 +179,20 @@ function scrap() {
 </div>
 
 	<div class="col-md-8">
-	<pre>
-	주요 업무
-	
-	- 석박사 채용 서비스, 리서처팜(researcherfarm.com)의 마케팅 및 영업
-	- 바이럴 마케팅
-	- 국내 학회를 대상으로 홍보 및 영업
-	- 페이스북 페이지 및 그룹 홍보 및 관리
-	- 리서처팜 커뮤니티 홍보 및 관리
-	- 국내 대학교 및 석박사 인력 채용 기업 대상으로 홍보 및 영업
-	</pre>
+	<pre>주요 업무	
+- 석박사 채용 서비스, 리서처팜(researcherfarm.com)의 마케팅 및 영업
+- 바이럴 마케팅
+- 국내 학회를 대상으로 홍보 및 영업
+- 페이스북 페이지 및 그룹 홍보 및 관리
+- 리서처팜 커뮤니티 홍보 및 관리
+- 국내 대학교 및 석박사 인력 채용 기업 대상으로 홍보 및 영업</pre>
 	<hr>
 	<pre>
 	채용 상세
 	
 	고용인원
 	${employ.cePeople }
-	■ 자격 요건1
+	■ 자격 요건
 	- 3개월 이상 근무 가능하신 분
 	- 인센티브 제도를 이해하는 분
 	- 기본 급여 + 인센티브로 급여가 지급됩니다
