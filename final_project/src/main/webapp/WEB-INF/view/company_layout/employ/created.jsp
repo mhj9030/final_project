@@ -66,7 +66,7 @@
 	}
 </script>
 <div class="employ-created-body">
-	<div class="page-header">
+	<div class="body-header">
 		<h3 align="left">
 			${mode=='update'?'| 채용수정':'| 채용등록'} <small></small>
 		</h3>

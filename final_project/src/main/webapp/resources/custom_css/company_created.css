@@ -1,13 +1,19 @@
 @CHARSET "UTF-8";
 
 .created-created-body{
-	clear: both;
+	clear:both;
     box-sizing: border-box;
     margin: 0px auto 15px;
-    min-height: 500px;
-    padding-top: 20px;
+    min-height: 655px;
+    margin-top: 40px;
     width: 800px;
+ 	height: auto;
 }
+
+.created-created-body .body-header{
+	margin-bottom: 50px;
+}
+
 
 .created-created-body .form-group{
 	margin-bottom: 30px;

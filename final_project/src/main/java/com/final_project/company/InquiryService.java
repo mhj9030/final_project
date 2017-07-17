@@ -12,4 +12,6 @@ public interface InquiryService {
 	public void updateAnswerInquiry(int cqNum) throws Exception;
 	public Inquiry preReadInquiry(Map<String, Object> map) throws Exception;
 	public Inquiry nextReadInquiry(Map<String, Object> map) throws Exception;
+	public void deleteInquiry(int cqNum) throws Exception;
+	public void updateInquiry(Inquiry dto) throws Exception;
 }

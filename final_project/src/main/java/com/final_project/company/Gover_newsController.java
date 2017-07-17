@@ -12,6 +12,6 @@ public class Gover_newsController {
 		
 		model.addAttribute("gover_news", "on");
 		
-		return ".company_layout.gover_news.container";
+		return ".company_layout.gover_news.list";
 	}
 }

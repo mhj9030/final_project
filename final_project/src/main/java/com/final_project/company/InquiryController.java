@@ -203,6 +203,48 @@ public class InquiryController {
 		
 		return "redirect:/company/inquiry";
 	}
+	
+	@RequestMapping(value="/company/inquiry/delete")
+	public String delete(
+			@RequestParam int cqNum,
+			@RequestParam(value="page", defaultValue="1") int page
+			) throws Exception{
+		
+		service.deleteInquiry(cqNum);
+		
+		return "redirect:/company/inquiry?page="+page;
+	}
+	
+	@RequestMapping(value="/company/inquiry/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int cqNum,
+			@RequestParam(value="page", defaultValue="1") int page,
+			Model model
+			) throws Exception{
+		
+		Inquiry dto=service.readInquiry(cqNum);
+		if(dto==null){
+			return "redirect:/company/inquiry?page="+page;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("inquiry", "on");
+		model.addAttribute("mode", "update");
+		
+		return ".company_layout.inquiry.created";
+	}
+	
+	@RequestMapping(value="/company/inquiry/update", method=RequestMethod.POST)
+	public String updateSubmit(
+			Inquiry dto,
+			@RequestParam(value="page", defaultValue="1") int page
+			) throws Exception{
+		
+		service.updateInquiry(dto);
+		
+		return "redirect:/company/inquiry?page="+page;
+	}
 }
 
 
