@@ -1,6 +1,6 @@
 package com.final_project.setting;
 
-public class Setting {
+public class Career {
 
 	// 경력 부분
 	private String company; // 회사
@@ -9,6 +9,10 @@ public class Setting {
 	private String carend; // 퇴사일 (재직중 있음)
 	private String memo; // 간단메모
 	private String mid; // 사용자 아이디
+	
+	
+	
+	
 
 	public String getCompany() {
 		return company;

@@ -60,7 +60,7 @@ color:#666666;
 
 
 $(function() {
-	detaillistPage(1);
+	listPage(1);
 
 /*채용정보 분류별 검색*/
 //1차직종
@@ -68,7 +68,7 @@ $("#location > a").click(function() {
 	alert("d");
 	if($(this).attr("id")=='j') {
 		$("#sub_class").append("<option value="+$(this).attr("id").substring(1)+">"+ $(this).attr("id").substring(1)+"</option>");
-		$("#sub_class option:selected").val("");
+		$("#sub_class option:select").val("");
 	}
 });
 
@@ -216,7 +216,7 @@ $("#main_class").change(function() {
 		$("#middlebar").width(mbar+'%');
 		
 		
-		detaillistPage(page);
+		listPage(page);
 	});
 	
 	//endpay가 변경되면
@@ -239,7 +239,7 @@ $("#main_class").change(function() {
 		$("#middlebar").width(mbar+'%');
 		$("#endbar").width(ebar+'%');
 		$("#listEmploy").html("");
-		detaillistPage(1);
+		listPage(1);
 	});
 	
 	
@@ -247,28 +247,31 @@ $("#main_class").change(function() {
 	
 	/* 검색,키워드 추가부분 */
 	$("#cePrefere").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#ceType").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#ability").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#license").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#sub_class").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#s_date").change(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	$("#e_date").change(function() {
-		detaillistPage(1);
+		listPage(1);
+	});
+	$("#cePlace").change(function() {
+		listPage(1);
 	});
 	$("#search").keyup(function() {
-		detaillistPage(1);
+		listPage(1);
 	});
 	
 });
@@ -343,7 +346,7 @@ function imageError(image) {
 }
 
 
-function detaillistPage(page) {
+function listPage(page) {
 	var url="<%=cp%>/employ/list";
 	var query = $('form[name=employForm]').serialize();
 	query +="&page="+page;
@@ -430,7 +433,7 @@ function ajaxHTML(url, type, query) {
 			
 			
 			if($.trim(data)=="error") {
-				detaillistPage(page);
+				listPage(page);
 				return;
 			}
 			$("#listEmploy").html(out);
@@ -486,12 +489,10 @@ function ajaxHTML(url, type, query) {
 					  <c:forEach var="dto" items="${mjlist}">
 					  <div class="targe" id="j${dto.macode}"><a>${dto.maname}</a></div>
 					  </c:forEach>
-					  <br>
 	  				<strong>산업별(업종)</strong><br>
 	  				<c:forEach var="dto" items="${mblist}">
 					  	<div class="targe" id="b${dto.macode}"><a >${dto.maname}</a></div>
 					  </c:forEach>
-	  				
 	  				
 	  			</div>
 	  			<div class="col-md-3" style="height:424px;border-right:1px solid #F5F5F5;padding:20px;" id="location">
@@ -586,14 +587,14 @@ function ajaxHTML(url, type, query) {
 								
 								</div>
 								<div class="col-md-3">
-									<select class="form-control">
+									<select class="form-control" id="cePlace" name="cePlace">
 									  <option>지역</option>
-									  <option>서울</option>
-									  <option>경기</option>
-									  <option>인천</option>
-									  <option>대전</option>
-									  <option>강원</option>
-									  <option>제주</option>
+									  <option value="서울">서울</option>
+									  <option value="경기">경기</option>
+									  <option value="인천">인천</option>
+									  <option value="대전">대전</option>
+									  <option value="강원">강원</option>
+									  <option value="제주">제주</option>
 									</select>
 								</div>
 								
@@ -762,7 +763,7 @@ function ajaxHTML(url, type, query) {
 	<!-- 채용정보 -->
 	<!-- 검색을 누르면 ajax로 페이지가 바뀌어야한다. -->
 	<!-- 페이징으로한다. -->
-	<!-- 일단은 모든페이지 다나오게 한다.(detaillistPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
+	<!-- 일단은 모든페이지 다나오게 한다.(listPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
 	<div class="callout" style="padding: 20px;margin: 20px 0;border: 1px solid #eee; border-left-width: 5px;border-radius: 3px;">
 		
 		<div id="listEmploy"><!-- ajax나오는id -->
@@ -778,7 +779,7 @@ function ajaxHTML(url, type, query) {
 								<a href="ceNum">제목 ceSubject</a>
 						</div>
 						<div class="col-md-2"> 				
-								지원자격 ability
+								지원자격1 ability
 						</div>
 						<div class="col-md-2"> 				
 								근무조건 ceType

@@ -17,6 +17,9 @@
 <!-- Bootstrap CSS -->
 <link href="<%=cp%>/resources/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- Bootstrap-Tags-inputs CSS -->
+<link href="<%=cp%>/resources/css/bootstrap-tagsinput.css" rel="stylesheet">
+
 <!-- Main_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/main_layout.css" rel="stylesheet">
 
@@ -41,7 +44,10 @@
 <!-- Bootstrap JS -->
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 
-<!-- Bootstrap JS -->
+<!-- bootstrap-tagsinput.min JS -->
+<script src="<%=cp%>/resources/js/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+
+<!-- Setting JS -->
 <script src="<%=cp%>/resources/js/setting.js" type="text/javascript"></script>
 
 <!-- Profile JS -->

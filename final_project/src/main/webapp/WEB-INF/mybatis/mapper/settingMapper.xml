@@ -3,13 +3,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="setting">
 
-    <!-- 회원정보 추가  -->    
-
-	
-    <insert id="insertCareer" parameterType="com.final_project.setting.Setting">
+    <!-- 회원경력 추가  -->    
+    <insert id="insertCareer" parameterType="com.final_project.setting.Career">
        INSERT INTO mem_career(mcnum, company, part, carstart, carend, memo, mid)
        	VALUES (mem_career_seq.NEXTVAL, #{company}, #{part}, TO_DATE(#{carstart}, 'MM/DD/YYYY'), TO_DATE(#{carend}, 'MM/DD/YYYY'), #{memo}, #{mid} ) 
     </insert>
+    
+    <!-- 회원 학력 추가 -->
+    <insert id="insertAbility" parameterType="com.final_project.setting.Ability">
+    	INSERT INTO ability (abnum, school, major, termstart, termend, termstate, memo, mid )
+    	 VALUES (ABILITY_SEQ.NEXTVAL, #{school}, #{major}, #{termstart}, #{termend}, #{termstate}, #{memo}, #{mid})
+    </insert>
+    
+    <!-- 전문 분야 추가 -->
+    <insert id="insertExpertise" parameterType="com.final_project.setting.Expertise">
+    		INSERT INTO expertise(eid, expertise)
+    			VALUES (#{eid}, #{expertise} )
+    </insert>
+    
+    
+    <!-- 전문 분야 수정 -->
+    <update id="updateExpertise" parameterType="com.final_project.setting.Expertise">
+    		UPDATE expertise SET expertise=#{expertise} WHERE eid = #{eid}
+    </update>
+    
+    
+    <!-- 전문 분야 가져오기 -->
+    <select id="getExpertise" resultType="com.final_project.setting.Expertise" parameterType="String">
+    		SELECT expertise, created FROM expertise WHERE eid = #{eid}
+    </select>
+    
+    
+    <!-- 프로젝트 추가 -->
+    <insert id="insertProject" parameterType="com.final_project.setting.Project">
+    		INSERT INTO mem_project(prnum, prname, expstarthyear, expendyear, expstartmonth, expendmonth, memo, mid)
+    			VALUES (#{prnum}, #{prname}, #{expstarthyear}, #{expendyear}, #{expstartmonth}, #{expendmonth}, #{memo}, #{mid})
+    </insert>
+    
+    
 
 
 
