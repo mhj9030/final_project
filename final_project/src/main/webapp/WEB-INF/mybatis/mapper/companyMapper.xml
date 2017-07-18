@@ -355,6 +355,28 @@
 	<update id="updateInquiry" parameterType="com.final_project.company.Inquiry">
 		update company_qu set cqSubject=#{cqSubject}, cqContent=#{cqContent} where cqNum=#{cqNum}
 	</update>
+	
+	<!-- 메인 화면 인기 기업 정보 리스트 -->
+	<select id="listMainCompany" resultType="com.final_project.company.Company">
+		select * from(
+		  select rownum rnum, tb.* from(
+		    select distinct c.cSerial, c.mId, cNum, cName, mName, cDescription, sb.subName, mb.maName, 
+		    	ci.cLogoImage, ci.cCoverImage, 
+		    	nvl(count(ce.cSerial) over(partition by c.cSerial), 0) employ_cnt, proPhoto
+		      from company c
+		      join sub_bu_class sb on c.subCode=sb.subCode
+		      join main_bu_class mb on sb.maCode=mb.maCode
+		      join com_image ci on c.cSerial=ci.cSerial
+		      join member m on c.mId=m.mId
+		      left outer join profile p on c.mId=p.mId
+		      left outer join com_employ ce on c.cSerial=ce.cSerial
+		      where cNum>0
+		      order by employ_cnt desc, c.cNum asc
+		<![CDATA[
+		  )tb where rownum<=3
+		)where rnum>=1
+		]]>
+	</select>
 </mapper>
 
 
