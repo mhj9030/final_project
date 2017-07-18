@@ -62,7 +62,16 @@
 					<input type="hidden" name="seller" value="${dto.mId}">
 					<input type="hidden" name="rNum" value="${dto.rNum}">
 					<input type="hidden" name="mypoint" value="${point.mypoint}">
-					<button type="button" class="btn btn-primary btn-xs" onclick="usePoint(${dto.rNum})"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 (-3000p) </button>
+					<c:if test="${dto.isBuy=='0'}">
+						<button type="button" class="btn btn-primary btn-xs" onclick="usePoint(${dto.rNum})"> 
+							<i class="fa fa-user" aria-hidden="true"></i> 지원서 (-3000p) 
+						</button>
+					</c:if>
+					<c:if test="${dto.isBuy=='1'}">
+						<button type="button" class="btn btn-primary btn-xs" onclick="article(${dto.rNum})"> 
+							<i class="fa fa-user" aria-hidden="true"></i> 열람하기
+						</button>
+					</c:if>
 				</div>
 			</div>
 		</form>
@@ -121,31 +130,39 @@ function subPrint(data){
 
 function usePoint(num) {
 	var mypoint = ${point.mypoint};
-
-	if(mypoint-3000 >= 0){
-		var query = $("form[name=reintro" + num + "]").serialize();
-		
-		$.ajax({
-			type: "post",
-			url: "<%=cp%>/point/market/usePoint",
-			data: query,
-			dataType: "json",
-			success: function(data){
-				if(data.state=="1"){
-					if(confirm("이력서를 바로 열람하시겠습니까?")){
-						location.href="<%=cp%>/point/storagy/article?rNum=" + num + "&page=${page}";
+	
+	if(confirm(num + "번 이력서를 구매하시겠습니까?")){
+		if(mypoint-3000 >= 0){
+			var query = $("form[name=reintro" + num + "]").serialize();
+			
+			$.ajax({
+				type: "post",
+				url: "<%=cp%>/point/market/usePoint",
+				data: query,
+				dataType: "json",
+				success: function(data){
+					if(data.state=="1"){
+						if(confirm("이력서를 바로 열람하시겠습니까?")){
+							article(num);
+						}else{
+							location.href="<%=cp%>/point/market";
+						}
+					}else{
+						alert("포인트가 부족합니다.");
 					}
-				}else{
-					alert("포인트가 부족합니다.");
+				},
+				error: function(e){
+					alert("관리자에게 문의하세요.");
+					return;
 				}
-			},
-			error: function(e){
-				alert("관리자에게 문의하세요.");
-				return;
-			}
-		});
-	}else{
-		alert("포인트가 부족합니다.");
+			});
+		}else{
+			alert("포인트가 부족합니다.");
+		}
 	}
+}
+
+function article(num) {
+	location.href="<%=cp%>/point/storagy/article?rNum=" + num + "&page=${page}";
 }
 </script>

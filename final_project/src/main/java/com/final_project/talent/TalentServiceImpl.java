@@ -22,7 +22,7 @@ public class TalentServiceImpl implements TalentService{
 		try {
 			mainType = dao.getListData("talent.mainClass");
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		
 		return mainType;
@@ -35,7 +35,7 @@ public class TalentServiceImpl implements TalentService{
 		try {
 			list = dao.getListData("talent.subClass", map);
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		
 		return list;
@@ -48,7 +48,7 @@ public class TalentServiceImpl implements TalentService{
 		try {
 			result = dao.getIntValue("talent.dataCount");
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		
 		return result;
@@ -59,10 +59,9 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = new ArrayList<>();
 		
 		try {
-			System.out.println(">>>> " + map.get("list"));
 			list = dao.getListData("talent.searchList", map);
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		
 		return list;
@@ -79,7 +78,7 @@ public class TalentServiceImpl implements TalentService{
 				dto.setSubTypes(jobs.getSubTypes());
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		
 		return list;
@@ -92,7 +91,7 @@ public class TalentServiceImpl implements TalentService{
 		try {
 			result = dao.getIntValue("talent.dataCount", map);
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		
 		return result;
@@ -206,6 +205,23 @@ public class TalentServiceImpl implements TalentService{
 		
 		try {
 			list = dao.getListData("talent.storagyResume", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Talent> isBuy(List<Talent> list, Map<String, Object> map) {
+		try {
+			for(Talent dto:list){
+				Map<String, Object> qMap = new HashMap<>();
+				qMap.put("mId", map.get("mId"));
+				qMap.put("rNum", dto.getrNum());
+				int result = dao.getIntValue("talent.isBuy", qMap);
+				dto.setIsBuy(result);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -13,8 +13,8 @@
 	</div>
 
 	<div class="point_intro">
-		<div style="width: 170px; height: 170px">
-			<img src="" height="150px" width="150px">
+		<div style="width: 200px; height: 200px">
+			<img src="<%=cp%>/resources/image/intro_coin.jpg" height="170px">
 		</div>
 		<div style="width: 450px; height: 150px; vertical-align: bottom;">
 			<h3>포인트란?</h3><br>

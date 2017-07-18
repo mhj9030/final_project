@@ -17,6 +17,10 @@ div{
 	//border: 1px solid #cccccc;
 }
 
+h3{
+   margin-top: 40px;
+}
+
 .form-control{
 	height: 35px;
 	width: 150px;
@@ -35,7 +39,7 @@ div{
 }
 
 .point_intro{
-	margin: 0px auto 15px;
+	margin: 15px auto 15px;
 	padding-top: 40px;
 	padding-left: 120px;
 	width: 900px;
@@ -129,7 +133,52 @@ div #subCode{
 	width: 230px;
 }
 
-#pointEvent div{
-	width: 100%;
+.pointEvent{
+	margin: 10px auto;
+	border: 8px double #cccccc;
+	width: 65%;
 	text-align: center;
+	height: 250px;
+}
+
+.pointEvent div{
+	margin: 10px auto;
+}
+
+.randImg div{
+	//border: 1px solid #cccccc;
+	float: left;
+	width: 50%;
+	height: 160px;
+}
+
+.scratch {
+	margin: 0 100px;
+	position: relative;
+}
+
+.scratch button{
+	position: absolute;
+	background: #cccccc;
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+	color: #808080;
+	//margin: 5px auto;
+	width: 200px;
+	height: 40px;
+	top: 100px;
+	left: 25px;
+}
+
+.scratch input{
+	position: absolute;
+	background: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+	//margin: 5px auto;
+	text-align: center;
+	width: 200px;
+	height: 40px;
+	top: 100px;
+	left: 25px;
 }

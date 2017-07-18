@@ -119,8 +119,44 @@
 		values(point_seq.nextval, #{classify}, #{history}, #{point}, #{total}, #{mId})
 	</insert>
 	
+	
 	<insert id="buyResume" parameterType="map">
 		insert into storagy(stNum, rNum, mid) 
 		values(storagy_seq.nextval, #{rNum}, #{mId})
 	</insert>
+	
+	<select id="totalId" parameterType="map" resultType="com.final_project.point.Point">
+		<!-- total이 0인 1번rownum에 해당하는 mId -->
+		select poNum, point, mId from(
+			select rownum, tb.* from(
+				select * from point 
+				where mId=#{mId} 
+				and total=0
+				order by poNum asc
+			)tb where rownum=1
+		)
+	</select>
+	
+	<select id="totalOne" parameterType="map" resultType="com.final_project.point.Point">
+		<!-- 역순 rownum 1번의 total에 -->
+		select total from(
+			select rownum, tb.* from(select * from point 
+				where mId=#{mId} 
+				and total!=0
+				order by poNum desc
+			)tb where rownum=1
+		)
+	</select>
+	
+	<update id="total" parameterType="map">
+		<!-- total이 0인 1번rownum에 point를 더하여 total에 넣음 -->
+		update point set total=#{total} where poNum=#{poNum}
+	</update>
+	
+	<select id="isPointEvent"  parameterType="map" resultType="Integer">
+		select count(*) from(
+			select to_char(poDate, 'YY/MM/DD') poDate from point 
+			where classify='사용' and history='포인트 복권' and mId=#{mId}
+		)where  poDate=to_char(sysdate, 'YY/MM/DD')
+	</select>
 </mapper>
