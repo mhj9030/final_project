@@ -33,6 +33,22 @@
 		</if>
 	</sql>
 
+	<sql id="goverNews-where-list">
+		<if test="searchKey=='gnSubject'">
+			and instr(gnSubject, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='mName'">
+			and instr(mName, #{searchValue})=1
+		</if>
+		<if test="searchKey=='gnContent'">
+			and instr(gnContent, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='gnCreated'">
+			and (to_char(gnCreated, 'YYYY-MM-DD')=#{searchValue}
+				or to_char(gnCreated, 'YYYYMMDD')=#{searchValue})
+		</if>
+	</sql>
+
 	<!-- 기업 등록 -->
 	<insert id="insertCompany" parameterType="com.final_project.company.Company">
 		insert into company(cSerial, cNum, cCeo, cName, cPeople, cCreated, cSize, cTel, cProfit, cIntro, mId, subCode, cDescription, cAddress)
@@ -376,6 +392,89 @@
 		  )tb where rownum<=3
 		)where rnum>=1
 		]]>
+	</select>
+	
+	<!-- 공무원 소식 등록 -->
+	<insert id="insertGoverNews" parameterType="com.final_project.company.GoverNews">
+		insert into gov_news(gnNum, gnSubject, gnContent, mId) 
+			values(gov_news_seq.nextval, #{gnSubject}, #{gnContent}, #{mId})
+	</insert>
+	
+	<!-- 공무원 소식 Count -->
+	<select id="countGoverNews" parameterType="map" resultType="Integer">
+		select count(*) from gov_news gn
+ 	 		join member m on gn.mId=m.mId
+ 	 		<where>
+				<if test="searchValue!=null and searchValue!='' ">
+			    	<include refid="goverNews-where-list"/>
+			     </if>
+			</where>	
+	</select>
+	
+	<!-- 공무원 소식 리스트 -->
+	<select id="listGoverNews" parameterType="map" resultType="com.final_project.company.GoverNews">
+		select * from(
+		  select rownum rnum, tb.* from(
+		    select gnNum, gnSubject, gnHitCount, to_char(gnCreated, 'YYYY-MM-DD') gnCreated, mName
+		      from gov_news gn
+		      join member m on gn.mId=m.mId
+		      <where>
+				<if test="searchValue!=null and searchValue!='' ">
+			    	<include refid="goverNews-where-list"/>
+			     </if>
+			  </where>
+		      order by gnNum desc
+		<![CDATA[
+		  )tb where rownum<=#{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 공무원 소식 조회수 증가 -->
+	<update id="updateGnHitCount" parameterType="Integer">
+		update gov_news set gnHitCount=gnHitCount+1 where gnNum=#{gnNum}
+	</update>
+	
+	<!-- 공무원 소식 가져오기 -->
+	<select id="readGoverNews" parameterType="Integer" resultType="com.final_project.company.GoverNews">
+		select gnNum, gnSubject, gnContent, gnHitCount, gnCreated, gn.mId, mName
+			from gov_news gn
+			join member m on gn.mId=m.mId
+		    where gnNum=#{gnNum}
+	</select>
+	
+	<!-- 공무원 소식 이전글 -->
+	<select id="preReadGoverNews" parameterType="map" resultType="com.final_project.company.GoverNews">
+		select tb.* from(
+			select gnNum, gnSubject from gov_news gn
+				join member m on gn.mId=m.mId
+				<where>
+					<if test="searchValue!=null and searchValue!='' ">
+		     	    	<include refid="goverNews-where-list"/>
+		     		</if>
+		     	<![CDATA[
+		     		and (gnNum>#{gnNum})
+		     	]]>
+	     		</where>
+	     		order by gnNum asc
+		)tb where rownum=1
+	</select>
+	
+	<!-- 공무원 소식 다음글 -->
+	<select id="nextReadGoverNews" parameterType="map" resultType="com.final_project.company.GoverNews">
+		select tb.* from(
+			select gnNum, gnSubject from gov_news gn
+				join member m on gn.mId=m.mId
+				<where>
+					<if test="searchValue!=null and searchValue!='' ">
+		     	    	<include refid="goverNews-where-list"/>
+		     		</if>
+		     	<![CDATA[
+		     		and (gnNum<#{gnNum})
+		     	]]>
+	     		</where>
+	     		order by gnNum desc
+		)tb where rownum=1
 	</select>
 </mapper>
 
