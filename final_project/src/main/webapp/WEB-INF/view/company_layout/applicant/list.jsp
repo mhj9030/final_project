@@ -8,18 +8,27 @@
 %>
 <script>
 	$(function(){
-		$("input[name=order]").change(function(){
+		$(document).on("click", "input[name=order]" ,function(){
+			var f=document.searchForm;
+			var ceNum=f.ceNum.value;
+			var ceSubject=f.ceSubject.value;
 			var order=$(this).val();
-
-			alert(order);
+			
+			searchList(ceNum, ceSubject, order);
+			
+			$("input:radio[name=order]:radio[value="+order+"]").prop("checked", true);
 		});
 	});
 
-	function searchList(ceNum, ceSubject){
+	function searchList(ceNum, ceSubject, order){
 		$("#employ-subject").html(ceSubject);
 		
+		var f=document.searchForm;
+		f.ceNum.value=ceNum;
+		f.ceSubject.value=ceSubject;
+		
 		var url="<%=cp%>/company/applicant/list";
-		var query="ceNum="+ceNum;
+		var query="ceNum="+ceNum+"&order="+order;
 		
 		$.ajax({
 			type:"POST",
@@ -33,10 +42,11 @@
 				var out="<div class='list-header' style='margin-top: 30px;'>";
 				out+="<div align='left' style='float: left;'><h4>전체 지원자("+dataCount+"명)</h4></div>";
 				out+="	<div class='chk_info' align='right'>";
-				out+="		<input type='radio' name='order' value='recent' checked='checked'> 최신순";
+				out+="		<input type='radio' name='order' value='recent'> 최신순";
 				out+="		<input type='radio' name='order' value='name'> 이름순";
 				out+="	</div>";
 				out+="</div>";
+				
 				if(dataCount!=0){
 					for(var idx=0; idx<data.list.length; idx++){
 						var proPhoto=data.list[idx].proPhoto;
@@ -80,7 +90,7 @@
 	}
 </script>
 <div class="applicant-list-body" align="center">
-	<div class="page-header">
+	<div class="body-header">
 		<h3 align="left">
 			| 지원자 현황 <small></small>
 		</h3>
@@ -98,7 +108,8 @@
 							<li><a href="#">진행 중인 채용 정보가 없습니다</a></li>
 						</c:if>
 						<c:forEach var="dto" items="${listEmploy}">
-							<li><a href="#" onclick="searchList('${dto.ceNum}', '${dto.ceSubject}'); return false">${dto.ceSubject}</a></li>
+							<li><a href="#" onclick="searchList('${dto.ceNum}', '${dto.ceSubject}', 'name'); return false">${dto.ceSubject}</a></li>
+							
 						</c:forEach>
 					</ul>
 				</div>
@@ -113,7 +124,7 @@
 	
 	<form name="searchForm" action="" method="post">
 		<input type="hidden" name="ceNum">
-		<input type="hidden" name="order">
+		<input type="hidden" name="ceSubject">
 	</form>
 	
 	<div id="listApplicant" class="list"></div>

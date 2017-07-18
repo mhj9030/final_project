@@ -35,7 +35,7 @@
 </script>
 
 <div class="employ-list-body">
-	<div class="page-header">
+	<div class="body-header">
 		<h3 align="left">
 			| 채용관리 <small></small>
 		</h3>

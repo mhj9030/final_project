@@ -57,7 +57,9 @@
 						<h3 align="left">| 기본 정보 <small></small></h3>
 					</div>
 					<div class="col-xs-7" style="margin-top: 30px; text-align: right;">
-						<button class="btn btn-default" type="button" onclick="inquiry();">문의하기</button>
+						<c:if test="${sessionScope.member.userId!=dto.mId}">
+							<button class="btn btn-default" type="button" onclick="inquiry();">문의하기</button>		
+						</c:if>
 					</div>
 				</div>
 				<form name="inquiryForm" action="" method="post">
@@ -67,7 +69,7 @@
 				</form>
 			</div>
 			<table class="table table-condensed">
-				<tbody>
+				<tbody class="table-tbody">
 					<tr align="center">
 		  				<td class="active" width="100">대표자</td>
 		  				<td width="100">${dto.cCeo}</td>

@@ -7,8 +7,8 @@
 	String cp = request.getContextPath();
 %>
 
-<div class="list-body" align="center">
-	<div class="page-header">
+<div class="gover_news-list-body" align="center">
+	<div class="body-header">
 		<h1 align="left">
 			| 공무원 소식 <small></small>
 		</h1>
@@ -32,13 +32,6 @@
 				<tr align="center">
 					<td>1</td>
 					<td align="left"><a href="#">공무원 소식1</a></td>
-					<td>관리자</td>
-					<td>2017-06-27</td>
-					<td>0</td>
-				</tr>
-				<tr align="center">
-					<td>2</td>
-					<td align="left"><a href="#">공무원 소식2</a></td>
 					<td>관리자</td>
 					<td>2017-06-27</td>
 					<td>0</td>

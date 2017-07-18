@@ -31,10 +31,14 @@
 			f.cNum.value="${cNum}";
 			f.page.value="${page}";
 			f.action="<%=cp%>/company/inquiry/createdSubmit";
-		}else if(mode=="update")
+		}else if(mode=="update"){
+			f.cqNum.value="${dto.cqNum}";
+			f.page.value="${page}";
     		f.action="<%=cp%>/company/inquiry/update";
+		}
     	else if(mode=="answer"){
     		f.cqNum.value="${dto.cqNum}";
+    		f.page.value="${page}";
     		f.action="<%=cp%>/company/inquiry/answerSubmit";
     	}
     		
@@ -43,10 +47,12 @@
 	}
 </script>
 
-<div class="created_form">
-	<div>
+<div class="inquiry-created-body">
+	<div class="body-header">
 		<h3>
-			${mode=='answer'?'| 답변하기':'| 문의하기'}
+			<c:if test="${mode=='created'}">문의하기</c:if>
+			<c:if test="${mode=='answer'}">답변하기</c:if>
+			<c:if test="${mode=='update'}">문의수정</c:if>
 		</h3>
 	</div>
 	
@@ -65,12 +71,7 @@
 						<tr>
 							<td class="input_info">제목</td>
 							<td colspan="3">
-								<c:if test="${mode=='created'}">
-									<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
-								</c:if>
-								<c:if test="${mode=='answer'}">
-									<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
-								</c:if>
+								<input type="text" name="cqSubject" value="${dto.cqSubject}" required="required">
 							</td>
 						</tr>
 
@@ -82,6 +83,9 @@
 								</c:if>
 								<c:if test="${mode=='answer'}">
 									<textarea id="content" name="cqContent" rows="15" style="width : 800px;">${dto.cqContent} RE : </textarea>
+								</c:if>
+								<c:if test="${mode=='update'}">
+									<textarea id="content" name="cqContent" rows="15" style="width : 800px;">${dto.cqContent}</textarea>
 								</c:if>
 							</td>
 						</tr>
@@ -99,6 +103,12 @@
 								<c:if test="${mode=='answer'}">
 									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry'">취소</button> 
 									<input type="hidden" name="cqNum">
+									<input type="hidden" name="page">
+								</c:if>
+								<c:if test="${mode=='update'}">
+									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry'">취소</button> 
+									<input type="hidden" name="cqNum">
+									<input type="hidden" name="page">
 								</c:if>
 							</td>
 						</tr>

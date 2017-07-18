@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.inquiry-list-body{
+.employ-list-body{
 	clear:both;
     box-sizing: border-box;
     margin: 0px auto 15px;
@@ -10,17 +10,6 @@
  	height: auto;
 }
 
-.inquiry-list-body .body-header{
+.employ-list-body .body-header{
 	margin-bottom: 50px;
 }
-
-
-
-
-
-
-
-
-
-
-

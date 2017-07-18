@@ -36,10 +36,10 @@
 <link href="<%=cp%>/resources/custom_css/company_search_article.css" rel="stylesheet">
 <!-- company_created.css -->
 <link href="<%=cp%>/resources/custom_css/company_created.css" rel="stylesheet">
-<!-- company_employ.css -->
-<link href="<%=cp%>/resources/custom_css/company_employ.css" rel="stylesheet">
-<!-- company_applicant.css -->
-<link href="<%=cp%>/resources/custom_css/company_applicant.css" rel="stylesheet">
+<!-- company_employ_list.css -->
+<link href="<%=cp%>/resources/custom_css/company_employ_list.css" rel="stylesheet">
+<!-- company_applicant_list.css -->
+<link href="<%=cp%>/resources/custom_css/company_applicant_list.css" rel="stylesheet">
 <!-- company_employ_created.css -->
 <link href="<%=cp%>/resources/custom_css/company_employ_created.css" rel="stylesheet">
 <!-- created_form.css -->
@@ -48,6 +48,9 @@
 <link href="<%=cp%>/resources/custom_css/company_inquiry_list.css" rel="stylesheet">
 <!-- company_inquiry_article.css -->
 <link href="<%=cp%>/resources/custom_css/company_inquiry_article.css" rel="stylesheet">
+<!-- company_inquiry_created.css -->
+<link href="<%=cp%>/resources/custom_css/company_inquiry_created.css" rel="stylesheet">
+
 
 </head>
 <body>
