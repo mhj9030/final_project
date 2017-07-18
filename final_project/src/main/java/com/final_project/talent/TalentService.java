@@ -17,6 +17,7 @@ public interface TalentService {
 	
 	//
 	public List<Talent> interestList(List<Talent> list);
+	public List<Talent> isBuy(List<Talent> list, Map<String, Object> map);
 	
 	// 게시물 보기
 	public Talent readIntro(Map<String, Object> map);
