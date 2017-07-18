@@ -146,6 +146,9 @@ public class PointServiceImpl implements PointService{
 		try {
 			map.put("classify", "적립");
 			result = dao.insertData("point.savePoint", map);
+			
+			//
+			result = totalPoint(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -201,5 +204,39 @@ public class PointServiceImpl implements PointService{
 		}
 		
 		return dto;
+	}
+
+	@Override
+	public int totalPoint(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			Point point;
+			point = dao.getReadData("point.totalId", map);
+			
+			Point point2;
+			map.put("mId", point.getmId());
+			point2 = dao.getReadData("point.totalOne", map);
+			
+			map.put("poNum", point.getPoNum());
+			int total = Integer.parseInt(point.getPoint()) + Integer.parseInt(point2.getTotal());
+			map.put("total", total);
+			result = dao.updateData("point.total", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int isPointEvent(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("point.isPointEvent", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 }

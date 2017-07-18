@@ -133,7 +133,7 @@
 
 
 <div class="created-created-body">
-	<div class="page-header">
+	<div class="body-header">
 		<h3 align="left">
 			${mode=='update'?'| 기업정보수정':'| 기업등록'}
 		</h3>

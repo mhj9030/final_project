@@ -88,7 +88,7 @@
 	
 	<!-- 기업 정보 가져오기(기업 번호) -->
 	<select id="readCompanyNum" parameterType="Integer" resultType="com.final_project.company.Company">
-		select c.cSerial, cNum, cCeo, cName, cPeople, to_char(cCreated, 'YYYY-MM-DD') cCreated, cSize, cTel, cProfit, cIntro, cAddress, sb.subName, mb.maName, ci.cLogoImage, ci.cCoverImage
+		select c.cSerial, mId, cNum, cCeo, cName, cPeople, to_char(cCreated, 'YYYY-MM-DD') cCreated, cSize, cTel, cProfit, cIntro, cAddress, sb.subName, mb.maName, ci.cLogoImage, ci.cCoverImage
 			from company c
 		  	join sub_bu_class sb on c.subCode=sb.subCode
 		  	join main_bu_class mb on sb.maCode=mb.maCode
@@ -299,6 +299,10 @@
 		update company_qu set cqIsq=1 where cqNum=#{cqNum}
 	</update>
 	
+	<update id="updateAnswerInquiryToZero" parameterType="Integer">
+		update company_qu set cqIsq=0 where cqNum=#{cqNum}
+	</update>
+	
 	<!-- 기업 문의 이전글 -->
 	<select id="preReadInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
 		select tb.* from(
@@ -329,6 +333,49 @@
 			]]>
 				order by cqGroupNum asc, cqNum desc
 		)tb where rownum=1
+	</select>
+	
+	<!-- 기업 문의 삭제(질문을 삭제할 때) -->
+	<delete id="deleteQuestionInquiry" parameterType="Integer">
+		delete from company_qu where cqGroupNum=#{cqGroupNum}
+	</delete>
+	
+	<!-- 기업 문의 삭제(답변을 삭제할 때) -->
+	<delete id="deleteAnswerInquiry" parameterType="Integer">
+		delete from company_qu where cqNum=#{cqNum}
+	</delete>
+	
+	<!-- 기업 문의 답변 개수 -->
+	<select id="countAnswerInquiry" parameterType="Integer" resultType="Integer">
+		select count(*) from company_qu
+			where cqGroupNum=#{cqGroupNum} and cqDepth=1
+	</select>
+	
+	<!-- 기업 문의 수정 -->
+	<update id="updateInquiry" parameterType="com.final_project.company.Inquiry">
+		update company_qu set cqSubject=#{cqSubject}, cqContent=#{cqContent} where cqNum=#{cqNum}
+	</update>
+	
+	<!-- 메인 화면 인기 기업 정보 리스트 -->
+	<select id="listMainCompany" resultType="com.final_project.company.Company">
+		select * from(
+		  select rownum rnum, tb.* from(
+		    select distinct c.cSerial, c.mId, cNum, cName, mName, cDescription, sb.subName, mb.maName, 
+		    	ci.cLogoImage, ci.cCoverImage, 
+		    	nvl(count(ce.cSerial) over(partition by c.cSerial), 0) employ_cnt, proPhoto
+		      from company c
+		      join sub_bu_class sb on c.subCode=sb.subCode
+		      join main_bu_class mb on sb.maCode=mb.maCode
+		      join com_image ci on c.cSerial=ci.cSerial
+		      join member m on c.mId=m.mId
+		      left outer join profile p on c.mId=p.mId
+		      left outer join com_employ ce on c.cSerial=ce.cSerial
+		      where cNum>0
+		      order by employ_cnt desc, c.cNum asc
+		<![CDATA[
+		  )tb where rownum<=3
+		)where rnum>=1
+		]]>
 	</select>
 </mapper>
 

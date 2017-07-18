@@ -7,8 +7,30 @@
 	String cp=request.getContextPath();
 %>
 
+<script>
+	function updateInquiry(){
+		var cqNum=${dto.cqNum};
+		var page=${page};
+		var query="cqNum="+cqNum+"&page="+page;
+		var url="<%=cp%>/company/inquiry/update?"+query;
+		
+		location.href=url;
+	}
+
+	function deleteInquiry(){
+		var cqNum=${dto.cqNum};
+		var page=${page};
+		var query="cqNum="+cqNum+"&page="+page;
+		var url="<%=cp%>/company/inquiry/delete?"+query;
+		
+		if(confirm("위 자료를 삭제 하시게습니까?"))
+			location.href=url;
+	}
+	
+</script>
+
 <div class="inquiry-article-body">
-	<div class="page-header">
+	<div class="body-header">
 		<h3 align="left">
 			| 기업문의 <small></small>
 		</h3>
@@ -44,6 +66,10 @@
 	<div style="text-align: right;">
 		<c:if test="${dto.cqDepth==0}">
 			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry/answer?cqNum=${cqNum}';">답변</button>
+		</c:if>
+		<c:if test="${sessionScope.member.userId==dto.mId}">
+			<button type="button" class="btn btn-default" onclick="updateInquiry();">수정</button>
+			<button type="button" class="btn btn-default" onclick="deleteInquiry();">삭제</button>
 		</c:if>
 		<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry';">뒤로</button>
 	</div>

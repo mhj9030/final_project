@@ -15,7 +15,7 @@
 </script>
 
 <div class="inquiry-list-body" align="center">
-	<div class="page-header">
+	<div class="body-header">
 		<h3 align="left">
 			| 기업문의 <small></small>
 		</h3>

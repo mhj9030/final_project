@@ -76,6 +76,7 @@ public class ApplicantController {
         Map<String, Object> model = new HashMap<>();
         
         model.put("list", list);
+        model.put("order", order);
         model.put("dataCount", dataCount);
         model.put("paging", paging);
 		

@@ -126,14 +126,25 @@ body{
 
 
 .panel-busi .busi-name{
-	padding : 10px 10px;
-	font-size : 18px;
-	font-weight : bold;
-	height: 50px;
+	padding: 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    float: left;
 }
+
+.panel-busi .busi-type{
+	margin-left: 10px;
+    height: 50px;
+    padding-top: 14px;
+    text-align: right;
+    padding-right: 10px;
+}
+
 .panel-busi .busi-intro{
 	margin-left : 10px;
 	height: 50px;
+	clear: both;
 }
 
 .panel-busi .busi-etc div{

@@ -25,4 +25,8 @@ public interface PointService {
 	public int savePoint(Map<String, Object> map);
 	public int usePoint(Map<String, Object> map);
 	public int buyResume(Map<String, Object> map);
+	public int totalPoint(Map<String, Object> map);
+	
+	// PointEvent 판별
+	public int isPointEvent(Map<String, Object> map);
 }

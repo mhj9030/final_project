@@ -7,7 +7,7 @@
 	String cp=request.getContextPath();
 %>
 <div class="page_body">
-	<div class="container-fluid .page_head">
+	<div class="container-fluid page_head">
 		<h3>| 인재검색</h3><hr>
 	</div>
 	
@@ -91,6 +91,14 @@ function isCheck(data) {
 		cc++;
 	}
 	
+	if(cc==0){
+		$('input:checkbox[name="subCode"][value="0"]').attr("checked", true);
+		$('button[name="subName"][value="0"]').attr("class", "btn btn-info btn-xs");
+	}else{
+		$('input:checkbox[name="subCode"][value="0"]').attr("checked", false);
+		$('button[name="subName"][value="0"]').attr("class", "btn btn-xs");
+	}
+	
 	var query = $("form[name=searchForm]").serialize();
 	list(query);
 } 
@@ -114,8 +122,8 @@ function subPrint(data){
 	var out = "";
 	if(data.subType.length!=0){
 		out += '<span class="button-checkbox">';
-		out += '<button type="button" name="subName" class="btn btn-xs"> 전체 </button>';
-		out += '<input type="checkbox" name="subCode" class="hidden" value="" />';
+		out += '<button type="button" name="subName" class="btn btn-info btn-xs" value="0"> 전체 </button>';
+		out += '<input type="checkbox" name="subCode" class="hidden" checked="checked" value="0" />';
 		out += '</span>';
 		for(var i=0; i<data.subType.length; i++){
 			out += '<span class="button-checkbox">';
@@ -135,7 +143,7 @@ function listPrint(data){
 	
 	if(data.list.length!=0){
 		for(var i=0; i<data.list.length; i++){
-			out += '<div class="list-content col-sm-5">';
+			out += '<div class="list-content col-xs-5 col-sm-5">';
 			out += '	<div class="col-xs-6 col-sm-5">';
 			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />';//data.list[i].photo
 			out += '	</div>';

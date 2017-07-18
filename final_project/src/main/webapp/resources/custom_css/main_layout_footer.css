@@ -12,6 +12,14 @@
 	
 }
 
+.footer .container{
+	text-align: center;
+}
+
+.footer .nav{
+	display: inline-block;
+}
+
 .footer .container p {
 	margin-top: 10px;
 	
