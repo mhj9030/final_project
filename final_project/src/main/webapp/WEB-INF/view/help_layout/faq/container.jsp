@@ -10,9 +10,12 @@
 
 
 <div class="list-body" align="center" style="overflow-x:hidden; overflow-y:auto;">
-	<div class="page-header">
-  		<h1 align="left">| FAQ <small></small></h1>
-	</div>
+	<div class="notice_list_wrap" style="text-align: left ">
+	<h3>| FAQ</h3>
+	<p>
+	궁금한 문의 사항을 확인 해 보세요.
+	</p>    
+</div>
 	<div role="tabpanel">
 
   <!-- Nav tabs -->

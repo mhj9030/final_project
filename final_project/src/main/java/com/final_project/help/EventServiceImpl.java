@@ -59,48 +59,20 @@ public class EventServiceImpl implements EventService {
 		return list;
 	}
 
-/*	@Override
-	public Photo readPhoto(int num) {
-		Photo dto=null;
+	@Override
+	public Event readEvent(int num) {
+		Event dto=null;
 		
 		try {
-			dto=dao.getReadData("photo.readPhoto", num);
+			dto=dao.getReadData("event.readEvent", num);
 		} catch (Exception e) {
 		}
 		
 		return dto;
 	}
-
 	
 	@Override
-	public int updatePhoto(Photo dto, String path) {
-		int result=0;
-		
-		try {
-			// 업로드한 파일이 존재한 경우
-			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
-				String newFilename = fileManager.doFileUpload(dto.getUpload(), path);
-		
-				if (newFilename != null) {
-					// 이전 파일 지우기
-					Photo vo = readPhoto(dto.getNum());
-					if(vo!=null && vo.getImageFilename()!=null) {
-						fileManager.doFileDelete(vo.getImageFilename(), path);
-					}
-					
-					dto.setImageFilename(newFilename);
-				}
-			}
-			
-			result=dao.updateData("photo.updatePhoto", dto);
-		} catch (Exception e) {
-		}
-		
-		return result;
-	}
-
-	@Override
-	public int deletePhoto(int num, String imageFilename, String path) {
+	public int deleteEvent(int num, String imageFilename, String path) {
 		int result=0;
 		
 		try {
@@ -110,13 +82,44 @@ public class EventServiceImpl implements EventService {
 				fileManager.doFileDelete(imageFilename, path);
 			
 			// 게시물지우기
-			result=dao.deleteData("photo.deletePhoto", num);
+			result=dao.deleteData("event.deleteEvent", num);
 		} catch (Exception e) {
 		}
 		
 		return result;
 	}
-*/
+	
+	
+	
+	
+	@Override
+	public int updateEvent(Event dto, String path) {
+		int result=0;
+		
+		try {
+			// 업로드한 파일이 존재한 경우
+			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
+				String newFilename = fileManager.doFileUpload(dto.getUpload(), path);
+		
+				if (newFilename != null) {
+					// 이전 파일 지우기
+					Event vo = readEvent(dto.getEvtNum());
+					if(vo!=null && vo.getImageFilename()!=null) {
+						fileManager.doFileDelete(vo.getImageFilename(), path);
+					}
+					
+					dto.setImageFilename(newFilename);
+				}
+			}
+			
+			result=dao.updateData("event.updateEvent", dto);
+		} catch (Exception e) {
+		}
+		
+		return result;
+	}
+
+
 	
 	
 }

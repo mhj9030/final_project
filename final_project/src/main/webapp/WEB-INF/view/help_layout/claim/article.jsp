@@ -97,7 +97,8 @@ function sendReply() {
 	</div>
 
 
-<div>
+	<div>
+	<c:if test="${sessionScope.member.userId=='admin@a.com'}">
             <table style='width: 100%; margin: 15px auto 0px; border-spacing: 0px;'>
             <tr height='30'> 
 	            <td align='left'>
@@ -115,6 +116,7 @@ function sendReply() {
                 </td>
             </tr>
             </table>
+       </c:if>
             
             <div id="listReply"></div>
  	 </div>

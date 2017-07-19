@@ -8,9 +8,12 @@
 %>
 
 <div class="list-body" align="center">
-	<div class="page-header">
-  		<h1 align="left">| 문의하기 <small></small></h1>
-	</div>
+<div class="notice_list_wrap" style="text-align: left ">
+	<h3>| 문의하기</h3>
+	<p>
+	서비스 이용관련 궁금하신 사항을 문의해주세요
+	</p>    
+</div>
 	
 	<div>
 		<div align="right">${dataCount}개(${page}/${total_page} 페이지)</div>
