@@ -50,7 +50,12 @@
 <link href="<%=cp%>/resources/custom_css/company_inquiry_article.css" rel="stylesheet">
 <!-- company_inquiry_created.css -->
 <link href="<%=cp%>/resources/custom_css/company_inquiry_created.css" rel="stylesheet">
-
+<!-- company_goverNews_list.css -->
+<link href="<%=cp%>/resources/custom_css/company_goverNews_list.css" rel="stylesheet">
+<!-- company_goverNews_created.css -->
+<link href="<%=cp%>/resources/custom_css/company_goverNews_created.css" rel="stylesheet">
+<!-- company_goverNews_article.css -->
+<link href="<%=cp%>/resources/custom_css/company_goverNews_article.css" rel="stylesheet">
 
 </head>
 <body>
