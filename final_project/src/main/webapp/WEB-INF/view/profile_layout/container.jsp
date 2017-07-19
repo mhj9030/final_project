@@ -10,20 +10,18 @@
 
 
 <div id="wrap">
-    <div id="content">
-        <div class="page profile">
-            <div class="wrap_wide cmenu">
-                <div class="wrap">
-                    <ul class="nav nav-pills" role="tablist">
-                        <li role="presentation" class="on"><a href="<%=cp%>/profile?mid=${member.userId }">내 프로필</a></li>
-                        <li role="presentation" class=""><a href="/@maryjune778/friends">내 친구들</a></li>
-                        <li role="presentation" class=""><a href="/@maryjune778/find-friends">친구 찾기 </a></li>
-                        <li role="presentation" class=""><a href="/@maryjune778/activities">활동로그</a></li>
-                        <li role="presentation" class=""><a href="/@maryjune778/notifications">알림 </a></li>
-                        <li role="presentation" class=""><a href="/@maryjune778/applications">지원서 관리</a></li>
-                    </ul>
-                </div>
-            </div>
+	<div id="content">
+		<div class="page profile">
+			<div class="wrap_wide cmenu">
+				<div class="wrap">
+					<ul class="nav nav-pills" role="tablist">
+						<li role="presentation" class="on"><a href="<%=cp%>/profile?mid=${member.userId }">내 프로필</a></li>
+						<li role="presentation" class=""><a href="<%=cp%>/member/scrap">채용스크랩</a></li>
+						<li role="presentation" class=""><a href="<%=cp%>/member/applications/list">지원서 관리</a></li>
+						<li role="presentation" class=""><a href="<%=cp%>/member/myInquiry">나의 문의 내역</a></li>
+					</ul>
+				</div>
+			</div>
             <div class="wrap_wide section cover">
                 <div id="cover_image" class="image">
                     <div class="in"></div>

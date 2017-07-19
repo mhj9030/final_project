@@ -55,10 +55,12 @@ function random(){
 			success: function(data) {
 				if(data.state=='2'){
 					alert("오늘은 이미 참가하셨습니다.\n내일 다시 참가해주세요.");
+					//$('#scratch').html("오늘은 이미 참가하셨습니다.<br>내일 다시 참가해주세요.").css("padding", "35px;");
 				}else if(data.state=='1'){
 					print(data);
 				}else{
 					alert("포인트가 부족합니다.");
+					//$('#scratch').html("포인트가 부족합니다.");
 				}
 			},
 			error: function(e){
@@ -67,6 +69,7 @@ function random(){
 		});
 	}else{
 		alert("포인트가 부족합니다.");
+		//$('#scratch').html("포인트가 부족합니다.");
 	}
 }
 

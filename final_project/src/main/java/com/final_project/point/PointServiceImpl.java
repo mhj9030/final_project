@@ -239,4 +239,19 @@ public class PointServiceImpl implements PointService{
 		}
 		return result;
 	}
+
+	@Override
+	public int entryPoint(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			map.put("classify", "적립");
+			map.put("history", "회원 가입시 포인트 적립");
+			map.put("point", 3000);
+			result = dao.insertData("point.entryPoint", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }

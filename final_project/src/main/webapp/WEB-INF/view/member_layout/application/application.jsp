@@ -9,7 +9,7 @@
 
 <div class="page_body .container-fluid ">
 	<div class="page_head">
-		<h3>| 인재 검색 열람</h3><hr>
+		<h3>| 이력서 열람</h3><hr>
 	</div>
 	<div id="resume_div">
 		<table class="table">
@@ -19,25 +19,25 @@
 					<img src="" width="110px" height="140px" />
 				</td>
 				<td>이름</td>
-				<td>${introList.rName}</td>
+				<td>${sessionScope.member.userName}</td>
 				<td>영어</td>
-				<td>${introList.engName}</td>
+				<td><input type="text" class="form-control" /></td>
 			</tr>
 			<tr>
 				<td>생년월인</td>
-				<td>${introList.mBirth}</td>
+				<td>.</td>
 				<td>폰번호</td>
-				<td>${introList.phone}</td>
+				<td>.</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td>${introList.email}</td>
+				<td>.</td>
 				<td>병역</td>
-				<td>${introList.army}</td>
+				<td>.</td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="3">${introList.addr}<br>${introList.addr2}</td>
+				<td colspan="3">.</td>
 			</tr>
 		</table>
 		
@@ -53,13 +53,11 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${abilityList}">
 			<tr>
-				<td>${dto.acName}</td>
-				<td>${dto.termtime}</td>
-				<td>${dto.memo}</td>
+				<td>.</td>
+				<td>.</td>
+				<td>.</td>
 			</tr>
-		</c:forEach>
 		</table>
 		
 		<table id="license" class="table" style="height: 60px;">
@@ -74,13 +72,11 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${licenseList}">
 			<tr>
-				<td>${dto.license}</td>
-				<td>${dto.expStart}</td>
-				<td>${dto.liGC}</td>
+				<td>.</td>
+				<td>.</td>
+				<td>.</td>
 			</tr>
-		</c:forEach>
 		</table>
 		
 		<table id="language" class="table" style="height: 60px;">
@@ -94,12 +90,10 @@
 				<td colspan="2">해당사항없음</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${languageList}">
 			<tr>
-				<td>${dto.language}</td>
-				<td>${dto.laScore}</td>
+				<td>.</td>
+				<td>.</td>
 			</tr>
-		</c:forEach>
 		</table>
 		
 		<table id="career" class="table" style="height: 60px;">
@@ -114,13 +108,11 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${careerList}">
 			<tr>
-				<td>${dto.company}</td>
-				<td>${dto.part}</td>
-				<td>${dto.memo}</td>
+				<td>.</td>
+				<td>.</td>
+				<td>.</td>
 			</tr>
-		</c:forEach>
 		</table>
 		
 		<table id="award" class="table" style="height: 60px;">
@@ -135,13 +127,11 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${awardList}">
-			<tr>
-				<td>${dto.awAgency}</td>
-				<td>${dto.awSector}</td>
-				<td>${dto.awDate}</td>
-			</tr>
-		</c:forEach>
+		<tr>
+			<td>.</td>
+			<td>.</td>
+			<td>.</td>
+		</tr>
 		</table>
 		
 		<table id="project" class="table" style="height: 60px;">
@@ -158,9 +148,9 @@
 		</c:if>
 		<c:forEach var="dto" items="${projectList}">
 			<tr>
-				<td>${dto.prName}</td>
-				<td>${dto.expStart} ~ ${dto.expEnd}</td>
-				<td>${dto.memo}</td>
+				<td>.</td>
+				<td>.</td>
+				<td>.</td>
 			</tr>
 		</c:forEach>
 		</table>
@@ -168,35 +158,35 @@
 		<table id="intro" class="table">
 			<caption>▶ 자기소개</caption>
 			<tr height="100px">
-				<td>${introList.intro1}</td>
+				<td><textarea rows="7" cols="100"></textarea></td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ 지원동기</caption>
 			<tr height="100px">
-				<td>${introList.intro2}</td>
+				<td><textarea rows="7" cols="100"></textarea></td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ 성장배경</caption>
 			<tr height="100px">
-				<td>${introList.intro3}</td>
+				<td><textarea rows="7" cols="100"></textarea></td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ ???</caption>
 			<tr>
-				<td>${introList.intro4}</td>
+				<td><textarea rows="7" cols="100"></textarea></td>
 			</tr>
 		</table>
 		<hr>
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/talent/main?page=${page}'">목록</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/storagy'">이력서 보관함 목록</button>
 		</div>
 	</div>
 </div>
