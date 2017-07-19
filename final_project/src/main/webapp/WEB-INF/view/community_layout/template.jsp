@@ -37,25 +37,30 @@
 
 <!-- 본인의 css영역 -->
 <!-- community_group_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_group_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_group_list.css" rel="stylesheet">
 <!-- community_review_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_review_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_review_list.css" rel="stylesheet">
 <!-- community_news_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_news_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_news_list.css" rel="stylesheet">
 <!-- community_tip_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_tip_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_tip_list.css" rel="stylesheet">
 <!-- community_recommend_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_recommend_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_recommend_list.css" rel="stylesheet">
 <!-- community_free_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_free_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_free_list.css" rel="stylesheet">
 <!-- community_photo_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_photo_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_photo_list.css" rel="stylesheet">
 <!-- article_form CSS -->
-<link href="<%=cp%>/resources/custom_css/community_article.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_article.css" rel="stylesheet">
 <!-- reply_form CSS -->
-<link href="<%=cp%>/resources/custom_css/community_reply.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_reply.css" rel="stylesheet">
 <!-- recommend_article_form CSS -->
-<link href="<%=cp%>/resources/custom_css/community_recommend_article.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_recommend_article.css" rel="stylesheet">
+<!-- community_group_mylist -->
+<link href="<%=cp%>/resources/custom_css/community/community_group_mylist.css" rel="stylesheet">
+<!-- group_article_form CSS -->
+<link href="<%=cp%>/resources/custom_css/community/community_group_article.css" rel="stylesheet">
+
 
 </head>
 <body>

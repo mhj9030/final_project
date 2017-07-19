@@ -1,10 +1,16 @@
 package com.final_project.community;
 
 public class RecommendArticle {
-	private String cName, subject, created, content, mName;
+	private String cName, subject, created, content, mName, mId;
 	private int gcNum, cNum, state, employCount, grade , grade1, grade2, grade3, grade4, grade5;
 	private double gradeAvg;
 	
+	public String getmId() {
+		return mId;
+	}
+	public void setmId(String mId) {
+		this.mId = mId;
+	}
 	public int getGcNum() {
 		return gcNum;
 	}

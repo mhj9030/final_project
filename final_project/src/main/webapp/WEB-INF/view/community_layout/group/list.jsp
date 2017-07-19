@@ -6,41 +6,45 @@
 <%
 	String cp = request.getContextPath();
 %>
-
+<script type="text/javascript">
+	function searchList() {
+		var f=document.searchForm;
+		f.action="<%=cp%>/community/group";
+		f.submit();
+	}
+	function searchTag(str){
+		location.href="<%=cp%>/community/group?searchKey=groupTag&searchValue="+encodeURIComponent(str);
+	}
+</script>
 
 <div class="group_list_wrap">
 	<h3>| 그룹</h3>
 	<p>하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.</p>
+	
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group'">그룹리스트</a></li>
+	    <li role="presentation"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group/mylist'">나의 그룹</a></li>
+	    <li role="presentation"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group/created'">그룹 만들기</a></li>
+	</ul>
 	
 	<div class="group_list_tag">
 		<div class="group_list_tag_subject">
 			인기태그
 		</div>
 		<div class="group_list_tag_btns">
-			<button class="btn btn-default btn-sm">IT/통신</button>
-			<button class="btn btn-default btn-sm">직장인</button>
-			<button class="btn btn-default btn-sm">금융/은행</button>
-			<button class="btn btn-default btn-sm">제조/화학</button>
-			<button class="btn btn-default btn-sm">알바생</button>
-			<button class="btn btn-default btn-sm">공무원</button>
-			<button class="btn btn-default btn-sm">디자인/미디어</button>
-			<button class="btn btn-default btn-sm">디자인/미디어</button>
-			<button class="btn btn-default btn-sm">직장인</button>
-			<button class="btn btn-default btn-sm">금융/은행</button>
-			<button class="btn btn-default btn-sm">제조/화학</button>
-			<button class="btn btn-default btn-sm">알바생</button>
-			<button class="btn btn-default btn-sm">공무원</button>
-			<button class="btn btn-default btn-sm">학생</button>	
+			<c:forEach	var="menu" items="${menuTag}">
+				<button class="btn btn-default btn-sm" onclick="searchTag('${menu.groupTag}');">${menu.groupTag}</button>
+			</c:forEach>
 		</div>
 	</div>
 	
 	<div class="btn-group group_list_btn_group">
   		<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-        	인기순 <span class="caret"></span>
+        	정렬순 <span class="caret"></span>
   		</button>
   		<ul class="dropdown-menu group_list_dropdown" role="menu">
+    		<li><a href="<%=cp%>/community/group">최근 생성순</a></li>
    			<li><a href="#">인기순</a></li>
-    		<li><a href="#">최근 생성순</a></li>
 		</ul>
 	</div>
 	<div class="group_list_search">
@@ -49,38 +53,43 @@
 				<option value="groupName">그룹명</option>
 				<option value="groupTag">태그명</option>
 			</select> 
-			<input type="text" class="form-control input-sm input-search" name="searchValue">
+			<input type="text" class="form-control input-sm input-search" name="searchValue" placeholder="영문자는 대소문자 구별!">
 			<button type="button" class="btn btn-info btn-sm btn-search" onclick="searchList();">
 				검색
 			</button>
 		</form>
 	</div>
-	<div class="btn-group group_list_createbtn">
-  		<button type="button" class="btn btn-info btn-sm" onclick="searchList();">
-			그룹만들기
-		</button>
-	</div>
+	
 	
 	<div class="group_back">
 	</div>
 	
 	<div class="row group_row">
-		<c:forEach var="d" begin="1" end="8" step="1">
+		<c:forEach var="dto" items="${list}">
   			<div class="group_list_group">
-  				<div class="group_list_groupimg"><img src="<%=cp%>/resources/image/group_impty.jpg"></div>
-  				<div class="group_list_groupsubject">자바를 자바라</div>
+  				<div class="group_list_groupimg">
+  					<c:if test="${not empty dto.saveFilename}">
+	  					<img src="<%=cp%>/uploads/community/${dto.saveFilename}">
+  					</c:if>
+  					<c:if test="${empty dto.saveFilename}">
+  						<img src="<%=cp%>/resources/image/noimage.png">
+  					</c:if>
+  					
+  				</div>
+  				<div class="group_list_groupsubject">${dto.groupName}</div>
   				<div class="group_list_groupmember">
-  					<c:forEach var="d" begin="1" end="4" step="1">
-  						<div class="grorpmember_img">
-  							<img src="<%=cp%>/resources/image/group_profile.jpg">
-  						</div>
+  					<c:forEach var="vo" items="${dto.list}">
+  						<button class="btn  btn-xs btn-default" onclick="searchTag('${vo.groupTag}');">${vo.groupTag}</button>
   					</c:forEach>
   				</div>
   				<div class="group_list_groupjoin">
-  					<button type="button" class="btn btn-info btn-sm">가입</button>
+  					<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}'">자세히 보기</button>
   				</div>
   			</div>
   		</c:forEach>
+	</div>
+	<div style="text-align: center;">
+		${paging}
 	</div>
 </div>
 

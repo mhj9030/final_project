@@ -2,13 +2,12 @@
 
 .group_list_wrap{
 	width: 800px;
-	min-height: 700px;
+	min-height: 750px;
 	margin: 30px auto;
 	box-sizing: border-box;
 }
 
 .group_list_wrap h3{
-	font-weight: bold;
 	margin-top: 40px;
 }
 
@@ -60,8 +59,8 @@
 .group_list_search{
 	margin-top : 40px;
 	padding-top : 10px;
-	text-align : center;
-	width: 60%;
+	text-align : right;
+	width: 75%;
 	height: 50px;
 	float: left;
 }
@@ -119,7 +118,8 @@
 	width:100%;
 	height: 49px;
 	border-bottom: 1px solid #ccc;
-	padding-left: 20px;
+	padding-top: 2px;
+    overflow: auto;
 }
 
 .group_list_group .group_list_groupmember .grorpmember_img{

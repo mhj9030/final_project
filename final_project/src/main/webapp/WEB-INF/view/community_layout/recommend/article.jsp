@@ -20,19 +20,34 @@ $(function(){
 
 function moreInfo(gcNum){
 	var url = "<%=cp%>/community/recommend/moreInfo";
+	var className = $('#moreA'+gcNum).attr('class');
+	var id = "moreA"+gcNum;
 	
-	// text/html
-	$.post(url, {gcNum:gcNum}, function(data){
-		$("#articleInfo"+gcNum).html(data);
-	});
+	
+	if(className=='more_off'){
+		document.getElementById(id).className="more_on";
+		$.post(url, {gcNum:gcNum}, function(data){
+			$("#articleInfo"+gcNum).html(data);
+		});
+	}else if(className=='more_on'){
+		document.getElementById(id).className="more_off";
+		$("#articleInfo"+gcNum).html("");
+	}
 
 }
 
-
-function hideInfo(gcNum){
-	$("#articleInfo"+gcNum).html("");
+function updateRecommend(gcNum){
+	 var query = "gcNum="+gcNum;
+	 var url = "<%=cp%>/community/recommend/update?" + query;
+	 location.href=url;
 }
+function deleteRecommend(gcNum, cNum){
+	 var query = "gcNum="+gcNum+"&cNum="+cNum;
+	 var url = "<%=cp%>/community/recommend/delete?" + query;
 
+	 if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
+	  location.href=url;
+}
 </script>
 
 
@@ -61,7 +76,8 @@ function hideInfo(gcNum){
 			<div class="recommend_article_grade" style="height: 6%; width: 100%;"><strong>2점</strong>  ${dto.grade2}</div>
 			<div class="recommend_article_grade" style="height: 6%; width: 100%;"><strong>1점</strong>  ${dto.grade1}</div>
 			<div class="recommend_article_createBtn">
-				<button class="btn btn-info">글쓰기</button>
+				<button class="btn btn-info" style="margin-bottom : 5px; width: 80%; background-color: #2d3c4b;	border-color: #2d3c4b;" onclick="javascript:location.href='<%=cp%>/community/recommend/created?cNum=${dto.cNum}'">글쓰기</button>
+				<button class="btn btn-info" style="width: 80%; background-color: #2d3c4b;	border-color: #2d3c4b;" onclick="javascript:location.href='<%=cp%>/community/recommend'">돌아가기</button>
 			</div>
 		</div>
 		<div style="float: left;">
@@ -90,7 +106,7 @@ function hideInfo(gcNum){
 							<div class="etc_created">${vo.created}</div>
 							<div class="etc_name">${vo.mName}</div>
 							<div class="etc_more">
-								<a style="cursor: pointer;" onclick="moreInfo(${vo.gcNum});">더보기▼</a>
+								<a class="more_off" id="moreA${vo.gcNum}" style="cursor: pointer;" onclick="moreInfo(${vo.gcNum});">더보기▼</a>
 							</div>
 						</div>
 					</div>

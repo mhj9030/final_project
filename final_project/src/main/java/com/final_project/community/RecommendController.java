@@ -3,20 +3,21 @@ package com.final_project.community;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.final_project.common.MyUtilBootstrap;
+import com.final_project.member.SessionInfo;
 
 @Controller("community.recommendController")
 public class RecommendController {
@@ -133,7 +134,7 @@ public class RecommendController {
 		return ".community_layout.recommend.article";
 	}
 	
-	@RequestMapping("/community/recommend/moreInfo")
+	@RequestMapping(value="/community/recommend/moreInfo", method=RequestMethod.POST)
 	public String moreInfo(
 			@RequestParam(value="gcNum") int gcNum,
 			Model model
@@ -145,5 +146,87 @@ public class RecommendController {
 		
 		return "community_layout/recommend/article_article";
 	}
+	
+	@RequestMapping(value="/community/recommend/created", method=RequestMethod.GET)
+	public String createdForm(
+			@RequestParam(value="cNum") int cNum,
+			@RequestParam(value="page", defaultValue="1") int page,
+			Model model
+			) throws Exception{
+		
+		RecommendArticle dto = service.RecommendArticleInfo(cNum);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "created");
+		return ".community_layout.recommend.created";
+	}
+	
+	@RequestMapping(value="/community/recommend/created", method=RequestMethod.POST)
+	public String createdSubmit(
+			RecommendArticle dto,
+			HttpSession session,
+			@RequestParam(value="cNum") int cNum,
+			@RequestParam(value="page", defaultValue="1") int page,
+			Model model
+			) throws Exception{
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		
+		dto.setmId(info.getUserId());
+		service.insertRecommend(dto);
+		
+		model.addAttribute("cNum", cNum);
+		model.addAttribute("page", page);
+		return "redirect:/community/recommend/article?cNum="+cNum;
+	}
+	
+	@RequestMapping(value = "/community/recommend/update", method = RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int gcNum, 
+			Model model, 
+			HttpSession session) throws Exception {
+
+
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		RecommendArticle vo = service.readRecommendContent(gcNum);
+		if (vo == null) {
+			return "redirect:/commuinty/recommend/article?gcNum=" + gcNum;
+		}
+
+		if (!info.getUserId().equals(vo.getmId())) {
+			return "redirect:/commuinty/recommend/article?gcNum=" + gcNum;
+		}
+
+		model.addAttribute("vo", vo);
+		model.addAttribute("mode", "update");
+
+		return ".community_layout.recommend.created";
+	}
+
+	@RequestMapping(value = "/community/recommend/update", method = RequestMethod.POST)
+	public String updateSubmit(
+			RecommendArticle vo,
+			@RequestParam(value = "gcNum") int gcNum,
+			@RequestParam(value = "cNum") int cNum,
+			HttpSession session) throws Exception {
+
+
+		service.updateRecommend(vo);
+
+		return "redirect:/community/recommend/article?cNum="+cNum;
+	}
+	
+	@RequestMapping(value = "/community/recommend/delete")
+	public String delete(
+			@RequestParam int gcNum,
+			@RequestParam int cNum) throws Exception {
+
+		service.deleteRecommend(gcNum);
+
+		return "redirect:/community/recommend/article?cNum=" + cNum;
+	}
+
 
 }

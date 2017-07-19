@@ -115,4 +115,43 @@ public class RecommendServiceImpl implements RecommendService{
 		
 		return dto;
 	}
+
+	@Override
+	public int insertRecommend(RecommendArticle dto) {
+		int result = 0;
+		
+		try {
+			result = dao.insertData("community_recommend.insertRecommend", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int updateRecommend(RecommendArticle dto) {
+		int result = 0;
+		
+		try {
+			result = dao.updateData("community_recommend.updateRecommend", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int deleteRecommend(int gcNum) {
+		int result = 0;
+		
+		try {
+			result = dao.deleteData("community_recommend.deleteRecommend", gcNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
 }
