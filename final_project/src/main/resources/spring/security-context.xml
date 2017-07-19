@@ -34,7 +34,7 @@
 	        <intercept-url pattern="/community/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/help_layout/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/employ/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/talent/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
+	        <intercept-url pattern="/talent/**" access="hasRole('ROLE_COMPANY')"/>
 	        <intercept-url pattern="/point/**" access="hasRole('ROLE_USER')"/>
 	        
 	        <intercept-url pattern="/company/search/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
