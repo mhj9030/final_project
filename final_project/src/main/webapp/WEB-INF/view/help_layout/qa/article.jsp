@@ -6,15 +6,13 @@
 <%
 	String cp=request.getContextPath();
 %>
-<!-- Bootstrap CSS -->
 
-<link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- 중앙정렬용 center-block  -->
 <div class="wrapper center-block" style="max-width: 980px;">
 
 <div id="title"class="text-center">
-<h1>제목</h1>
+<h1>${dto.subject}</h1>
 </div>
 <div class="text-right">
 <h5>${dto.created} ${dto.hitCount}</h5>

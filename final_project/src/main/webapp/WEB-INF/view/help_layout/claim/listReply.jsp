@@ -19,18 +19,10 @@
 <c:forEach var="dto" items="${list}">
     <tr height='35' style='background: #eee;'>
        <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-right:none;'>
-           <span><b>${dto.mId}</b></span>
+           <span><b>관리자</b></span>
         </td>
        <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-left:none;' align='right'>
-           <span>
            
-           </span> |
-           <c:if test="${sessionScope.member.userId==dto.mId || sessionScope.member.userId=='admin@a.com' }">
-                   <a onclick='deleteReply(${dto.replyNum}, ${pageNo})'>삭제</a>
-           </c:if>
-           <c:if test="${sessionScope.member.userId!=dto.mId && sessionScope.member.userId!='admin@a.com' }">
-                    신고
-           </c:if>
         </td>
     </tr>
     <tr>

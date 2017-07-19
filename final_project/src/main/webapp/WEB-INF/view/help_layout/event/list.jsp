@@ -47,9 +47,12 @@ function article(num) {
 
 <div class="list-body" align="center">
  
-	<div class="page-header">
-  		<h1 align="left">| 이벤트 <small></small></h1>
-	</div>
+	<div class="notice_list_wrap" style="text-align: left ">
+	<h3>| 이벤트</h3>
+	<p>
+	
+	</p>    
+</div>
     
     <div style="max-width:660px; margin: 0px auto;">
 <c:if test="${dataCount!=0 }">    
@@ -97,29 +100,13 @@ function article(num) {
         </div>        
         
         <div style="clear: both;">
-        		<div style="float: left; width: 20%; min-width: 85px;">
-        		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/photo/list';">새로고침</button>
-        		</div>
-        		<div class="list-search">
-		    			<form name="searchForm" action="" method="post">
-			    			<select name="searchKey" class="list-searchList" style="float: left;">
-						    	<option value="subject">제목</option> 
-						        <option value="userName">작성자</option>
-						        <option value="content">내용</option>
-						        <option value="created">등록일</option>
-				           	</select>
-				            
-				            <div class="input-group" style="float: left;">
-		      					<input type="text" class="form-control" placeholder="">
-							    <span class="input-group-btn">
-							    	<button class="btn btn-default" type="button">검색</button>
-							    </span>
-							</div>
-		    			</form>
-		    		</div>
+        		
+		    	<c:if test="${sessionScope.member.userId=='admin@a.com'}">
         		<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
         		    <button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/help_layout/event/created';">글올리기</button>
         		</div>
+        		</c:if>
+        		
         </div>
         
     </div>

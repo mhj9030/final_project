@@ -105,9 +105,6 @@ public class EventController {
 		model.addAttribute("paging", paging);
 		
    	    
-   	    
-   	    
-   	    
 		return ".help_layout.event.list";
 	}
 
@@ -129,8 +126,7 @@ public class EventController {
 		return ".help_layout.event.created";
 	}
 	
-	@RequestMapping(value="/help_layout/event/created",
-			method=RequestMethod.POST)
+	@RequestMapping(value="/help_layout/event/created", method=RequestMethod.POST)
 	public String createdSubmit(
 			Event dto,
 			Model model,
@@ -149,7 +145,121 @@ public class EventController {
 		return "redirect:/help_layout/event/list";
 	}
 	
+	
+	@RequestMapping(value="/event/article", method=RequestMethod.GET)
+	public String article(
+			@RequestParam(value="num") int num,
+			@RequestParam(value="page") String page,
+			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			Model model,
+			HttpSession session) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		/*if(info==null) {
+			return "redirect:/member/login";
+		}*/
+		
+		Event dto = service.readEvent(num);
+		dto.setmId(info.getUserId());
+		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
+		/*model.addAttribute("subMenu", "3");*/
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		
+		return ".help_layout.event.article";
+	}
+	
+	@RequestMapping(value="/event/delete",
+			method=RequestMethod.GET)
+	public String delete(
+			@RequestParam int num,
+			@RequestParam String page,			
+			HttpSession session) throws Exception {
+		
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"event";
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null) {
+			return "redirect:/member/login";
+		}
+		
+		Event dto = service.readEvent(num);
+		/*if (dto == null)
+			return "redirect:/event/list?page="+page;*/
 
+		// admin과 글을 등록한 사람만 삭제 가능
+		if( !dto.getmId().equals(info.getUserId()) && ! info.getUserId().equals("admin@a.com")) {
+			return "redirect:/event/list?page="+page;
+		}
+		
+		// 게시물 지우기
+		service.deleteEvent(num, dto.getImageFilename(), pathname);
+		
+		return "redirect:/help_layout/event/list";
+		
+	}	
+	
+	@RequestMapping(value="/event/update", 
+			method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String page,
+			Model model,
+			HttpSession session) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		/*if(info==null) {
+			return "redirect:/member/login";
+		}*/
+		
+		Event dto = service.readEvent(num);
+		/*if (dto == null)
+			return "redirect:/event/list?page="+page;*/
+
+		// 글을 등록한 사람만 수정 가능
+		if(! dto.getmId().equals(info.getUserId())) {
+			return "redirect:/event/list?page="+page;
+		}
+		
+/*		model.addAttribute("subMenu", "3");
+*/		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "update");
+		
+		return ".help_layout.event.created";
+		
+	}
+	
+	@RequestMapping(value="/event/update",
+			method=RequestMethod.POST)
+	public String updateSubmit(
+			Event dto,
+			String page,
+			int num,
+			HttpSession session) throws Exception {
+		dto.setEvtNum(num);
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"event";
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null) {
+			return "redirect:/member/login";
+		}
+		
+		// 수정하기
+		service.updateEvent(dto, pathname);
+		
+		// return "redirect:/photo/list?page="+page;
+		return "redirect:/event/article?num="+dto.getEvtNum()+"&page="+page;
+	}
+	
+	
+	
 	
 	
 	
