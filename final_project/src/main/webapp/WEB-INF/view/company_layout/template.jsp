@@ -28,6 +28,18 @@
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
 <!-- list_form CSS -->
 <link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
+<!-- 알림창 CSS -->
+<link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
+<!-- 알림창 JS -->
+<script src="<%=cp%>/resources/js/sweetalert2.min.js" type="text/javascript"></script>
+<!-- 로그인 JS -->
+<script src="<%=cp%>/resources/js/login.js" type="text/javascript"></script>
+<!-- Profile_layout CSS -->
+<link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<!-- Font Awesome CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Profile JS -->
+<script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
 
 <!-- company 전용 CSS -->
 <!-- company_search_list.css -->
