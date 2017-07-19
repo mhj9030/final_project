@@ -15,8 +15,6 @@
 			var order=$(this).val();
 			
 			searchList(ceNum, ceSubject, order);
-			
-			$("input:radio[name=order]:radio[value="+order+"]").prop("checked", true);
 		});
 	});
 
@@ -85,6 +83,8 @@
 				out+="</div>";
 				
 				$("#listApplicant").html(out);
+				
+				$("input:radio[name=order]:radio[value="+order+"]").prop("checked", true);
 			}
 		});
 	}

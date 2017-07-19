@@ -7,7 +7,7 @@
 	String cp=request.getContextPath();
 %>
 <!-- Bootstrap CSS -->
-<link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
 h3{
    margin-top: 40px;
@@ -90,7 +90,17 @@ $(function() {
 
 /*채용정보 분류별 검색*/
 //상세검색과 연결
-$(document).on("click","#location > a",function(){ 
+$(document).on("click","#location > a",function(){
+	$("#cePlace").find("select option:eq(0)").prop("selected",true).change();
+	$("#ceType").find("select option:eq(0)").prop("selected",true).change();
+	$("#license").find("select option:eq(0)").prop("selected",true).change();
+	$("#cePlace").find("select option:eq(0)").prop("selected",true).change();
+	$("#cePrefere").find("select option:eq(0)").prop("selected",true).change();
+	$("#ability").find("select option:eq(0)").prop("selected",true).change();
+	$("#sub_class option").remove();
+	$("#sub_class").append("<option>2차업종</option>");
+	$("#sub_class").find("select option:eq(0)").prop("selected",true).change();
+	
 	//직종
 	if($(this).attr("id")=='j') {
 		$("#sub_class").append("<option value="+$(this).text()+">"+ $(this).text()+"</option>");
@@ -195,14 +205,12 @@ $(document).on("mouseenter","#job > div > a",function(){
 /* 채용정보 상세검색 */
 
 /* 업종 선택*/
-
 $(document).on("change","#main_bu_class",function(){
 //$("#main_bu_class").change(function() {	
 	$("#sub_bu_class option").remove();
 	
 	if($("#main_bu_class option:selected").val()=="1차업종") {
-		$("#sub_bu_class").append("<option>2차업종</option><option>선택해주세요</option>");
-		$("#sub_bu_class").find("select option:eq(1)").prop("selected",true).change();
+		$("#sub_bu_class").append("<option>2차업종</option>");
 		$("#sub_class").find("select option:eq(0)").prop("selected",true).change();
 		listPage(1);
 		return;
@@ -260,7 +268,6 @@ $(document).on("change","#main_class",function(){
 
 	
 /*연봉 부분*/
-	
 	//기본적으로startpay select에 넣어놓는값
 	var s = "";
 	for(var i=15; i<=99; i++) {
@@ -326,38 +333,146 @@ $(document).on("change","#main_class",function(){
 	
 	
 	
-	/* 검색,키워드 추가부분 */
+/* 검색,키워드 추가부분 */
+	//우대사항이 바뀌었을때
 	$("#cePrefere").change(function() {
-		var seleted = $("#cePrefere option:selected").text();
-		if($("#cePrefere option:selected").text()!='우대사항')
-			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
-		listPage(1);
+		
+		//중복여부체크
+		var check=0;
+		var value;
+		$("#keywordbox > a").each(function(i,e) {
+			if($("#cePrefere > option").text().indexOf($("#keywordbox > a:eq("+i+")").text()) >0) {
+				check=1;
+				value=$("#keywordbox > a:eq("+i+")").text();
+			}
+		});
+		
+	
+		if($("#cePrefere option:selected").text()=='우대사항') {
+			listPage(1);
+			$("#keywordbox a:contains("+value+")").remove();
+			return false;
+		}
 		
 		
+		
+		if(check==1) {
+			alert("중복된분류의 검색조건을 삭제한뒤 선택해주세요.");
+			//중복된값으로 검색했을시 얼럿띄워준후 원래값으로 option을 change해주는것
+			$("#cePrefere option:contains('"+value+"')").prop("selected", true);
+		} else {
+			var seleted = $("#cePrefere option:selected").text();
+			
+				$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+			listPage(1);	
+		}
 	});
+	
+	//근무조건이 바뀌었을때
 	$("#ceType").change(function() {
-		var seleted = $("#ceType option:selected").text();
-		if($("#ceType option:selected").text()!='근무조건')
-			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
-		listPage(1);
+		
+		//중복여부체크
+		var check=0;
+		var value;
+		$("#keywordbox > a").each(function(i,e) {
+			if($("#ceType > option").text().indexOf($("#keywordbox > a:eq("+i+")").text()) >0) {
+				check=1;
+				value=$("#keywordbox > a:eq("+i+")").text();
+			}
+		});	
+	
+		if($("#ceType option:selected").text()=='근무조건') {
+			listPage(1);
+			$("#keywordbox a:contains("+value+")").remove();
+			return false;
+		}
+		
+		
+		if(check==1) {
+			alert("중복된분류의 검색조건을 삭제한뒤 선택해주세요.");
+			//중복된값으로 검색했을시 얼럿띄워준후 원래값으로 option을 change해주는것
+			$("#ceType option:contains('"+value+"')").prop("selected", true);
+		} else {
+			var seleted = $("#ceType option:selected").text();
+			
+				$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+			listPage(1);
+		}	
+		
 	});
+	
+	//학력이 바뀌었을때
 	$("#ability").change(function() {
-		var seleted = $("#ability option:selected").text();
-		if($("#ability option:selected").text()!='학력')
-			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
-		listPage(1);
+		
+		//중복여부체크
+		var check;
+		var value;
+		$("#keywordbox > a").each(function(i,e) {
+			if($("#ability > option").text().indexOf($("#keywordbox > a:eq("+i+")").text()) >0) {
+				check=1;
+				value=$("#keywordbox > a:eq("+i+")").text();
+			}
+		});
+		
+		if($("#ability option:selected").text()=='학력') {
+			listPage(1);
+			$("#keywordbox a:contains("+value+")").remove();
+			return false;
+		}
+		
+		
+		if(check==1) {
+			alert("중복된분류의 검색조건을 삭제한뒤 선택해주세요.");
+			//중복된값으로 검색했을시 얼럿띄워준후 원래값으로 option을 change해주는것
+			$("#ability option:contains('"+value+"')").prop("selected", true);
+		} else {
+			var seleted = $("#ability option:selected").text();
+			
+				$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+			listPage(1);
+		}	
 	});
+	
+	//자격증이 바뀌었을때
 	$("#license").change(function() {
 		var seleted = $("#license option:selected").text();
 		if($("#license option:selected").text()!='자격증')
 			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
 		listPage(1);
 	});
+	
+	//2차직종이 바뀌었을때
 	$("#sub_class").change(function() {
-		var seleted = $("#sub_class option:selected").text();
-		if($("#sub_class option:selected").text()!='2차직종')
-			$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
-		listPage(1);
+		
+		//중복여부체크
+		var check;
+		var value;
+		$("#keywordbox > a").each(function(i,e) {
+			if($("#sub_class > option").text().indexOf($("#keywordbox > a:eq("+i+")").text()) >0) {
+				check=1;
+				value=$("#keywordbox > a:eq("+i+")").text();
+			}
+		});
+		
+		if($("#sub_class option:selected").text()=='2차직종') {
+			listPage(1);
+			$("#keywordbox a:contains("+value+")").remove();
+			return false;
+		}
+		
+		
+		if(check==1) {
+			alert("중복된분류의 검색조건을 삭제한뒤 선택해주세요.");
+			//중복된값으로 검색했을시 얼럿띄워준후 원래값으로 option을 change해주는것
+			$("#sub_class option:contains('"+value+"')").prop("selected", true);
+		} else {
+			var seleted = $("#sub_class option:selected").text();
+			
+				$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+			listPage(1);
+		}	
+		
+		
 	});
 	$("#s_date").change(function() {
 		listPage(1);
@@ -365,33 +480,86 @@ $(document).on("change","#main_class",function(){
 	$("#e_date").change(function() {
 		listPage(1);
 	});
+	//지역이 바뀌었을때
 	$("#cePlace").change(function() {
-		listPage(1);
+		
+		//중복여부체크
+		var check;
+		var value;
+		$("#keywordbox > a").each(function(i,e) {
+			if($("#cePlace > option").text().indexOf($("#keywordbox > a:eq("+i+")").text()) >0) {
+				check=1;
+				value=$("#keywordbox > a:eq("+i+")").text();
+			}
+		});
+		
+		if($("#cePlace option:selected").text()=='지역') {
+			listPage(1);
+			$("#keywordbox a:contains("+value+")").remove();
+			return false;
+		}
+		
+		
+		if(check==1) {
+			alert("중복된분류의 검색조건을 삭제한뒤 선택해주세요.");
+			//중복된값으로 검색했을시 얼럿띄워준후 원래값으로 option을 change해주는것
+			$("#cePlace option:contains('"+value+"')").prop("selected", true);
+		} else {
+			var seleted = $("#cePlace option:selected").text();
+			
+				$("#keywordbox").append("<a class='btn-info'>"+seleted+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+			listPage(1);
+		}	
 	});
-	$("#search").keyup(function() {
-		listPage(1);
+	
+	//검색
+	$("#search").keydown(function() {
+		if(event.keyCode==13) {
+			event.preventDefault();//설정한 이벤트외에 별도의 브라우저의 행동을 막아주는 메소드
+			var check=0;
+			var value;
+			
+			$("#keywordbox > a").each(function(i,e) {
+					
+					if($("#search").val().indexOf($("#keywordbox > a:eq("+i+")").text().substring(6)) >=0) {//폼전체에서 등록된문자가없으면 search에서 등록한거다.
+						check=1;
+						value=$("#keywordbox > a").text();
+						
+						return false;
+					}
+			
+			});
+			if(check==1) {
+				alert("등록한 검색키워드를 삭제한뒤 검색해주세요.");
+				//중복된값으로 검색했을시 얼럿띄워준후 원래값으로 되돌려주는것
+				$("#search:contains('"+value+"')").text();
+			} else {
+				var selected = $("#search").val();
+				if(selected!='')
+					$("#keywordbox").append("<a class='btn-info'>검색키워드:"+selected+"<i class='glyphicon glyphicon-remove'></i></a>&nbsp;");
+				else
+					$("#search").val('');
+				listPage(1);
+			}		
+		}
 	});
+	
 	//키워드박스 요소 삭제
 		var stored = "stored";
 	$(document).on("click","#keywordbox > a > i",function(){
-		
 		stored = $(this).parent().text();
 		$(this).parent().remove();
 		var removeid = $("#employForm select option:contains('"+stored+"')").parent().attr("id")
 		if(removeid=='sub_class') {
 			$("#main_class").find("option:eq(0)").prop("selected",true).change();
-		} else {
+		} 	else {
 			$("#"+removeid).find("option:eq(0)").prop("selected",true).change();	
 		}
-			
 		
-		
-		
-			
+		if($("#search").val()==stored.substring(6)) {
+			$("#search").val("");
+		}
 	});
-	
-	
-	
 });
 
 function apply(ceNum) {
@@ -852,6 +1020,7 @@ function ajaxHTML(url, type, query) {
 						
 						
 	</div>
+	<div></div>
 	<div>&nbsp;</div>
 	
 
