@@ -14,10 +14,10 @@
 	}
 </script>
 
-<div class="inquiry-list-body" align="center">
+<div class="myInquiry-list-body" align="center">
 	<div class="body-header">
 		<h3 align="left">
-			| 기업문의 <small></small>
+			| 나의 문의 <small></small>
 		</h3>
 	</div>
 
@@ -29,7 +29,7 @@
 				<tr>
 					<th width="60">번호</th>
 					<th>제목</th>
-					<th width="150">작성자</th>
+					<th width="100">작성자</th>
 					<th width="100">작성일</th>
 					<th width="80">답변여부</th>
 				</tr>

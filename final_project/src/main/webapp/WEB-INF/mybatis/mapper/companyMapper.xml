@@ -61,6 +61,11 @@
 			values(com_image_seq.nextval, #{cLogoImage, jdbcType=VARCHAR}, #{cLogoOriginalFilename, jdbcType=VARCHAR}, #{cCoverImage, jdbcType=VARCHAR}, #{cCoverOriginalFilename, jdbcType=VARCHAR}, #{cSerial})
 	</insert>
 	
+	<!-- 기업 권한 수정 -->
+	<update id="updateComAuthority" parameterType="String">
+		update memberAuthority set authority='ROLE_COMPANY' where mId=#{mId}
+	</update>
+	
 	<!-- 검색한 기업 수 -->
 	<select id="companyCount" parameterType="map" resultType="Integer">
 		select nvl(count(*), 0) from company c
