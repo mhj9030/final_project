@@ -33,7 +33,7 @@
 			join sub_class s on ij.subCode=s.subCode 
 			join main_class mc on s.maCode=mc.maCode 
 			where resumeType=1 
-		<if test="(mainCode!='' and mainCode!=null) and list!=null">
+		<if test="(mainCode!='' and mainCode!=null) or list!=null">
 			and (<include refid="where-list" />)
 		</if>
 			group by mId, r.rNum, rName 
@@ -51,7 +51,7 @@
 				join sub_class s on ij.subCode=s.subCode
 				join main_class mc on s.maCode=mc.maCode
 				where resumeType=1
-			<if test="(mainCode!='' and mainCode!=null) and list!=null">
+			<if test="(mainCode!='' and mainCode!=null) or list!=null">
 				and (<include refid="where-list" />)
 			</if>
 				group by mId, r.rNum, rName
@@ -151,7 +151,7 @@
 				join sub_class s on ij.subCode=s.subCode 
 				join main_class mc on s.maCode=mc.maCode 
 				where s.mId=#{mId}
-			<if test="(mainCode!='' and mainCode!=null) and list!=null">
+			<if test="(mainCode!='' and mainCode!=null) or list!=null">
 				and <include refid="where-list" />
 			</if>
 				group by r.mId, r.rNum, rName

@@ -59,6 +59,7 @@ public class TalentServiceImpl implements TalentService{
 		List<Talent> list = new ArrayList<>();
 		
 		try {
+			System.out.println(map.get("mainCode"));
 			list = dao.getListData("talent.searchList", map);
 		} catch (Exception e) {
 			e.printStackTrace();

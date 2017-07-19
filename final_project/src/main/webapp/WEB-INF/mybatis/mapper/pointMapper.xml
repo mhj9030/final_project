@@ -159,4 +159,9 @@
 			where classify='사용' and history='포인트 복권' and mId=#{mId}
 		)where  poDate=to_char(sysdate, 'YY/MM/DD')
 	</select>
+	
+	<insert id="entryPoint" parameterType="map">
+		insert into point(poNum, classify, history, point, total, mid) 
+		values(point_seq.nextval, #{classify}, #{history}, #{point}, #{point}, #{mId})
+	</insert>
 </mapper>

@@ -157,4 +157,17 @@ public class TalentController {
 		
 		return ".talent_layout.main.article";
 	}
+	
+	
+	// 지원서임시
+	@RequestMapping("/member/applys/list")
+	public String applyList(Model model) throws Exception {
+		
+		return ".point_layout.application.list";
+	}
+	@RequestMapping("/member/applys/created")
+	public String application(Model model) throws Exception {
+		
+		return ".point_layout.application.apply";
+	}
 }
