@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myInquiry">
+	<sql id="myInquiry-where-list">
+		<if test="searchKey=='cqSubject'">
+			and instr(cqSubject, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='cName'">
+			and instr(cName, #{searchValue})=1
+		</if>
+		<if test="searchKey=='cqContent'">
+			and instr(cqContent, #{searchValue})&gt;=1
+		</if>
+		<if test="searchKey=='cqCreated'">
+			and (to_char(cqCreated, 'YYYY-MM-DD')=#{searchValue}
+				or to_char(cqCreated, 'YYYYMMDD')=#{searchValue})
+		</if>
+	</sql>
+	
+	<!-- 나의 문의 Count -->
+	<select id="countMyInquiry" parameterType="map" resultType="Integer">
+		select nvl(count(*), 0) from company_qu cq
+			join company c on cq.cNum=c.cNum
+ 			where cq.mId=#{mId}
+ 			<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="myInquiry-where-list"/>
+	     	</if>
+	</select>
+	
+	<!-- 나의 문의 리스트 -->
+	<select id="listMyInquiry" parameterType="map" resultType="com.final_project.member.MyInquiry">
+		select * from(
+			select rownum rnum, tb.* from(
+		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName, cName
+            from company_qu cq
+            join member m on cq.mId=m.mId
+            join company c on cq.cNum=c.cNum
+            where cq.mId=#{mId}
+            <if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="myInquiry-where-list"/>
+	     	</if>
+	     	order by cqGroupNum desc, cqNum asc
+		<![CDATA[
+			)tb where rownum<=#{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -26,8 +26,8 @@ public class MemberController {
 	@Autowired
 	private PointService pointService;
 
-/*	
-	@RequestMapping(value = "/member/login_check", method = RequestMethod.POST)
+	
+	/*@RequestMapping(value = "/member/login_check", method = RequestMethod.POST)
 	public String loginsubmit(@RequestParam String mid, @RequestParam String mpwd, @RequestParam String state, Model model, HttpSession session, HttpServletRequest req)
 			throws Exception {
 		
@@ -67,7 +67,7 @@ public class MemberController {
 		
 
 		return ".mainLayout";
-	}
+	}*/
 	
 	@RequestMapping(value = "/member/logout")
 	public String logout(HttpSession session) throws Exception{
@@ -78,7 +78,8 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-*/
+	
+	
 
 	// 회원가입
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
@@ -124,6 +125,15 @@ public class MemberController {
 		model.put("state", state);
 		return model;
 
+	}
+	
+
+	// 시큐리티 제한시 표시
+	@RequestMapping(value = "/member/noAuthorized")
+	public String noAuthorized(
+			) throws Exception {
+		
+		return "redirect:/submain";
 	}
 
 }

@@ -21,20 +21,22 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 	public void onAuthenticationSuccess(HttpServletRequest req,
 			HttpServletResponse resp, Authentication authentication)
 			throws ServletException, IOException {
+		
 		HttpSession session=req.getSession();
 		
 		// System.out.println(authentication.getName()); // 로그인 아이디
 		
 		// 로그인 날짜 변경
-		memberService.updateLastLogin(authentication.getName());
+		//memberService.updateLastLogin(authentication.getName());
 		
 		// 로그인 정보 저장
 		Member member=memberService.readMember(authentication.getName());
 		SessionInfo info=new SessionInfo();
 		info.setUserId(member.getMid());
 		info.setUserName(member.getMname());
+		info.setcSerial(member.getcSerial());
 		
-		session.setAttribute("member", info);	
+		session.setAttribute("member", info);
 
 		super.onAuthenticationSuccess(req, resp, authentication);
 	}

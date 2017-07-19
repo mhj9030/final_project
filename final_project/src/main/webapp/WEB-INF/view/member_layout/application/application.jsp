@@ -19,25 +19,25 @@
 					<img src="" width="110px" height="140px" />
 				</td>
 				<td>이름</td>
-				<td>${sessionScope.member.userName}</td>
+				<td>${introList.rName}</td>
 				<td>영어</td>
-				<td><input type="text" class="form-control" /></td>
+				<td>${introList.engName}</td>
 			</tr>
 			<tr>
 				<td>생년월인</td>
-				<td>.</td>
+				<td>${introList.mBirth}</td>
 				<td>폰번호</td>
-				<td>.</td>
+				<td>${introList.phone}</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td>.</td>
+				<td>${introList.email}</td>
 				<td>병역</td>
-				<td>.</td>
+				<td>${introList.army}</td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="3">.</td>
+				<td colspan="3">${introList.addr}<br>${introList.addr2}</td>
 			</tr>
 		</table>
 		
@@ -53,11 +53,13 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
+		<c:forEach var="dto" items="${abilityList}">
 			<tr>
-				<td>.</td>
-				<td>.</td>
-				<td>.</td>
+				<td>${dto.acName}</td>
+				<td>${dto.termtime}</td>
+				<td>${dto.memo}</td>
 			</tr>
+		</c:forEach>
 		</table>
 		
 		<table id="license" class="table" style="height: 60px;">
@@ -72,11 +74,13 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
+		<c:forEach var="dto" items="${licenseList}">
 			<tr>
-				<td>.</td>
-				<td>.</td>
-				<td>.</td>
+				<td>${dto.license}</td>
+				<td>${dto.expStart}</td>
+				<td>${dto.liGC}</td>
 			</tr>
+		</c:forEach>
 		</table>
 		
 		<table id="language" class="table" style="height: 60px;">
@@ -90,10 +94,12 @@
 				<td colspan="2">해당사항없음</td>
 			</tr>
 		</c:if>
+		<c:forEach var="dto" items="${languageList}">
 			<tr>
-				<td>.</td>
-				<td>.</td>
+				<td>${dto.language}</td>
+				<td>${dto.laScore}</td>
 			</tr>
+		</c:forEach>
 		</table>
 		
 		<table id="career" class="table" style="height: 60px;">
@@ -108,11 +114,13 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
+		<c:forEach var="dto" items="${careerList}">
 			<tr>
-				<td>.</td>
-				<td>.</td>
-				<td>.</td>
+				<td>${dto.company}</td>
+				<td>${dto.part}</td>
+				<td>${dto.memo}</td>
 			</tr>
+		</c:forEach>
 		</table>
 		
 		<table id="award" class="table" style="height: 60px;">
@@ -127,11 +135,13 @@
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
-		<tr>
-			<td>.</td>
-			<td>.</td>
-			<td>.</td>
-		</tr>
+		<c:forEach var="dto" items="${awardList}">
+			<tr>
+				<td>${dto.awAgency}</td>
+				<td>${dto.awSector}</td>
+				<td>${dto.awDate}</td>
+			</tr>
+		</c:forEach>
 		</table>
 		
 		<table id="project" class="table" style="height: 60px;">
@@ -148,9 +158,9 @@
 		</c:if>
 		<c:forEach var="dto" items="${projectList}">
 			<tr>
-				<td>.</td>
-				<td>.</td>
-				<td>.</td>
+				<td>${dto.prName}</td>
+				<td>${dto.expStart} ~ ${dto.expEnd}</td>
+				<td>${dto.memo}</td>
 			</tr>
 		</c:forEach>
 		</table>
@@ -158,35 +168,35 @@
 		<table id="intro" class="table">
 			<caption>▶ 자기소개</caption>
 			<tr height="100px">
-				<td><textarea rows="7" cols="100"></textarea></td>
+				<td>${introList.intro1}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ 지원동기</caption>
 			<tr height="100px">
-				<td><textarea rows="7" cols="100"></textarea></td>
+				<td>${introList.intro2}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ 성장배경</caption>
 			<tr height="100px">
-				<td><textarea rows="7" cols="100"></textarea></td>
+				<td>${introList.intro3}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ ???</caption>
 			<tr>
-				<td><textarea rows="7" cols="100"></textarea></td>
+				<td>${introList.intro4}</td>
 			</tr>
 		</table>
 		<hr>
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/storagy'">이력서 보관함 목록</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/talent/main?page=${page}'">목록</button>
 		</div>
 	</div>
 </div>

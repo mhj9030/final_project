@@ -97,4 +97,12 @@ public class GoverNewsServiceImpl implements GoverNewsService{
 		return nextDto;
 	}
 
+	@Override
+	public void updateGoverNews(GoverNews dto) throws Exception {
+		try {
+			dao.updateData("company.updateGoverNews", dto);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

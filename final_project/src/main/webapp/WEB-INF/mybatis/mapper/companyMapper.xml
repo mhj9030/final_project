@@ -61,6 +61,11 @@
 			values(com_image_seq.nextval, #{cLogoImage, jdbcType=VARCHAR}, #{cLogoOriginalFilename, jdbcType=VARCHAR}, #{cCoverImage, jdbcType=VARCHAR}, #{cCoverOriginalFilename, jdbcType=VARCHAR}, #{cSerial})
 	</insert>
 	
+	<!-- 기업 권한 수정 -->
+	<update id="updateComAuthority" parameterType="String">
+		update memberAuthority set authority='ROLE_COMPANY' where mId=#{mId}
+	</update>
+	
 	<!-- 검색한 기업 수 -->
 	<select id="companyCount" parameterType="map" resultType="Integer">
 		select nvl(count(*), 0) from company c
@@ -160,7 +165,7 @@
   			<if test="searchValue!=null and searchValue!='' ">
 	     		and instr(ceSubject, #{searchValue})&gt;=1
 	     	</if>
-	</select>
+	</select>	
 	
 	<!-- 채용 리스트 -->
 	<select id="listComEmploy" parameterType="map" resultType="com.final_project.company.Employ">
@@ -476,6 +481,11 @@
 	     		order by gnNum desc
 		)tb where rownum=1
 	</select>
+	
+	<!-- 공무원 소식 수정 -->
+	<update id="updateGoverNews" parameterType="com.final_project.company.GoverNews">
+		update gov_news set gnSubject=#{gnSubject}, gnContent=#{gnContent}
+	</update>
 </mapper>
 
 

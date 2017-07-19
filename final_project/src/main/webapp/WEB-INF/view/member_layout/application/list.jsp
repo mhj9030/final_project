@@ -16,12 +16,20 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th width="40px"><input type="checkbox" style="width: 30px;" /></th>
-					<th width="100px">이력서 번호</th>
+					<th width="30px"><input type="checkbox" style="width: 30px;" /></th>
+					<th width="150px">이력서 번호</th>
 					<th>이력서 메모</th>
 					<th width="150px">작성일</th>
 				</tr>
 			</thead>
+			<tr align="center">
+					<td><input type="checkbox" value="" style="width: 20px;" /></td>
+					<td>1</td>
+					<td align="left">
+						<a href="<%=cp%>/member/applications/application?num=${dto.poNum}&page=${page}">지원서1</a>
+					</td>
+					<td>2017-07-19</td>
+				</tr>
 			<tbody>
 				<c:forEach var="dto" items="${list}">
 				<tr align="center">
@@ -37,8 +45,8 @@
 		</table>
 		
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applys/created'">새 이력서 작성</button>
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applys/created'">삭제</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/created'">새 이력서 작성</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/created'">삭제</button>
 		</div>
 			
 		<div class= "footer-bar">

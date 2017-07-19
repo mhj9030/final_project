@@ -108,7 +108,7 @@
 							<li><a href="#">진행 중인 채용 정보가 없습니다</a></li>
 						</c:if>
 						<c:forEach var="dto" items="${listEmploy}">
-							<li><a href="#" onclick="searchList('${dto.ceNum}', '${dto.ceSubject}', 'name'); return false">${dto.ceSubject}</a></li>
+							<li><a href="#" onclick="searchList('${dto.ceNum}', '${dto.ceSubject}', 'recent'); return false">${dto.ceSubject}</a></li>
 							
 						</c:forEach>
 					</ul>
