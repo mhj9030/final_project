@@ -15,11 +15,14 @@
 		<table class="table table-bordered">
 			<caption>▶ 인적사항</caption>
 			<tr>
-				<td rowspan="3" width="120px">
-					<img src="" width="110px" height="140px" />
+				<td rowspan="4" width="120px">
+					<img src="" width="110px" height="140px" /><br><br>
+					<button type="button" class="btn btn-xs">기본</button>
+					<button type="button" class="btn btn-xs">올리기</button>
+					<!-- <input type="file" class="btn btn-xs" value="올리기" /> -->
 				</td>
 				<td width="80px">이름</td>
-				<td>${sessionScope.member.userName}</td>
+				<td><input type="text" class="form-control input-sm" value="${sessionScope.member.userName}" /></td>
 				<td width="80px">영어</td>
 				<td><input type="text" class="form-control input-sm" /></td>
 			</tr>
@@ -37,7 +40,7 @@
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="4">
+				<td colspan="3">
 					<input type="text" class="form-control input-sm" placeholder="기본주소" /><br>
 					<input type="text" class="form-control input-sm" placeholder="상세주소" />
 				</td>
@@ -189,7 +192,8 @@
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/storagy'">이력서 보관함 목록</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/creates'">등록</button>
+			<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
 		</div>
 	</div>
 </div>
