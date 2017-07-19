@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+h3{
+   margin-top: 40px;
+}
+
+.page_body{
+	clear:both;
+    margin: 0px auto;
+    min-height: 500px;
+    width: 800px;
+}
+
+.page_head{
+	padding-top: 20px;
+}

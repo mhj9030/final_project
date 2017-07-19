@@ -11,13 +11,19 @@ public class ApplicationController {
 	private ApplicationService service;
 	
 	@RequestMapping("/member/applications/list")
-	public String applyList(Model model) throws Exception {
+	public String list(Model model) throws Exception {
 		
 		return ".member_layout.application.list";
 	}
 	
 	@RequestMapping("/member/applications/created")
-	public String application(Model model) throws Exception {
+	public String created(Model model) throws Exception {
+		
+		return ".member_layout.application.created";
+	}
+	
+	@RequestMapping("/member/applications/application")
+	public String article(Model model) throws Exception {
 		
 		return ".member_layout.application.application";
 	}
