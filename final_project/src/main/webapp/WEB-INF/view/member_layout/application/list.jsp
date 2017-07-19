@@ -37,8 +37,8 @@
 		</table>
 		
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applys/created'">새 이력서 작성</button>
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applys/created'">삭제</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/created'">새 이력서 작성</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/created'">삭제</button>
 		</div>
 			
 		<div class= "footer-bar">
