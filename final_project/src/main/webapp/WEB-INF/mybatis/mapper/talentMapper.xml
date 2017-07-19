@@ -158,4 +158,8 @@
 			)tb where <![CDATA[rownum<=#{end} 
 		)where rownum>=#{start}]]>
 	</select>
+	
+	<select id="isBuy"  parameterType="map" resultType="Integer">
+		select count(*) from storagy where mId=#{mId} and rnum=#{rNum}
+	</select>
 </mapper>

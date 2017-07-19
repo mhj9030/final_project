@@ -15,11 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.final_project.point.PointService;
+
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+	private PointService pointService;
 
 	@RequestMapping(value = "/member/login_check", method = RequestMethod.POST)
 	public String loginsubmit(@RequestParam String mid, @RequestParam String mpwd, @RequestParam String state, Model model, HttpSession session, HttpServletRequest req)
@@ -86,13 +91,16 @@ public class MemberController {
 		try {
 			// 회원가입 정보 dao 전송
 			service.insertMember(dto);
+			Map<String, Object> map = new HashMap<>();
+			map.put("mId", dto.getMid());
+			//pointService.
 		} catch (Exception e) {
 			model.addAttribute("mode", "registerFail"); // 회원가입 실패 mode 전송
 			return ".signup";
 		}
 		model.addAttribute("mode", "registerComplet"); // 오류 발생이 안되면 완료 mode 전송
 
-		return ".signup";
+		return "redirect:/submain";
 
 	}
 	

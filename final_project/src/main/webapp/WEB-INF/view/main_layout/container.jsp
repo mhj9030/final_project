@@ -111,31 +111,46 @@
 			<h4 class="panel-title">인기 기업정보</h4>
 		</div>
 		<div class="col-md-1">
-			<a class="panel-link" href="#">더보기</a>
+			<a class="panel-link" href="<%=cp%>/company/search">더보기</a>
 		</div>
 	</div> 
 	
 	<div class="row">
+	  <c:forEach var="dto" items="${comList}">
 	  <div class="col-md-4">
 	  	<div class="panel-busi">
-	  		<div class="busi-img" style="background-size: cover; background-image: url('<%=cp%>/resources/image/google.jpeg');">
-	  			<img src="<%=cp%>/resources/image/Desert.jpg">
+	  		<div class="busi-img" style="background-size: cover; background-image: url('<%=cp%>/uploads/company/${dto.cCoverImage}');">
+	  			<c:if test="${not empty dto.cLogoImage}">
+					<img width="80px" src="<%=cp%>/uploads/company/${dto.cLogoImage}">
+				</c:if>
+				<c:if test="${empty dto.cLogoImage}">
+					<img width="80px" src="<%=cp%>/resources/image/profile_img.jpg">
+				</c:if>
 	  		</div>
-	  		<div class="busi-name">기업명</div>
-	  		<div class="busi-intro">직원은 가족이다!!</div>
+	  		<div class="busi-name"><a href="${articleUrl}?cNum=${dto.cNum}">${dto.cName}</a></div>
+	  		<div class="busi-type">${dto.maName} : ${dto.subName}</div>
+	  		<div class="busi-intro">${dto.cDescription}</div>
 	  		<div class="busi-etc">
-	  			<div><img src="<%=cp%>/resources/image/Desert.jpg"></div>
-	  			<div class="busi-etc-text">사진이름</div>
-	  			<div class="busi-etc-text">채용중</div>
+	  			<div>
+	  				<c:if test="${not empty dto.proPhoto}">
+						<img width="80px" src="<%=cp%>/uploads/member/${dto.proPhoto}">
+					</c:if>
+					<c:if test="${empty dto.proPhoto}">
+						<img width="80px" src="<%=cp%>/resources/image/profile_img.jpg">
+					</c:if>
+	  			</div>
+	  			<div class="busi-etc-text">
+	  				<a href="<%=cp%>/profile?id=${dto.mId}">${dto.mName}</a>
+	  			</div>
+	  			<div class="busi-etc-text">
+	  				<c:if test="${dto.employ_cnt>0}">
+						<a href="<%=cp%>/employ/main">채용 : ${dto.employ_cnt}</a>
+					</c:if>
+	  			</div>
 	  		</div>
 	  	</div>
 	  </div>
-	  <div class="col-md-4">
-		<div class="panel-busi"></div>
-	  </div>
-	  <div class="col-md-4">
-	  	<div class="panel-busi"></div>
-	  </div>
+	  </c:forEach>
 	</div>
 	
 	<div class="row blank">

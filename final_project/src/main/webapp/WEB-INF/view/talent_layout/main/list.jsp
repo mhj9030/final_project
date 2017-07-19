@@ -7,7 +7,7 @@
 	String cp=request.getContextPath();
 %>
 <div class="page_body">
-	<div class="container-fluid .page_head">
+	<div class="container-fluid page_head">
 		<h3>| 인재검색</h3><hr>
 	</div>
 	
@@ -42,7 +42,7 @@
 	<br><br>
 	
 	<!-- 리스트 -->
-	<div id="talent_list">
+	<div id="talent_list" class="row">
 	</div>
 	
 	<div class="paging">
@@ -91,6 +91,14 @@ function isCheck(data) {
 		cc++;
 	}
 	
+	if(cc==0){
+		$('input:checkbox[name="subCode"][value="0"]').attr("checked", true);
+		$('button[name="subName"][value="0"]').attr("class", "btn btn-info btn-xs");
+	}else{
+		$('input:checkbox[name="subCode"][value="0"]').attr("checked", false);
+		$('button[name="subName"][value="0"]').attr("class", "btn btn-xs");
+	}
+	
 	var query = $("form[name=searchForm]").serialize();
 	list(query);
 } 
@@ -114,8 +122,8 @@ function subPrint(data){
 	var out = "";
 	if(data.subType.length!=0){
 		out += '<span class="button-checkbox">';
-		out += '<button type="button" name="subName" class="btn btn-xs"> 전체 </button>';
-		out += '<input type="checkbox" name="subCode" class="hidden" value="" />';
+		out += '<button type="button" name="subName" class="btn btn-info btn-xs" value="0"> 전체 </button>';
+		out += '<input type="checkbox" name="subCode" class="hidden" checked="checked" value="0" />';
 		out += '</span>';
 		for(var i=0; i<data.subType.length; i++){
 			out += '<span class="button-checkbox">';
@@ -135,14 +143,16 @@ function listPrint(data){
 	
 	if(data.list.length!=0){
 		for(var i=0; i<data.list.length; i++){
-			out += '<div class="marketDiv">';
-			out += '	<div style="text-align: center;">';
+			out += '<div class="list-content col-xs-5 col-sm-5">';
+			out += '	<div class="col-xs-6 col-sm-5">';
 			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />';//data.list[i].photo
 			out += '	</div>';
-			out += '	<div>';
-			out += '		이름: ' + data.list[i].rName + '(' + data.list[i].rNum + ')<br>';
-			out += '		관심직종<br>' + data.list[i].subTypes + '<br>';
-			out += '		<a href="<%=cp%>/talent/main/article?mId=&rNum=' + data.list[i].rNum + '">[ 이력서 보러가기 ]</a>';
+			out += '	<div class="col-xs-6 col-sm-7">';
+			out += '		<span>' + data.list[i].rName + '(' + data.list[i].rNum + ')</span>';
+			out += '		<p class="text-muted small">' + data.list[i].mId + '</p>';
+			out += '		<p class="small">관심분야<br>' + data.list[i].subTypes + '</p>';
+			out += '		<button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user" aria-hidden="true"></i> 프로필 </button>';
+			out += '		<button type="button" class="btn btn-primary btn-xs" onclick="article(' + data.list[i].rNum + ');"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 </button>';
 			out += '	</div>';
 			out += '</div>';
 		}
@@ -151,5 +161,9 @@ function listPrint(data){
 	}
 	
 	$("#talent_list").html(out);
+}
+
+function article(rNum) {
+	location.href = "<%=cp%>/point/storagy/article?rNum=" + rNum + "&page=${page}";
 }
 </script>

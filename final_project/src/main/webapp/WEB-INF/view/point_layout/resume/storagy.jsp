@@ -40,20 +40,20 @@
 	</div>
 	
 	<!-- 열람 -->
-	<div id="resume_list">
+	<div id="resume_list" class="row">
 		<c:if test="${empty list}">
 			<div style="text-align: center;"> 검색 결과가 없습니다.</div>
 		</c:if>
 		<c:forEach var="dto" items="${list}">
-		<div class="marketDiv">
-			<div style="text-align: center;">
-				<img src="" width="110px" height="140px" />
+		<div class="list-content col-xs-5 col-sm-5">
+			<div class="col-xs-6 col-sm-5">
+				<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />
 			</div>
-			<div>
-				이력서번호: ${dto.rNum} (${dto.rName})<br>
-				<%-- 지원분야: ${dto.apply}<br> --%>
-				관심직종: ${dto.subTypes}<br>
-				<button type="button" class="btn btn-primary" onclick="javascript:location.href='<%=cp%>/point/storagy/article?rNum=${dto.rNum}'">열람</button>
+			<div class="col-xs-6 col-sm-7">
+				<span>${dto.rName}(${dto.rNum})</span>
+				<p class="text-muted small">${dto.mId}</p>
+				<p class="small">관심분야<br>${dto.subTypes}</p>
+				<button type="button" class="btn btn-primary btn-xs" onclick="article(${dto.rNum});"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 열람 </button>
 			</div>
 		</div>
 		</c:forEach>
@@ -108,5 +108,9 @@ function subPrint(data){
 	}
 	
 	return ;
+}
+
+function article(num) {
+	location.href="<%=cp%>/point/storagy/article?rNum=" + num + "&page=${page}";
 }
 </script>

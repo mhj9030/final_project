@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Company {
 	private int cNum;
 	private String cSerial, cSerial1, cSerial2, cSerial3; 
-	private String cCeo, cName, mId;
+	private String cCeo, cName, mId, mName;
 	private int cPeople, subCode;
 	private String cProfit, cProfit1, cProfit2, cProfit3;
 	private String subName, maName;
@@ -21,6 +21,7 @@ public class Company {
 	
 	private int ciNum;
 	private String cCoverImage, cLogoImage, cLogoOriginalFilename, cCoverOriginalFilename;
+	private String proPhoto;
 	private List<MultipartFile> upload;
 	
 	public int getcNum() {
@@ -214,5 +215,17 @@ public class Company {
 	}
 	public void setcProfit3(String cProfit3) {
 		this.cProfit3 = cProfit3;
+	}
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+	public String getProPhoto() {
+		return proPhoto;
+	}
+	public void setProPhoto(String proPhoto) {
+		this.proPhoto = proPhoto;
 	}
 }

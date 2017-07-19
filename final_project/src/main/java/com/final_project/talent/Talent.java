@@ -4,6 +4,7 @@ public class Talent {
 	// 분류
 	private int mainCode, subCode;
 	private String mainName, subName;
+	private int isBuy;
 	// 인재 리스트
 	private int rNum;
 	private String mId, mBirth, rName, rPhoto, subTypes, apply;
@@ -46,6 +47,12 @@ public class Talent {
 	}
 	public void setSubName(String subName) {
 		this.subName = subName;
+	}
+	public int getIsBuy() {
+		return isBuy;
+	}
+	public void setIsBuy(int isBuy) {
+		this.isBuy = isBuy;
 	}
 	public int getrNum() {
 		return rNum;

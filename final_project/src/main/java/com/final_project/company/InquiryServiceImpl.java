@@ -103,4 +103,34 @@ public class InquiryServiceImpl implements InquiryService{
 		
 		return nextDto;
 	}
+
+	@Override
+	public void deleteInquiry(int cqNum) throws Exception {
+		try {
+			Inquiry dto=dao.getReadData("company.readInquiry", cqNum);
+			
+			if(dto.getCqDepth()==0){
+				dao.deleteData("company.deleteQuestionInquiry", dto.getCqGroupNum());
+			} else{
+				dao.deleteData("company.deleteAnswerInquiry", cqNum);
+				
+				int answerCount=dao.getIntValue("company.countAnswerInquiry", dto.getCqGroupNum());
+				
+				if(answerCount==0){
+					dao.updateData("company.updateAnswerInquiryToZero", dto.getCqGroupNum());
+				}
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Override
+	public void updateInquiry(Inquiry dto) throws Exception {
+		try {
+			dao.updateData("company.updateInquiry", dto);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

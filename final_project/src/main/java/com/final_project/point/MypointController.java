@@ -3,7 +3,6 @@ package com.final_project.point;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -81,7 +80,18 @@ public class MypointController {
 	
 	
 	@RequestMapping("/point/saveEvent")
-	public String saveEvent(){
+	public String saveEvent(HttpSession session, Model model) throws Exception {
+		Point dto = new Point();
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> map = new HashMap<>();
+		map.put("mId", info.getUserId());
+		
+		// 나의 포인트
+		dto = service.mypoint(map);
+		
+		model.addAttribute("point", dto);
+		
 		return ".point_layout.saveEvent.random";
 	}
 	
@@ -90,9 +100,15 @@ public class MypointController {
 	public Map<String, Object> randomPoint(HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> model = new HashMap<>();
 		
 		map.put("mId", info.getUserId());
 		Point dto = service.mypoint(map);
+		
+		if(service.isPointEvent(map)!=0){
+			model.put("state", 2);
+			return model;
+		}
 		
 		int random = (int) (Math.random()*21) * 300;
 		
@@ -100,6 +116,8 @@ public class MypointController {
 			random = 100;
 		
 		System.out.println(random);
+		
+		
 		
 		if(dto.getMypoint()-500 >= 0){
 			map.put("history", "포인트 복권");
@@ -110,12 +128,14 @@ public class MypointController {
 			map.put("history", "포인트 복권 당첨포인트");
 			map.put("point", random);
 			service.savePoint(map);
+			
+			model.put("point", random);
+			model.put("state", 1);
 		}else{
 			// 포인트가 부족합니다.
+			System.out.println(">>> 포인트가 부족합니다.");
+			model.put("state", 0);
 		}
-		
-		Map<String, Object> model = new HashMap<>();
-		model.put("point", random);
 		
 		return model;
 	}

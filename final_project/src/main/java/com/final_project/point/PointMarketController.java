@@ -51,10 +51,8 @@ public class PointMarketController {
 		if(subCode!=null && ! subCode.equals("") ){
 			List<String> subCodes = Arrays.asList(subCode);
 			map.put("list", subCodes);
-			System.out.println(">>> subCodes");
 		}else{
 			map.put("list", null);
-			System.out.println(">>> null");
 		}
 		
 		mainType = tService.mainType();
@@ -79,9 +77,11 @@ public class PointMarketController {
 		
 		List<Talent> list = tService.listBoard(map);
 		list = tService.interestList(list);
+		list = tService.isBuy(list, map);
 		
 		String paging = util.paging(current_page, total_page);
 		
+		model.addAttribute("page", current_page);
 		model.addAttribute("mainType", mainType);
 		model.addAttribute("mainCode", mainCode);
 		model.addAttribute("subCode", subCode);
@@ -123,7 +123,7 @@ public class PointMarketController {
 		if(mypoint-3000 >= 0){
 			map.put("history", "이력서 열람");
 			map.put("point", 3000);
-			map.put("total", dto.getMypoint()-500);
+			map.put("total", dto.getMypoint()-3000);
 			pService.usePoint(map);
 			
 			map.put("rNum", rNum);
@@ -189,6 +189,7 @@ public class PointMarketController {
 		
 		String paging = util.paging(current_page, total_page);
 		
+		model.addAttribute("page", current_page);
 		model.addAttribute("mainType", mainType);
 		model.addAttribute("mainCode", mainCode);
 		model.addAttribute("subCode", subCode);

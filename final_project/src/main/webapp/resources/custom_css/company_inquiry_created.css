@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+.inquiry-created-body{
+	clear:both;
+    box-sizing: border-box;
+    margin: 0px auto 15px;
+    min-height: 655px;
+    margin-top: 40px;
+    width: 800px;
+ 	height: auto;
+}
+
+.inquiry-created-body .body-header{
+	margin-bottom: 50px;
+}
+
+.inquiry-created-body .table .input_info {
+    min-width: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
