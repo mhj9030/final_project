@@ -33,29 +33,46 @@
 <!-- list_form CSS -->
 <link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
 
+<!-- 알림창 CSS -->
+<link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
+<!-- 알림창 JS -->
+<script src="<%=cp%>/resources/js/sweetalert2.min.js" type="text/javascript"></script>
+<!-- 로그인 JS -->
+<script src="<%=cp%>/resources/js/login.js" type="text/javascript"></script>
+<!-- Profile_layout CSS -->
+<link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<!-- Font Awesome CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Profile JS -->
+<script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
 
 
 <!-- 본인의 css영역 -->
 <!-- community_group_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_group_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_group_list.css" rel="stylesheet">
 <!-- community_review_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_review_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_review_list.css" rel="stylesheet">
 <!-- community_news_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_news_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_news_list.css" rel="stylesheet">
 <!-- community_tip_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_tip_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_tip_list.css" rel="stylesheet">
 <!-- community_recommend_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_recommend_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_recommend_list.css" rel="stylesheet">
 <!-- community_free_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_free_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_free_list.css" rel="stylesheet">
 <!-- community_photo_list CSS -->
-<link href="<%=cp%>/resources/custom_css/community_photo_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_photo_list.css" rel="stylesheet">
 <!-- article_form CSS -->
-<link href="<%=cp%>/resources/custom_css/community_article.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_article.css" rel="stylesheet">
 <!-- reply_form CSS -->
-<link href="<%=cp%>/resources/custom_css/community_reply.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_reply.css" rel="stylesheet">
 <!-- recommend_article_form CSS -->
-<link href="<%=cp%>/resources/custom_css/community_recommend_article.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/community/community_recommend_article.css" rel="stylesheet">
+<!-- community_group_mylist -->
+<link href="<%=cp%>/resources/custom_css/community/community_group_mylist.css" rel="stylesheet">
+<!-- group_article_form CSS -->
+<link href="<%=cp%>/resources/custom_css/community/community_group_article.css" rel="stylesheet">
+
 
 </head>
 <body>

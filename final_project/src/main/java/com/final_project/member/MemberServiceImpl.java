@@ -1,5 +1,7 @@
 package com.final_project.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,34 @@ public class MemberServiceImpl implements MemberService{
 		}
 	}
 	
+	@Override
+	public int updateLastLogin(String userId) {
+		int result=0;
+		try {
+			result=cDao.updateData("member.updateLastLogin", userId);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public int updateAuthority(Member dto) {
+		int result=0;
+		try {
+			result=cDao.updateData("member.updateAuthority", dto);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public List<Member> listAuthority(String userId) {
+		List<Member> list=null;
+		try {
+			list=cDao.getListData("member.listAuthority", userId);
+		} catch (Exception e) {
+		}
+		return list;
+	}
 
 }

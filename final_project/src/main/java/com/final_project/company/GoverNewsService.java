@@ -11,4 +11,5 @@ public interface GoverNewsService {
 	public GoverNews readGoverNews(int gnNum) throws Exception;
 	public GoverNews preReadGoverNews(Map<String, Object> map) throws Exception;
 	public GoverNews nextReadGoverNews(Map<String, Object> map) throws Exception;
+	public void updateGoverNews(GoverNews dto) throws Exception;
 }

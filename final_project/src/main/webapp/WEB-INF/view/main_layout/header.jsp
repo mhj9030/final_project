@@ -28,7 +28,6 @@ function navloginCheck() {
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="<%=cp%>/main">Job square</a> </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">네트워크</a></li>
                 <li><a href="<%=cp%>/company/search">기업</a></li>
                 <li><a href="<%=cp%>/employ/main">채용</a></li>
                 <li><a href="<%=cp%>/talent/main">인재</a></li>
@@ -48,10 +47,10 @@ function navloginCheck() {
                                         <form class="form" name="navlogin" method="post" onsubmit="return navloginCheck();">
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputEmail2">사용자 이메일</label>
-                                                <input type="email" class="form-control" name="mid" id="exampleInputEmail2" placeholder="사용자 이메일" required> </div>
+                                                <input type="email" class="form-control" name="mId" id="exampleInputEmail2" placeholder="사용자 이메일" required> </div>
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputPassword2">사용자 비밀번호</label>
-                                                <input type="password" class="form-control" name="mpwd" id="exampleInputPassword2" placeholder="비밀번호" required>
+                                                <input type="password" class="form-control" name="mPwd" id="exampleInputPassword2" placeholder="비밀번호" required>
                                                 <input type="hidden" name="state" value="navlogin">
                                                 <div class="help-block text-right"> <a href="">비밀번호를 잊으셨나요?</a> </div>
                                             </div>
@@ -83,10 +82,10 @@ function navloginCheck() {
                                             <input type="hidden" value="${member.userId }">
                                             <div class="divider"></div>
                                             <form name="profileaction">
-                                                <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 내프로필 </button>
-                                                <button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 관리 </button>
+                                                <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i>마이페이지</button>
+                                                <button type="button" class="btn btn-primary btn-xs" onclick="memberMenu('applications', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 관리 </button>
                                                 <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('pwd', 'update');"> <i class="fa fa-cogs" aria-hidden="true"></i> 계정설정 </button>
-                                                <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 준비중 </button> <a href="<%=cp%>/profile?id=${member.userId }">asd</a> </form>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

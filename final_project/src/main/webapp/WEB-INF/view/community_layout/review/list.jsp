@@ -42,7 +42,6 @@
 	<p>
 		기업 면접에 관련된 인터뷰형식의 후기를 공유합니다.
 	</p>
-	
 	<div class="review_select">
 		<form name="type_form">
 			<button class="btn btn-default btn-xs" id="newest_btn" onclick="searchType('최신순')">최신순</button>
@@ -50,7 +49,6 @@
 			<input type="hidden" name="type" value="${type}">
 		</form>
 	</div>
-	
 	<table class="table review_list_table">
 		<c:forEach var="dto" items="${list}">
 		<tr>

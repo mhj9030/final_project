@@ -25,5 +25,22 @@
 	    INSERT INTO memberAuthority(mid, authority)
 	        VALUES (#{mid}, #{authority})
 	</insert>
+	
+	<update id="updateLastLogin" parameterType="String">
+        UPDATE member SET last_login=SYSDATE 
+                    WHERE mId=#{mId}
+    </update>
+    
+    <select id="listAuthority" parameterType="String" resultType="com.final_project.member.Member">
+	    SELECT mId, authority
+	        FROM memberAuthority WHERE mId=#{mId}
+	</select>
+	
+	<update id="updateAuthority" parameterType="com.final_project.member.Member">
+	     UPDATE memberAuthority SET authority=#{authority}
+	         WHERE mId=#{mId} AND authority=#{oldAuthority}
+	</update>
+    
+	
 
 </mapper>

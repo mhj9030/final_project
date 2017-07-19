@@ -53,6 +53,7 @@ public class CreatedServiceImpl implements CreatedService{
 			}
 			
 			insertComImage(dto);
+			dao.updateData("company.updateComAuthority", dto.getmId());
 			
 		} catch (Exception e) {
 			throw e;
