@@ -28,7 +28,18 @@
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
 <!-- smart edit -->
 <script type="text/javascript" src="<%=cp%>/resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
-
+<!-- 알림창 CSS -->
+<link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
+<!-- 알림창 JS -->
+<script src="<%=cp%>/resources/js/sweetalert2.min.js" type="text/javascript"></script>
+<!-- 로그인 JS -->
+<script src="<%=cp%>/resources/js/login.js" type="text/javascript"></script>
+<!-- Profile_layout CSS -->
+<link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<!-- Font Awesome CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Profile JS -->
+<script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
 
 <!-- 본인의 css영역 -->
 <!-- community_review_list CSS -->
