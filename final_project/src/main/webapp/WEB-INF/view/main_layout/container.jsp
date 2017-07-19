@@ -15,7 +15,6 @@
 		<p>지금 가입하고 비즈니스와 커리어를 성장시킬 수 있는 다양한 기회들을 만나보세요!
 </p>
 		<p>
-			<a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#job-register">무료 가입</a>
 		</p>
 		</div>
 	</div>

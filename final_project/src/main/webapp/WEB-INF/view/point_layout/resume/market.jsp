@@ -62,12 +62,12 @@
 					<input type="hidden" name="seller" value="${dto.mId}">
 					<input type="hidden" name="rNum" value="${dto.rNum}">
 					<input type="hidden" name="mypoint" value="${point.mypoint}">
-					<c:if test="${dto.isBuy=='0'}">
+					<c:if test="${dto.isBuy=='0' and sessionScope.member.userId!=dto.mId}">
 						<button type="button" class="btn btn-primary btn-xs" onclick="usePoint(${dto.rNum})"> 
 							<i class="fa fa-user" aria-hidden="true"></i> 지원서 (-3000p) 
 						</button>
 					</c:if>
-					<c:if test="${dto.isBuy=='1'}">
+					<c:if test="${dto.isBuy=='1' or sessionScope.member.userId==dto.mId}">
 						<button type="button" class="btn btn-primary btn-xs" onclick="article(${dto.rNum})"> 
 							<i class="fa fa-user" aria-hidden="true"></i> 열람하기
 						</button>

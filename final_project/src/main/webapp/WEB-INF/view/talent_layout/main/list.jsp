@@ -151,7 +151,7 @@ function listPrint(data){
 			out += '		<span>' + data.list[i].rName + '(' + data.list[i].rNum + ')</span>';
 			out += '		<p class="text-muted small">' + data.list[i].mId + '</p>';
 			out += '		<p class="small">관심분야<br>' + data.list[i].subTypes + '</p>';
-			out += '		<button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user" aria-hidden="true"></i> 프로필 </button>';
+			out += '		<button type="button" class="btn btn-primary btn-xs" onclick="proArti(\'' + data.list[i].mId + '\');"> <i class="fa fa-user" aria-hidden="true"></i> 프로필 </button>';
 			out += '		<button type="button" class="btn btn-primary btn-xs" onclick="article(' + data.list[i].rNum + ');"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 </button>';
 			out += '	</div>';
 			out += '</div>';
@@ -163,7 +163,11 @@ function listPrint(data){
 	$("#talent_list").html(out);
 }
 
+function proArti(mId){
+	location.href = "<%=cp%>/profile?id=" + mId;
+}
+
 function article(rNum) {
-	location.href = "<%=cp%>/point/storagy/article?rNum=" + rNum + "&page=${page}";
+	location.href = "<%=cp%>/talent/main/article?rNum=" + rNum + "&page=${page}";
 }
 </script>

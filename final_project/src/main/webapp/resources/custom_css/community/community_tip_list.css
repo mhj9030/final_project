@@ -58,7 +58,7 @@
 }
 
 
-.row {
+.rowlist {
   width: 700px;
   height : 200px;
   text-align: center;
@@ -66,18 +66,18 @@
   margin: 0px auto;
 }
 
-.row .row_header{
+.rowlist .row_header{
 	margin-top: 5px;
 	font-weight: bold;
 	font-size : 20px;
 	margin-bottom: 0px;
 }
 
-.row .row_header_tip{
+.rowlist .row_header_tip{
 	color : red;
 	font-size: 11px;
 }
-.row input[type="checkbox"] {
+.rowlist input[type="checkbox"] {
   	display: none;
 }
 input[type="checkbox"] + label {

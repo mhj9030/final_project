@@ -25,5 +25,7 @@
 	    INSERT INTO memberAuthority(mid, authority)
 	        VALUES (#{mid}, #{authority})
 	</insert>
+	
+	
 
 </mapper>

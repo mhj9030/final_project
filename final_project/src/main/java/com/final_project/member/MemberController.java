@@ -26,6 +26,7 @@ public class MemberController {
 	@Autowired
 	private PointService pointService;
 
+/*	
 	@RequestMapping(value = "/member/login_check", method = RequestMethod.POST)
 	public String loginsubmit(@RequestParam String mid, @RequestParam String mpwd, @RequestParam String state, Model model, HttpSession session, HttpServletRequest req)
 			throws Exception {
@@ -66,7 +67,6 @@ public class MemberController {
 		
 
 		return ".mainLayout";
-
 	}
 	
 	@RequestMapping(value = "/member/logout")
@@ -78,6 +78,7 @@ public class MemberController {
 
 		return "redirect:/";
 	}
+*/
 
 	// 회원가입
 	@RequestMapping(value = "/member/register", method = RequestMethod.POST)
@@ -93,7 +94,7 @@ public class MemberController {
 			service.insertMember(dto);
 			Map<String, Object> map = new HashMap<>();
 			map.put("mId", dto.getMid());
-			//pointService.
+			pointService.entryPoint(map);
 		} catch (Exception e) {
 			model.addAttribute("mode", "registerFail"); // 회원가입 실패 mode 전송
 			return ".signup";
@@ -106,8 +107,6 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/signin")
 	public String signinPage() throws Exception {
-		
-		
 		return ".signup";
 	}
 

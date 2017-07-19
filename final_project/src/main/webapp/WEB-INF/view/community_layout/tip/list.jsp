@@ -103,7 +103,7 @@ function login() {
 		<p>
 			각 분야별 취업관련 정보를 공유하고 소통하는 게시판입니다.
 		</p>
-		<div class="row">
+		<div class="row rowlist">
 			<p class="row_header">분야 설정</p>
 			<span class="row_header_tip">Tip. 체크된 분야의 관련 글만 보여집니다.</span><br>
 			<form name="input_form">

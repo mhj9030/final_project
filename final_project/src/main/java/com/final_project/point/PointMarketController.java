@@ -133,7 +133,6 @@ public class PointMarketController {
 			map.put("point", 300);
 			map.put("mId", seller);
 			pService.savePoint(map);
-			System.out.println("savePoint");
 			
 			// 이력서 보러가기
 			model.put("state", 1);

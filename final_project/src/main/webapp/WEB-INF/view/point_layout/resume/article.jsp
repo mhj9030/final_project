@@ -196,7 +196,7 @@
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/resume/storagy'">목록</button>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/storagy'">이력서 보관함 목록</button>
 		</div>
 	</div>
 </div>

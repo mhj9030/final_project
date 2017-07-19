@@ -165,9 +165,9 @@ $(function() {
 
 
 <form name = "loginac" method="post" onsubmit="return login();">
-      <input type="email" id="mid" name = "mid" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
+      <input type="email" id="mId" name = "mId" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
 
-      <input type="password" id="mpwd" name = "mpwd" class="form-control" placeholder="Password" required="required">
+      <input type="password" id="mPwd" name = "mPwd" class="form-control" placeholder="Password" required="required">
 	<input type="hidden" name="state" value="navlogin">
       <button class="sub-layout-btn" type="submit">로그인</button>
 </form>
