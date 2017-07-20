@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="applications">
+	<select id="memberList" parameterType="map" resultType="com.final_project.member.Member">
+		select mId, mName, to_char(mBirth, 'YYYY-MM-DD') mBirth, to_char(mBirth, 'YYYY')-to_char(sysdate, 'YYYY')+1 age, mGender 
+		from member where mId=#{mId}
+	</select>
+	
+	<select id="academyList" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select termStart, termEnd, termState, school, major from ability where mId=#{mId} order by termStart desc
+	</select>
+	
+	<select id="careerList" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select company, part, carStart, carEnd, memo from mem_career where mId=#{mId} order by carStart desc
+	</select>
+	
+	<select id="projectList" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select prName, expStartYear, expEndYear, expStartMonth, expEndMonth, expState 
+		from mem_project where mId=#{mId} order by expStartYear desc
+	</select>
+	
+	<insert id="insertDefault" parameterType="com.final_project.member.MemberDetail">
+		insert into resume(rNum, rName engName, Phone, eMail, addr, addr2, army) 
+		values(resume_seq.next_val, #{rName}, #{engName}, #{Phone}, #{eMail}, #{addr}, #{addr2}, #{army})
+	</insert>
+	
+	<insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
+		insert into intro(rNum) 
+		values(#{rNum})
+	</insert>
+</mapper>

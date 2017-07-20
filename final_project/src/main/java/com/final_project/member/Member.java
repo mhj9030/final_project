@@ -9,6 +9,7 @@ public class Member {
 	private String lastname; // 두번째 사용자 이름
 	private String mname; // 사용자 이름
 	private String mbirth; // 사용자 생일
+	private String age; // 사용자  나이
 	private String mgender; // 사용자 성별
 	private String cSerial; // 사업자등록번호(기업등록을 했을 때, 생성)
 	
@@ -84,5 +85,13 @@ public class Member {
 
 	public void setcSerial(String cSerial) {
 		this.cSerial = cSerial;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
 	}
 }
