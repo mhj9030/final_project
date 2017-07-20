@@ -267,14 +267,14 @@
 	
 	<!-- 기업 문의 등록 -->
 	<insert id="insertInquiry" parameterType="com.final_project.company.Inquiry">
-		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum)
-  			values(COMPANY_QU_SEQ.CURRVAL, #{cqSubject}, #{cqContent}, 0, 0, COMPANY_QU_SEQ.nextval, #{mId}, #{cNum})
+		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum, cqQuestioner)
+  			values(COMPANY_QU_SEQ.CURRVAL, #{cqSubject}, #{cqContent}, 0, 0, COMPANY_QU_SEQ.nextval, #{mId}, #{cNum}, #{mId})
 	</insert>
 	
 	<!-- 기업 문의 답변 등록 -->
 	<insert id="insertAnswerInquiry" parameterType="com.final_project.company.Inquiry">
-		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum)
-			values(company_qu_seq.nextval, #{cqSubject}, #{cqContent}, 1, 1, #{cqNum}, #{mId}, #{cNum})
+		insert into company_qu(cqNum, cqSubject, cqContent, cqIsq, cqDepth, cqGroupNum, mId, cNum, cqQuestioner)
+			values(company_qu_seq.nextval, #{cqSubject}, #{cqContent}, 1, 1, #{cqNum}, #{mId}, #{cNum}, #{cqQuestioner})
 	</insert>
 	
 	<!-- 기업 문의 Count -->
@@ -291,7 +291,7 @@
 	<select id="listInquiry" parameterType="map" resultType="com.final_project.company.Inquiry">
 		select * from(
 			select rownum rnum, tb.* from(
-		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName, cName
+		    	select cqNum, cqSubject, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, cqIsq, cqDepth, mName, cName, cqQuestioner
             from company_qu cq
             join member m on cq.mId=m.mId
             join company c on cq.cNum=c.cNum
@@ -309,7 +309,7 @@
 	<!-- 기업 문의 가져오기 -->
 	<select id="readInquiry" parameterType="Integer" resultType="com.final_project.company.Inquiry">
 		select cqNum, cqSubject, cqContent, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, 
-			cqIsq, cqDepth, cqGroupNum, cq.mId, cNum, mName
+			cqIsq, cqDepth, cqGroupNum, cq.mId, cNum, mName, cqQuestioner
 			from company_qu cq
 			join member m on cq.mId=m.mId
 			where cqNum=#{cqNum}

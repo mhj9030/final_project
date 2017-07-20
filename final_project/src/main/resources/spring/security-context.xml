@@ -43,7 +43,10 @@
 	        <intercept-url pattern="/company/gover_job/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/company/employ/**" access="hasRole('ROLE_COMPANY')"/>
 	        <intercept-url pattern="/company/applicant/**" access="hasRole('ROLE_COMPANY')"/>
+	        <intercept-url pattern="/company/inquiry/created" access="hasRole('ROLE_USER')"/>
+	        <intercept-url pattern="/company/inquiry/createdSubmit" access="hasRole('ROLE_USER')"/>
 	        <intercept-url pattern="/company/inquiry/**" access="hasRole('ROLE_COMPANY')"/>
+			
 
 	        <!--  사용자 정의 로그인 폼  -->
 	        <form-login login-page="/"
