@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+
+
+.notice_list_wrap h3{
+	margin-top: 40px;
+}
+
+.notice_list_wrap p{
+	font-size: 12px;
+	color : #ff0057;
+	padding-left: 20px;
+	margin-bottom: 40px;
+}
+
+

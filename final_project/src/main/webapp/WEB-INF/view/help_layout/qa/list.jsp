@@ -8,9 +8,12 @@
 %>
 
 <div class="list-body" align="center">
-	<div class="page-header">
-  		<h1 align="left">| 질문과답변 <small></small></h1>
-	</div>
+	<div class="notice_list_wrap" style="text-align: left ">
+	<h3>| 질문과답변</h3>
+	<p>
+	궁금한 점은 이곳에 글을 남겨 주시면 성심껏 답변 해드리겠습니다.
+	</p>    
+</div>
 	
 	<div>
 		<div align="right">${dataCount}개(${page}/${total_page} 페이지)</div>

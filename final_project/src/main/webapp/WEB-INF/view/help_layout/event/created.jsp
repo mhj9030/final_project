@@ -128,27 +128,27 @@
                             </td>
                         </tr>
                         
-<c:if test="${mode=='update'}">
+					<c:if test="${mode=='update'}">
                         <tr>
                             <td class="td1">등록이미지</td>
                             <td colspan="3" class="td3">
-                                <img src="<%=cp%>/uploads/photo/${dto.imageFilename}"
+                                <img src="<%=cp%>/uploads/event/${dto.imageFilename}"
 				                 width="30" height="30" border="0"
 				                 onclick="imageViewer('<%=cp%>/uploads/photo/${dto.imageFilename}');"
 				                 style="cursor: pointer;">
                             </td>
                         </tr>
-</c:if>                        
+					</c:if>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="4" style="text-align: center; padding-top: 15px;">
                                   <button type="submit" class="btn btn-primary"> 확인 <span class="glyphicon glyphicon-ok"></span></button>
-                                  <button type="button" class="btn btn-danger" onclick="javascript:location.href='<%=cp%>/photo/list';"> 취소 </button>
+                                  <button type="button" class="btn btn-danger" onclick="javascript:location.href='<%=cp%>/event/list';"> 취소 </button>
                                   
                                   <c:if test="${mode=='update'}">
-                                      <input type="hidden" name="num" value="${dto.num}">
-                                      <input type="hidden" name="userId" value="${dto.userId}">
+                                      <input type="hidden" name="num" value="${dto.evtNum}">
+                                      <input type="hidden" name="userId" value="${dto.mId}">
                                       <input type="hidden" name="imageFilename" value="${dto.imageFilename}">
                                       <input type="hidden" name="page" value="${page}">
                                   </c:if>
