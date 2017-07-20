@@ -4,9 +4,13 @@
 <mapper namespace="community_group">
 	<insert id="insertGroup" parameterType="com.final_project.community.Group">
 		INSERT INTO group_info(groupNum, groupName, groupInfo, mid, saveFilename, originalFilename) 
-		VALUES (group_info_seq.NEXTVAL, #{groupName}, #{groupInfo, jdbcType=VARCHAR}, #{mId},  
+		VALUES (#{groupNum}, #{groupName}, #{groupInfo, jdbcType=VARCHAR}, #{mId},  
 				#{saveFilename, jdbcType=VARCHAR}, #{originalFilename, jdbcType=VARCHAR})
 	</insert>
+	
+	<select id="maxGroupSeq" resultType="Integer">
+	    SELECT NVL(MAX(groupNum), 0) FROM group_info
+	</select>
 	
 	<insert id="insertTag" parameterType="map">
 		INSERT INTO group_tag(groupNum, groupTag) VALUES (#{groupNum}, #{tag})
@@ -46,6 +50,10 @@
 	     	    <include refid="where-list"/>
 	     	</if>
 	    </where>  
+	</select>
+	
+	<select id="checkGroupMember" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM group_member WHERE groupNum=#{groupNum} AND mId=#{mId} 
 	</select>
 	
 	<select id="dataTagCount" parameterType="map" resultType="Integer">
@@ -117,143 +125,136 @@
 	</select>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<update id="updatehitCount" parameterType="Integer">
-		UPDATE photo_bbs SET hitCount = hitCount + 1 WHERE ptnum = #{ptnum}
+	<!-- 블로그 게시판 -->
+	<update id="createBoardTable" parameterType="Integer">
+		CREATE TABLE g_${value}_board (
+  		  gbnum         NUMBER NOT NULL
+  		  ,groupNum      NUMBER NOT NULL
+  		  ,mId          VARCHAR2(200) NOT NULL
+  		  ,subject     VARCHAR2(255) NOT NULL
+  		  ,content     CLOB NOT NULL
+  		  ,hitCount    NUMBER  DEFAULT 0
+  		  ,originalFilename  VARCHAR2(2000)
+  		  ,saveFilename      VARCHAR2(2000)
+  		  ,created     DATE DEFAULT SYSDATE
+  		  ,PRIMARY   KEY(gbnum)
+ 		  ,FOREIGN    KEY(groupNum) REFERENCES group_info(groupNum)
+                     ON DELETE CASCADE
+          ,FOREIGN    KEY(mId) REFERENCES member(mId)
+                     ON DELETE CASCADE
+       )
 	</update>
-	
-	<select id="readPhoto" parameterType="Integer" resultType="com.final_project.community.Photo">
-		SELECT p.ptnum, subject, content, created, hitCount, p.mId, mName, saveFilename, originalFilename 
-		FROM photo_bbs p JOIN member m ON p.mId=m.mId 
-		WHERE ptnum = #{ptnum}	
-	</select>
-	
-	<select id="preReadPhoto" parameterType="map" resultType="com.final_project.community.Photo">
-		SELECT tb.* FROM(
-			SELECT ptnum, subject 
-			FROM photo_bbs p JOIN member m ON p.mId=m.mId 
-			<where>
-			     	<if test="searchValue!=null and searchValue!='' ">
-			     	    <include refid="where-list"/>
-			     	</if>
-	     			<![CDATA[
-		                 AND (ptnum > #{ptnum}) AND state = 0
-		            ]]>
-	    	</where>
-	    	ORDER BY ptnum ASC
-	    ) tb WHERE ROWNUM=1
-	</select>
-	
-	<select id="nextReadPhoto" parameterType="map" resultType="com.final_project.community.Photo">
-		SELECT tb.* FROM(
-			SELECT ptnum, subject 
-			FROM photo_bbs p JOIN member m ON p.mId=m.mId 
-			<where>
-			     	<if test="searchValue!=null and searchValue!='' ">
-			     	    <include refid="where-list"/>
-			     	</if>
-	     			<![CDATA[
-		                 AND (ptnum < #{ptnum}) AND state = 0
-		            ]]>
-	    	</where>
-	    	ORDER BY ptnum DESC
-	    ) tb WHERE ROWNUM=1
-	</select>
-	
-	<update id="deletePhoto" parameterType="Integer">
-		UPDATE Photo_bbs SET state = 1 WHERE ptnum=#{ptnum}
-	</update>
-	
-	<update id="updatePhoto" parameterType="com.final_project.community.Photo">
-		UPDATE photo_bbs SET subject=#{subject}, content=#{content}, 
-							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
-							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
-							WHERE ptnum = #{ptnum}
-	</update>
-	
-	<insert id="insertLikePhoto" parameterType="com.final_project.community.Photo">
-	INSERT INTO photo_like(ptnum, mId) VALUES (#{ptnum}, #{mId})
-	</insert>
 
-	<select id="countLikePhoto" resultType="Integer" parameterType="Integer">
-	   SELECT  NVL(COUNT(*), 0) countLikePhoto
-	        FROM photo_like WHERE ptnum=#{ptnum}
+	<update id="dropBoardTable" parameterType="Integer">
+	    DROP TABLE g_${value}_board PURGE
+	</update>
+
+	<!-- 블로그 게시판 공감 -->
+	<update id="createBoardLikeTable" parameterType="Integer">
+	CREATE TABLE g_${value}_boardLike (
+  	  gbnum       NUMBER NOT NULL
+  	  ,mId   VARCHAR2(200) NOT NULL
+  	  ,PRIMARY  KEY(gbnum, mId)
+  	  ,FOREIGN  KEY(gbnum) REFERENCES g_${value}_board(gbnum)
+	      ON DELETE CASCADE
+ 	   ,FOREIGN  KEY(mId) REFERENCES member(mId)
+	      ON DELETE CASCADE
+	)
+	</update>
+	
+	<update id="dropBoardLikeTable" parameterType="Integer">
+	    DROP TABLE g_${value}_boardLike PURGE
+	</update>
+
+	
+	<!-- 블로그 게시판 리플 -->
+	<update id="createBoardReplyTable" parameterType="Integer">
+	CREATE TABLE g_${value}_boardReply (
+ 	   replyNum  NUMBER NOT NULL
+  	   ,gbnum      NUMBER NOT NULL
+  	   ,mId   VARCHAR2(200) NOT NULL
+  	   ,content  VARCHAR2(4000) NOT NULL
+   	   ,created  DATE DEFAULT SYSDATE
+  	   ,answer   NUMBER NOT NULL
+ 	   ,PRIMARY  KEY(replyNum)
+   	   ,FOREIGN  KEY(gbnum) REFERENCES g_${value}_board(gbnum)
+	         ON DELETE CASCADE
+   	   ,FOREIGN  KEY(mId) REFERENCES member(mId)
+	         ON DELETE CASCADE
+	)
+	</update>
+	<update id="dropBoardReplyTable" parameterType="Integer">
+	    DROP TABLE g_${value}_boardReply PURGE
+	</update>
+	
+	
+	
+	<select id="maxGroupBoardSeq" parameterType="map" resultType="Integer">
+	    SELECT NVL(MAX(gbnum), 0) FROM g_${groupNum}_BOARD
 	</select>
 	
-	<insert id="insertReply" parameterType="com.final_project.community.PhotoReply">
-		INSERT INTO photo_re(replyNum, ptnum, mId, content, answer) 
-		VALUES (PHOTO_RE_SEQ.NEXTVAL, #{ptnum}, #{mId}, #{content}, #{answer})
+	<insert id="insertGroupBoard" parameterType="com.final_project.community.GroupBoard">
+		INSERT INTO g_${groupNum}_BOARD(gbNum, groupNum, subject, content, mId, saveFilename, originalFilename) 
+		VALUES (#{gbNum}, #{groupNum}, #{subject}, #{content}, #{mId},  
+				#{saveFilename, jdbcType=VARCHAR}, #{originalFilename, jdbcType=VARCHAR})
 	</insert>
 	
-	<select id="replyDataCount" parameterType="map" resultType="Integer">
-		SELECT NVL(COUNT(*), 0) replyCount FROM photo_re 
-		WHERE ptnum = #{ptnum} AND answer = 0 
+	
+	
+	
+	<sql id="board-where-list">
+	  <if test="searchKey=='mName'">
+	      mName=#{searchValue}
+	  </if>
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='content'">
+	      DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='created'">
+	      TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+          OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
+	  </if>
+	</sql>
+	
+	<select id="dataCountBoard" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM g_${groupNum}_board b JOIN member m ON b.mId=m.mId
+	    <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="board-where-list"/>
+	     	</if>
+	    </where> 
 	</select>
 	
-	<select id="listReply" parameterType="map" resultType="com.final_project.community.PhotoReply">
-		SELECT * FROM (
+	<select id="listGroupBoard" parameterType="map" resultType="com.final_project.community.GroupBoard">
+		SELECT * FROM( 
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT tbreply.replyNum, ptnum, mId, mName, content, created, 
-						tbreply.answer, NVL(answerCount, 0) answerCount 
-				FROM
+				SELECT b.gbNum, m.mId, mName, subject, TO_CHAR(b.created, 'YYYY-MM-DD') created,  
+					   hitCount, saveFilename, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount  
+				FROM g_${groupNum}_board b JOIN member m ON b.mId=m.mId 
+				LEFT OUTER JOIN
 				(
-					(
-						SELECT replyNum, r.ptnum, r.mId, mName, r.content, r.created, answer  
-						FROM photo_re r JOIN member m ON r.mId=m.mId 
-						WHERE ptnum = #{ptnum} AND answer = 0
-					) tbreply
-					LEFT OUTER JOIN
-					(
-						SELECT answer, COUNT(*) answerCount 
-						FROM photo_re 
-						GROUP BY answer 
-					) tbanswer ON tbreply.replyNum=tbanswer.answer
-				) 
-				ORDER BY replyNum DESC
+					SELECT gbNum, COUNT(*) replyCount FROM g_${groupNum}_boardreply 
+					WHERE answer=0 
+					GROUP BY gbNum
+				) r ON b.gbNum=r.gbNum 
+				LEFT OUTER JOIN
+				(
+					SELECT gbNum, COUNT(*) likeCount FROM g_${groupNum}_boardlike
+					GROUP BY gbNum
+				) l ON b.gbNum=l.gbNum
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="board-where-list"/>
+			     	</if>
+	    		</where>
+	    		ORDER BY gbNum DESC
 	<![CDATA[
-			)tb WHERE ROWNUM <= #{end}
-		) WHERE rnum >= #{start}
-	]]>			
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
 	</select>
 	
-	<delete id="deleteReply" parameterType="map">
-		DELETE FROM photo_re WHERE
-	    <if test="mode == 'ptnum' ">
-			 ptnum=#{ptnum}
-		</if>
-	    <if test="mode == 'reply' ">
-			 replyNum IN 
-               (SELECT replyNum FROM photo_re START WITH  replyNum = #{replyNum}
-	            CONNECT BY PRIOR replyNum = answer)
-		</if>
-	    <if test="mode == 'answer' ">
-			 replyNum=#{replyNum}
-		</if>
-	</delete>
-
-    <!-- 댓글별 답글 리스트 -->
-	<select id="listReplyAnswer" resultType="com.final_project.community.PhotoReply" parameterType="Integer">
-     SELECT replyNum, ptnum, r.mId, mName, content, created, answer
-	          FROM photo_re r 
-	          JOIN member m ON r.mId=m.mId
-              WHERE answer=#{answer}
-              ORDER BY replyNum DESC
-	</select>
-	
-    <!-- 댓글별 답글 개수 -->
-	<select id="replyCountAnswer" resultType="Integer" parameterType="Integer">
-	   SELECT NVL(COUNT(*), 0)
-	        FROM photo_re WHERE answer=#{answer}
-	</select>
 	
 </mapper>

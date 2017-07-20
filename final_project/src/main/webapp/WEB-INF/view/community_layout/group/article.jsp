@@ -12,7 +12,7 @@
 </script>
 
 
-<div class="community_article_wrap" style="height:750px; border: 0px;">
+<div class="community_article_wrap" style="min-height:750px; border: 0px;">
 	<div class="group_article_info">
 		<div class="group_article_info_image">
 			<c:if test="${not empty dto.saveFilename}">
@@ -48,7 +48,82 @@
 		</div>
 	</div>
 	
-	<div class="groupNo">
-		그룹원만 이용 가능합니다.
+	<c:if test="${check==0}">
+		<div class="groupNo">
+			그룹원만 이용 가능합니다.
+		</div>
+	</c:if>
+	
+	<c:if test="${check==1}">
+		<div class="list-body" align="center" style="min-height:500px;">
+			<div>
+				<div align="right">${dataCount}개(${page}/${total_page} 페이지)</div>
+
+				<table class="table table-hover free_list_table">
+					<thead>
+						<tr>
+							<th width="60">번호</th>
+							<th>제목</th>
+							<th width="100">작성자</th>
+							<th width="100">작성일</th>
+							<th width="60">조회수</th>
+							<th width="60">추천수</th>
+							<th width="60">파일</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<c:forEach var="dto" items="${list}">
+							<tr align="center" height="41">
+								<td>${dto.listNum}</td>
+								
+								<td align="left">	                           
+									<a href="${articleUrl}&gbnum=${dto.gbNum}">${dto.subject}[${dto.replyCount}]</a>
+								</td>
+								<td>${dto.mName}</td>
+								<td>${dto.created}</td>
+								<td>${dto.hitCount}</td>
+								<td>${dto.likeCount}</td>
+								<td>
+									<c:if test="${not empty dto.saveFilename}">
+										<a href="<%=cp%>/community/group/download?frnum=${dto.gbNum}"><img width="24" src="<%=cp%>/resources/image/download-2-icon.png"></a>
+									</c:if>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+				<div>
+					<div>${paging}</div>
+				</div>
+
+				<div class= "footer-bar" >
+					<div class = "foorter-bar-refresh">
+						<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/community/free'">새로고침</button>
+					</div>
+					<div class = "footer-search-bar">
+						<form name="searchForm" method="post" class="form-inline">
+							<select class="form-control input-sm" name="searchKey">
+								<option value="subject">제목</option>
+								<option value="mName">작성자</option>
+								<option value="content">내용</option>
+								<option value="created">등록일</option>
+							</select> <input type="text" class="form-control input-sm input-search"
+								name="searchValue">
+							<button type="button" class="btn btn-info btn-sm btn-search" onclick="searchList();">
+								검색
+							</button>
+						</form>
+					</div>
+					<div class = "footer-bar-submit">
+						<button type="button" class="btn btn-default"
+							onclick="javascript:location.href='<%=cp%>/community/group/board/created?groupNum=${dto.groupNum}&page=${page}'">
+							 글쓰기
+						</button>
+					</div>
+				</div>
+			</div>
 	</div>
+	</c:if>
 </div>

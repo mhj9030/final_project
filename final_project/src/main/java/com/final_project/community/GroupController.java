@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
+import com.sun.glass.ui.delegate.MenuBarDelegate;
 
 @Controller("community.groupController")
 public class GroupController {
@@ -214,18 +215,117 @@ public class GroupController {
 	@RequestMapping("/community/group/article")
 	public String article(
 			@RequestParam(value = "groupNum") int groupNum,
-			@RequestParam(value = "page", defaultValue="1") int page,
-			HttpServletRequest req,
+			@RequestParam(value = "page", defaultValue="1") int current_page,
+			@RequestParam(value = "searchKey", defaultValue = "subject") String searchKey,
+			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
+			HttpServletRequest req, HttpSession session, 
 			Model model) throws Exception {
+		String cp = req.getContextPath();
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
+		
+		int rows = 10;
+		int total_page = 0;
+		int dataCount = 0;
+
+		if (req.getMethod().equalsIgnoreCase("GET")) {
+			searchValue = URLDecoder.decode(searchValue, "utf-8");
+		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
 		map.put("groupNum", groupNum);
+		map.put("mId", info.getUserId());
 		
+		int check = service.checkGroupMember(map);
 		Group dto = service.readGroup(map);
 		dto.setList(service.tagList(dto.getGroupNum()));
+		
+		dataCount = service.dataCountBoard(map);
+		
+		if (dataCount != 0)
+			total_page = myUtil.pageCount(rows, dataCount);
 
+		if (total_page < current_page)
+			current_page = total_page;
+
+		int start = (current_page - 1) * rows + 1;
+		int end = current_page * rows;
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<GroupBoard> list = service.listGroupBoard(map);
+		
+
+		int listNum, n = 0;
+		Iterator<GroupBoard> it = list.iterator();
+		while (it.hasNext()) {
+			GroupBoard data = it.next();
+			listNum = dataCount - (start + n - 1);
+			data.setListNum(listNum);
+			n++;
+		}
+		
+		String query = "";
+		String listUrl = cp + "/community/group/article?groupNum="+groupNum;
+		String articleUrl = cp + "/community/group/article/arti?groupNum="+groupNum+"&page=" + current_page;
+		if (searchValue.length() != 0) {
+			query += "searchKey=" + searchKey + "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
+		}
+
+		listUrl = cp + "/community/group/article?groupNum="+groupNum + "&" + query;
+		articleUrl = cp + "/community/group/article?groupNum="+groupNum + "&page=" + current_page + query;
+
+		String paging = myUtil.paging(current_page, total_page, listUrl);
+		System.out.println(groupNum);
+		
+		model.addAttribute("check", check);
+		model.addAttribute("list", list);
+		model.addAttribute("articleUrl", articleUrl);
+		model.addAttribute("page", current_page);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		model.addAttribute("group", "on");
 		model.addAttribute("dto", dto);
-		model.addAttribute("page", page);
 		return ".community_layout.group.article";
+	}
+	
+	@RequestMapping(value="/community/group/board/created", method=RequestMethod.GET)
+	public String boardCreated(
+			@RequestParam(value = "groupNum") int groupNum,
+			@RequestParam(value = "page", defaultValue="1") int page,
+			Model model) throws Exception {
+
+		model.addAttribute("page", page);
+		model.addAttribute("groupNum", groupNum);
+		return ".community_layout.group.boardCreated";
+	}
+	
+	@RequestMapping(value="/community/group/board/created", method=RequestMethod.POST)
+	public String boardCreatedSubmit(
+			@RequestParam(value = "page", defaultValue="1") int page,
+			GroupBoard dto,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "community";
+
+		dto.setmId(info.getUserId());
+		
+		int result = service.insertGroupBoard(dto, pathname);
+		if(result<1){
+			return "redirect:/community/group/article?groupNum="+dto.getGroupNum()+"&page="+page;
+		}
+		
+		
+
+		return "redirect:/community/group/article?groupNum="+dto.getGroupNum()+"&page="+page;
 	}
 }

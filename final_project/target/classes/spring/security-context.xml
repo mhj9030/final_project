@@ -16,6 +16,10 @@
     
 	<http auto-config="true" use-expressions="true">
 	        <csrf disabled="true"/>
+	        <headers>
+	            <frame-options policy="SAMEORIGIN" />
+	            <hsts disabled="true"/>
+        	</headers>
 	        
             <!-- 모든 접근자를 항상 승인 -->
             <intercept-url pattern="/submain" access="permitAll"/>
@@ -31,11 +35,16 @@
 			<intercept-url pattern="/resources/**" access="permitAll" />
 	        
 	         <!-- 모든 페이지 -->
+	        <intercept-url pattern="/profile/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/community/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/help_layout/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/employ/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/talent/**" access="hasRole('ROLE_COMPANY')"/>
 	        <intercept-url pattern="/point/**" access="hasRole('ROLE_USER')"/>
+	        
+	        <intercept-url pattern="/member/scrap/**" access="hasAnyRole('ROLE_USER')"/>
+	        <intercept-url pattern="/member/applications/**" access="hasAnyRole('ROLE_USER')"/>
+	        <intercept-url pattern="/member/myInquiry/**" access="hasAnyRole('ROLE_USER')"/>
 	        
 	        <intercept-url pattern="/company/search/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/company/created/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
@@ -43,7 +52,10 @@
 	        <intercept-url pattern="/company/gover_job/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
 	        <intercept-url pattern="/company/employ/**" access="hasRole('ROLE_COMPANY')"/>
 	        <intercept-url pattern="/company/applicant/**" access="hasRole('ROLE_COMPANY')"/>
+	        <intercept-url pattern="/company/inquiry/created" access="hasRole('ROLE_USER')"/>
+	        <intercept-url pattern="/company/inquiry/createdSubmit" access="hasRole('ROLE_USER')"/>
 	        <intercept-url pattern="/company/inquiry/**" access="hasRole('ROLE_COMPANY')"/>
+			
 
 	        <!--  사용자 정의 로그인 폼  -->
 	        <form-login login-page="/"

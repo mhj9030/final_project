@@ -2,7 +2,7 @@ package com.final_project.member;
 
 public class MyInquiry {
 	private int listNum, cqNum, cNum;
-	private String cqSubject, cqContent, cqCreated;
+	private String cqSubject, cqContent, cqCreated, cqQuestioner;
 	private int cqIsq, cqDepth, cqGroupNum;
 	private String mId, mName, cName;
 	
@@ -77,5 +77,11 @@ public class MyInquiry {
 	}
 	public void setcName(String cName) {
 		this.cName = cName;
+	}
+	public String getCqQuestioner() {
+		return cqQuestioner;
+	}
+	public void setCqQuestioner(String cqQuestioner) {
+		this.cqQuestioner = cqQuestioner;
 	}
 }

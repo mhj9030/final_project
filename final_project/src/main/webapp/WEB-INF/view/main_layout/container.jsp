@@ -27,7 +27,9 @@
 	<!-- 광고 슬라이드 -->
 	<div class="row">
 	  <div class="col-md-6">
-	  	<div style="width: 100%; height: 150px; border: 1px solid black;"></div>
+	  	<div style="width: 100%; height: 150px; border: 1px solid black;">
+	  		<img style="width: 100%; height: 100%" src="">
+	  	</div>
 	  </div>
 	  <div class="col-md-6">
 		<div style="width: 100%; height: 150px; border: 1px solid black;"></div>
