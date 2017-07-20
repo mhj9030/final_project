@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.final_project.common.MyUtilBootstrap;
@@ -97,5 +98,88 @@ public class MyInquiryController {
         model.addAttribute("myInquiry", "on");
         
 		return ".member_layout.myInquiry.list";
+	}
+	
+	@RequestMapping("/member/myInquiry/article")
+	public String article(
+			@RequestParam(value="cqNum") int cqNum,
+			@RequestParam(value="page", defaultValue="1") String page,
+			@RequestParam(value="searchKey", defaultValue="cqSubject") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			Model model, HttpSession session) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		searchValue = URLDecoder.decode(searchValue, "utf-8");
+		
+		MyInquiry dto=service.readMyInquiry(cqNum);
+		
+		dto.setCqContent(myUtil.htmlSymbols(dto.getCqContent()));
+		
+		Map<String, Object> map=new HashMap<>();
+		
+		map.put("mId", info.getUserId());
+		map.put("cqNum", cqNum);
+		map.put("cqGroupNum", dto.getCqGroupNum());
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		
+		MyInquiry preReadDto=service.preReadMyInquiry(map);
+		MyInquiry nextReadDto=service.nextReadMyInquiry(map);
+		
+		String query="page="+page;
+		if(searchValue.length()!=0) {
+			query+="&searchKey="+searchKey+"&searchValue="+URLEncoder.encode(searchValue, "utf-8");
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
+		model.addAttribute("myInquiry", "on");
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		
+		return ".member_layout.myInquiry.article";
+	}
+	
+	@RequestMapping(value="/member/myInquiry/delete")
+	public String delete(
+			@RequestParam int cqNum,
+			@RequestParam(value="page", defaultValue="1") int page
+			) throws Exception{
+		
+		service.deleteMyInquiry(cqNum);
+		
+		return "redirect:/member/myInquiry?page="+page;
+	}
+	
+	@RequestMapping(value="/member/myInquiry/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int cqNum,
+			@RequestParam(value="page", defaultValue="1") int page,
+			Model model
+			) throws Exception{
+		
+		MyInquiry dto=service.readMyInquiry(cqNum);
+		if(dto==null){
+			return "redirect:/member/myInquiry?page="+page;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("myInquiry", "on");
+		model.addAttribute("mode", "update");
+		
+		return ".member_layout.myInquiry.created";
+	}
+	
+	@RequestMapping(value="/member/myInquiry/update", method=RequestMethod.POST)
+	public String updateSubmit(
+			MyInquiry dto,
+			@RequestParam(value="page", defaultValue="1") int page
+			) throws Exception{
+		
+		service.updateMyInquiry(dto);
+		
+		return "redirect:/member/myInquiry?page="+page;
 	}
 }

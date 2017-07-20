@@ -29,7 +29,7 @@
 				<tr>
 					<th width="60">번호</th>
 					<th>제목</th>
-					<th width="100">작성자</th>
+					<th width="150">작성자</th>
 					<th width="100">작성일</th>
 					<th width="80">답변여부</th>
 				</tr>
@@ -68,11 +68,14 @@
 		</div>
 
 		<div class= "footer-bar" >
+			<div class = "footer-bar-submit">
+				<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/member/myInquiry';">새로고침</button>
+			</div>
 			<div class = "footer-search-bar">
-				<form name="searchForm" method="post" class="form-inline" style="width: 560px; text-align: right;">
+				<form name="searchForm" method="post" class="form-inline">
 					<select class="form-control input-sm" name="searchKey">
 						<option value="cqSubject">제목</option>
-						<option value="mName">작성자</option>
+						<option value="cName">기업</option>
 						<option value="cqContent">내용</option>
 						<option value="cqCreated">등록일</option>
 					</select> 
@@ -81,12 +84,6 @@
 						<span class="glyphicon glyphicon-search"></span> 검색
 					</button>
 				</form>
-			</div>
-			<div class = "footer-bar-submit" style="width: 300px;">
-				<button type="button" class="btn btn-default"
-					onclick="javascript:location.href='<%=cp%>/company/inquiry';">
-					 새로고침
-				</button>
 			</div>
 		</div>
 	</div>

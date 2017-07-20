@@ -16,7 +16,7 @@ public class InquiryServiceImpl implements InquiryService{
 	@Override
 	public void insertInquiry(Inquiry dto) throws Exception {
 		try {
-			dao.insertData("insertInquiry", dto);
+			dao.insertData("company.insertInquiry", dto);
 		} catch (Exception e) {
 			throw e;
 		}

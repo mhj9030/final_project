@@ -68,8 +68,11 @@
 		</div>
 
 		<div class= "footer-bar" >
+			<div class = "footer-bar-submit">
+				<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/company/inquiry';">새로고침</button>
+			</div>
 			<div class = "footer-search-bar">
-				<form name="searchForm" method="post" class="form-inline" style="width: 560px; text-align: right;">
+				<form name="searchForm" method="post" class="form-inline">
 					<select class="form-control input-sm" name="searchKey">
 						<option value="cqSubject">제목</option>
 						<option value="mName">작성자</option>
@@ -81,12 +84,6 @@
 						<span class="glyphicon glyphicon-search"></span> 검색
 					</button>
 				</form>
-			</div>
-			<div class = "footer-bar-submit" style="width: 300px;">
-				<button type="button" class="btn btn-default"
-					onclick="javascript:location.href='<%=cp%>/company/inquiry';">
-					 새로고침
-				</button>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.inquiry-list-body{
+.myInquiry-created-body{
 	clear:both;
     box-sizing: border-box;
     margin: 0px auto 15px;
@@ -10,13 +10,19 @@
  	height: auto;
 }
 
-.inquiry-list-body .body-header{
+.myInquiry-created-body .body-header{
 	margin-bottom: 50px;
 }
 
-.inquiry-list-body .footer-bar-submit{
-	text-align: left;
+.myInquiry-created-body .table .input_info {
+    min-width: 100px;
+    text-align: center;
+    vertical-align: middle;
 }
+
+
+
+
 
 
 
