@@ -12,54 +12,134 @@
 		<h3>| 이력서 열람</h3><hr>
 	</div>
 	<div id="resume_div">
-		<table class="table">
+		<table class="table table-bordered">
 			<caption>▶ 인적사항</caption>
 			<tr>
-				<td rowspan="4">
-					<img src="" width="110px" height="140px" />
+				<td rowspan="4" width="120px">
+					<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;"></div>
 				</td>
-				<td>이름</td>
-				<td>${introList.rName}</td>
-				<td>영어</td>
-				<td>${introList.engName}</td>
+				<td width="80px">이름</td>
+				<td width="230px">${rDto.rName}</td>
+				<td width="80px">영어</td>
+				<td colspan="3">${rDto.engName}</td>
 			</tr>
 			<tr>
 				<td>생년월인</td>
-				<td>${introList.mBirth}</td>
+				<td>${mDto.mbirth} ( ${mDto.age}세)</td>
 				<td>폰번호</td>
-				<td>${introList.phone}</td>
+				<td colspan="3">${rDto.engName}</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td>${introList.email}</td>
-				<td>병역</td>
-				<td>${introList.army}</td>
+				<td>${rDto.eMail}</td>
+				<td>성별</td>
+				<td width="80px">${mDto.mgender}</td>
+				<td width="90px">병역</td>
+				<td>${rDto.army}</td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan="3">${introList.addr}<br>${introList.addr2}</td>
+				<td colspan="5">
+					${rDto.addr}<br>
+					${rDto.addr2}
+				</td>
 			</tr>
 		</table>
 		
-		<table id="academy" class="table" style="height: 60px;">
-			<caption>▶ 학력</caption>
+		<table class="table table-bordered">
 			<tr>
-				<td>학교명</td>
-				<td>재학기간</td>
-				<td>비고</td>
+				<td>지원분야</td>
+				<td>${rDto.apply}</td>
+				<td>페이</td>
+				<td>${rDto.pay}</td>
 			</tr>
-		<c:if test="${empty abilityList}">
+		</table>
+		
+		<div class= "footer-bar">
+			<div style="text-align: right;">
+			<c:if test="${sessionScope.member.userId==rDto.mId}">
+				<button type="button" class="btn btn-default" onclick="updateForm(1)">기본사항 수정</button>
+			</c:if>
+			</div>
+		</div>
+		
+		<table id="academy" class="table" style="height: 60px;">
+			<caption>▶ 학력 (학력은 이력서에서 수정이 불가능 합니다.)</caption>
+			<tr>
+				<td>재학기간</td>
+				<td>학교명</td>
+				<td>전공</td>
+				<td>상태</td>
+			</tr>
+		<c:if test="${empty acList}">
+			<tr>
+				<td colspan="4">해당사항없음</td>
+			</tr>
+		</c:if>
+		<c:if test="${not empty acList}">
+		<c:forEach var="dto" items="${acList}">
+			<tr>
+				<td>${dto.termStart} ~ ${dto.termEnd}</td>
+				<td>${dto.school}</td>
+				<td>${dto.major}</td>
+				<td>${dto.termState}</td>
+			</tr>
+		</c:forEach>
+		</c:if>
+		</table>
+		
+		<table id="career" class="table" style="height: 60px;">
+			<caption>▶ 경력 (경력은 이력서에서 수정이 불가능 합니다.)</caption>
+			<tr>
+				<td>재직기간</td>
+				<td>회사명</td>
+				<td>직무</td>
+				<td>직급</td>
+			</tr>
+		<c:if test="${empty coList}">
+			<tr>
+				<td colspan="4">해당사항없음</td>
+			</tr>
+		</c:if>
+		<c:if test="${not empty coList}">
+		<c:forEach var="dto" items="${coList}">
+			<tr>
+				<td>${dto.carStart} ~ ${dto.carEnd}</td>
+				<td>${dto.company}</td>
+				<td>${dto.part}</td>
+				<td>
+					${dto.memo}
+					<input type="hidden" name="mcNum" value="${dto.mcNum}" />
+				</td>
+			</tr>
+		</c:forEach>
+		</c:if>
+		</table>
+		
+		<table id="project" class="table" style="height: 60px;">
+			<caption>▶ 프로젝트 (프로젝트는 이력서에서 수정이 불가능 합니다.)</caption>
+			<tr>
+				<td>기간</td>
+				<td>프로젝트명</td>
+				<td>상태</td>
+			</tr>
+		<c:if test="${empty proList}">
 			<tr>
 				<td colspan="3">해당사항없음</td>
 			</tr>
 		</c:if>
-		<c:forEach var="dto" items="${abilityList}">
+		<c:if test="${not empty proList}">
+		<c:forEach var="dto" items="${proList}">
 			<tr>
-				<td>${dto.acName}</td>
-				<td>${dto.termtime}</td>
-				<td>${dto.memo}</td>
+				<td>${dto.expStartYear}.${dto.expStartMonth} ~ ${dto.expEndYear}.${dto.expEndMonth}</td>
+				<td>${dto.prName}</td>
+				<td>
+					${dto.expState}
+					<input type="hidden" name="prNum" value="${dto.prNum}" />
+				</td>
 			</tr>
 		</c:forEach>
+		</c:if>
 		</table>
 		
 		<table id="license" class="table" style="height: 60px;">
@@ -102,27 +182,6 @@
 		</c:forEach>
 		</table>
 		
-		<table id="career" class="table" style="height: 60px;">
-			<caption>▶ 경력</caption>
-			<tr>
-				<td>회사명</td>
-				<td>직무</td>
-				<td>직급</td>
-			</tr>
-		<c:if test="${empty careerList}">
-			<tr>
-				<td colspan="3">해당사항없음</td>
-			</tr>
-		</c:if>
-		<c:forEach var="dto" items="${careerList}">
-			<tr>
-				<td>${dto.company}</td>
-				<td>${dto.part}</td>
-				<td>${dto.memo}</td>
-			</tr>
-		</c:forEach>
-		</table>
-		
 		<table id="award" class="table" style="height: 60px;">
 			<caption>▶ 수상</caption>
 			<tr>
@@ -140,27 +199,6 @@
 				<td>${dto.awAgency}</td>
 				<td>${dto.awSector}</td>
 				<td>${dto.awDate}</td>
-			</tr>
-		</c:forEach>
-		</table>
-		
-		<table id="project" class="table" style="height: 60px;">
-			<caption>▶ 프로젝트</caption>
-			<tr>
-				<td>자격증명</td>
-				<td>취득일</td>
-				<td>발급기관</td>
-			</tr>
-		<c:if test="${empty projectList}">
-			<tr>
-				<td colspan="3">해당사항없음</td>
-			</tr>
-		</c:if>
-		<c:forEach var="dto" items="${projectList}">
-			<tr>
-				<td>${dto.prName}</td>
-				<td>${dto.expStart} ~ ${dto.expEnd}</td>
-				<td>${dto.memo}</td>
 			</tr>
 		</c:forEach>
 		</table>
@@ -196,7 +234,16 @@
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/talent/main?page=${page}'">목록</button>
+		<c:if test="${sessionScope.member.userId==rDto.mId}">
+			<button type="button" class="btn btn-default" onclick="updateForm(2)">추가사항 수정</button>
+		</c:if>
+			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">목록</button>
 		</div>
 	</div>
 </div>
+
+<script>
+function updateForm(num) {
+	location.href = "<%=cp%>/member/applications/update" + num + "?rNum=${rNum}";
+}
+</script>
