@@ -16,6 +16,10 @@
     
 	<http auto-config="true" use-expressions="true">
 	        <csrf disabled="true"/>
+	        <headers>
+	            <frame-options policy="SAMEORIGIN" />
+	            <hsts disabled="true"/>
+        	</headers>
 	        
             <!-- 모든 접근자를 항상 승인 -->
             <intercept-url pattern="/submain" access="permitAll"/>
