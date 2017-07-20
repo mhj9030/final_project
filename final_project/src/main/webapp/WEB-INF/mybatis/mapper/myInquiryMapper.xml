@@ -46,6 +46,58 @@
 		)where rnum>=#{start}
 		]]>
 	</select>
+	
+	<!-- 나의 문의 가져오기 -->
+	<select id="readMyInquiry" parameterType="Integer" resultType="com.final_project.member.MyInquiry">
+		select cqNum, cqSubject, cqContent, to_char(cqCreated, 'YYYY-MM-DD') cqCreated, 
+			cqIsq, cqDepth, cqGroupNum, cq.mId, cq.cNum, mName, cqQuestioner, cName
+			from company_qu cq
+			join company c on cq.cNum=c.cNum
+			join member m on cq.mId=m.mId
+			where cqNum=#{cqNum}
+	</select>
+	
+	<!-- 나의 문의 이전글 -->
+	<select id="preReadMyInquiry" parameterType="map" resultType="com.final_project.member.MyInquiry">
+		select tb.* from(
+			select cqNum, cqSubject from company_qu cq
+				join member m on cq.mId=m.mId
+				where cq.cqQuestioner=#{mId}
+				<if test="searchValue!=null and searchValue!='' ">
+	     	    	<include refid="myInquiry-where-list"/>
+	     		</if>
+			<![CDATA[
+				and ((cqGroupNum=#{cqGroupNum} and cqNum>#{cqNum}) or cqGroupNum<#{cqGroupNum})
+			]]>
+				order by cqGroupNum desc, cqNum asc
+		)tb where rownum=1
+	</select>
+	
+	<!-- 나의 문의 다음글 -->
+	<select id="nextReadMyInquiry" parameterType="map" resultType="com.final_project.member.MyInquiry">
+		select tb.* from(
+			select cqNum, cqSubject from company_qu cq
+				join member m on cq.mId=m.mId
+				where cq.cqQuestioner=#{mId}
+				<if test="searchValue!=null and searchValue!='' ">
+	     	    	<include refid="myInquiry-where-list"/>
+	     		</if>
+			<![CDATA[
+				and ((cqGroupNum=#{cqGroupNum} and cqNum<#{cqNum}) or cqGroupNum>#{cqGroupNum})
+			]]>
+				order by cqGroupNum asc, cqNum desc
+		)tb where rownum=1
+	</select>
+	
+	<!-- 나의 문의 삭제 -->
+	<delete id="deleteMyInquiry" parameterType="Integer">
+		delete from company_qu where cqGroupNum=#{cqNum}
+	</delete>
+	
+	<!-- 나의 문의 수정 -->
+	<update id="updateMyInquiry" parameterType="com.final_project.member.MyInquiry">
+		update company_qu set cqSubject=#{cqSubject}, cqContent=#{cqContent} where cqNum=#{cqNum}
+	</update>
 </mapper>
 
 
