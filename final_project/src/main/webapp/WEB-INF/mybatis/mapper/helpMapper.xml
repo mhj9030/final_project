@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 	<insert id="insertNotice" parameterType="com.final_project.help.Notice">
-		INSERT INTO notice(notNum, subject, content, hitCount, mId) VALUES
-		(notice_seq.NEXTVAL, #{subject}, #{content}, #{hitCount}, #{mId})
+		INSERT INTO notice(notNum, subject, content, hitCount, mId, noticeType) VALUES
+		(notice_seq.NEXTVAL, #{subject}, #{content}, #{hitCount}, #{mId}, #{noticeType})
 	</insert>
 
 <sql id="where-list">
@@ -22,6 +22,16 @@
           OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue}
 	  </if>
 	</sql>	
+	
+	<select id="listNoticeTop"  resultType="com.final_project.help.Notice">
+          SELECT notNum, noticeType, m.mId, m.mName, subject, hitCount, 
+          TO_CHAR(created, 'YYYY-MM-DD') created 
+          FROM notice n
+          JOIN member m ON n.mId=m.mId 
+          WHERE noticeType =  1
+          ORDER BY notNum DESC
+	</select>
+
 	
 	
 <!-- 글개수 -->
