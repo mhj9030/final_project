@@ -28,6 +28,7 @@ function navloginCheck() {
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="<%=cp%>/main">Job square</a> </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+            	<li><a href="<%=cp%>/profile?id=${member.userId}">회원</a></li>
                 <li><a href="<%=cp%>/company/search">기업</a></li>
                 <li><a href="<%=cp%>/employ/main">채용</a></li>
                 <li><a href="<%=cp%>/talent/main">인재</a></li>

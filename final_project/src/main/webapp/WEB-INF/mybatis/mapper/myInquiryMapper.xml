@@ -22,7 +22,7 @@
 	<select id="countMyInquiry" parameterType="map" resultType="Integer">
 		select nvl(count(*), 0) from company_qu cq
 			join company c on cq.cNum=c.cNum
- 			where cq.mId=#{mId}
+ 			where cq.cqQuestioner=#{mId}
  			<if test="searchValue!=null and searchValue!='' ">
 	     	    <include refid="myInquiry-where-list"/>
 	     	</if>
@@ -36,7 +36,7 @@
             from company_qu cq
             join member m on cq.mId=m.mId
             join company c on cq.cNum=c.cNum
-            where cq.mId=#{mId}
+            where cq.cqQuestioner=#{mId}
             <if test="searchValue!=null and searchValue!='' ">
 	     	    <include refid="myInquiry-where-list"/>
 	     	</if>

@@ -38,10 +38,10 @@
 		}
     	else if(mode=="answer"){
     		f.cqNum.value="${dto.cqNum}";
+    		f.cqQuestioner.value="${dto.cqQuestioner}";
     		f.page.value="${page}";
     		f.action="<%=cp%>/company/inquiry/answerSubmit";
     	}
-    		
     	
     	f.submit();
 	}
@@ -104,6 +104,7 @@
 									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry'">취소</button> 
 									<input type="hidden" name="cqNum">
 									<input type="hidden" name="page">
+									<input type="hidden" name="cqQuestioner">
 								</c:if>
 								<c:if test="${mode=='update'}">
 									<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/inquiry'">취소</button> 

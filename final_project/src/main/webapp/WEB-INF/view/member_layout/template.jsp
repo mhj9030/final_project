@@ -44,6 +44,8 @@
 <!-- 본인의 css영역 -->
 <!-- community_review_list CSS -->
 <link href="<%=cp%>/resources/custom_css/member_layout.css" rel="stylesheet">
+<!-- member_myInquiry_list.css -->
+<link href="<%=cp%>/resources/custom_css/member_myInquiry_list.css" rel="stylesheet">
 
 </head>
 <body>
