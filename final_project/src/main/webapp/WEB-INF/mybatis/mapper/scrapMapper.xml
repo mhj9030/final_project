@@ -16,7 +16,19 @@
 				select TO_CHAR(scrapdate,'YYYY-MM-DD') scrapdate, cNum,cname,cesubject,TO_CHAR(ceend,'YYYY-MM-DD') ceend,C.cserial,E.cenum from com_employ E
 				JOIN scrap S ON E.cenum = S.cenum
 				JOIN company C ON E.cserial = C.cserial
-				where S.mid = #{mId}
+				<trim prefix="WHERE" prefixOverrides="AND |OR ">
+					<if test="mId !=''">
+					AND S.mid = #{mId}
+					</if>
+					<!-- 채용마감공고 -->
+					<if test="deadline == 'deadlineover'">
+			        AND ceEnd &gt; sysdate
+				    </if>
+				    <!-- 채용중공고 -->
+				    <if test="deadline == 'deadlinenotyet'">
+				    AND ceEnd &lt; sysdate
+				    </if>
+				</trim>
 	</select>
 	
 	<!-- 스크랩 삭제 delete from scrap where ceNum=#{ceNum}, mId=#{mId} -->

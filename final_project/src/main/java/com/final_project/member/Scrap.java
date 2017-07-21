@@ -1,10 +1,16 @@
 package com.final_project.member;
 
 public class Scrap {
-	private String mId;
+	private String mId,deadline;
 	private String scrapdate,cNum,cName,ceSubject,ceEnd,cSerial;
 	private int ceNum;
 	
+	public String getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
 	public String getcNum() {
 		return cNum;
 	}

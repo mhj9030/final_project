@@ -62,7 +62,11 @@ color:#666666;
 
 $(function() {
 	listPage(1);
-
+	
+	$("#deadline").change(function() {
+		listPage(1);
+		
+	});
 /*채용정보 분류별 검색*/
 //상세검색과 연결
 
@@ -159,8 +163,8 @@ function deleteScrap() {
 	$.ajax({
 		type:'post'
 		,url:"<%=cp%>/member/deletescrap"
-		//,data:query
-		,data: {deleteArray:deleteArray}
+		,data:query
+		//,data: {deleteArray:deleteArray}
 		,dataType:'json'
 		,success:function(data) {
 			listPage(1);
@@ -172,7 +176,7 @@ function ajaxHTML(url, type, query) {
 	$.ajax({
 		type:type
 		,url:url
-		,data:query
+		,data:query+"&deadline="+$("#deadline option:selected").val()
 		,success:function(data) {
 			
 			var out="";
@@ -291,11 +295,20 @@ function ajaxHTML(url, type, query) {
   
  
 	<div></div>
+	<div style="float:left"><a class="apply" style="width:150px;">모든채용 : 10 (${dataCount }) </a></div>
+	<a class="apply" onclick="deleteScrap();">선택삭제</a>
+	<div style="float:right">
+	<select class="form-control" id="deadline">
+	<option value="all">전체보기</option>
+	<option value="deadlinenotyet">채용중공고</option>
+	<option value="deadlineover">마감공고</option>
+	</select>
+	</div>
 	<div>&nbsp;</div>
 
 	
-	모든채용 (${dataCount })
-	<div style="float:right"><a style="background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;" onclick="deleteScrap();">선택삭제</a></div>
+	
+	
 		<div class="col-md-12" style="background: #5BC0DE;border-radius: 3px;padding: 20px;margin: 20px 0;color:white;max-height:15px;text-align: center;border-left-width: 5px solid #337AB7;">
 			<div class="col-md-1">
 				삭제
@@ -346,7 +359,7 @@ function ajaxHTML(url, type, query) {
 								마감일
 						</div>
 						<div class="col-md-2">	
-								<a style="background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;">지원하기</a>
+								<a class="apply">지원하기</a>
 						</div>
 					</div>
 					

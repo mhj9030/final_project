@@ -39,12 +39,13 @@ public class ScrapController {
 	@ResponseBody
 	public Map<String, Object> list(
 			@RequestParam(value="page", defaultValue="1") int current_page,
-			HttpSession session) throws Exception{
+			HttpSession session,
+			String deadline) throws Exception{
 		SessionInfo info =(SessionInfo) session.getAttribute("member");
         
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mId", "howon222@a.com");
-		
+		map.put("deadline", deadline);
 		Map<String, Object> model = new HashMap<>();
 		List<Scrap> list = service.listScrap(map);
 		model.put("list",list);
