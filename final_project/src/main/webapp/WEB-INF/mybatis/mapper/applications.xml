@@ -18,8 +18,9 @@
 	</select>
 	
 	<!-- 이력서 1단계 불러오기 -->
+	
 	<select id="memberList" parameterType="map" resultType="com.final_project.member.Member">
-		select mId, mName, to_char(mBirth, 'YYYY-MM-DD') mBirth, to_char(mBirth, 'YYYY')-to_char(sysdate, 'YYYY')+1 age, mGender 
+		select mId, mName, to_char(mBirth, 'YYYY-MM-DD') mBirth, to_char(sysdate, 'YYYY')-to_char(mBirth, 'YYYY')+1 age, mGender 
 		from member where mId=#{mId}
 	</select>
 	
@@ -39,9 +40,8 @@
 	<!-- 이력서 1단계 저장 -->
 	
 	<insert id="insertDefault" parameterType="com.final_project.member.MemberDetail">
-		insert into resume(rNum, rName, rPhoto, engName, apply, pay, phone, eMail, addr, addr2, army, mId) 
-		values(resume_seq.nextval, #{rName}, #{rPhoto}, #{engName}, #{apply}, #{pay}, #{phone}, #{eMail}, #{addr}, #{addr2}, #{army}, #{mId})
-
+		insert into resume(rNum, rName, rPhoto, resumeType, engName, apply, pay, phone, eMail, addr, addr2, army, mId) 
+		values(resume_seq.nextval, #{rName}, #{rPhoto}, #{resumeType}, #{engName}, #{apply}, #{pay}, #{phone}, #{eMail}, #{addr}, #{addr2}, #{army}, #{mId})
 	</insert>
 	
 	<select id="newResume" parameterType="com.final_project.member.MemberDetail" resultType="Integer">
@@ -61,7 +61,16 @@
 		insert into re_project(rNum, prNum) values(#{rNum}, #{prNum})
 	</insert>
 	
-	<!-- 이력서 2단계 저장 -->
+	<!-- 1단계 수정 -->
+	
+	<update id="updateDefault" parameterType="map">
+		update resume set rNum=#{rNum}, rName=#{rName}, resumeType=#{resumeType}, rPhoto=#{rPhoto}, engName=#{engName}, apply=#{apply}, 
+		pay=#{pay}, phone=#{phone}, eMail=#{eMail}, addr=#{addr}, addr2=#{addr2}, army=#{army}
+		where rNum=#{rNum}
+	</update>
+	
+	
+	<!-- 2단계 저장 -->
 	
 	<!-- <insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
 		insert into re_career(rNum) 
@@ -76,20 +85,59 @@
 	<insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
 		insert into intro(rNum) 
 		values(#{rNum})
-	</insert>
-	
-	<insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
-		insert into intro(rNum) 
-		values(#{rNum})
 	</insert> -->
 	
+	<!-- 2단계 셀렉 -->
+	
+	
+	<!-- 2단계 수정 -->
+	
+	
+	<!-- 3단계 저장 -->
+	<insert id="insertThrIntro" parameterType="com.final_project.member.MemberDetail">
+		insert into intro(rNum, intro1, intro2, intro3, intro4) values(#{rNum}, #{intro1}, #{intro2}, #{intro3}, #{intro4})
+	</insert>
+	
+	<!-- 3단계 셀렉 -->
+	<select id="selectThrIntro" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select rNum, intro1, intro2, intro3, intro4 from intro where rNum=#{rNum} 
+	</select>
+	
+	<!-- 3단계 수정 -->
+	<select id="updateThrIntroCheck" parameterType="map" resultType="Integer">
+		select count(*) from intro where rNum=#{rNum}
+	</select>
+	
+	<update id="updateThrIntro" parameterType="map">
+		update intro set intro1=#{intro1}, intro2=#{intro2}, intro3=#{intro3}, intro4=#{intro4} where rNum=#{rNum}
+	</update>
+	
 	<!-- 삭제 -->
-	<delete id="deleteResume" parameterType="com.final_project.member.MemberDetail">
-		delete from resume where rNum=#{rNum};
-		delete from re_AWARD where rNum=#{rNum};
-		delete from re_CAREER where rNum=#{rNum};
-		delete from re_LANGUAGE where rNum=#{rNum};
-		delete from RE_LICENSE where rNum=#{rNum};
+	<delete id="deleteResume1" parameterType="map">
+		delete from resume where rNum=#{rNum}
+	</delete>
+	
+	<delete id="deleteResume2" parameterType="map">
+		delete from re_AWARD where rNum=#{rNum}
+	</delete>
+	
+	<delete id="deleteResume3" parameterType="map">
+		delete from re_CAREER where rNum=#{rNum}
+	</delete>
+	
+	<delete id="deleteResume4" parameterType="map">
+		delete from re_LANGUAGE where rNum=#{rNum}
+	</delete>
+	
+	<delete id="deleteResume5" parameterType="map">
+		delete from RE_LICENSE where rNum=#{rNum}
+	</delete>
+	
+	<delete id="deleteResume6" parameterType="map">
 		delete from RE_PROJECT where rNum=#{rNum}
+	</delete>
+	
+	<delete id="deleteResume7" parameterType="map">
+		delete from intro where rNum=#{rNum}
 	</delete>
 </mapper>

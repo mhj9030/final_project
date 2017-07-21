@@ -7,16 +7,33 @@
 	String cp=request.getContextPath();
 %>
 
+<style>
+#resume_div table{
+	text-align: center;
+}
+</style>
+
 <div class="page_body .container-fluid ">
 	<div class="page_head">
 		<h3>| 이력서 열람</h3><hr>
 	</div>
 	<div id="resume_div">
 		<table class="table table-bordered">
-			<caption>▶ 인적사항</caption>
+			<caption>
+				▶ 인적사항
+				<input type="hidden" name="rNum" value="${rDto.rNum}" /> 
+				( <c:if test="">공개</c:if><c:if test="">비공개</c:if> 이력서 )
+			</caption>
 			<tr>
 				<td rowspan="4" width="120px">
-					<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;"></div>
+					<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;">
+						<c:if test="${empty rDto.saveFilename}">
+							<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 140px;" />
+						</c:if>
+						<c:if test="${not empty rDto.saveFilename}">
+							<img src="<%=cp%>/uploads/resume/${rDto.saveFilename}"  style="width: 110px; height: 140px;"/>
+						</c:if>
+					</div>
 				</td>
 				<td width="80px">이름</td>
 				<td width="230px">${rDto.rName}</td>
@@ -27,7 +44,7 @@
 				<td>생년월인</td>
 				<td>${mDto.mbirth} ( ${mDto.age}세)</td>
 				<td>폰번호</td>
-				<td colspan="3">${rDto.engName}</td>
+				<td colspan="3">${rDto.phone}</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
@@ -50,17 +67,15 @@
 			<tr>
 				<td>지원분야</td>
 				<td>${rDto.apply}</td>
-				<td>페이</td>
+				<td>희망연봉</td>
 				<td>${rDto.pay}</td>
 			</tr>
 		</table>
 		
-		<div class= "footer-bar">
-			<div style="text-align: right;">
+		<div style="text-align: right;">
 			<c:if test="${sessionScope.member.userId==rDto.mId}">
 				<button type="button" class="btn btn-default" onclick="updateForm(1)">기본사항 수정</button>
 			</c:if>
-			</div>
 		</div>
 		
 		<table id="academy" class="table" style="height: 60px;">
@@ -203,40 +218,50 @@
 		</c:forEach>
 		</table>
 		
+		<div style="text-align: right;">
+			<c:if test="${sessionScope.member.userId==rDto.mId}">
+				<button type="button" class="btn btn-default" onclick="updateForm(2)">추가 사항 수정</button>
+			</c:if>
+		</div>
+		
 		<table id="intro" class="table">
 			<caption>▶ 자기소개</caption>
 			<tr height="100px">
-				<td>${introList.intro1}</td>
+				<td>${iDto.intro1}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ 지원동기</caption>
 			<tr height="100px">
-				<td>${introList.intro2}</td>
+				<td>${iDto.intro2}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ 성장배경</caption>
 			<tr height="100px">
-				<td>${introList.intro3}</td>
+				<td>${iDto.intro3}</td>
 			</tr>
 		</table>
 		
 		<table class="table">
 			<caption>▶ ???</caption>
 			<tr>
-				<td>${introList.intro4}</td>
+				<td>${iDto.intro4}</td>
 			</tr>
 		</table>
+		
+		<c:if test="${sessionScope.member.userId==rDto.mId}">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="updateForm(3)">자기소개 수정</button>
+			</div>
+		</c:if>
+		
 		<hr>
 	</div>
 	<div class= "footer-bar">
 		<div style="text-align: right;">
-		<c:if test="${sessionScope.member.userId==rDto.mId}">
-			<button type="button" class="btn btn-default" onclick="updateForm(2)">추가사항 수정</button>
-		</c:if>
 			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">목록</button>
 		</div>
 	</div>
@@ -244,6 +269,6 @@
 
 <script>
 function updateForm(num) {
-	location.href = "<%=cp%>/member/applications/update" + num + "?rNum=${rNum}";
+	location.href = "<%=cp%>/member/applications/update" + num + "?rNum=${rDto.rNum}";
 }
 </script>
