@@ -25,7 +25,7 @@
 						<tr>
 							<td class="input_info">공지여부</td>
 							<td colspan="3">
-								<input type="checkbox" name="notice" value="1" style="width:30px;">
+								<input type="checkbox" name="noticeType" value="1" style="width:30px;" ${dto.noticeType==1 ? "checked='checked' ":""}>
 							</td>
 						</tr>
 					

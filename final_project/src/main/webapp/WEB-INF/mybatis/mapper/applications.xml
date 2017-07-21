@@ -2,6 +2,22 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="applications">
+	<select id="resumeCount" parameterType="map" resultType="Integer">
+		select count(*) from resume where mId=#{mId}
+	</select>
+	
+	<select id="resumeList" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select rownum, tb.* from(
+			select rNum, memo, endWrite from resume where mId=#{mId} order by rNum desc 
+		)tb
+	</select>
+	
+	<select id="readResume" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select rNum, rName, rPhoto, engName, apply, pay, addr, addr2, phone, eMail, army, mId, memo, endWrite 
+		from resume where rNum=#{rNum}
+	</select>
+	
+	<!-- 이력서 1단계 불러오기 -->
 	<select id="memberList" parameterType="map" resultType="com.final_project.member.Member">
 		select mId, mName, to_char(mBirth, 'YYYY-MM-DD') mBirth, to_char(mBirth, 'YYYY')-to_char(sysdate, 'YYYY')+1 age, mGender 
 		from member where mId=#{mId}
@@ -12,21 +28,68 @@
 	</select>
 	
 	<select id="careerList" parameterType="map" resultType="com.final_project.member.MemberDetail">
-		select company, part, carStart, carEnd, memo from mem_career where mId=#{mId} order by carStart desc
+		select mcNum, company, part, carStart, carEnd, memo from mem_career where mId=#{mId} order by carStart desc
 	</select>
 	
 	<select id="projectList" parameterType="map" resultType="com.final_project.member.MemberDetail">
-		select prName, expStartYear, expEndYear, expStartMonth, expEndMonth, expState 
+		select prNum, prName, expStartYear, expEndYear, expStartMonth, expEndMonth, expState 
 		from mem_project where mId=#{mId} order by expStartYear desc
 	</select>
 	
+	<!-- 이력서 1단계 저장 -->
+	
 	<insert id="insertDefault" parameterType="com.final_project.member.MemberDetail">
-		insert into resume(rNum, rName engName, Phone, eMail, addr, addr2, army) 
-		values(resume_seq.next_val, #{rName}, #{engName}, #{Phone}, #{eMail}, #{addr}, #{addr2}, #{army})
+		insert into resume(rNum, rName, rPhoto, engName, apply, pay, phone, eMail, addr, addr2, army, mId) 
+		values(resume_seq.nextval, #{rName}, #{rPhoto}, #{engName}, #{apply}, #{pay}, #{phone}, #{eMail}, #{addr}, #{addr2}, #{army}, #{mId})
+
+	</insert>
+	
+	<select id="newResume" parameterType="com.final_project.member.MemberDetail" resultType="Integer">
+		select rNum from(
+			select rownum, tb.* from(
+				select rNum from resume where mId=#{mId}
+				order by rNum desc
+			)tb where rownum=1
+		)
+	</select>
+	
+	<insert id="resCare" parameterType="com.final_project.member.MemberDetail">
+		insert into re_career(rNum, mcNum) values(#{rNum}, #{mcNum})
+	</insert>
+	
+	<insert id="resProj" parameterType="com.final_project.member.MemberDetail">
+		insert into re_project(rNum, prNum) values(#{rNum}, #{prNum})
+	</insert>
+	
+	<!-- 이력서 2단계 저장 -->
+	
+	<!-- <insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
+		insert into re_career(rNum) 
+		values(#{rNum})
 	</insert>
 	
 	<insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
 		insert into intro(rNum) 
 		values(#{rNum})
 	</insert>
+	
+	<insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
+		insert into intro(rNum) 
+		values(#{rNum})
+	</insert>
+	
+	<insert id="insertIntro" parameterType="com.final_project.member.MemberDetail">
+		insert into intro(rNum) 
+		values(#{rNum})
+	</insert> -->
+	
+	<!-- 삭제 -->
+	<delete id="deleteResume" parameterType="com.final_project.member.MemberDetail">
+		delete from resume where rNum=#{rNum};
+		delete from re_AWARD where rNum=#{rNum};
+		delete from re_CAREER where rNum=#{rNum};
+		delete from re_LANGUAGE where rNum=#{rNum};
+		delete from RE_LICENSE where rNum=#{rNum};
+		delete from RE_PROJECT where rNum=#{rNum}
+	</delete>
 </mapper>

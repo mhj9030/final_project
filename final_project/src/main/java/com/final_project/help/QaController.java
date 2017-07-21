@@ -1,6 +1,5 @@
 package com.final_project.help;
 
-import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -113,20 +112,19 @@ public class QaController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	@RequestMapping(value="/help_layout/qa/created", method=RequestMethod.GET)
 	public String createdForm(
-			Model model
-			) throws Exception {
-
+			Model model,
+			HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		/*if(info==null){
+			
+		}*/
+		
+		
 		model.addAttribute("mode", "created");
 		
 		return ".help_layout.qa.created";
@@ -138,12 +136,14 @@ public class QaController {
 			HttpSession session
 			) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		dto.setmId(info.getUserId());
-		//dto.setmId("admin@a.com");
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"";
 		
-		service.insertQa(dto, pathname);
+		//dto.setmId(info.getUserId());
+		dto.setmId("admin@a.com");
+		/*String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"";*/
+		
+		//service.insertQa(dto, pathname);
+		service.insertQa(dto, "created");
 		return "redirect:/help_layout/qa/list";
 		
 	}
@@ -168,14 +168,14 @@ public class QaController {
 		
         /*dto.setContent(util.htmlSymbols(dto.getContent()));*/
         
-		// 이전 글, 다음 글
+		/*// 이전 글, 다음 글
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		map.put("num", num);
 
 		Qa preReadDto = service.preReadQa(map);
-		Qa nextReadDto = service.nextReadQa(map);
+		Qa nextReadDto = service.nextReadQa(map);*/
         
 		
 		String query = "page="+page;
@@ -185,8 +185,8 @@ public class QaController {
 		}
 		
 		model.addAttribute("dto", dto);
-		model.addAttribute("preReadDto", preReadDto);
-		model.addAttribute("nextReadDto", nextReadDto);
+		/*model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);*/
 
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
@@ -195,6 +195,49 @@ public class QaController {
 		
 		return ".help_layout.qa.article";
 	}
-	
+	@RequestMapping(value="/help_layout/qa/reply", method=RequestMethod.GET)
+	public String replyForm(
+			@RequestParam int qaNum,
+			@RequestParam String page,
+			Model model,
+			HttpSession session
+			) throws Exception {
+	/*	SessionInfo info = (SessionInfo) session.getAttribute("member");
+
+		if (info == null) {
+			return "redirect:/member/login";
+		}*/
+		
+		Qa dto = service.readQa(qaNum);
+		/*if (dto == null) {
+			return "redirect:/board/list?page="+page;
+		}*/
+
+		String str = "["+dto.getSubject()+"] 에 대한 답변입니다.\n";
+		dto.setContent(str);
+
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "reply");
+
+		return ".help_layout.qa.created";
+	}
+
+	@RequestMapping(value="/help_layout/qa/reply", method = RequestMethod.POST)
+	public String replySubmit(
+			Qa dto,
+		    @RequestParam String page,
+		    HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+
+		/*if (info == null) {
+			return "redirect:/member/login";
+		}*/
+		dto.setmId(info.getUserId());
+		service.insertQa(dto, "reply");
+
+		return "redirect:/help_layout/qa/list?page="+page;
+	}
 	
 }

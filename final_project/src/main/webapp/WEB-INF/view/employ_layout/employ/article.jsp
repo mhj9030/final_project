@@ -6,10 +6,6 @@
 <%
 	String cp=request.getContextPath();
 %>
-<!-- Bootstrap CSS -->
-
-<link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet">
-
 <style>
   /* Note: Try to remove the following lines to see the effect of CSS positioning */
   .affix {
@@ -83,7 +79,7 @@ $(function() {
 				
 			
 				if(data==0) {
-					alert("스크랩성공");
+				
 					$("#scrap_result").html("<h5>이미 스크랩한 정보입니다.</h5><br><a>나의 스크랩 바로가기</a>");
 					
 				}	else {

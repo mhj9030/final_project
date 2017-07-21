@@ -9,6 +9,9 @@
 <!-- Bootstrap CSS -->
 <!-- <link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
+body{
+background: white;
+}
 h3{
    margin-top: 40px;
 }

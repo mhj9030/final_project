@@ -1,21 +1,115 @@
 package com.final_project.member;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDetail {
+	private String rownum, rNum, rName, engName, phone, eMail, addr, addr2, army, apply, pay, mId, endWrite, rPhoto;
+	private MultipartFile upload;
 	// 자기소개
 	private String intro1, intro2, intro3, intro4;
 	// 학교
 	private String termStart, termEnd, termState, school, major;
 	// 경력
-	private String company, part, carStart, carEnd, memo;
+	private String mcNum, company, part, carStart, carEnd, memo;
 	// 프로젝트
-	private String prName, expStartYear, expStartMonth, expEndYear, expEndMonth, expState;
+	private String prNum, prName, expStartYear, expStartMonth, expEndYear, expEndMonth, expState;
 	// 자격증
-	private String license, expStart, expEnd, liGC;
+	private String liNum, license, expStart, expEnd, liGC;
 	// 언어
-	private String language, laScore;
+	private String laNum, language, laScore;
 	// 수상
-	private String awAgency, awSector, awDate;//, memo;
-	
+	private String awNum, awAgency, awSector, awDate;//, memo;
+	//
+	public String getRownum() {
+		return rownum;
+	}
+	public void setRownum(String rownum) {
+		this.rownum = rownum;
+	}
+	public String getrNum() {
+		return rNum;
+	}
+	public void setrNum(String rNum) {
+		this.rNum = rNum;
+	}
+	public String getrName() {
+		return rName;
+	}
+	public void setrName(String rName) {
+		this.rName = rName;
+	}
+	public String getEngName() {
+		return engName;
+	}
+	public void setEngName(String engName) {
+		this.engName = engName;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String geteMail() {
+		return eMail;
+	}
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getArmy() {
+		return army;
+	}
+	public void setArmy(String army) {
+		this.army = army;
+	}
+	public String getApply() {
+		return apply;
+	}
+	public void setApply(String apply) {
+		this.apply = apply;
+	}
+	public String getPay() {
+		return pay;
+	}
+	public void setPay(String pay) {
+		this.pay = pay;
+	}
+	public String getmId() {
+		return mId;
+	}
+	public void setmId(String mId) {
+		this.mId = mId;
+	}
+	public String getEndWrite() {
+		return endWrite;
+	}
+	public void setEndWrite(String endWrite) {
+		this.endWrite = endWrite;
+	}
+	public String getrPhoto() {
+		return rPhoto;
+	}
+	public void setrPhoto(String rPhoto) {
+		this.rPhoto = rPhoto;
+	}
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	public String getIntro1() {
 		return intro1;
 	}
@@ -70,6 +164,12 @@ public class MemberDetail {
 	public void setMajor(String major) {
 		this.major = major;
 	}
+	public String getMcNum() {
+		return mcNum;
+	}
+	public void setMcNum(String mcNum) {
+		this.mcNum = mcNum;
+	}
 	public String getCompany() {
 		return company;
 	}
@@ -99,6 +199,12 @@ public class MemberDetail {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+	public String getPrNum() {
+		return prNum;
+	}
+	public void setPrNum(String prNum) {
+		this.prNum = prNum;
 	}
 	public String getPrName() {
 		return prName;
@@ -136,6 +242,12 @@ public class MemberDetail {
 	public void setExpState(String expState) {
 		this.expState = expState;
 	}
+	public String getLiNum() {
+		return liNum;
+	}
+	public void setLiNum(String liNum) {
+		this.liNum = liNum;
+	}
 	public String getLicense() {
 		return license;
 	}
@@ -160,6 +272,12 @@ public class MemberDetail {
 	public void setLiGC(String liGC) {
 		this.liGC = liGC;
 	}
+	public String getLaNum() {
+		return laNum;
+	}
+	public void setLaNum(String laNum) {
+		this.laNum = laNum;
+	}
 	public String getLanguage() {
 		return language;
 	}
@@ -171,6 +289,12 @@ public class MemberDetail {
 	}
 	public void setLaScore(String laScore) {
 		this.laScore = laScore;
+	}
+	public String getAwNum() {
+		return awNum;
+	}
+	public void setAwNum(String awNum) {
+		this.awNum = awNum;
 	}
 	public String getAwAgency() {
 		return awAgency;

@@ -186,7 +186,7 @@ public class EmployController {
 		map.put("ceNum", ceNum);
 		map.put("mId", info.getUserId());
 		result = service.add_scrap(map);
-		
+		System.out.println(result + info.getUserId() + map.get("mId"));
 		return result;
 	}
 	

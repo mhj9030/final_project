@@ -9,6 +9,4 @@ public interface QaService {
 	public List<Qa> listQa(Map<String, Object> map);
 	public Qa readQa(int num);
 	public int updateHitCount(int num);
-	public Qa preReadQa(Map<String, Object> map);
-	public Qa nextReadQa(Map<String, Object> map);
 }

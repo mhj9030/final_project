@@ -5,22 +5,17 @@ public class Qa {
 	private String subject, content;
 	private int hitCount;
 	private String created, mId, mName;
+	private int groupNum, depth, orderNo, parent;
+	
+	private long gap;
 	
 	public String getmName() {
 		return mName;
 	}
-
+	
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
-
-	private int groupNum;
-	private int depth;
-	
-	private int orderNo;
-	private int parent;
-	
-	private long gap;
 	
 	public int getListNum() {
 		return listNum;

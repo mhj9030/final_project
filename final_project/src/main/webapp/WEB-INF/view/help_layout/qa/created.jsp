@@ -15,11 +15,34 @@
   }
 
   function check() {
-        var f = document.boardForm;
-        f.action = "<%=cp%>/help_layout/qa/${mode}";
-          
-          return true;
+	  var f = document.boardForm;
+
+  	var str = f.subject.value;
+      if(!str) {
+          f.subject.focus();
+          return false;
+      }
+
+  	str = f.content.value;
+      if(!str || str=="<p>&nbsp;</p>") {
+          f.content.focus();
+          return false;
+      }
+
+      var mode="${mode}";
+  	if(mode=="created")
+  		f.action="<%=cp%>/help_layout/qa/created";
+   	else if(mode=="reply")
+          f.action="<%=cp%>/help_layout/qa/reply";
+  	else if(mode=="update")
+  		f.action="<%=cp%>/help_layout/qa/update";
+
+  	// <input type='submit' ..>,  <input type='image' ..>, <button>은 submit() 메소드 호출하면 두번전송
+      return true;
   }
+  
+  
+  
 </script>
 
 <div class="created_form">
@@ -67,7 +90,15 @@
 							<td colspan="4" style="text-align: center;">
 								<button>확인 </button>
 								
-								<button type="button" onclick="">취소</button> 
+								<button type="button" onclick="javascript: history.back();">취소</button>
+								
+								<c:if test="${mode=='reply'}">
+                                      <input type="hidden" name="page" value="${page}">
+                                      <input type="hidden" name="groupNum" value="${dto.groupNum}">
+                                      <input type="hidden" name="orderNo" value="${dto.orderNo}">
+                                      <input type="hidden" name="depth" value="${dto.depth}">
+                                      <input type="hidden" name="parent" value="${dto.qaNum}">
+                                  </c:if> 
 							</td>
 						</tr>
 					</tfoot>
