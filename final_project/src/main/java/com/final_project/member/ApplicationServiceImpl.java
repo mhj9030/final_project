@@ -1,6 +1,7 @@
 package com.final_project.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,12 +103,12 @@ public class ApplicationServiceImpl implements ApplicationService{
 		int result = 0;
 		
 		try {
-			/*if(! dto.getUpload().isEmpty()){
+			if(! dto.getUpload().isEmpty()){
 				String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
 				dto.setrPhoto(saveFilename);
 				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
 			}
-			*/
+			
 			dto.setrPhoto(pathname);
 			result = dao.insertData("applications.insertDefault", dto);
 			
@@ -173,23 +174,16 @@ public class ApplicationServiceImpl implements ApplicationService{
 		
 		try {
 			for(String dto:list){
-				result = dao.insertData("applications.deleteResume", dto);
+				Map<String, Object> map = new HashMap<>();
+				map.put("rNum", Integer.parseInt(dto));
+				result = dao.insertData("applications.deleteResume2", map);
+				result = dao.insertData("applications.deleteResume3", map);
+				result = dao.insertData("applications.deleteResume4", map);
+				result = dao.insertData("applications.deleteResume5", map);
+				result = dao.insertData("applications.deleteResume6", map);
+				result = dao.insertData("applications.deleteResume7", map);
+				result = dao.insertData("applications.deleteResume1", map);
 			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return result;
-	}
-
-	@Override
-	public int deleteList(List<MemberDetail> list) {
-		int result = 0;
-		
-		try {
-			/*for(MemberDetail dto:list)
-				break;*/
-			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -202,6 +196,12 @@ public class ApplicationServiceImpl implements ApplicationService{
 		int result = 0;
 		
 		try {
+			if(! dto.getUpload().isEmpty()){
+				String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+				dto.setrPhoto(saveFilename);
+				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+			}
+			
 			dto.setrPhoto(pathname);
 			result = dao.updateData("applications.updateDefault", dto);
 		} catch (Exception e) {

@@ -43,7 +43,14 @@
 				</caption>
 				<tr>
 					<td rowspan="4" width="120px">
-						<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;"></div>
+						<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;">
+							<c:if test="${empty rDto.saveFilename}">
+								<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 140px;" />
+							</c:if>
+							<c:if test="${not empty rDto.saveFilename}">
+								<img src="<%=cp%>/uploads/resume/${rDto.saveFilename}"  style="width: 110px; height: 140px;"/>
+							</c:if>
+						</div>
 						<div class="input-group file-class">
 							<label for="exampleInputFile">사진 업로드</label>
 							<input type="file" id="exampleInputFile" name="resumeImg" class="hidden">
@@ -109,7 +116,7 @@
 						</select>
 					</td>
 					<td>희망연봉</td>
-					<td><input type="text" name="pay" class="form-control input-sm" value="회사 내규에 따름" /></td>
+					<td><input type="text" name="pay" class="form-control input-sm" value="${rDto.pay}" /></td>
 				</tr>
 			</table>
 		
@@ -230,7 +237,7 @@ $(document).ready(function () {
 	
 		var file = upload.files[0], reader = new FileReader();
 		reader.onload = function(event) {
-			var img = new Image();
+			var img = new Image(); 
 			img.src = event.target.result;
 			img.width = 110;
 			img.height = 140;

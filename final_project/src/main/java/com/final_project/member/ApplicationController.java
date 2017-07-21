@@ -103,6 +103,8 @@ public class ApplicationController {
 	@RequestMapping(value="/member/applications/created2", method=RequestMethod.POST)
 	public String created_step2_ok(@RequestParam("rNum")int rNum, Model model) throws Exception {
 		
+		model.addAttribute("rNum", rNum);
+		
 		return "redirect:/member/applications/created3";
 	}
 	
@@ -148,10 +150,10 @@ public class ApplicationController {
 	
 	// 삭제
 	@RequestMapping("/member/applications/delete")
-	public String delete(String[] rNum, HttpSession session, Model model) throws Exception {
+	public String delete(String[] resuNum, HttpSession session, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		
-		List<String> list = Arrays.asList(rNum);
+		List<String> list = Arrays.asList(resuNum);
 		map.put("list", list);
 		service.delete(list);
 		
@@ -225,13 +227,13 @@ public class ApplicationController {
 		
 		model.addAttribute("rNum", rNum);
 		
-		return "redirect:/member/applications/application?rNum=" + rNum;
+		return "redirect:/member/applications/application";
 	}
 	
 	@RequestMapping(value="/member/applications/update2", method=RequestMethod.POST)
 	public String update_step2_ok(@RequestParam("rNum")int rNum, HttpSession session, Model model) throws Exception {
 		
-		return "redirect:/member/applications/application?rNum=" + rNum;
+		return "redirect:/member/applications/application";
 	}
 	
 	@RequestMapping(value="/member/applications/update3", method=RequestMethod.POST)
@@ -246,6 +248,6 @@ public class ApplicationController {
 		
 		service.updateThrIntro(map);
 		
-		return "redirect:/member/applications/application?rNum=" + rNum;
+		return "redirect:/member/applications/application";
 	}
 }

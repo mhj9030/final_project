@@ -11,7 +11,6 @@ public interface ApplicationService {
 	
 	// 삭제
 	public int delete(List<String> list);
-	public int deleteList(List<MemberDetail> list);
 	
 	// 1단계 입력
 	public Member memberList(Map<String, Object> map);
