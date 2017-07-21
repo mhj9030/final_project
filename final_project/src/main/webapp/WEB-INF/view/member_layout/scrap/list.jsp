@@ -68,7 +68,70 @@ $(function() {
 
 });
 
+function apply(ceNum) {
+	var rNum = $("#resume option:selected").val();
+	var url="<%=cp%>/employ/apply?ceNum="+ceNum+"&rNum="+rNum;
+	
+	$.ajax({
+		type:"GET"
+		,url:url
+		,success:function(data) {
+			
+			if(data==0) {	        
+		        $("#apply_result").html("<h5>이미 입사지원한 공고입니다.</h5><br><a>입사지원현황 바로가기</a><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+			} else {
 
+		        $("#apply_result").html("<h5>입사지원이 완료되었습니다.</h5><br><a>입사지원현황 바로가기</a><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+			}
+		}
+		,error : function() {
+			$("#apply_result").html("<h5>이미 입사지원한 공고입니다.</h5><br><a>입사지원현황 바로가기</a><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+		}
+		
+	})
+}
+
+function loadSimpleInfo(ceNum) {
+	$("#apply_result").html("제출할 이력서를 선택해주세요<select id='resume'></select><br><button type='button' class='btn btn-info' style='margin-right:1px;' id='apply'>제출</button><hr><button type='button' class='btn btn-default' data-dismiss='modal'>채용정보 계속보기</button>");
+	$("#resume option").remove();
+	var url="<%=cp%>/employ/applyForm?ceNum="+ceNum;
+	$.ajax({
+		type:"GET"
+		,url:url
+		,success:function(data) {
+			$("#subname").text(data.employ.subname);
+			$("#ceType1").text(data.employ.ceType);
+			$("#ceStart").text(data.employ.ceStart);
+			$("#ceEnd").text(data.employ.ceEnd);
+			$("#ceNum").text(data.employ.ceNum);
+			$("#cePay").text(data.employ.cePay);
+			$("#cName").text(data.employ.cName);
+			$("#article").attr("onclick","location.href='<%=cp%>/employ/article?ceNum="+ceNum+"'");
+			
+			$("#apply").attr("onclick","apply("+ceNum+");");
+	
+			for(var i=0; i<=data.resumeList.length; i++) {
+				if(data.resumeList[i]!=undefined && data.resumeList[i].rNum!=undefined)
+					$("#resume").append("<option value='"+data.resumeList[i].rNum+"'>"+data.resumeList[i].rName+"</option>");
+			}
+			
+
+
+		}
+		,error : function(jqXHR) {
+			
+	        if (jqXHR.status == 401) {
+	        	 console.log(jqXHR);
+	        } else if (jqXHR.status == 403) {
+	        } else {
+	        	 console.log(jqXHR.responseText);
+	        }
+	    }
+	});
+	
+	
+	
+}
 function imageError(image) {
 	image.src="<%=cp%>/resources/image/profile_img.jpg";
 }
@@ -79,6 +142,30 @@ function listPage(page) {
 
 	query ="&page="+page;
 	ajaxHTML(url,"get",query);
+}
+
+//체크박스에 checked 된것들 받아서 삭제해준다.
+function deleteScrap() {
+	var deleteArray = new Array();
+	var query = "a=1";
+	$('input:checkbox[name="delete"]:checked').each(function(i,e) {
+		
+		deleteArray.push($(e).val());
+		//alert($(e).val());
+		query +="&deleteArray="+deleteArray;
+	});
+
+	
+	$.ajax({
+		type:'post'
+		,url:"<%=cp%>/member/deletescrap"
+		//,data:query
+		,data: {deleteArray:deleteArray}
+		,dataType:'json'
+		,success:function(data) {
+			listPage(1);
+			}
+		});
 }
 
 function ajaxHTML(url, type, query) {
@@ -106,7 +193,7 @@ function ajaxHTML(url, type, query) {
 				out+="<div class='row'>";
 				out+="<div class='col-md-12'>";
 				out+="<div class='col-md-1'>";
-				out+="<input type='checkbox' class='form-group'>";
+				out+="<input type='checkbox' name='delete' class='form-group' value="+ceNum+">";
 				out+="</div>";
 				out+="<div class='col-md-2 center-block' > ";
 				out+=""+scrapdate+"";
@@ -121,7 +208,7 @@ function ajaxHTML(url, type, query) {
 				out+="~"+ceEnd;
 				out+="</div>";
 				out+="<div class='col-md-2'>";
-				out+="<a style='background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;''>즉시지원</a>";
+				out+="<a class='apply' onclick='javascript:loadSimpleInfo("+ceNum+")' data-toggle='modal' data-target='.bs-example-modal-sm'>즉시지원</a>";
 				out+="</div>";
 				out+="</div>";
 				out+="</div>";
@@ -208,6 +295,7 @@ function ajaxHTML(url, type, query) {
 
 	
 	모든채용 (${dataCount })
+	<div style="float:right"><a style="background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;" onclick="deleteScrap();">선택삭제</a></div>
 		<div class="col-md-12" style="background: #5BC0DE;border-radius: 3px;padding: 20px;margin: 20px 0;color:white;max-height:15px;text-align: center;border-left-width: 5px solid #337AB7;">
 			<div class="col-md-1">
 				삭제
@@ -236,7 +324,7 @@ function ajaxHTML(url, type, query) {
 	<!-- 페이징으로한다. -->
 	<!-- 일단은 모든페이지 다나오게 한다.(listPage) 나오는정보 회사명 기업로고 제목 시작일 마감일-->
 	<div class="callout" style="padding: 20px;margin: 20px 0;border: 1px solid #eee; border-left-width: 5px;border-radius: 3px;">
-		
+				
 		<div id="listEmploy"><!-- ajax나오는id -->
 					<!-- 받아온것 ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage -->
 					<!-- 채용정보 한세트 -->

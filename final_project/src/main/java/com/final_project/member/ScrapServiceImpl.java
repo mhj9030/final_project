@@ -23,5 +23,24 @@ public class ScrapServiceImpl implements ScrapService {
 		}	
 		return list;
 	}
+
+	@Override
+	public int deleteScrap(Map<String, Object> map) throws Exception {
+		int result = 0;
+		
+		try {
+			dao.deleteData("scrap.deleteScrap", map);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return result;
+	}
+
+	
+
+	
+
+	
 	
 }

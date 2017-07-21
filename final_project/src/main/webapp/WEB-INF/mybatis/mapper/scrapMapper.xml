@@ -18,4 +18,14 @@
 				JOIN company C ON E.cserial = C.cserial
 				where S.mid = #{mId}
 	</select>
+	
+	<!-- 스크랩 삭제 delete from scrap where ceNum=#{ceNum}, mId=#{mId} -->
+	<delete id="deleteScrap" parameterType="map">
+		delete from scrap where  mId=#{mId} AND
+		ceNum IN
+		 <foreach item="v" collection="list" separator="," open="(" close=")">
+		   #{v}
+		 </foreach>
+		
+	</delete>
 </mapper>
