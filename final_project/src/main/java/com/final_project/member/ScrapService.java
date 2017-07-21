@@ -1,5 +1,8 @@
 package com.final_project.member;
 
-public interface ScrapService {
+import java.util.List;
+import java.util.Map;
 
+public interface ScrapService {
+	public List<Scrap> listScrap(Map<String, Object> map) throws Exception;
 }

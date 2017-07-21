@@ -13,9 +13,9 @@
 	
 	<!-- 스크랩 리스트 -->
 	<select id="listScrap" parameterType="map" resultType="com.final_project.member.Scrap">
-				select scrapdate, cname,cesubject,ceend,C.cserial,E.cenum from com_employ E
+				select TO_CHAR(scrapdate,'YYYY-MM-DD') scrapdate, cNum,cname,cesubject,TO_CHAR(ceend,'YYYY-MM-DD') ceend,C.cserial,E.cenum from com_employ E
 				JOIN scrap S ON E.cenum = S.cenum
 				JOIN company C ON E.cserial = C.cserial
-				where S.mid = #{mid}
+				where S.mid = #{mId}
 	</select>
 </mapper>

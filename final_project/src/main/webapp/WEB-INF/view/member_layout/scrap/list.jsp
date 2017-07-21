@@ -75,9 +75,9 @@ function imageError(image) {
 
 
 function listPage(page) {
-	var url="<%=cp%>/scrap/list";
-	var query = $('form[name=employForm]').serialize();
-	query +="&page="+page;
+	var url="<%=cp%>/member/list";
+
+	query ="&page="+page;
 	ajaxHTML(url,"get",query);
 }
 
@@ -91,47 +91,72 @@ function ajaxHTML(url, type, query) {
 			var out="";
 			
 
-			//받아온것 ceNum, ceSubject, ability, ceType, ceStart, ceEnd, cSerial, cName, cLogoimage
-			for(var idx=0; idx<data.celist.length; idx++) {
-				var ceNum=data.celist[idx].ceNum;
-				var ceSubject=data.celist[idx].ceSubject;
-				var cName=data.celist[idx].cName;
-				var ability=data.celist[idx].ability;
-				var ceType=data.celist[idx].ceType;
-				var ceStart=data.celist[idx].ceStart;
-				var ceEnd=data.celist[idx].ceEnd;
-				var cSerial=data.celist[idx].cSerial;
-				var cLogoimage=data.celist[idx].cLogoimage;
-				var cNum = data.celist[idx].cNum;
+			//받아온것 scrapdate, cname,cesubject,ceend,C.cserial,E.cenum
+			for(var idx=0; idx<data.list.length; idx++) {
+				var scrapdate=data.list[idx].scrapdate;
+				var cName=data.list[idx].cName;
+				var ceSubject=data.list[idx].ceSubject;
+				var ceEnd=data.list[idx].ceEnd;
+				var cSerial=data.list[idx].cSerial;
+				var ceNum=data.list[idx].ceNum;
+				var cNum=data.list[idx].cNum;
+				
 				
 				
 				out+="<div class='row'>";
 				out+="<div class='col-md-12'>";
-				out+="<div class='col-md-2 center-block' >";
-				out+="<img src='<%=cp%>/uploads/company/"+cLogoimage+"' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'>";
-				out+="<div class='container'><a href='<%=cp%>/company/search/article?page=1&cNum="+cNum+"'>회사명 "+cName+"</a></div>";
+				out+="<div class='col-md-1'>";
+				out+="<input type='checkbox' class='form-group'>";
 				out+="</div>";
-				out+="<div class='col-md-4'>";
+				out+="<div class='col-md-2 center-block' > ";
+				out+=""+scrapdate+"";
+				out+="</div>";
+				out+="<div class='col-md-2'> ";
+				out+="<a href='<%=cp%>/company/search/article?page=1&cNum="+cNum+"'>회사명 "+cName+"</a>";
+				out+="</div>";
+				out+="<div class='col-md-3'>";
 				out+="<a href='<%=cp%>/employ/article?ceNum="+ceNum+"'>"+ceSubject+"</a>";
 				out+="</div>";
 				out+="<div class='col-md-2'>";
-				out+="지원자격 "+ability;
+				out+="~"+ceEnd;
 				out+="</div>";
-				out+="<div class='col-md-2'> ";
-				out+="근무조건 "+ceType;
-				out+="</div>";
-				out+="<div class='col-md-2' style='text-align:center;'>";
-				out+="등록일 "+ceStart+" 마감일 "+ ceEnd +"<br><br>   <a class='apply' onclick='javascript:loadSimpleInfo("+ceNum+")' data-toggle='modal' data-target='.bs-example-modal-sm'>즉시지원</a>";
+				out+="<div class='col-md-2'>";
+				out+="<a style='background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;''>즉시지원</a>";
 				out+="</div>";
 				out+="</div>";
 				out+="</div>";
 				out+="<hr>";
-
+				/* <div class="row">
+				<div class="col-md-12">
+					<div class="col-md-1">
+						<input type="checkbox" class="form-group">
+					</div>
+					<div class='col-md-2 center-block' > 
+						<div class='container'><a href='C.cSerial'>스크랩일</a></div>
+					</div>
+					<div class='col-md-2'> 				
+							<a href='ceNum'>회사명</a>
+					</div>
+					<div class='col-md-3'> 				
+							제목
+					</div>
+					<div class='col-md-2'> 				
+							마감일
+					</div>
+					<div class='col-md-2'>	
+							<a style='background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;''>지원하기</a>
+					</div>
+				</div>
+				
+				
+			</div>
+			
+			<hr> */
 			}
-			out = out.substring(0,out.length-11);
+			/* out = out.substring(0,out.length-11);
 			out+="<hr>";
 			out+="<div class='col-md-12 text-center'>"+data.paging+"</div>";
-			out+="</div>";
+			out+="</div>"; */
 			
 			
 			if($.trim(data)=="error") {
@@ -184,10 +209,13 @@ function ajaxHTML(url, type, query) {
 	
 	모든채용 (${dataCount })
 		<div class="col-md-12" style="background: #5BC0DE;border-radius: 3px;padding: 20px;margin: 20px 0;color:white;max-height:15px;text-align: center;border-left-width: 5px solid #337AB7;">
+			<div class="col-md-1">
+				삭제
+			</div>
 			<div class="col-md-2">
 				스크랩일
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				회사명
 			</div>
 			<div class="col-md-3">
@@ -214,10 +242,13 @@ function ajaxHTML(url, type, query) {
 					<!-- 채용정보 한세트 -->
 				<div class="row">
 					<div class="col-md-12">
+						<div class="col-md-1">
+							<input type="checkbox" class="form-group">
+						</div>
 						<div class="col-md-2 center-block" > 
 							<div class="container"><a href="C.cSerial">스크랩일</a></div>
 						</div>
-						<div class="col-md-3"> 				
+						<div class="col-md-2"> 				
 								<a href="ceNum">회사명</a>
 						</div>
 						<div class="col-md-3"> 				
