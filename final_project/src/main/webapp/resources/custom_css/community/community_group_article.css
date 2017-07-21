@@ -50,3 +50,26 @@
 	border: 7px double black;
 }
 
+.group_article_info_member{
+	width: 100%;
+	height: 110px;
+	
+}
+
+.group_admin_imgBtn{
+	position: absolute;
+    top: 281px;
+    width: 240px;
+    background-color: rgba(0, 0, 0, 0.71);
+    border: 0px;
+    color: white;
+}
+
+.group_info_introBtn{
+	background-color: rgba(0, 0, 0, 0.71);
+    border: 0px;
+    color: white;
+}
+
+
+

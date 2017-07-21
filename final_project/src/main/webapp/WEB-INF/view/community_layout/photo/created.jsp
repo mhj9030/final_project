@@ -73,7 +73,6 @@
 							<td colspan="3">
 								<input type="file" name="upload" accept=".gif, .jpg, .png">
 							</td>
-							
 						</tr>
 						<c:if test="${mode=='update'}" >
 							<tr height="40" style="border-bottom: 1px solid #cccccc;">
