@@ -83,7 +83,7 @@
   					</c:forEach>
   				</div>
   				<div class="group_list_groupjoin">
-  					<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}'">자세히 보기</button>
+  					<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">자세히 보기</button>
   				</div>
   			</div>
   		</c:forEach>

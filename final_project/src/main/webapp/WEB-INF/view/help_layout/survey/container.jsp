@@ -6,36 +6,53 @@
 <%
 	String cp=request.getContextPath();
 %>
-
-
-
-
-<div class="wrapper center-block" style="max-width: 980px;">
-
-<div id="title"class="text-center">
-<h2>${dto.subject}</h2>
-</div>
-<div class="text-right">
-<h5>${dto.created} ${dto.hitCount}</h5>
-</div>
-<hr>
-
-<!-- 글내용  content -->
-<div id="content">
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd32nHQ1UeFAyuOQmkknkeWZOFEe1vGZjd5g34Fc0v6Sbl4tQ/viewform?usp=sf_link" width=800px; height=800px;></iframe>
-
-</div>
-<hr>
-	<div class= "footer-bar">
-			<div style="text-align: right;">
-				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/notice/list'">목록</button>
-			<c:if test="${sessionScope.member.userId=='admin@a.com'}">
-				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/update?num=${dto.notNum}&page=${page}'">수정</button>
-				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/delete?num=${dto.notNum}'">삭제</button>
-			</c:if>
-			</div>
+<div class="created_form">
+	<div>
+		<h3>
+		 |  설문조사
+		</h3>
 	</div>
 
-
-
+	<div>
+		<form name="boardForm" method="post" onsubmit="return submitContents(this);" enctype="multipart/form-data">
+			<div>
+				<table class="table table-hover">
+					<tbody>
+						
+					
+						<tr>
+							<td colspan="3">
+								*본 설문은 대학생을 대상으로 진행됩니다. 귀하는 대학생이신가요?<br>
+								
+							<input type="radio" name="category" value="그렇다" ${dto.category=="그렇다"?"checked='checked'":""}  style="width:30px;" required="required">그렇다
+								<input type="radio" name="category" value="아니다" ${dto.category=="아니다"?"checked='checked'":""}  style="width:30px;"  required="required">아니다
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="3">
+								1. 귀하는 2017년 2학기에 등록하실 예정입니까?<br>
+								<input type="radio" name="category" value="그렇다" ${dto.category=="그렇다"?"checked='checked'":""}  style="width:30px;" required="required">그렇다
+								<input type="radio" name="category" value="아니다" ${dto.category=="아니다"?"checked='checked'":""}  style="width:30px;" required="required">아니다
+								
+							</td>
+						</tr>
+						
+				
+					</tbody>
+					
+					
+					<tfoot>
+						<tr>
+							<td colspan="4" style="text-align: center;">
+								<button>확인 </button>
+								
+								<button type="button" onclick="javascript: history.back();">취소</button>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</form>
+	</div>
 </div>

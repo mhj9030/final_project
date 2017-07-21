@@ -9,6 +9,7 @@ public interface NoticeService {
 	public int dataCount(Map<String, Object> map);
 	public Notice readNotice(int num);
 	public int updateHitCount(int num);
+	public List<Notice> listNoticeTop();
 	
 	public int deleteNotice(Map<String, Object> map);
 	public int updateNotice(Notice dto);

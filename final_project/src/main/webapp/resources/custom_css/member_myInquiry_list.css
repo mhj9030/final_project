@@ -14,11 +14,27 @@
 	margin-bottom: 50px;
 }
 
+.myInquiry-list-body .table-hover th {
+    text-align: center;
+}
 
+.myInquiry-list-body .footer-bar {
+    margin-top: 60px;
+    clear: both;
+}
 
+.myInquiry-list-body .footer-bar-submit {
+	float: left;
+    width: 20%;
+    min-width: 85px;
+	text-align: left;
+}
 
-
-
+.myInquiry-list-body .footer-search-bar {
+	float: left;
+    width: 60%;
+    text-align: center;
+}
 
 
 

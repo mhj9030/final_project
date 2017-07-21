@@ -31,6 +31,18 @@
 			</thead>
 			
 			<tbody>
+			
+			  <c:forEach var="dto" items="${noticeList}">
+                    <tr align="center">
+                        <td class="text-center"><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
+                        <td align="left">
+                        <a href="${articleUrl}&num=${dto.notNum}">${dto.subject}</a></td>
+                        <td>${dto.mName}</td>
+                        <td>${dto.created}</td>
+                        <td>${dto.hitCount}</td>
+                    </tr>
+    	 </c:forEach>      
+			
 			<c:forEach var="dto" items="${list}">
 			
 				<tr align="center">

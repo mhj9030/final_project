@@ -165,7 +165,7 @@ $(function() {
 
 
 <form name = "loginac" method="post" onsubmit="return login();">
-      <input type="email" id="mId" name = "mId" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
+      <input type="text" id="mId" name = "mId" class="form-control" placeholder="E-mail" required="required" autofocus="autofocus">
 
       <input type="password" id="mPwd" name = "mPwd" class="form-control" placeholder="Password" required="required">
 	<input type="hidden" name="state" value="navlogin">

@@ -48,7 +48,6 @@ public class CreatedController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
 		Company dto=service.readCompanySerial(info.getcSerial());
-		System.out.println(dto.getcSerial());
 		
 		if(dto==null){
 			return "redirect:/company/search";

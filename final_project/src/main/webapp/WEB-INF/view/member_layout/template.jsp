@@ -46,6 +46,10 @@
 <link href="<%=cp%>/resources/custom_css/member_layout.css" rel="stylesheet">
 <!-- member_myInquiry_list.css -->
 <link href="<%=cp%>/resources/custom_css/member_myInquiry_list.css" rel="stylesheet">
+<!-- member_myInquiry_article.css -->
+<link href="<%=cp%>/resources/custom_css/member_myInquiry_article.css" rel="stylesheet">
+<!-- member_myInquiry_crated.css -->
+<link href="<%=cp%>/resources/custom_css/member_myInquiry_created.css" rel="stylesheet">
 
 </head>
 <body>

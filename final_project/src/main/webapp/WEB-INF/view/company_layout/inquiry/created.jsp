@@ -50,9 +50,9 @@
 <div class="inquiry-created-body">
 	<div class="body-header">
 		<h3>
-			<c:if test="${mode=='created'}">문의하기</c:if>
-			<c:if test="${mode=='answer'}">답변하기</c:if>
-			<c:if test="${mode=='update'}">문의수정</c:if>
+			<c:if test="${mode=='created'}">| 문의하기</c:if>
+			<c:if test="${mode=='answer'}">| 답변하기</c:if>
+			<c:if test="${mode=='update'}">| 문의수정</c:if>
 		</h3>
 	</div>
 	

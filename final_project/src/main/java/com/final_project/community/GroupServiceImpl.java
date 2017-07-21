@@ -1,5 +1,6 @@
 package com.final_project.community;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,18 @@ public class GroupServiceImpl implements GroupService{
 	@Autowired
 	private FileManager fileManager;
 	
+	
+	@Override
+	public int maxGroupSeq() {
+		int result=0;
+		try {
+			result=dao.getReadData("community_group.maxGroupSeq");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
 	@Override
 	public int insertGroup(Group dto, String pathname) {
 		int result = 0;
@@ -27,13 +40,36 @@ public class GroupServiceImpl implements GroupService{
 				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
 			}
 			
-			result = dao.insertData("community_group.insertGroup", dto);
+			int seq = maxGroupSeq()+1;
+			dto.setGroupNum(seq);
+			dao.insertData("community_group.insertGroup", dto);
+			
+			createGroupTable(seq);
+			
+			result = 1;
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		
 		return result;
 	}
+	
+	@Override
+	public int createGroupTable(int seq) {
+		int result=0;
+		try {
+			dao.updateData("community_group.createBoardTable", seq);
+			dao.updateData("community_group.createBoardLikeTable", seq);
+			dao.updateData("community_group.createBoardReplyTable", seq);
+			
+			result=1;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
 	@Override
 	public List<Group> listGroup(Map<String, Object> map) {
 		List<Group> list = null;
@@ -187,4 +223,120 @@ public class GroupServiceImpl implements GroupService{
 		return dto;
 	}
 
+	
+	@Override
+	public int maxGroupBoardSeq(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.getReadData("community_group.maxGroupBoardSeq" ,map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	@Override
+	public int insertGroupBoard(GroupBoard dto, String pathname) {
+		int result=0;
+		try {
+			if(! dto.getUpload().isEmpty()){
+				String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+				dto.setSaveFilename(saveFilename);
+				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("groupNum", dto.getGroupNum());
+			dto.setGbNum(maxGroupBoardSeq(map)+1);
+
+			result = dao.insertData("community_group.insertGroupBoard", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<GroupBoard> listGroupBoard(Map<String, Object> map) {
+		List<GroupBoard> list = null;
+		
+		try{
+			list=dao.getListData("community_group.listGroupBoard",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int dataCountBoard(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("community_group.dataCountBoard", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public GroupBoard readGroupBoard(int gbNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateHitCount(int gbNum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public GroupBoard preReadGroupBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GroupBoard nextReadGroupBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateGroupBoard(GroupBoard dto, String pathname) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteGroupBoard(int gbNum, String pathname, String mId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertLikeGroupBoard(GroupBoard dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int countLikeGroupBoard(int gbNum) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int checkGroupMember(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.getIntValue("community_group.checkGroupMember", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }
