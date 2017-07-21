@@ -25,4 +25,15 @@ public interface ApplicationService {
 	public int insertOneProject(List<MemberDetail> list, Map<String, Object> map);
 	
 	// 2단계 저장
+	
+	
+	// 1단계 수정
+	public int updateDefault(MemberDetail dto, String pathname);
+	
+	// 2단계 수정
+	
+	// 3단계
+	public MemberDetail selectThrIntro(Map<String, Object> map);
+	public int insertThrIntro(Map<String, Object> map);
+	public int updateThrIntro(Map<String, Object> map);
 }

@@ -12,14 +12,13 @@ import com.final_project.common.dao.CommonDAO;
 
 @Service("member.applicationService")
 public class ApplicationServiceImpl implements ApplicationService{
-
 	@Autowired
 	private CommonDAO dao;
-	
 	
 	@Autowired
 	private FileManager fileManager;
 
+	// 보기
 	@Override
 	public int listCount(Map<String, Object> map) {
 		int result = 0;
@@ -152,6 +151,8 @@ public class ApplicationServiceImpl implements ApplicationService{
 		
 		return result;
 	}
+	
+	
 
 	@Override
 	public MemberDetail readResume(Map<String, Object> map) {
@@ -186,9 +187,66 @@ public class ApplicationServiceImpl implements ApplicationService{
 		int result = 0;
 		
 		try {
-			for(MemberDetail dto:list)
-				break;
+			/*for(MemberDetail dto:list)
+				break;*/
 			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int updateDefault(MemberDetail dto, String pathname) {
+		int result = 0;
+		
+		try {
+			dto.setrPhoto(pathname);
+			result = dao.updateData("applications.updateDefault", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public MemberDetail selectThrIntro(Map<String, Object> map) {
+		MemberDetail dto = new MemberDetail();
+		
+		try {
+			dto = dao.getReadData("applications.selectThrIntro", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
+	}
+	
+	@Override
+	public int insertThrIntro(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.updateData("applications.insertThrIntro", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int updateThrIntro(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.getIntValue("applications.updateThrIntroCheck", map);
+			if(result==0)
+				result = dao.insertData("applications.insertThrIntro", map);
+			else
+				result = dao.updateData("applications.updateThrIntro", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
