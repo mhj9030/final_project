@@ -557,4 +557,28 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return result;
 	}
+
+	@Override
+	public int joinGroup(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.insertData("community_group.joinGroup", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int outGroup(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.deleteData("community_group.outGroup", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }

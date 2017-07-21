@@ -62,7 +62,7 @@ function deleteGroup() {
 		</div>
 		<div style="float: left; width: 20%; height: 100%;">
 				<c:if test="${check==0}">
-					<button class="btn btn-info" style="width: 100%; height:100%">
+					<button class="btn btn-info" style="width: 100%; height:100%" onclick="javascript:location.href='<%=cp%>/community/group/join?groupNum=${dto.groupNum}&page=${page}'">
 						가입하기
 					</button>
 				</c:if>
@@ -73,7 +73,7 @@ function deleteGroup() {
 					</button>
 				</c:if>
 				<c:if test="${check==1 && dto.mName!=sessionScope.member.userName}">
-					<button class="btn btn-info" style="width: 100%; height:100%">
+					<button class="btn btn-info" style="width: 100%; height:100%" onclick="javascript:location.href='<%=cp%>/community/group/out?groupNum=${dto.groupNum}&page=${page}'">
 						탈퇴하기
 					</button>
 				</c:if>
