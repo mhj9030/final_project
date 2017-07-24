@@ -35,26 +35,26 @@
 			<intercept-url pattern="/resources/**" access="permitAll" />
 	        
 	         <!-- 모든 페이지 -->
-	        <intercept-url pattern="/profile/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/community/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/help_layout/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/employ/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/talent/**" access="hasRole('ROLE_COMPANY')"/>
-	        <intercept-url pattern="/point/**" access="hasRole('ROLE_USER')"/>
+	        <intercept-url pattern="/profile/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/community/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/help_layout/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/employ/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/talent/**" access="hasAnyRole('ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/point/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 	        
-	        <intercept-url pattern="/member/scrap/**" access="hasAnyRole('ROLE_USER')"/>
-	        <intercept-url pattern="/member/applications/**" access="hasAnyRole('ROLE_USER')"/>
-	        <intercept-url pattern="/member/myInquiry/**" access="hasAnyRole('ROLE_USER')"/>
+	        <intercept-url pattern="/member/scrap/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/member/applications/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/member/myInquiry/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 	        
-	        <intercept-url pattern="/company/search/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/company/created/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/company/gover_news/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/company/gover_job/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY')"/>
-	        <intercept-url pattern="/company/employ/**" access="hasRole('ROLE_COMPANY')"/>
-	        <intercept-url pattern="/company/applicant/**" access="hasRole('ROLE_COMPANY')"/>
-	        <intercept-url pattern="/company/inquiry/created" access="hasRole('ROLE_USER')"/>
-	        <intercept-url pattern="/company/inquiry/createdSubmit" access="hasRole('ROLE_USER')"/>
-	        <intercept-url pattern="/company/inquiry/**" access="hasRole('ROLE_COMPANY')"/>
+	        <intercept-url pattern="/company/search/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/created/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/gover_news/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/gover_job/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/employ/**" access="hasAnyRole('ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/applicant/**" access="hasAnyRole('ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/inquiry/created" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/inquiry/createdSubmit" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/company/inquiry/**" access="hasAnyRole('ROLE_COMPANY','ROLE_ADMIN')"/>
 			
 
 	        <!--  사용자 정의 로그인 폼  -->

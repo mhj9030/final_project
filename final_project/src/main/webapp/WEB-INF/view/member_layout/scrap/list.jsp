@@ -217,38 +217,7 @@ function ajaxHTML(url, type, query) {
 				out+="</div>";
 				out+="</div>";
 				out+="<hr>";
-				/* <div class="row">
-				<div class="col-md-12">
-					<div class="col-md-1">
-						<input type="checkbox" class="form-group">
-					</div>
-					<div class='col-md-2 center-block' > 
-						<div class='container'><a href='C.cSerial'>스크랩일</a></div>
-					</div>
-					<div class='col-md-2'> 				
-							<a href='ceNum'>회사명</a>
-					</div>
-					<div class='col-md-3'> 				
-							제목
-					</div>
-					<div class='col-md-2'> 				
-							마감일
-					</div>
-					<div class='col-md-2'>	
-							<a style='background: #5BC0DE;border-radius: 3px;color:white;list-style: none;font-size:20px;''>지원하기</a>
-					</div>
-				</div>
-				
-				
-			</div>
-			
-			<hr> */
-			}
-			/* out = out.substring(0,out.length-11);
-			out+="<hr>";
-			out+="<div class='col-md-12 text-center'>"+data.paging+"</div>";
-			out+="</div>"; */
-			
+			}	
 			
 			if($.trim(data)=="error") {
 				listPage(page);

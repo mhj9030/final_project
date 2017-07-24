@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 .goverNews-article-body{
 	clear:both;
@@ -8,6 +9,11 @@
     margin-top: 40px;
     width: 800px;
  	height: auto;
+}
+
+.goverNews-article-body h3{
+	margin-top: 40px;
+	font-family: 'Jeju Gothic', serif;
 }
 
 .goverNews-article-body .body-header{

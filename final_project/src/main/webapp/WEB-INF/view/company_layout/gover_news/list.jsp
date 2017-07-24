@@ -16,8 +16,12 @@
 <div class="gover_news-list-body" align="center">
 	<div class="body-header">
 		<h3 align="left">
-			| 공무원 소식 <small></small>
+			| 공무원 소식 
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				Government Employee News
+			</small>
 		</h3>
+		<hr>
 	</div>
 
 	<div>

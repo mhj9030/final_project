@@ -53,7 +53,11 @@
 			<c:if test="${mode=='created'}">| 문의하기</c:if>
 			<c:if test="${mode=='answer'}">| 답변하기</c:if>
 			<c:if test="${mode=='update'}">| 문의수정</c:if>
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				Company Inquiry
+			</small>
 		</h3>
+		<hr>
 	</div>
 	
 	<form name="inquiryForm" method="post">

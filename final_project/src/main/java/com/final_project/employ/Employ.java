@@ -9,7 +9,7 @@ private String maname,subname;
 
 //company 회사번호 회사명 회사사진
 private int cNum;
-private String cSerial,cName,cLogoimage,cAddress;
+private String cSerial,cName,cLogoimage,cAddress,cIntro;
 //employ_com 공고번호 제목 지원자격 근무조건 마감일등록일
 private int ceNum,cePeople;
 private String ceSubject, ability, ceType,cePrefere,ceETC,cePay,modyTime,cePlace;
@@ -18,10 +18,30 @@ private Date ceStart, ceEnd;
 private int liCode;
 private String license;
 
+//main
+private int rank;
+private String applicant_count;
 
 
 
-
+public String getcIntro() {
+	return cIntro;
+}
+public void setcIntro(String cIntro) {
+	this.cIntro = cIntro;
+}
+public int getRank() {
+	return rank;
+}
+public void setRank(int rank) {
+	this.rank = rank;
+}
+public String getApplicant_count() {
+	return applicant_count;
+}
+public void setApplicant_count(String applicant_count) {
+	this.applicant_count = applicant_count;
+}
 public String getcAddress() {
 	return cAddress;
 }

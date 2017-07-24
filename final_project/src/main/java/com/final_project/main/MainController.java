@@ -16,6 +16,8 @@ import com.final_project.community.GroupService;
 import com.final_project.community.News;
 import com.final_project.community.NewsService;
 import com.final_project.company.Company;
+import com.final_project.employ.Employ;
+import com.final_project.employ.EmployService;
 
 @Controller("mainController")
 public class MainController {
@@ -25,7 +27,8 @@ public class MainController {
 	private GroupService groupService;
 	@Autowired
 	private NewsService newsService;
-	
+	@Autowired
+	private EmployService employService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest req) throws Exception{
@@ -44,10 +47,11 @@ public class MainController {
 		}
 		List<News> newsList = newsService.listMainNews();
 		
+		List<Employ> employList  = employService.list_applicant_rank();
 		
 		
 		
-		
+		model.addAttribute("employList",employList);
 		model.addAttribute("groupList", groupList);
 		model.addAttribute("comList", comList);
 		model.addAttribute("articleUrl", articleUrl);

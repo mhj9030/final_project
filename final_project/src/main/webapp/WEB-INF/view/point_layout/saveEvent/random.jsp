@@ -8,11 +8,10 @@
 %>
 
 <div class="page_body">
-	<div class="page_head">
-		<h3>| 포인트 복권</h3>
-		<!-- <p>포인트를 이용한 포인트 수집 이벤트 게시판입니다.</p> -->
-		<hr>
-	</div>
+	<h3>
+		| 포인트 복권 
+		<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Point Event</small>
+	</h3><hr>
 
 	<!-- 나의 포인트 -->
 	<div style="height: 50px; text-align: center; font-size: 7;">

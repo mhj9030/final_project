@@ -14,24 +14,25 @@
 </style>
 
 <div class="page_body .container-fluid ">
-	<div class="page_head">
-		<h3>| 이력서 열람</h3><hr>
-	</div>
+	<h3>
+		 이력서 열람<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Read Resume</small>
+	</h3><hr>
+	
 	<div id="resume_div">
 		<table class="table table-bordered">
 			<caption>
 				▶ 인적사항
 				<input type="hidden" name="rNum" value="${rDto.rNum}" /> 
-				( <c:if test="">공개</c:if><c:if test="">비공개</c:if> 이력서 )
+				( <c:if test="${rDto.resumeType==1}">공개</c:if><c:if test="${rDto.resumeType==0}">비공개</c:if> 이력서 )
 			</caption>
 			<tr>
 				<td rowspan="4" width="120px">
 					<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;">
-						<c:if test="${empty rDto.saveFilename}">
+						<c:if test="${empty rDto.rPhoto}">
 							<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 140px;" />
 						</c:if>
-						<c:if test="${not empty rDto.saveFilename}">
-							<img src="<%=cp%>/uploads/resume/${rDto.saveFilename}"  style="width: 110px; height: 140px;"/>
+						<c:if test="${not empty rDto.rPhoto}">
+							<img src="<%=cp%>/uploads/resume/${rDto.rPhoto}"  style="width: 110px; height: 140px;"/>
 						</c:if>
 					</div>
 				</td>
@@ -42,7 +43,7 @@
 			</tr>
 			<tr>
 				<td>생년월인</td>
-				<td>${mDto.mbirth} ( ${mDto.age}세)</td>
+				<td>${rDto.mbirth} ( ${rDto.age}세)</td>
 				<td>폰번호</td>
 				<td colspan="3">${rDto.phone}</td>
 			</tr>
@@ -50,7 +51,7 @@
 				<td>이메일</td>
 				<td>${rDto.eMail}</td>
 				<td>성별</td>
-				<td width="80px">${mDto.mgender}</td>
+				<td width="80px">${rDto.mgender}</td>
 				<td width="90px">병역</td>
 				<td>${rDto.army}</td>
 			</tr>

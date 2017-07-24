@@ -28,6 +28,7 @@
 <script src="<%=cp%>/resources/js/bootstrap.js" type="text/javascript"></script>
 <!-- Profile_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gudea|Yellowtail" rel="stylesheet">
 
 
 
