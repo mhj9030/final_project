@@ -195,6 +195,19 @@ public class EmployServiceImpl implements EmployService{
 		return result;
 	}
 
+	@Override
+	public List<Employ> list_applicant_rank() {
+List<Employ> list = null;
+		
+		try {
+			list=dao.getListData("employ.list_applicant_rank");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
 	
 
 	

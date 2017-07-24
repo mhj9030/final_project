@@ -79,29 +79,29 @@
 		</div>
 	</div> 
 	
+	<!-- 채용시작 -->
 	
 	<div class="row">
+		<c:forEach var="dto" items="${employList}">
 	  <div class="col-md-4">
 	  	<div class="panel-hire">
 	  		<div class="hire-info">
-	  			<div class="hire-img"><img src="<%=cp%>/resources/image/Desert.jpg"></div>
+	  			<div class="hire-img"><img src='<%=cp%>/uploads/company/${dto.cLogoimage}' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'></div>
 	  			<div class="hire-etc">
-	  				<div>채용제목</div>
-	  				<div>기업명</div>
-	  				<div>신입 _경력</div>
+	  				<div><a href='<%=cp%>/employ/article?ceNum=${dto.ceNum}'>${dto.ceSubject}</a></div>
+	  				<div><a href='<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}'>${dto.cName}</a></div>
+	  				<div>${dto.ceType}</div>
 	  			</div>
 	  		</div>
-	  		<div class="hire-type">IT</div>
-	  		<div class="hire-now">현재 지원자 수 , 마감일, 연봉, 등등</div>
+	  		<div class="hire-type">현재 지원자 수: ${dto.applicant_count }, 분야:${dto.subname}</div>
+	  		<div class="hire-now">마감일: ~${dto.ceEnd }, 연봉 ${dto.cePay}</div>
 	  	</div>
 	  </div>
-	  <div class="col-md-4">
-		<div class="panel-hire"></div>
-	  </div>
-	  <div class="col-md-4">
-	  	<div class="panel-hire"></div>
-	  </div>
+	   </c:forEach>
+	 
 	</div>
+	
+	<!-- 채용끝 -->
 	
 	<div class="row blank">
 		<div class="col-md-11">
@@ -213,3 +213,9 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+function imageError(image) {
+	image.src="<%=cp%>/resources/image/profile_img.jpg";
+}
+</script>

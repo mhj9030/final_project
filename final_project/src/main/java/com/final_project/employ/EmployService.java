@@ -19,4 +19,5 @@ public interface EmployService {
 	public int apply_resume(Map<String, Object> map);
 	public int dataCount();
 	public int add_scrap(Map<String, Object> map);
+	public List<Employ> list_applicant_rank();
 }

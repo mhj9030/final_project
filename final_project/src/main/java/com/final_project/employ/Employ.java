@@ -18,10 +18,24 @@ private Date ceStart, ceEnd;
 private int liCode;
 private String license;
 
+//main
+private int rank;
+private String applicant_count;
 
 
 
-
+public int getRank() {
+	return rank;
+}
+public void setRank(int rank) {
+	this.rank = rank;
+}
+public String getApplicant_count() {
+	return applicant_count;
+}
+public void setApplicant_count(String applicant_count) {
+	this.applicant_count = applicant_count;
+}
 public String getcAddress() {
 	return cAddress;
 }
