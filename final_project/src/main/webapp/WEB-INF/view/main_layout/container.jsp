@@ -75,7 +75,7 @@
 			<h4 class="panel-title">인기 채용정보</h4>
 		</div>
 		<div class="col-md-1">
-			<a class="panel-link" href="#">더보기</a>
+			<a class="panel-link" href="<%=cp%>/employ/main">더보기</a>
 		</div>
 	</div> 
 	

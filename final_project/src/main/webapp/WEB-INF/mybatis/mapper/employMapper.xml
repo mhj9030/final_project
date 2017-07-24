@@ -112,7 +112,7 @@
 
 <select id="read_com_employ"
 				parameterType="Integer" resultType="com.final_project.employ.Employ">
-	select ceNum,cNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime,cePlace,cAddress
+	select ceNum,cNum, cIntro,ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime,cePlace,cAddress
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
