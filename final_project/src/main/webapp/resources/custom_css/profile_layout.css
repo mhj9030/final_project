@@ -132,7 +132,13 @@
 }
 
 .section .icontrol {
+	margin-top: 5px; 
 	display: inline;
+	text-align: right;
+}
+
+.section .icontrol a{
+	color: #ffffff;
 }
 
 .section.summary .user_thumb .icontrol .form-inline {

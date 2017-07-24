@@ -12,9 +12,12 @@ SELECT m.mid, mname, mpwd, expertise, eid, TO_CHAR(mbirth, 'YYYY-MM-DD')mbirth,
 			LEFT OUTER JOIN profile p ON m.mid = p.mid
       			LEFT OUTER JOIN expertise e ON m.mid = e.eid
 					WHERE m.mid = #{mid} 
-					
-				
 </select>
+
+<!-- 프로필 등록 -->
+<insert id="insertProfile">
+	insert into profile(mId) values(#{mId})
+</insert>
 
 
 </mapper>
