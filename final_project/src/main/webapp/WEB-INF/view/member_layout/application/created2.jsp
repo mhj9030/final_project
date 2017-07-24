@@ -128,18 +128,40 @@ $(document).ready(function () {
 });
 
 function add(type) {
-	var out = '<tr>';
-	out += '	<td><input type="text" name="' + type + '1" class="form-control input-sm" /></td>';
-	out += '	<td><input type="text" name="' + type + '2" class="form-control input-sm" /></td>';
-	if(type!='language'){
-	out += '	<td><input type="text" name="' + type + '3" class="form-control input-sm" /></td>';
+	if(type=='license'){
+		var out = '<tr>';
+		out += '	<td><input type="text" name="license" class="form-control input-sm" /></td>';
+		out += '	<td><input type="text" name="expStart" class="form-control input-sm" /></td>';
+		out += '	<td><input type="text" name="liGC" class="form-control input-sm" /></td>';
+		out += '	<td>';
+		out += '		<button type="button" id="btn-remove" class="btn btn-default" aria-label="Left Align" onclick="remove(\'' + type + '\');">';
+		out += '			<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
+		out += '		</button>';
+		out += '	</td>';
+		out += '</tr>';
+	}else if(type=='language'){
+		var out = '<tr>';
+		out += '	<td><input type="text" name="language" class="form-control input-sm" /></td>';
+		out += '	<td><input type="text" name="laScore" class="form-control input-sm" /></td>';
+		out += '	<td>';
+		out += '		<button type="button" id="btn-remove" class="btn btn-default" aria-label="Left Align" onclick="remove(\'' + type + '\');">';
+		out += '			<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
+		out += '		</button>';
+		out += '	</td>';
+		out += '</tr>';
+	}else if(type=='award'){
+		var out = '<tr>';
+		out += '	<td><input type="text" name="awAgency" class="form-control input-sm" /></td>';
+		out += '	<td><input type="text" name="awSector" class="form-control input-sm" /></td>';
+		out += '	<td><input type="text" name="awDate" class="form-control input-sm" /></td>';
+		out += '	<td>';
+		out += '		<button type="button" id="btn-remove" class="btn btn-default" aria-label="Left Align" onclick="remove(\'' + type + '\');">';
+		out += '			<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
+		out += '		</button>';
+		out += '	</td>';
+		out += '</tr>';
 	}
-	out += '	<td>';
-	out += '		<button type="button" id="btn-remove" class="btn btn-default" aria-label="Left Align" onclick="remove(\'' + type + '\');">';
-	out += '			<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
-	out += '		</button>';
-	out += '	</td>';
-	out += '</tr>';
+	
 	$('#' + type + ' > tbody:last').append(out);
 }
 

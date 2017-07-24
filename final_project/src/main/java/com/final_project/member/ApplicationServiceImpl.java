@@ -186,17 +186,10 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 
 	@Override
-	public int updateDefault(MemberDetail dto, String pathname) {
+	public int updateDefault(MemberDetail dto) {
 		int result = 0;
 		
 		try {
-			if(! dto.getUpload().isEmpty()){
-				String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
-				dto.setrPhoto(saveFilename);
-				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
-			}
-			
-			dto.setrPhoto(pathname);
 			result = dao.updateData("applications.updateDefault", dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -219,11 +212,11 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 	
 	@Override
-	public int insertThrIntro(Map<String, Object> map) {
+	public int insertThrIntro(MemberDetail dto) {
 		int result = 0;
 		
 		try {
-			result = dao.updateData("applications.insertThrIntro", map);
+			result = dao.updateData("applications.insertThrIntro", dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

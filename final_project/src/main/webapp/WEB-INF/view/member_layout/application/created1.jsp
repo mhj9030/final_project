@@ -30,12 +30,16 @@
 		</c:if>
 	</h3><hr>
 	
-	<form name="member_detail" method="post">
+	<form name="member_detail" method="post" enctype="multipart/form-data">
 		<div id="resume_div">
 			<table class="table table-bordered">
 				<caption>
-					▶ 인적사항
-					<input type="hidden" name="rNum" value="${rDto.rNum}" /> 
+					이력서 제목: 
+					<c:if test="${mode!='update'}"><input type="text" name="memo" value="나의이력서" /></c:if>
+					<c:if test="${mode=='update'}"><input type="text" name="memo" value="${rDto.memo}" /></c:if>
+					<br><br>
+					▶ 인적사항 
+					<c:if test="${mode=='update'}"><input type="hidden" name="rNum" value="${rDto.rNum}" /> </c:if>
 					( 이력서 공개 설정 : <input type="radio" name="resumeType" value="1"> 공개 
 					<input type="radio" name="resumeType" value="0" checked="checked"> 비공개 )
 				</caption>
@@ -60,7 +64,7 @@
 							<input type="text" name="rName" class="form-control input-sm" value="${sessionScope.member.userName}" />
 						</c:if>
 						<c:if test="${mode=='update'}">
-							<input type="text" name="rName" class="form-control input-sm" value="${mDto.mname}" />
+							<input type="text" name="rName" class="form-control input-sm" value="${rDto.rName}" />
 						</c:if>
 					</td>
 					<td width="80px">영어</td>
@@ -68,7 +72,14 @@
 				</tr>
 				<tr>
 					<td>생년월인</td>
-					<td>${mDto.mbirth} ( ${mDto.age}세)</td>
+					<td>
+						<c:if test="${mode!='update'}">
+							${mDto.mbirth} ( ${mDto.age}세)
+						</c:if>
+						<c:if test="${mode=='update'}">
+							${rDto.mbirth} ( ${rDto.age}세)
+						</c:if>
+					</td>
 					<td>폰번호</td>
 					<td colspan="3"><input type="tel" name="phone" class="form-control input-sm" placeholder="핸드폰 번호" value="${rDto.phone}" /></td>
 				</tr>
@@ -83,7 +94,14 @@
 						</c:if>
 					</td>
 					<td>성별</td>
-					<td width="80px">${mDto.mgender}</td>
+					<td width="80px">
+						<c:if test="${mode!='update'}">
+							${mDto.mgender}
+						</c:if>
+						<c:if test="${mode=='update'}">
+							${rDto.mgender}
+						</c:if>
+					</td>
 					<td width="90px">병역</td>
 					<td>
 						<select name="army" id="army" class="form-control">
@@ -164,7 +182,7 @@
 					<td>${dto.part}</td>
 					<td>
 						${dto.memo}
-						<input type="hidden" name="mcNum" value="${dto.mcNum}" />
+						<%-- <input type="hidden" name="mcNum" value="${dto.mcNum}" /> --%>
 					</td>
 				</tr>
 			</c:forEach>
@@ -190,7 +208,7 @@
 					<td>${dto.prName}</td>
 					<td>
 						${dto.expState}
-						<input type="hidden" name="prNum" value="${dto.prNum}" />
+						<%-- <input type="hidden" name="prNum" value="${dto.prNum}" /> --%>
 					</td>
 				</tr>
 			</c:forEach>

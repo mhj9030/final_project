@@ -92,20 +92,17 @@ public class ApplicationController {
 		dto.setmId(info.getUserId());
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "community";
+		String pathname = root + File.separator + "uploads" + File.separator + "resume";
 		System.out.println(pathname);
 		System.out.println(dto.getUpload());
-		//getrPhoto
+		
 		if(! dto.getUpload().isEmpty()){
 			String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
 			dto.setSaveFilename(saveFilename);
-			//dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
-			System.out.println(saveFilename);
 		}
 		
 		int rNum = service.insertOneDetails(dto);
 		map.put("rNum", rNum);
-		System.out.println(rNum);
 		List<MemberDetail> test = null;
 		service.insertOneCareer(test, map);
 		service.insertOneProject(test, map);
@@ -128,7 +125,7 @@ public class ApplicationController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("rNum", rNum);
 		
-		service.insertThrIntro(map);
+		service.insertThrIntro(dto);
 		
 		model.addAttribute("rNum", rNum);
 		
@@ -139,6 +136,8 @@ public class ApplicationController {
 	@RequestMapping("/member/applications/application")
 	public String article(@RequestParam int rNum, HttpSession session, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		map.put("mId", info.getUserId());		
 		map.put("rNum", rNum);
 		
 		MemberDetail rDto = service.readResume(map);
@@ -148,12 +147,14 @@ public class ApplicationController {
 		
 		MemberDetail iDto = service.selectThrIntro(map);
 		
+		
+		System.out.println(rDto.getrPhoto());
+		
 		model.addAttribute("rNum", rNum);
 		model.addAttribute("rDto", rDto);
 		model.addAttribute("acList", acList);
 		model.addAttribute("proList", proList);
 		model.addAttribute("coList", coList);
-		
 		model.addAttribute("iDto", iDto);
 		
 		return ".member_layout.application.application";
@@ -232,17 +233,14 @@ public class ApplicationController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "community";
+		String pathname = root + File.separator + "uploads" + File.separator + "resume";
 		
-		//getrPhoto
 		if(! dto.getUpload().isEmpty()){
 			String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
 			dto.setSaveFilename(saveFilename);
-			dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
 		}
-		System.out.println(pathname);
 		
-		service.updateDefault(dto, pathname);
+		service.updateDefault(dto);
 		
 		model.addAttribute("rNum", rNum);
 		

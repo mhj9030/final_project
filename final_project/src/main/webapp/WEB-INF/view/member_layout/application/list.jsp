@@ -42,7 +42,7 @@
 						<td width="50px"><input type="checkbox" name="resuNum" value="${dto.rNum}" style="width: 20px;" /></td>
 						<td width="150px">${dto.rownum}</td>
 						<td align="left" width="50%">
-							<a href="<%=cp%>/member/applications/application?rNum=${dto.rNum}">자기소개서 ${dto.rownum}</a>
+							<a href="<%=cp%>/member/applications/application?rNum=${dto.rNum}">이력서${dto.memo}</a>
 						</td>
 						<td>${dto.endWrite}</td>
 					</tr>

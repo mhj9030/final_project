@@ -27,12 +27,12 @@ public interface ApplicationService {
 	
 	
 	// 1단계 수정
-	public int updateDefault(MemberDetail dto, String pathname);
+	public int updateDefault(MemberDetail dto);
 	
 	// 2단계 수정
 	
 	// 3단계
 	public MemberDetail selectThrIntro(Map<String, Object> map);
-	public int insertThrIntro(Map<String, Object> map);
+	public int insertThrIntro(MemberDetail dto);
 	public int updateThrIntro(Map<String, Object> map);
 }
