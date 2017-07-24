@@ -118,7 +118,7 @@ public class PhotoServiceImpl implements PhotoService{
 		
 				if (newFilename != null) {
 					// 이전 파일 지우기
-					if(dto.getSaveFilename().length()!=0 && dto.getSaveFilename()!=null) {
+					if(dto.getSaveFilename()!=null && dto.getSaveFilename().length()!=0) {
 						fileManager.doFileDelete(dto.getSaveFilename(), pathname);
 					}
 					

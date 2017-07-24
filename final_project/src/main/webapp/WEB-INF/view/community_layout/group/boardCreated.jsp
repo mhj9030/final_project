@@ -7,7 +7,7 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-  if(typeof String.prototype.trim !== 'function') {
+if(typeof String.prototype.trim !== 'function') {
     String.prototype.trim = function() {
         var TRIM_PATTERN = /(^\s*)|(\s*$)/g;
         return this.replace(TRIM_PATTERN, "");
@@ -16,21 +16,21 @@
 
   function check() {
         var f = document.boardForm;
- 
+ 		
     	var str = f.subject.value;
         if(!str) {
             alert("제목을 입력하세요. ");
             f.subject.focus();
             return false;
         }
-
        
         var mode="${mode}";
         if(mode=="created")
-    		f.action="<%=cp%>/community/group/board/created";
-    	else if(mode=="update")
-    		f.action="<%=cp%>/community/group/board/update";
-       	
+    		f.action="<%=cp%>/community/group/boardCreated";
+    	else if(mode=="update"){
+    		f.action="<%=cp%>/community/group/boardUpdate";
+    	}
+    		
        	return true;
   }
 </script>
@@ -38,7 +38,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-		그룹   | 글올리기
+		그룹   | <c:if test="${mode=='created'}">글올리기</c:if><c:if test="${mode=='update'}">수정하기</c:if>
 		</h3>
 	</div>
 
@@ -50,7 +50,7 @@
 						<tr>
 							<td class="input_info">작성자명</td>
 							<td colspan="3">
-								<input type="text" name="name" value="${sessionScope.member.userName}" readonly="readonly">
+								<input type="text" name="mName" value="${sessionScope.member.userName}" readonly="readonly">
 							</td>
 						</tr>
 
@@ -94,12 +94,12 @@
 								<button type="reset" class="btn btn-default">다시입력</button>
 								<button type="button" class="btn btn-default" onclick="javascript:location.href='';">${mode=='update'?'수정취소':'등록취소'}</button> 
 								 <c:if test="${mode=='update'}">
-						         	 <input type="hidden" name="ptnum" value="${dto.gbnum}">
+						         	 <input type="hidden" name="gbNum" value="${dto.gbNum}">
 						         	 <input type="hidden" name="saveFilename" value="${dto.saveFilename}">
 						         	 <input type="hidden" name="originalFilename" value="${dto.originalFilename}">
+						        	<input type="hidden" name="page" value="${page}">
 						        </c:if>
 						        <input type="hidden" name="groupNum" value="${groupNum}"> 
-						        <input type="hidden" name="page" value="${page}">
 							</td>
 						</tr>
 					</tfoot>

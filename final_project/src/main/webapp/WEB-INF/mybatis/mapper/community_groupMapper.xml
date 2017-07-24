@@ -119,10 +119,21 @@
 	</select>
 	
 	<select id="readGroup" parameterType="map" resultType="com.final_project.community.Group">
-		SELECT  groupName, groupNum, groupInfo,mName, TO_CHAR(created, 'YYYY-MM-DD') created, saveFilename, originalFilename 
+		SELECT  gi.mId, groupName, groupNum, groupInfo,mName, TO_CHAR(created, 'YYYY-MM-DD') created, saveFilename, originalFilename 
 		FROM group_info gi JOIN member m ON gi.mId = m.mId
 		WHERE groupNum = #{groupNum}  
 	</select>
+	
+	<update id="updateGroup" parameterType="com.final_project.community.Group">
+		UPDATE group_info SET  groupInfo=#{groupInfo}, 
+							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
+							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
+							WHERE groupNum = #{groupNum}
+	</update>
+	
+	<delete id="deleteGroup" parameterType="Integer">
+		DELETE FROM group_info WHERE groupNum = #{groupNum}
+	</delete>
 	
 	
 	<!-- 블로그 게시판 -->
@@ -230,7 +241,7 @@
 	<select id="listGroupBoard" parameterType="map" resultType="com.final_project.community.GroupBoard">
 		SELECT * FROM( 
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT b.gbNum, m.mId, mName, subject, TO_CHAR(b.created, 'YYYY-MM-DD') created,  
+				SELECT b.gbNum, m.mId, mName, subject, TO_CHAR(b.created, 'YYYY-MM-DD') created, b.groupNum, 
 					   hitCount, saveFilename, NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount  
 				FROM g_${groupNum}_board b JOIN member m ON b.mId=m.mId 
 				LEFT OUTER JOIN
@@ -256,5 +267,159 @@
     ]]> 
 	</select>
 	
+	<select id="readGroupBoard" parameterType="map" resultType="com.final_project.community.GroupBoard">
+		SELECT b.gbNum, b.groupNum,subject, content, created, hitCount, b.mId, mName, saveFilename, originalFilename 
+		FROM  g_${groupNum}_board b JOIN member m ON b.mId=m.mId 
+		WHERE gbNum = #{gbNum}
+	</select>
 	
+	<update id="updatehitCount" parameterType="map">
+		UPDATE g_${groupNum}_board SET hitCount = hitCount + 1 WHERE gbNum = #{gbNum}
+	</update>
+	
+	<select id="preReadGroupBoard" parameterType="map" resultType="com.final_project.community.GroupBoard">
+		SELECT tb.* FROM(
+			SELECT gbNum, subject 
+			FROM g_${groupNum}_board b JOIN member m ON b.mId=m.mId 
+			<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="board-where-list"/>
+			     	</if>
+	     			<![CDATA[
+		                 AND (gbNum > #{gbNum}) 
+		            ]]>
+	    	</where>
+	    	ORDER BY gbNum ASC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadGroupBoard" parameterType="map" resultType="com.final_project.community.GroupBoard">
+		SELECT tb.* FROM(
+			SELECT gbNum, subject 
+			FROM g_${groupNum}_board b JOIN member m ON b.mId=m.mId 
+			<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="board-where-list"/>
+			     	</if>
+	     			<![CDATA[
+		                 AND (gbNum < #{gbNum})
+		            ]]>
+	    	</where>
+	    	ORDER BY gbNum DESC
+	    ) tb WHERE ROWNUM=1
+	</select>
+	
+	<delete id="deleteGroupBoard" parameterType="map">
+		DELETE FROM g_${groupNum}_board  WHERE gbNum=#{gbNum} 
+	</delete>
+	
+	<update id="updateGroupBoard" parameterType="com.final_project.community.GroupBoard">
+		UPDATE g_${groupNum}_board SET subject=#{subject}, content=#{content}, 
+							saveFilename=#{saveFilename, jdbcType=VARCHAR}, 
+							originalFilename=#{originalFilename, jdbcType=VARCHAR} 
+							WHERE gbNum = #{gbNum}
+	</update>
+	
+	
+	<select id="maxGroupBoardReplyNum" parameterType="com.final_project.community.GroupBoardReply" resultType="Integer">
+	    SELECT NVL(MAX(replyNum), 0) FROM g_${groupNum}_BOARDREPLY
+	</select>
+	
+	<insert id="insertLikeGroupBoard" parameterType="com.final_project.community.GroupBoard">
+	INSERT INTO g_${groupNum}_boardlike(gbNum, mId) VALUES (#{gbNum}, #{mId})
+	</insert>
+
+	<select id="countLikeGroupBoard" resultType="Integer" parameterType="map">
+	   SELECT  NVL(COUNT(*), 0) countLikeGroupBoard
+	        FROM g_${groupNum}_boardlike WHERE gbNum=#{gbNum}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.final_project.community.GroupBoardReply">
+		INSERT INTO g_${groupNum}_boardreply(replyNum, gbNum, mId, content, answer) 
+		VALUES (#{replyNum}, #{gbNum}, #{mId}, #{content}, #{answer})
+	</insert>
+	
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) replyCount FROM g_${groupNum}_boardreply 
+		WHERE gbNum = #{gbNum} AND answer = 0 
+	</select>
+	
+	<select id="listReply" parameterType="map" resultType="com.final_project.community.GroupBoardReply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT tbreply.replyNum, gbNum, mId, mName, content, created, 
+						tbreply.answer, NVL(answerCount, 0) answerCount 
+				FROM
+				(
+					(
+						SELECT replyNum, r.gbNum, r.mId, mName, r.content, r.created, answer  
+						FROM g_${groupNum}_boardreply r JOIN member m ON r.mId=m.mId 
+						WHERE gbNum = #{gbNum} AND answer = 0
+					) tbreply
+					LEFT OUTER JOIN
+					(
+						SELECT answer, COUNT(*) answerCount 
+						FROM g_${groupNum}_boardreply 
+						GROUP BY answer 
+					) tbanswer ON tbreply.replyNum=tbanswer.answer
+				) 
+				ORDER BY replyNum DESC
+	<![CDATA[
+			)tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>			
+	</select>
+	
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM g_${groupNum}_boardreply WHERE
+	    <if test="mode == 'gbNum' ">
+			 gbNum=#{gbNum}
+		</if>
+	    <if test="mode == 'reply' ">
+			 replyNum IN 
+               (SELECT replyNum FROM g_${groupNum}_boardreply START WITH  replyNum = #{replyNum}
+	            CONNECT BY PRIOR replyNum = answer)
+		</if>
+	    <if test="mode == 'answer' ">
+			 replyNum=#{replyNum}
+		</if>
+	</delete>
+
+    <!-- 댓글별 답글 리스트 -->
+	<select id="listReplyAnswer" resultType="com.final_project.community.GroupBoardReply" parameterType="map">
+     SELECT replyNum, gbNum, r.mId, mName, content, created, answer
+	          FROM g_${groupNum}_boardreply r 
+	          JOIN member m ON r.mId=m.mId
+              WHERE answer=#{answer}
+              ORDER BY replyNum DESC
+	</select>
+	
+    <!-- 댓글별 답글 개수 -->
+	<select id="replyCountAnswer" resultType="Integer" parameterType="map">
+	   SELECT NVL(COUNT(*), 0)
+	        FROM g_${groupNum}_boardreply WHERE answer=#{answer}
+	</select>
+	
+	<insert id="joinGroup" parameterType="map">
+		INSERT INTO group_member(groupNum, mId) VALUES (#{groupNum}, #{mId}) 
+	</insert>
+	
+	<delete id="outGroup" parameterType="map">
+		DELETE FROM group_member WHERE mId=#{mId} AND groupNum=#{groupNum}
+	</delete>
+	
+	<select id="listMainGroup" resultType="com.final_project.community.Group">
+		SELECT ROWNUM, tb.* FROM(
+			select saveFilename, originalFilename, groupName, gi.groupNum, gm.memberCount
+			FROM group_info gi
+			LEFT OUTER JOIN
+			(
+			  SELECT groupNum, COUNT(*) memberCount FROM group_member
+			  GROUP BY groupNum
+			) gm ON gi.groupNum=gm.groupNum
+			ORDER BY memberCount DESC
+		<![CDATA[
+			)tb WHERE ROWNUM<=3
+		]]>
+	</select>
 </mapper>

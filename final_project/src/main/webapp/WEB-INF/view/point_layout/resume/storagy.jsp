@@ -111,6 +111,6 @@ function subPrint(data){
 }
 
 function article(num) {
-	location.href="<%=cp%>/point/storagy/article?rNum=" + num + "&page=${page}";
+	location.href="<%=cp%>/member/applications/application?rNum=" + num + "&page=${page}";
 }
 </script>

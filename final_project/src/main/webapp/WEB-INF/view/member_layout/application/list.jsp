@@ -7,6 +7,12 @@
 	String cp=request.getContextPath();
 %>
 
+<style>
+#resume_div table{
+	text-align: center;
+}
+</style>
+
 <div class="page_body">
 	<div class="page_head">
 		<h3>| 나의 지원서 관리</h3><hr>
@@ -18,10 +24,10 @@
 				<caption>나의 이력서 보관함 (${count}/5)</caption>
 				<thead>
 					<tr>
-						<th width="30px"><input type="checkbox" name=chkAll id="chkAll" onclick="check();" /></th>
+						<th width="50px"><input type="checkbox" name=chkAll id="chkAll" onclick="check();" /></th>
 						<th width="150px">이력서 번호</th>
-						<th>이력서</th>
-						<th width="150px">최종작성일</th>
+						<th width="50%">이력서</th>
+						<th>최종작성일</th>
 					</tr>
 				</thead>
 				<tr align="center">
@@ -33,9 +39,9 @@
 				</c:if>
 				<c:forEach var="dto" items="${list}">
 					<tr align="center">
-						<td><input type="checkbox" name="resuNum" value="${dto.rNum}" style="width: 20px;" /></td>
-						<td>${dto.rownum}</td>
-						<td align="left">
+						<td width="50px"><input type="checkbox" name="resuNum" value="${dto.rNum}" style="width: 20px;" /></td>
+						<td width="150px">${dto.rownum}</td>
+						<td align="left" width="50%">
 							<a href="<%=cp%>/member/applications/application?rNum=${dto.rNum}">자기소개서 ${dto.rownum}</a>
 						</td>
 						<td>${dto.endWrite}</td>
@@ -87,7 +93,7 @@ function check() {
 
 function created() {
 	if(${count<5}){
-		location.href = "<%=cp%>/member/applications/created";
+		location.href = "<%=cp%>/member/applications/created1";
 	}else{
 		alert("5개의 이력서가 이미 존재합니다.\n기존의 이력서를 삭제하시고 다시 시도해 주세요.");
 	}
