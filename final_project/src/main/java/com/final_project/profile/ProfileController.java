@@ -85,4 +85,11 @@ public class ProfileController {
 		return ".profile.settingProfile";
 	}
 
+	@RequestMapping(value="/profile/update")
+	public String updateForm(Model model) throws Exception{
+
+		model.addAttribute("profile", "on");
+		
+		return ".profile_layout.created";
+	}
 }

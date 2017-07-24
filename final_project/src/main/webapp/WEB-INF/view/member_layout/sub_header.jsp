@@ -10,7 +10,7 @@
 <div class="wrap_wide cmenu">
 	<div class="wrap">
 		<ul class="nav nav-pills" role="tablist">
-			<li role="presentation" class=""><a href="<%=cp%>/profile?id=${member.userId }">내 프로필</a></li>
+			<li role="presentation" class="${profile}"><a href="<%=cp%>/profile?id=${member.userId }">내 프로필</a></li>
 			<li role="presentation" class=""><a href="<%=cp%>/member/scrap">채용스크랩</a></li>
 			<li role="presentation" class=""><a href="<%=cp%>/member/applications/list">지원서 관리</a></li>
 			<li role="presentation" class="${myInquiry}"><a href="<%=cp%>/member/myInquiry">나의 문의 내역</a></li>
