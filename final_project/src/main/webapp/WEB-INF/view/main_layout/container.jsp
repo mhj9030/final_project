@@ -27,12 +27,18 @@
 	<!-- 광고 슬라이드 -->
 	<div class="row">
 	  <div class="col-md-6">
-	  	<div style="width: 100%; height: 150px; border: 1px solid black;">
-	  		<img style="width: 100%; height: 100%" src="">
+	  	<div style="width: 100%; height: 200px;">
+	  		<a href="https://docs.google.com/forms/d/e/1FAIpQLSfVZyIC7WYZUpT9sUvKOft1ASwP5QBLbBVBm64kO8ZVBgh0HA/viewform?c=0&w=1">
+	  			<img style="width: 100%; height: 100%" src="<%=cp%>/resources/image/Fursys-Partnership-20170101-1080x460-B.jpg">
+	  		</a>
 	  	</div>
 	  </div>
 	  <div class="col-md-6">
-		<div style="width: 100%; height: 150px; border: 1px solid black;"></div>
+		<div style="width: 100%; height: 200px;">
+			<a href="http://startup.ncia.kr/">
+				<img style="width: 100%; height: 100%" src="<%=cp%>/resources/image/Lvstudy-Business-20170719-1080x460.png">
+			</a>
+		</div>
 	  </div>
 	</div>
 	
