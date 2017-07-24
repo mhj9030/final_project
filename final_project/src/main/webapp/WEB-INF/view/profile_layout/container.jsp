@@ -23,9 +23,16 @@
                     <div class="main all">
                         <section class="section summary">
                             <div class="user_thumb">
-                                <div class="preview"> <img id="profile_image_preview" src="<%=cp %>/resources/image/profile_img.jpg" alt="" class="img img-center"> </div>
+                                <div class="preview">
+                                	<c:if test="${empty dto.proPhoto}">
+                                		<img id="profile_image_preview" src="<%=cp %>/resources/image/profile_img.jpg" alt="" class="img img-center">
+                                	</c:if>
+                                	<c:if test="${not empty dto.proPhoto}">
+                                		<img id="profile_image_preview" src="<%=cp %>/uploads/profile/${dto.proPhoto}" alt="" class="img img-center">
+                                	</c:if>
+                                </div>
                                 <div class="icontrol show">
-	                                <a href="<%=cp%>/profile/update">
+	                                <a href="<%=cp%>/profile/update?id=${member.userId}">
 	                                	<span class="glyphicon glyphicon-cog"></span> 프로필 수정
 	                                </a>
                                 </div>
@@ -48,7 +55,7 @@
  											</c:if>
  											
  											<c:if test="${!empty dto.proIntro }">
-                                             ${dto.proIntro }
+                                             ${dto.proIntro}
  											</c:if>
                                             </div>
                                         </div>
