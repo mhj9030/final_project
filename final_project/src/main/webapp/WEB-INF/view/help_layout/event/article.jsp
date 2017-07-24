@@ -64,14 +64,17 @@ function updateEvent() {
  <img src="<%=cp%>/uploads/event/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
  ${dto.content}
 </pre>
+
 </div>
+
 <hr>
 	<div class= "footer-bar">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/event/list'">목록</button>
-			
+			<c:if test="${sessionScope.member.userId=='admin'}">
 			<button type="button" class="btn btn-default btn-sm wbtn" onclick="updateEvent();">수정</button>
 			<button type="button" class="btn btn-default btn-sm wbtn" onclick="deleteEvent();">삭제</button>
+			</c:if>
 			</div>
 	</div>
 
