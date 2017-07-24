@@ -25,10 +25,14 @@
 		var type = "${type}";
 		if(type=='최신순'){
 			btn = document.getElementById('newest_btn');
-			btn.disabled = "disabled";
+			btn.style.color = "white";
+			btn.style.background = "#337ab7";
+			btn.style.borderColor = "#337ab7";
 		}else if(type=='추천순'){
 			btn = document.getElementById('like_btn');
-			btn.disabled = "disabled";
+			btn.style.color = "white";
+			btn.style.background = "#337ab7";
+			btn.style.borderColor = "#337ab7";
 		}
 	});
 
@@ -36,16 +40,20 @@
 
 
 
-
+<div class="topBar">
+		후기를 등록하고 포인트를 받으세요!!!&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/community/review/created">후기쓰기</a>
+</div>
 <div class="review_list_wrap">
-	<h3>| 면접후기</h3>
+	
+	<h3>| 면접후기 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">PostScript</small></h3>
+	<hr>
 	<p>
-		기업 면접에 관련된 인터뷰형식의 후기를 공유합니다.
+		기업 면접에 관련된 인터뷰형식의 후기를 정성껏 작성해주세요. 많은 취준생분들에게 큰 도움이 됩니다!!
 	</p>
 	<div class="review_select">
 		<form name="type_form">
-			<button class="btn btn-default btn-xs" id="newest_btn" onclick="searchType('최신순')">최신순</button>
-			<button class="btn btn-default btn-xs" id="like_btn" onclick="searchType('추천순')">추천순</button>
+			<button class="btn btn-default btn-sm" id="newest_btn" onclick="searchType('최신순')">최신순</button>
+			<button class="btn btn-default btn-sm" id="like_btn" onclick="searchType('추천순')">추천순</button>
 			<input type="hidden" name="type" value="${type}">
 		</form>
 	</div>
@@ -82,7 +90,7 @@
 							<button class="btn btn-sm btn-danger" style="width: 100px; border-radius: 0px;" >${dto.pass}</button>
 						</c:if>
 						<c:if test="${dto.pass=='합격'}">
-							<button class="btn btn-sm btn-info" style="width: 100px; border-radius: 0px;">${dto.pass}</button>
+							<button class="btn btn-sm btn-primary" style="width: 100px; border-radius: 0px;">${dto.pass}</button>
 						</c:if>
 						<c:if test="${dto.pass=='비공개'}">
 							<button class="btn btn-sm btn-default" style="width: 100px; border-radius: 0px;">${dto.pass}</button>
@@ -122,7 +130,7 @@
 		</div>
 		<div class = "footer-bar-submit">
 			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/review/created'">
-				 글쓰기
+				 후기쓰기
 			</button>
 		</div>
 	</div>	

@@ -9,14 +9,20 @@
 
 
 <div class="group_list_wrap">
-	<h3>| 그룹</h3>
-	<p>하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.</p>
+	<h3>| 그룹 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Group</small></h3>
+	<hr>
+	<p>
+		하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.
+	</p>
 	
 	<ul class="nav nav-tabs">
 		<li role="presentation"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group'">그룹리스트</a></li>
 	    <li role="presentation" class="active"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group/mylist'">나의 그룹</a></li>
 	    <li role="presentation"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group/created'">그룹 만들기</a></li>
 	</ul>
+	<div class="mylistBar">
+		그룹은 최대 3개의 그룹에 소속이 가능합니다.
+	</div>
 	
 			<div class="row group_row" style="margin-top: 50px;">
 				<c:forEach var="dto" items="${list}">
@@ -37,12 +43,11 @@
 		  					</c:forEach>
 		  				</div>
 		  				<div class="group_list_groupjoin">
-		  					<button type="button" class="btn btn-info btn-sm">자세히 보기</button>
+		  					<button type="button" class="btn btn-warning btn-sm" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">자세히 보기</button>
 		  				</div>
 		  			</div>
 		  		</c:forEach>
-		  		<p>(꼭 알아두세요!)</p>
-		  		<small>회원은 최대 3개의 그룹에 소속할 수 있습니다.</small>
+		  		
 			</div>
 </div>
 
