@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberDetail {
 	private int resumeType;
 	private String rownum, rNum, rName, engName, phone, eMail, addr, addr2, army, apply, pay, mId, endWrite, rPhoto;
+	private String mbirth, age, mgender;
 	// 자기소개
 	private String intro1, intro2, intro3, intro4;
 	// 학교
@@ -25,6 +26,24 @@ public class MemberDetail {
 	//
 	public String getRownum() {
 		return rownum;
+	}
+	public String getMbirth() {
+		return mbirth;
+	}
+	public void setMbirth(String mbirth) {
+		this.mbirth = mbirth;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
+	public String getMgender() {
+		return mgender;
+	}
+	public void setMgender(String mgender) {
+		this.mgender = mgender;
 	}
 	public int getResumeType() {
 		return resumeType;

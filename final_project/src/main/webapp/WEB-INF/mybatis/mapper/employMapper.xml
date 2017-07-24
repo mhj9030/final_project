@@ -112,7 +112,7 @@
 
 <select id="read_com_employ"
 				parameterType="Integer" resultType="com.final_project.employ.Employ">
-	select ceNum,cNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime,cePlace,cAddress
+	select ceNum,cNum, cIntro,ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage,cePay,subName,cePrefere,cePeople,ceETC, TO_CHAR(SCN_TO_TIMESTAMP(ORA_ROWSCN),'YYYY-MM-DD') modyTime,cePlace,cAddress
 			from com_employ CE
 			JOIN ability_type A ON A.atCode = CE.atCode
 			JOIN company C ON C.cSerial = CE.cSerial
@@ -135,6 +135,18 @@
 	INSERT INTO scrap(ceNum,scrapDate, mId) VALUES(#{ceNum},sysdate,#{mId})
 </insert>
 
-
+<!-- 메인출력 지원자수포함 -->
+<select id="list_applicant_rank" resultType="com.final_project.employ.Employ">
+SELECT ROWNUM rnum, tb.* FROM (
+select E.cenum,ceType,ceSubject,cePay, ceEnd ,cname, c.cSerial, cNum,cLogoimage,subname , ROW_NUMBER() OVER(ORDER BY count(E.cenum) desc) rank, count(E.cenum) applicant_count  
+from com_employ E
+JOIN sub_class SC ON SC.subcode = E.subcode
+JOIN company C ON C.cSerial = E.cSerial
+JOIN com_image CI ON C.cSerial=CI.cSerial
+JOIN applicant A ON A.cenum = E.cenum 
+GROUP BY E.ceNum,ceType,ceSubject,cePay,ceEnd,cname,c.cSerial,subname,cNum,cLogoimage
+)tb WHERE ROWNUM &lt; 4				
+				
+</select>
 
 </mapper>

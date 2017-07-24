@@ -8,9 +8,9 @@
 %>
 
 <div class="page_body">
-	<div class="page_head">
-		<h3>| 나의 포인트</h3><hr>
-	</div>
+	<h3>
+		| 나의 포인트 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">My Point</small>
+	</h3><hr>
 	
 	<!-- 나의 포인트 -->
 	<div style="padding-top: 30px;">

@@ -19,18 +19,16 @@
 </style>
 
 <div class="page_body .container-fluid ">
-	<div class="page_head">
-		<h3>
-			<c:if test="${mode!='update'}">
-			| 이력서 작성 
-			(<b>1단계</b> > 2단계 > 3단계)
-			</c:if>
-			<c:if test="${mode=='update'}">
-			| 이력서 수정 
-			(<b>1단계</b> > 2단계 > 3단계)
-			</c:if>
-		</h3><hr>
-	</div>
+	<h3>
+		<c:if test="${mode!='update'}">
+			이력서 작성 (<b>1단계</b> > 2단계 > 3단계)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume (1step)</small>
+		</c:if>
+		<c:if test="${mode=='update'}">
+			이력서 작성 (<b>1단계</b> > 2단계 > 3단계)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume</small>
+		</c:if>
+	</h3><hr>
 	
 	<form name="member_detail" method="post">
 		<div id="resume_div">
@@ -44,16 +42,16 @@
 				<tr>
 					<td rowspan="4" width="120px">
 						<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;">
-							<c:if test="${empty rDto.saveFilename}">
+							<c:if test="${empty rDto.rPhoto}">
 								<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 140px;" />
 							</c:if>
-							<c:if test="${not empty rDto.saveFilename}">
-								<img src="<%=cp%>/uploads/resume/${rDto.saveFilename}"  style="width: 110px; height: 140px;"/>
+							<c:if test="${not empty rDto.rPhoto}">
+								<img src="<%=cp%>/uploads/resume/${rDto.rPhoto}"  style="width: 110px; height: 140px;"/>
 							</c:if>
 						</div>
 						<div class="input-group file-class">
 							<label for="exampleInputFile">사진 업로드</label>
-							<input type="file" id="exampleInputFile" name="resumeImg" class="hidden">
+							<input type="file" id="exampleInputFile" name="upload" class="hidden">
 						</div>
 					</td>
 					<td width="80px">이름</td>
@@ -203,7 +201,7 @@
 		<div class= "footer-bar">
 			<div style="text-align: right;">
 				<c:if test="${mode!='update'}">
-					* 자격증, 어학점수, 수상 경력 및 자기소개는 다음 단계에서 쓸 수 있습니다. 
+					* 자격증, 어학점수, 수상 경력은 다음 단계에서 쓸 수 있습니다.<br>
 					<button type="button" class="btn btn-info" onclick="check();">저장하고 추가 정보 입력</button>
 					<button type="reset" class="btn btn-default">다시 입력</button>
 					<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
