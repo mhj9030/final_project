@@ -136,7 +136,11 @@
 	<div class="body-header">
 		<h3 align="left">
 			${mode=='update'?'| 기업정보수정':'| 기업등록'}
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				${mode=='update'?'| Company Update':'| Company Create'}
+			</small>
 		</h3>
+		<hr>
 	</div>
 
 	<form name="companyForm" method="post" enctype="multipart/form-data">

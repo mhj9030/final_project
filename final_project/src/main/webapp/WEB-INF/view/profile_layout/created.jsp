@@ -31,7 +31,13 @@
 
 <div class="profile-created-body">
 	<div class="body-header">
-		<h3>| 프로필 수정</h3>
+		<h3>
+			| 프로필 수정
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				Profile Update
+			</small>
+		</h3>
+		<hr>
 	</div>
 	
 	<form name="profileForm" method="post" enctype="multipart/form-data">
@@ -62,7 +68,6 @@
 			<textarea name="proIntro" class="profile-intro" rows="5">${dto.proIntro}</textarea>
 		</div>
 		<button type="button" class="btn btn-default" onclick="updateProfile();">수정</button>
-		<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/profile?id=${member.userId}';">돌아가기</button>
 		<input type="hidden" name="mid" value="${dto.mid}">
 	</form>
 </div>

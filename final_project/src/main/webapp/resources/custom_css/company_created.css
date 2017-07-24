@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 .created-created-body{
 	clear:both;
@@ -8,6 +9,11 @@
     margin-top: 40px;
     width: 800px;
  	height: auto;
+}
+
+.created-created-body h3{
+   margin-top: 40px;
+   font-family: 'Jeju Gothic', serif;
 }
 
 .created-created-body .body-header{

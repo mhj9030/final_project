@@ -29,6 +29,7 @@ public class ProfileController {
 		Profile dto = service.profileRead(id);
 
 		model.addAttribute("dto", dto);
+		model.addAttribute("profile", "on");
 
 		return ".profileLayout";
 	}
@@ -114,30 +115,6 @@ public class ProfileController {
 		service.updateProfile(dto, pathname);
 		
 		return "redirect:/profile/?id="+info.getUserId();
-	}
-	
-	@RequestMapping(value="/profile/deleteFile", method=RequestMethod.GET)
-	public String deleteFile(
-			@RequestParam String id,
-			HttpSession session
-			) throws Exception{
-		
-		Profile dto=service.profileRead(id);
-		if(dto==null){
-			return "redirect:/profile/id="+id;
-		}
-		
-		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "profile";	
-		
-		if(dto.getProPhoto()!=null && dto.getProPhoto().length()!=0){
-			fileManager.doFileDelete(dto.getProPhoto(), pathname);
-			
-			dto.setProPhoto("");
-			//service.updateBoard(dto, pathname);
-		}
-		
-		return "redirect:/profile/update?id="+id;
 	}
 }
 
