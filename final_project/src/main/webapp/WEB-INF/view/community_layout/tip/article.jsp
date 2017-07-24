@@ -446,7 +446,7 @@ function sendLikeTip(jtnum) {
 		<c:if test="${sessionScope.member.userId == dto.mId}">
 			<button class="btn btn-warning" onclick="updateTip();">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin'}">
 			<button class="btn btn-warning" onclick="deleteTip();">삭제</button>
 		</c:if>
 		<button class="btn btn-default" onclick="listPage(${page});">목록</button>

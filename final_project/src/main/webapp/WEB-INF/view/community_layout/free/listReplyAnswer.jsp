@@ -17,11 +17,11 @@
 				<div style='float: right;'>
 					<span>${vo.created}</span> |
 					<c:if
-						test="${sessionScope.member.userId==vo.mId || sessionScope.member.userId=='admin@a.com'}">
+						test="${sessionScope.member.userId==vo.mId || sessionScope.member.userId=='admin'}">
 						<a onclick='deleteReplyAnswer("${vo.replyNum}", "${vo.answer}");'>삭제</a>
 					</c:if>
 					<c:if
-						test="${sessionScope.member.userId!=vo.mId && sessionScope.member.userId!='admin@a.com'}">
+						test="${sessionScope.member.userId!=vo.mId && sessionScope.member.userId!='admin'}">
 						<a href='#'>신고</a>
 					</c:if>
 				</div>

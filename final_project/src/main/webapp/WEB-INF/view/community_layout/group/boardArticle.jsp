@@ -441,7 +441,7 @@ function sendLikeGroupBoard(gbNum) {
 		<c:if test="${sessionScope.member.userId == dto.mId}">
 			<button class="btn btn-warning" onclick="updateGroupBoard();">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin'}">
 			<button class="btn btn-warning" onclick="deleteGroupBoard();">삭제</button>
 		</c:if>
 		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/group/article?${query}'">목록</button>

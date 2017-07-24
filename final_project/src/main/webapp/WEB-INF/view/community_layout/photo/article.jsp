@@ -429,7 +429,7 @@ function sendLikePhoto(ptnum) {
 		<c:if test="${sessionScope.member.userId == dto.mId}">
 			<button class="btn btn-warning" onclick="updatePhoto();">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin'}">
 			<button class="btn btn-warning" onclick="deletePhoto();">삭제</button>
 		</c:if>
 		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/photo?${query}'">목록</button>
