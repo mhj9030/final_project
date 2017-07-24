@@ -57,7 +57,7 @@
 	
 	<div>
 		<h3>
-		기업 추천 게시판  | 후기쓰기
+		기업 추천 게시판  <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Writing</small>	
 		</h3>
 	</div>
 

@@ -24,10 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.final_project.common.FileManager;
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
+import com.final_project.point.PointService;
 
 @Controller("community.photoController")
 public class PhotoController {
 	
+	@Autowired
+	private PointService pointService;
 	@Autowired
 	private PhotoService service;
 	@Autowired
@@ -143,6 +146,11 @@ public class PhotoController {
 			flag=fileManager.doFileDownload(
 					     dto.getSaveFilename(), 
 					     dto.getOriginalFilename(), pathname, resp);
+			Map<String, Object> map = new HashMap<>();
+			map.put("history", "사진다운로드");
+			map.put("point", 1000);
+			map.put("mId", dto.getmId());
+			pointService.savePoint(map);
 		}
 		
 		if(! flag) {

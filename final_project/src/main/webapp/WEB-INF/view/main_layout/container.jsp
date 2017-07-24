@@ -62,7 +62,7 @@
 		  		<div class="group-name">${gdto.groupName}</div>
 		  		<div class="group-type">
 		  			<c:forEach var="grouplist" items="${gdto.list}">
-		  				${grouplist.groupTag}
+		  				<button class="btn btn-xs btn-default">${grouplist.groupTag}</button>
 		  			</c:forEach>
 		  		</div>
 		  		<div class="gruop-join"><button class="btn btn-warning" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${gdto.groupNum}'">가입하기</button></div>

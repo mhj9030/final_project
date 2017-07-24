@@ -96,18 +96,23 @@ function deleteGroup() {
 	<h3>| 그룹원 소개<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b; margin-bottom: 10px;">Group Member</small></h3>
 	<hr>
 	<div class="group_article_info_member" style="min-height: 100px; padding-left: 24px;">
-			<div style="float: left; margin:10px; width: 120px; height: 130px;
-						background: rgba(240, 248, 255, 0.3); box-shadow: 0 2px 0 rgba(0,0,0,0.075);">
-				<div style="width: 100%; height: 80%;">
-					<img src="<%=cp%>/resources/image/profile_img.jpg" style="width:100%; height: 100%;">
+			<c:forEach var="member" items="${memberList}">
+				<div style="float: left; margin:10px; width: 120px; height: 130px;
+							background: rgba(240, 248, 255, 0.3); box-shadow: 0 2px 0 rgba(0,0,0,0.075);">
+					<div style="width: 100%; height: 80%;">
+						<c:if test="${not empty member.prophoto}">
+							<img src="<%=cp%>/uploads/profile/${member.prophoto}" style="width:100%; height: 100%;">
+						</c:if>
+						<c:if test="${empty member.prophoto}">
+							<img src="<%=cp%>/resources/image/profile_img.jpg" style="width:100%; height: 100%;">
+						</c:if>
+					</div>
+					<div style="width: 100%; height: 20%; text-align: center; padding: 5px;">
+						<strong style="font-size: 15px; font-family: 'Jeju Gothic', serif; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/profile?id=${member.mId}'">${member.mName}</strong>
+					</div>
 				</div>
-				<div style="width: 100%; height: 20%; text-align: center; padding: 5px;">
-					<strong style="font-size: 15px; font-family: 'Jeju Gothic', serif;">김민혁</strong>
-				</div>
-			</div>
-			
+			</c:forEach>
 	</div>
-	
 	
 	<c:if test="${check==0}">
 	</c:if>

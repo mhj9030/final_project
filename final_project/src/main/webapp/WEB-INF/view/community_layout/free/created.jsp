@@ -49,7 +49,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-			문의하기
+			자유게시판 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Writing</small>
 		</h3>
 	</div>
 
