@@ -422,4 +422,12 @@
 			)tb WHERE ROWNUM<=3
 		]]>
 	</select>
+	
+	<select id="listGroupMember" parameterType="map" resultType="com.final_project.community.GroupMember">
+		select prophoto, gm.mId, mName 
+		FROM group_member gm 
+		JOIN profile p ON gm.mId = p.mId 
+      	JOIN member m ON gm.mId = m.mId 
+     	WHERE groupNum = #{groupNum}
+	</select>
 </mapper>

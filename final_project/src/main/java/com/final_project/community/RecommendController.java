@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
+import com.final_project.point.PointService;
 
 @Controller("community.recommendController")
 public class RecommendController {
@@ -25,6 +26,8 @@ public class RecommendController {
 	private MyUtilBootstrap myUtil;
 	@Autowired
 	private RecommendService service;
+	@Autowired
+	private PointService pointService;
 	
 	
 	
@@ -174,6 +177,12 @@ public class RecommendController {
 		
 		
 		dto.setmId(info.getUserId());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("history", "기업후기작성");
+		map.put("point", 1000);
+		map.put("mId", dto.getmId());
+		pointService.savePoint(map);
 		service.insertRecommend(dto);
 		
 		model.addAttribute("cNum", cNum);

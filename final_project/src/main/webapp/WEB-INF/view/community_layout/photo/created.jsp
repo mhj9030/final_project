@@ -45,7 +45,7 @@
 <div class="created_form">
 	<div>
 		<h3>
-		포토갤러리 | 글올리기
+		포토갤러리 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Writing</small>
 		</h3>
 	</div>
 
