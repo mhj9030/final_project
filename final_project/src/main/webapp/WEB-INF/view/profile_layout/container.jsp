@@ -12,20 +12,10 @@
 <div id="wrap">
 	<div id="content">
 		<div class="page profile">
-			<div class="wrap_wide cmenu">
-				<div class="wrap">
-					<ul class="nav nav-pills" role="tablist">
-						<li role="presentation" class="on"><a href="<%=cp%>/profile?id=${member.userId }">내 프로필</a></li>
-						<li role="presentation" class=""><a href="<%=cp%>/member/scrap">채용스크랩</a></li>
-						<li role="presentation" class=""><a href="<%=cp%>/member/applications/list">지원서 관리</a></li>
-						<li role="presentation" class=""><a href="<%=cp%>/member/myInquiry">나의 문의 내역</a></li>
-					</ul>
-				</div>
-			</div>
             <div class="wrap_wide section cover">
                 <div id="cover_image" class="image">
                     <div class="in"></div>
-                    버튼   	
+                 	
                 </div>
             </div>
             <div class="wrap_wide ontop shadow">
@@ -35,13 +25,16 @@
                             <div class="user_thumb">
                                 <div class="preview"> <img id="profile_image_preview" src="<%=cp %>/resources/image/profile_img.jpg" alt="" class="img img-center"> </div>
                                 <div class="icontrol show">
+	                                <a href="<%=cp%>/profile/update">
+	                                	<span class="glyphicon glyphicon-cog"></span> 프로필 수정
+	                                </a>
                                 </div>
                             </div>
                             <div id="user_info" class="section user_info">
                                 <div class="name clearfix">
                                     <p class="job_title"> </p>
                                     <h2 class="break">
-                                <strong>${dto.mname }</strong><span>  ${dto.mgender } </span>
+                                <strong>${dto.mname }</strong><span>&nbsp;&nbsp;&nbsp;${dto.mgender } </span>
                             </h2> </div>
                             </div>
   

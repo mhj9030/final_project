@@ -39,6 +39,9 @@ public class MemberServiceImpl implements MemberService{
 			dto.setAuthority("ROLE_USER");
 			cDao.insertData("member.insertAuthority", dto);
 			
+			// 프로필 삽입
+			cDao.insertData("profile.insertProfile", dto.getMid());
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			throw e;
