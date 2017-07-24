@@ -400,4 +400,26 @@
 	        FROM g_${groupNum}_boardreply WHERE answer=#{answer}
 	</select>
 	
+	<insert id="joinGroup" parameterType="map">
+		INSERT INTO group_member(groupNum, mId) VALUES (#{groupNum}, #{mId}) 
+	</insert>
+	
+	<delete id="outGroup" parameterType="map">
+		DELETE FROM group_member WHERE mId=#{mId} AND groupNum=#{groupNum}
+	</delete>
+	
+	<select id="listMainGroup" resultType="com.final_project.community.Group">
+		SELECT ROWNUM, tb.* FROM(
+			select saveFilename, originalFilename, groupName, gi.groupNum, gm.memberCount
+			FROM group_info gi
+			LEFT OUTER JOIN
+			(
+			  SELECT groupNum, COUNT(*) memberCount FROM group_member
+			  GROUP BY groupNum
+			) gm ON gi.groupNum=gm.groupNum
+			ORDER BY memberCount DESC
+		<![CDATA[
+			)tb WHERE ROWNUM<=3
+		]]>
+	</select>
 </mapper>

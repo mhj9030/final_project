@@ -11,7 +11,6 @@ public interface ApplicationService {
 	
 	// 삭제
 	public int delete(List<String> list);
-	public int deleteList(List<MemberDetail> list);
 	
 	// 1단계 입력
 	public Member memberList(Map<String, Object> map);
@@ -20,7 +19,7 @@ public interface ApplicationService {
 	public List<MemberDetail> careerList(Map<String, Object> map);
 	
 	// 1단계 저장
-	public int insertOneDetails(MemberDetail dto, String pathname);
+	public int insertOneDetails(MemberDetail dto);
 	public int insertOneCareer(List<MemberDetail> list, Map<String, Object> map);
 	public int insertOneProject(List<MemberDetail> list, Map<String, Object> map);
 	
@@ -28,12 +27,12 @@ public interface ApplicationService {
 	
 	
 	// 1단계 수정
-	public int updateDefault(MemberDetail dto, String pathname);
+	public int updateDefault(MemberDetail dto);
 	
 	// 2단계 수정
 	
 	// 3단계
 	public MemberDetail selectThrIntro(Map<String, Object> map);
-	public int insertThrIntro(Map<String, Object> map);
+	public int insertThrIntro(MemberDetail dto);
 	public int updateThrIntro(Map<String, Object> map);
 }

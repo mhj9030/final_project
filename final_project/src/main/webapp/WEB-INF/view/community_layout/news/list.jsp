@@ -24,24 +24,33 @@
 		var type = "${type}";
 		if(type==''){
 			btn = document.getElementById('all_btn');
-			btn.disabled="disabled";
+			btn.style.color = "white";
+			btn.style.background = "#337ab7";
+			btn.style.borderColor = "#337ab7";
 		}else if(type=="직장인"){
 			btn = document.getElementById('worker_btn');
-			btn.disabled = "disabled";
+			btn.style.color = "white";
+			btn.style.background = "#337ab7";
+			btn.style.borderColor = "#337ab7";
 		}else if(type=="취준생"){
 			btn = document.getElementById('ready_btn');
-			btn.disabled = "disabled";
+			btn.style.color = "white";
+			btn.style.background = "#337ab7";
+			btn.style.borderColor = "#337ab7";
 		}else if(type=="알바생"){
 			btn = document.getElementById('alba_btn');
-			btn.disabled = "disabled";
+			btn.style.color = "white";
+			btn.style.background = "#337ab7";
+			btn.style.borderColor = "#337ab7";
 		}
 	});
 </script>
 
 <div class="news_list_wrap">
-	<h3>| 취업뉴스</h3>
+	<h3>| 취업뉴스 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Job News</small></h3>
+	<hr>
 	<p>
-		직장인, 취준생, 알바생의 다양한 소식을 볼 수 있습니다.
+		직장인, 취준생, 알바생의 다양한 소식을 볼 수 있습니다. 아는 것이 힘입니다!!
 	</p>
 	<div class="news_search_wrap">
 		<div>

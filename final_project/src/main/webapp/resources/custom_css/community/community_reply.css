@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
 .community_reply_table{
 	box-sizing: border-box;
 }

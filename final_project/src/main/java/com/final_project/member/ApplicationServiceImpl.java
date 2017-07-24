@@ -1,6 +1,7 @@
 package com.final_project.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,26 +99,20 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 
 	@Override
-	public int insertOneDetails(MemberDetail dto, String pathname) {
+	public int insertOneDetails(MemberDetail dto) {
 		int result = 0;
 		
 		try {
-			/*if(! dto.getUpload().isEmpty()){
-				String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
-				dto.setrPhoto(saveFilename);
-				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
-			}
-			*/
-			dto.setrPhoto(pathname);
+			System.out.println(dto.getrPhoto());
 			result = dao.insertData("applications.insertDefault", dto);
 			
 			if(result!=0){
 				result = dao.getIntValue("applications.newResume", dto);
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
-		
+		System.out.println(">>> " + result);
 		return result;
 	}
 
@@ -173,7 +168,15 @@ public class ApplicationServiceImpl implements ApplicationService{
 		
 		try {
 			for(String dto:list){
-				result = dao.insertData("applications.deleteResume", dto);
+				Map<String, Object> map = new HashMap<>();
+				map.put("rNum", Integer.parseInt(dto));
+				result = dao.insertData("applications.deleteResume2", map);
+				result = dao.insertData("applications.deleteResume3", map);
+				result = dao.insertData("applications.deleteResume4", map);
+				result = dao.insertData("applications.deleteResume5", map);
+				result = dao.insertData("applications.deleteResume6", map);
+				result = dao.insertData("applications.deleteResume7", map);
+				result = dao.insertData("applications.deleteResume1", map);
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -183,26 +186,10 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 
 	@Override
-	public int deleteList(List<MemberDetail> list) {
+	public int updateDefault(MemberDetail dto) {
 		int result = 0;
 		
 		try {
-			/*for(MemberDetail dto:list)
-				break;*/
-			
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return result;
-	}
-
-	@Override
-	public int updateDefault(MemberDetail dto, String pathname) {
-		int result = 0;
-		
-		try {
-			dto.setrPhoto(pathname);
 			result = dao.updateData("applications.updateDefault", dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -225,11 +212,11 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 	
 	@Override
-	public int insertThrIntro(Map<String, Object> map) {
+	public int insertThrIntro(MemberDetail dto) {
 		int result = 0;
 		
 		try {
-			result = dao.updateData("applications.insertThrIntro", map);
+			result = dao.updateData("applications.insertThrIntro", dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

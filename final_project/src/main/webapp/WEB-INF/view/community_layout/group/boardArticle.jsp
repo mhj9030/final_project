@@ -390,6 +390,9 @@ function sendLikeGroupBoard(gbNum) {
 
 
 <div class="community_article_wrap">
+	<h3>
+		그룹게시판<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Member's Comments</small>
+	</h3>
 
 	<table class="table">
 		<tr>

@@ -1,5 +1,8 @@
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
 .search-article-body h3{
 	margin-top: 40px;
+	font-family: 'Jeju Gothic', serif;
 }
 
 .cover-back{

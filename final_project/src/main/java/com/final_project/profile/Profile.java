@@ -1,5 +1,7 @@
 package com.final_project.profile;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Profile {
 
 	// 멤버 테이블 정보
@@ -12,14 +14,13 @@ public class Profile {
 
 	// 프로필 테이블 정보
 	private String proPhoto;
-	private String proCover;
 	private String proIntro; // 자기소개
 
 	// 전문 분야
 	private String expertise;       
 	private String eid;
 	
-	
+	private MultipartFile upload;
 
 	public String getEid() {
 		return eid;
@@ -85,14 +86,6 @@ public class Profile {
 		this.proPhoto = proPhoto;
 	}
 
-	public String getProCover() {
-		return proCover;
-	}
-
-	public void setProCover(String proCover) {
-		this.proCover = proCover;
-	}
-
 	public String getProIntro() {
 		return proIntro;
 	}
@@ -107,6 +100,14 @@ public class Profile {
 
 	public void setMpwd(String mpwd) {
 		this.mpwd = mpwd;
+	}
+
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
 	}
 
 }

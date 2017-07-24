@@ -25,6 +25,8 @@
 
 <!-- Profile_layout CSS -->
 <link href="<%=cp%>/resources/custom_css/profile_layout.css" rel="stylesheet">
+<!-- member_profile_created.css -->
+<link href="<%=cp%>/resources/custom_css/member_profile_created.css" rel="stylesheet">
 
 <!-- Jquery 3.1.0 -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
@@ -38,6 +40,8 @@
 <!-- Font Awesome CSS -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+<!-- 글꼴 -->
+<link href="https://fonts.googleapis.com/css?family=Gudea|Yellowtail" rel="stylesheet">
 
 
 
@@ -51,7 +55,7 @@
 
     <tiles:insertAttribute name="headers"/>
 
-	
+	<tiles:insertAttribute name="sub_headers"/>
 	
     <tiles:insertAttribute name="body"/>
 

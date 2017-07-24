@@ -13,18 +13,17 @@
 </style>
 
 <div class="page_body .container-fluid ">
-	<div class="page_head">
-		<h3>
-			<c:if test="${mode!='update'}">
-			| 이력서 작성 
-			(1단계 > 2단계 > <b>3단계</b>)
-			</c:if>
-			<c:if test="${mode=='update'}">
-			| 이력서 작성 
-			(1단계 > 2단계 > <b>3단계</b>)
-			</c:if>
-		</h3><hr>
-	</div>
+	<h3>
+		<c:if test="${mode!='update'}">
+			이력서 작성 (1단계 > 2단계 > <b>3단계</b>)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume (3step)</small>
+		</c:if>
+		<c:if test="${mode=='update'}">
+			이력서 작성 (1단계 > 2단계 > <b>3단계</b>)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume</small>
+		</c:if>
+	</h3><hr>
+	
 	<form name="resume_detail2" method="post">
 		<div id="resume_div">
 			<input type="hidden" name="rNum" value="${rNum}" />

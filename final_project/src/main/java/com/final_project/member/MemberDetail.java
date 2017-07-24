@@ -3,8 +3,9 @@ package com.final_project.member;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MemberDetail {
+	private int resumeType;
 	private String rownum, rNum, rName, engName, phone, eMail, addr, addr2, army, apply, pay, mId, endWrite, rPhoto;
-	private MultipartFile upload;
+	private String mbirth, age, mgender;
 	// 자기소개
 	private String intro1, intro2, intro3, intro4;
 	// 학교
@@ -18,10 +19,37 @@ public class MemberDetail {
 	// 언어
 	private String laNum, language, laScore;
 	// 수상
-	private String awNum, awAgency, awSector, awDate;//, memo;
+	private String awNum, awAgency, awSector, awDate;
+	// 업로드
+	private MultipartFile upload;
+	private String saveFilename, originalFilename;
 	//
 	public String getRownum() {
 		return rownum;
+	}
+	public String getMbirth() {
+		return mbirth;
+	}
+	public void setMbirth(String mbirth) {
+		this.mbirth = mbirth;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
+	public String getMgender() {
+		return mgender;
+	}
+	public void setMgender(String mgender) {
+		this.mgender = mgender;
+	}
+	public int getResumeType() {
+		return resumeType;
+	}
+	public void setResumeType(int resumeType) {
+		this.resumeType = resumeType;
 	}
 	public void setRownum(String rownum) {
 		this.rownum = rownum;
@@ -313,5 +341,17 @@ public class MemberDetail {
 	}
 	public void setAwDate(String awDate) {
 		this.awDate = awDate;
+	}
+	public String getSaveFilename() {
+		return saveFilename;
+	}
+	public void setSaveFilename(String saveFilename) {
+		this.saveFilename = saveFilename;
+	}
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
 	}
 }

@@ -253,4 +253,17 @@ public class NewsServiceImpl implements NewsService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<News> listMainNews() {
+		List<News> list = null;
+		
+		try {
+			list = dao.getListData("community_news.listMainNews");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
 }

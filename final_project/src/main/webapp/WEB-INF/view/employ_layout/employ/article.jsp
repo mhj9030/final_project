@@ -7,6 +7,9 @@
 	String cp=request.getContextPath();
 %>
 <style>
+body{
+background: white;
+}
   /* Note: Try to remove the following lines to see the effect of CSS positioning */
   .affix {
   		top:0;
@@ -139,7 +142,7 @@ function scrap() {
 </div>
 <hr>
 <div style="text-align: center;">
-모바일 앱 사용자 행동 분석 솔루션 유저해빗을 개발하여 서비스 중인 데이터 기술 스타트업입니다. 
+${employ.cIntro}
 <div class="text-right">
 
 
@@ -161,16 +164,10 @@ function scrap() {
 <div class="rows" style="min-height:2000px">
 
 <div class="col-md-12">
-마주하지 않은 상태에서 일을 진행했을 때 발생하는 문제를 줄이기 위한 규칙
-
-아무리 좋은 시스템이 있더라도, 사람이 그것을 사용하는 과정에서 항상 어떤 문제가 발생하기 마련이다. 우리는 우리가 만든 시스템을 사용하면서 문제를 발견했고, 이를 줄일 수 있는 규칙들을 만들었다.
-
-1. 어떤 일에 대한 가장 중요한 이슈를 초창기에 해결하는 문화
-
-2. 목적과 대상을 명확히 지정하는 커뮤니케이션
-
-문제 현상 : 대부분 커뮤니케이션이 아니므로, 대상을 정확히 지칭해서 이야기 하지 않는 경우, 그 대상이 스스로 답변을 해야 하는지 인지하지 못하는 현상이 발생한다. 이는 특히 업무 메신저의 공용 채널이나 팀 내 다수를 대상으로 발송하는 이메일, 많은 사람들이 엮여 있는 프로젝트 도구 항목에서 자주 발생한다.
-해결을 위한 규칙 : 공용 채널 메시지나 다수의 수신인이 있는 이메일을 작성할 때 반드시 답변을 해야 하는 사람이 있거나 답변이 필요한 기한이 있다면 이를 명확히 언급한다. 대상이 답변을 줘야 하는 요소에 대하여 명확히 언급할 때는 각 항목에 대해서 ID를 할당해서 답변 대상이 답변하기 용이하도록 한다.
+ㅇ 입사지원서의 작성 내용이 사실과 다르거나 제출하신 서류가 허위일 경우 합격이 취소될 수 있습니다. <br>
+ㅇ 제출하신 서류는 요청시 반납 가능합니다 (단, 시스템 내 접수된 건은 삭제만 가능) <br>
+ㅇ 지원 및 전형에 관한 자세한 문의사항은 담당자에게 문의부탁드립니다.
+     (메일을 통해 문의 주시면 빠른 답변 가능합니다)
 <hr>
 </div>
 
@@ -238,9 +235,47 @@ function scrap() {
 					</h1>
 				</div>
 				<h5>주소 : ${employ.cAddress}</h5>
-				<div id="map" style="height:500px;background:gray;"></div>
+				<div id="map" style="height:500px;"></div>
 		</div>
-		
+		<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=ac8d0f9810c74bf05979f5efc0168e40&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addr2coord('${employ.cAddress}', function(status, result) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${employ.cName}</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
 </div>
 
 
@@ -252,7 +287,7 @@ function scrap() {
 					        <h4 class="modal-title"> 상세 온라인 입사지원</h4>
 					      </div>
 					      <div class="modal-body" style="text-align: center; height:700px;">
-					        유커넥 - ${employ.ceSubject}<br>
+					        ${employ.ceSubject}<br>
 							${employ.ceType} / ${employ.ability} 이상 / ${employ.cePlace } / ${employ.cePay } 만원 / ~${employ.ceEnd} 까지 - <a>채용정보 상세보기</a>
 					        <hr>
 					        <div>

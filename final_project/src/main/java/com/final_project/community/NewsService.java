@@ -24,4 +24,7 @@ public interface NewsService {
 	public int replyDataCount(Map<String, Object> map); // 댓글 갯수
 	public int replyCountAnswer(int answer); // 댓글의 댓글 갯수
 	public int deleteReply(Map<String, Object> map);  // 댓글삭제
+	
+	
+	public List<News> listMainNews();
 }

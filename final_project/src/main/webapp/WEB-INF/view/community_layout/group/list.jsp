@@ -18,8 +18,11 @@
 </script>
 
 <div class="group_list_wrap">
-	<h3>| 그룹</h3>
-	<p>하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.</p>
+	<h3>| 그룹 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Group</small></h3>
+	<hr>
+	<p>
+		하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.
+	</p>
 	
 	<ul class="nav nav-tabs">
 		<li role="presentation" class="active"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group'">그룹리스트</a></li>
@@ -83,7 +86,7 @@
   					</c:forEach>
   				</div>
   				<div class="group_list_groupjoin">
-  					<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">자세히 보기</button>
+  					<button type="button" class="btn btn-sm btn-warning" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">자세히 보기</button>
   				</div>
   			</div>
   		</c:forEach>

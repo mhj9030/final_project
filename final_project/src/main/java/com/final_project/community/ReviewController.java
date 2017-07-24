@@ -22,6 +22,7 @@ import com.final_project.common.MyUtilBootstrap;
 import com.final_project.company.Company;
 import com.final_project.company.SearchService;
 import com.final_project.member.SessionInfo;
+import com.final_project.point.PointService;
 
 
 
@@ -33,6 +34,8 @@ public class ReviewController {
 	private ReviewService service;
 	@Autowired
 	private MyUtilBootstrap myUtil;
+	@Autowired
+	private PointService pointService;
 	
 	
 	@RequestMapping("/community/review")
@@ -161,6 +164,11 @@ public class ReviewController {
 		
 		
 		service.insertReview(dto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("history", "후기작성");
+		map.put("point", 1000);
+		map.put("mId", dto.getmId());
+		pointService.savePoint(map);
 
 		return "redirect:/community/review";
 	}

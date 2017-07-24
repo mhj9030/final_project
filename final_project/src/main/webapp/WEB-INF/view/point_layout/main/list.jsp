@@ -8,9 +8,9 @@
 %>
 
 <div class="page_body">
-	<div class="page_head">
-		<h3>| 포인트 소개</h3><hr>
-	</div>
+	<h3>
+		| 포인트 소개 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Point Intro</small>
+	</h3><hr>
 
 	<div class="point_intro">
 		<div style="width: 200px; height: 200px">
@@ -61,7 +61,7 @@
 				${paging}
 			</div>
 
-		<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId=='admin'}">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main/created'">글쓰기</button>
 			</div>
