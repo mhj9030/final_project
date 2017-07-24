@@ -245,6 +245,8 @@ public class GroupController {
 		map.put("groupNum", groupNum);
 		map.put("mId", info.getUserId());
 		
+		List<GroupMember> memberList = service.listGroupMember(map);
+		
 		int check = service.checkGroupMember(map);
 		Group dto = service.readGroup(map);
 		dto.setList(service.tagList(dto.getGroupNum()));
@@ -286,6 +288,9 @@ public class GroupController {
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 		
+		
+		
+		model.addAttribute("memberList", memberList);
 		model.addAttribute("check", check);
 		model.addAttribute("list", list);
 		model.addAttribute("articleUrl", articleUrl);

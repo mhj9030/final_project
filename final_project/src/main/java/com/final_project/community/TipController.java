@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.final_project.common.FileManager;
 import com.final_project.common.MyUtilBootstrap;
 import com.final_project.member.SessionInfo;
+import com.final_project.point.PointService;
 
 @Controller("community.tipController")
 public class TipController {
@@ -33,6 +34,8 @@ public class TipController {
 	private MyUtilBootstrap myUtil;
 	@Autowired
 	private FileManager fileManager;
+	@Autowired
+	private PointService pointService;
 	
 	
 	@RequestMapping("/community/tip")
@@ -57,7 +60,12 @@ public class TipController {
 		String pathname = root + File.separator + "uploads" + File.separator + "community";
 
 		dto.setmId(info.getUserId());
-
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("history", "꿀팁작성");
+		map.put("point", 500);
+		map.put("mId", dto.getmId());
+		pointService.savePoint(map);
 		service.insertTip(dto, pathname);
 
 		return "redirect:/community/tip";
