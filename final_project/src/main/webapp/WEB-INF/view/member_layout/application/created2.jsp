@@ -13,18 +13,17 @@
 </style>
 
 <div class="page_body .container-fluid ">
-	<div class="page_head">
-		<h3>
-			<c:if test="${mode!='update'}">
-			| 이력서 작성 
-			(1단계 > <b>2단계</b> > 3단계)
-			</c:if>
-			<c:if test="${mode=='update'}">
-			| 이력서 작성 
-			(1단계 > <b>2단계</b> > 3단계)
-			</c:if>
-		</h3><hr>
-	</div>
+	<h3>
+		<c:if test="${mode!='update'}">
+			이력서 작성 (1단계 > <b>2단계</b> > 3단계)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume (2step)</small>
+		</c:if>
+		<c:if test="${mode=='update'}">
+			이력서 작성 (1단계 > <b>2단계</b> > 3단계)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume</small>
+		</c:if>
+	</h3><hr>
+	
 	<form name="resume_detail" method="post">
 		<div id="resume_div">
 			<input type="hidden" name="rNum" value="${rDto.rNum}" />
@@ -99,10 +98,13 @@
 		<hr>
 		<div class= "footer-bar">
 			<div style="text-align: right;">
-				<button type="button" class="btn btn-info" onclick="check()">
-					<c:if test="${mode!='update'}">추가 정보 등록</c:if>
-					<c:if test="${mode=='update'}">추가 정보 수정</c:if>
-				</button>
+				<c:if test="${mode!='update'}">
+					* 자기소개는 다음 단계에서 쓸 수 있습니다.<br>
+					<button type="button" class="btn btn-info" onclick="check()">추가 정보 등록</button>
+				</c:if>
+				<c:if test="${mode=='update'}">
+					<button type="button" class="btn btn-info" onclick="check()">추가 정보 수정</button>
+				</c:if>
 				<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">이력서 목록</button>
 			</div>
@@ -142,7 +144,7 @@ function add(type) {
 }
 
 function check() {
-	var f = ducoment.resume_detail;
+	var f = document.resume_detail;
 
 	if(${mode=='update'}){
 		f.action='<%=cp%>/member/applications/update2';

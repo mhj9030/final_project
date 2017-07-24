@@ -42,17 +42,11 @@
 </script>
 
 <div class="page_body">
-	<div class="page_head">
-		<h3>| 공지사항</h3><hr>
-	</div>
+	<h3>
+	| 글쓰기<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Writing</small>
+	</h3><hr>
 	
 	<div class="created_form">
-		<div>
-			<h3>
-			 |  글올리기
-			</h3>
-		</div>
-	
 		<div>
 			<form name="boardForm" method="post" onsubmit="return submitContents(this);" enctype="multipart/form-data">
 				<div>

@@ -99,26 +99,20 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 
 	@Override
-	public int insertOneDetails(MemberDetail dto, String pathname) {
+	public int insertOneDetails(MemberDetail dto) {
 		int result = 0;
 		
 		try {
-			if(! dto.getUpload().isEmpty()){
-				String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
-				dto.setrPhoto(saveFilename);
-				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
-			}
-			
-			dto.setrPhoto(pathname);
+			System.out.println(dto.getrPhoto());
 			result = dao.insertData("applications.insertDefault", dto);
 			
 			if(result!=0){
 				result = dao.getIntValue("applications.newResume", dto);
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
-		
+		System.out.println(">>> " + result);
 		return result;
 	}
 

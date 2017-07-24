@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.final_project.common.FileManager;
 import com.final_project.talent.Talent;
 import com.final_project.talent.TalentService;
 
@@ -26,6 +27,9 @@ public class ApplicationController {
 	
 	@Autowired
 	private TalentService tService;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	// 글리스트
 	@RequestMapping("/member/applications/list")
@@ -85,12 +89,23 @@ public class ApplicationController {
 	public String created_step1_ok(MemberDetail dto, HttpSession session, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "resume";
 		dto.setmId(info.getUserId());
 		
-		int rNum = service.insertOneDetails(dto, pathname);
-		map.put("mId", rNum);
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "community";
+		System.out.println(pathname);
+		System.out.println(dto.getUpload());
+		//getrPhoto
+		if(! dto.getUpload().isEmpty()){
+			String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+			dto.setSaveFilename(saveFilename);
+			//dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+			System.out.println(saveFilename);
+		}
+		
+		int rNum = service.insertOneDetails(dto);
+		map.put("rNum", rNum);
+		System.out.println(rNum);
 		List<MemberDetail> test = null;
 		service.insertOneCareer(test, map);
 		service.insertOneProject(test, map);
@@ -101,7 +116,7 @@ public class ApplicationController {
 	}
 	
 	@RequestMapping(value="/member/applications/created2", method=RequestMethod.POST)
-	public String created_step2_ok(@RequestParam("rNum")int rNum, Model model) throws Exception {
+	public String created_step2_ok(@RequestParam("rNum")int rNum, MemberDetail dto, Model model) throws Exception {
 		
 		model.addAttribute("rNum", rNum);
 		
@@ -109,11 +124,13 @@ public class ApplicationController {
 	}
 	
 	@RequestMapping(value="/member/applications/created3", method=RequestMethod.POST)
-	public String created_step3_ok(@RequestParam("rNum")int rNum, Model model) throws Exception {
+	public String created_step3_ok(@RequestParam("rNum")int rNum, MemberDetail dto, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("rNum", rNum);
 		
 		service.insertThrIntro(map);
+		
+		model.addAttribute("rNum", rNum);
 		
 		return "redirect:/member/applications/application";
 	}
@@ -122,11 +139,8 @@ public class ApplicationController {
 	@RequestMapping("/member/applications/application")
 	public String article(@RequestParam int rNum, HttpSession session, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		map.put("mId", info.getUserId());
 		map.put("rNum", rNum);
 		
-		Member mDto = service.memberList(map);
 		MemberDetail rDto = service.readResume(map);
 		List<MemberDetail> acList = service.academyList(map);
 		List<MemberDetail> proList = service.projectList(map);
@@ -134,10 +148,7 @@ public class ApplicationController {
 		
 		MemberDetail iDto = service.selectThrIntro(map);
 		
-		System.out.println(rDto.getApply());
-		
 		model.addAttribute("rNum", rNum);
-		model.addAttribute("mDto", mDto);
 		model.addAttribute("rDto", rDto);
 		model.addAttribute("acList", acList);
 		model.addAttribute("proList", proList);
@@ -217,11 +228,19 @@ public class ApplicationController {
 	// 수정 처리
 	@RequestMapping(value="/member/applications/update1", method=RequestMethod.POST)
 	public String update_step1_ok(@RequestParam("rNum")int rNum, MemberDetail dto, HttpSession session, Model model) throws Exception {
-		Map<String, Object> map = new HashMap<>();
+		//Map<String, Object> map = new HashMap<>();
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "resume";
-		dto.setmId(info.getUserId());
+		String pathname = root + File.separator + "uploads" + File.separator + "community";
+		
+		//getrPhoto
+		if(! dto.getUpload().isEmpty()){
+			String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+			dto.setSaveFilename(saveFilename);
+			dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+		}
+		System.out.println(pathname);
 		
 		service.updateDefault(dto, pathname);
 		
@@ -233,11 +252,13 @@ public class ApplicationController {
 	@RequestMapping(value="/member/applications/update2", method=RequestMethod.POST)
 	public String update_step2_ok(@RequestParam("rNum")int rNum, HttpSession session, Model model) throws Exception {
 		
+		model.addAttribute("rNum", rNum);
+		
 		return "redirect:/member/applications/application";
 	}
 	
 	@RequestMapping(value="/member/applications/update3", method=RequestMethod.POST)
-	public String update_step3_ok(@RequestParam("rNum")String rNum, MemberDetail dto) throws Exception {
+	public String update_step3_ok(@RequestParam("rNum")int rNum, MemberDetail dto, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("rNum", rNum);
@@ -247,6 +268,8 @@ public class ApplicationController {
 		map.put("intro4", dto.getIntro4());
 		
 		service.updateThrIntro(map);
+		
+		model.addAttribute("rNum", rNum);
 		
 		return "redirect:/member/applications/application";
 	}

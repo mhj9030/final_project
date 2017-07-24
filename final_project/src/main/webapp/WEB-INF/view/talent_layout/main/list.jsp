@@ -7,9 +7,9 @@
 	String cp=request.getContextPath();
 %>
 <div class="page_body">
-	<div class="container-fluid page_head">
-		<h3>| 인재검색</h3><hr>
-	</div>
+	<h3>
+		| 인재검색<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Telent search</small>
+	</h3><hr>
 	
 	<!-- 검색 -->
 	<div class="search_list" style="width: 100%;">
