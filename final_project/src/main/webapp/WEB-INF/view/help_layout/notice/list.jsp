@@ -3,13 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+  
 <%
 	String cp=request.getContextPath();
 %>
 
+
+
+
 <div class="list-body" align="center">
 <div class="notice_list_wrap" style="text-align: left ">
-	<h3>| 공지사항</h3>
+	<h3>| 공지사항<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Notice</small></h3>
+	<hr>
 	<p>
 	중요한 일정 및 알림 등은 공지사항 통해 고객님께 알려 드립니다.
 	</p>    
@@ -46,7 +51,7 @@
 			<c:forEach var="dto" items="${list}">
 			
 				<tr align="center">
-					<td>${dto.notNum}</td>
+					<td>${dto.listNum}</td>
 					<td align="left">
 						<a href="${articleUrl}&num=${dto.notNum}">${dto.subject}</a>
 					</td>
@@ -78,7 +83,7 @@
 		    	
 		    	
 		    	<td align="right" width="100">
-		    	<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+		    	<c:if test="${sessionScope.member.userId=='admin'}">
 		          	<button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/help_layout/notice/created';">글올리기</button>
 		         </c:if>
 		      	</td>

@@ -5,7 +5,14 @@ public class Notice {
 	private String subject, content;
 	private int hitCount, listNum;
 	private String created, mId, mName;
+	private long gap;
 	
+	public long getGap() {
+		return gap;
+	}
+	public void setGap(long gap) {
+		this.gap = gap;
+	}
 	public String getmName() {
 		return mName;
 	}

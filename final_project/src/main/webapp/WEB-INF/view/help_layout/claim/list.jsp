@@ -9,7 +9,8 @@
 
 <div class="list-body" align="center">
 <div class="notice_list_wrap" style="text-align: left ">
-	<h3>| 문의하기</h3>
+	<h3>| 문의하기<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Claim</small></h3>
+	<hr>
 	<p>
 	서비스 이용관련 궁금하신 사항을 문의해주세요
 	</p>    
