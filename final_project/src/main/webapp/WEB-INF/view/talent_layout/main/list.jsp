@@ -168,6 +168,6 @@ function proArti(mId){
 }
 
 function article(rNum) {
-	location.href = "<%=cp%>/talent/main/article?rNum=" + rNum + "&page=${page}";
+	location.href = "<%=cp%>/member/applications/application?rNum=" + rNum + "&page=${page}";
 }
 </script>

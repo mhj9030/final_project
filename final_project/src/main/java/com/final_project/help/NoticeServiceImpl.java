@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.final_project.common.dao.CommonDAO;
-import com.final_project.point.Point;
 
 @Service("help.noticeService")
 public class NoticeServiceImpl implements NoticeService{
@@ -108,6 +107,19 @@ public class NoticeServiceImpl implements NoticeService{
 		return result;
 	}
 	
+	
+	@Override
+	public List<Notice> listNoticeTop() {
+		List<Notice> list=null;
+		
+		try {
+			list=dao.getListData("notice.listNoticeTop");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
 	
 	
 }

@@ -35,8 +35,16 @@
 				<tr align="center">
 					<td>${dto.listNum}</td>
 					<td align="left">
+					<c:forEach var="n" begin="1" end="${dto.depth}">
+                                &nbsp;&nbsp;
+                            </c:forEach>
+                            <c:if test="${dto.depth!=0}">
+                                <img src='<%=cp%>/resources/image/re.gif'>
+                            </c:if>
+					
 						<a href="${articleUrl}&num=${dto.qaNum}">${dto.subject}</a>
 					</td>
+					
 					<td>${dto.mName}</td>
 					<td>${dto.created}</td>
 					<td>${dto.hitCount}</td>
@@ -61,30 +69,7 @@
 		
 		<table class="list-comp">
 			<tr>
-				<td align="left" width="100">
-		        	<button class="btn btn-default" type="button" class="btn" onclick="javascript:location.href='<%=cp%>/help/qa';">새로고침</button>
-		    	</td>
-		    	
-		    	<td align="center">
-		    		<div class="list-search">
-		    			<form name="searchForm" action="" method="post">
-			    			<select name="searchKey" class="list-searchList" style="float: left;">
-						    	<option value="subject">제목</option> 
-						        <option value="userName">작성자</option>
-						        <option value="content">내용</option>
-						        <option value="created">등록일</option>
-				           	</select>
-				            
-				            <div class="input-group" style="float: left;">
-		      					<input type="text" class="form-control" placeholder="">
-							    <span class="input-group-btn">
-							    	<button class="btn btn-default" type="button">검색</button>
-							    </span>
-							</div>
-		    			</form>
-		    		</div>
-		    	</td>
-		    	
+				
 		    	<td align="right" width="100">
 		          	<button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/help_layout/qa/created';">글올리기</button>
 		      	</td>

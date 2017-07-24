@@ -69,6 +69,19 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return result;
 	}
+	@Override
+	public int deleteGroupTable(int seq) {
+		int result=0;
+		try {
+			dao.updateData("community_group.dropBoardReplyTable", seq);
+			dao.updateData("community_group.dropBoardLikeTable", seq);
+			dao.updateData("community_group.dropBoardTable", seq);
+			result=1;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 	
 	@Override
 	public List<Group> listGroup(Map<String, Object> map) {
@@ -282,51 +295,123 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public GroupBoard readGroupBoard(int gbNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public GroupBoard readGroupBoard(Map<String, Object> map) {
+		GroupBoard dto = null;
+		
+		try {
+			dto = dao.getReadData("community_group.readGroupBoard", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
 	}
 
 	@Override
-	public int updateHitCount(int gbNum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateHitCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.updateData("community_group.updatehitCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override
 	public GroupBoard preReadGroupBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		GroupBoard dto = null;
+		try {
+			dto = dao.getReadData("community_group.preReadGroupBoard", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
 	public GroupBoard nextReadGroupBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		GroupBoard dto = null;
+		try {
+			dto = dao.getReadData("community_group.nextReadGroupBoard", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
 	public int updateGroupBoard(GroupBoard dto, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+
+		try{
+			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
+				String newFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+		
+				if (newFilename != null) {
+					// 이전 파일 지우기
+					if(dto.getSaveFilename()!=null && dto.getSaveFilename().length()!=0) {
+						fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+					}
+					
+					dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+					dto.setSaveFilename(newFilename);
+				}
+			}
+			
+			result= dao.updateData("community_group.updateGroupBoard", dto);
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteGroupBoard(int gbNum, String pathname, String mId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteGroupBoard(Map<String, Object> map, String pathname, String mId) {
+		int result = 0;
+		
+		try {
+			GroupBoard dto= readGroupBoard(map);
+			if(dto!=null) {
+				if(! dto.getmId().equals(mId) && ! mId.equals("admin@a.com"))
+					return result;
+				
+				if(dto.getSaveFilename()!=null&&dto.getSaveFilename().length()!=0) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+			}
+			
+			
+			result = dao.deleteData("community_group.deleteGroupBoard", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int insertLikeGroupBoard(GroupBoard dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.insertData("community_group.insertLikeGroupBoard", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
-	public int countLikeGroupBoard(int gbNum) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countLikeGroupBoard(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.getIntValue("community_group.countLikeGroupBoard", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
@@ -334,6 +419,163 @@ public class GroupServiceImpl implements GroupService{
 		int result = 0;
 		try {
 			result = dao.getIntValue("community_group.checkGroupMember", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int insertReply(GroupBoardReply dto) {
+		int result = 0;
+		
+		try {
+			
+			int maxNum = dao.getIntValue("community_group.maxGroupBoardReplyNum", dto);
+			dto.setReplyNum(maxNum+1);
+			result = dao.insertData("community_group.insertReply", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<GroupBoardReply> listReply(Map<String, Object> map) {
+		List<GroupBoardReply> list = null;
+		
+		try {
+			list = dao.getListData("community_group.listReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<GroupBoardReply> listReplyAnswer(Map<String, Object> map) {
+		List<GroupBoardReply> list=null;
+		try {
+			list=dao.getListData("community_group.listReplyAnswer", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int replyDataCount(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.getIntValue("community_group.replyDataCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int replyCountAnswer(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.getIntValue("community_group.replyCountAnswer", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteReply(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("community_group.deleteReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<GroupMember> listGroupMember(Map<String, Object> map) {
+		List<GroupMember> list = null;
+		try {
+			list = dao.getListData("community_group.listGroupMember", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int updateGroup(Group dto, String pathname) {
+		int result = 0;
+		try{
+			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
+				String newFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
+				if (newFilename != null) {
+					// 이전 파일 지우기
+					if(dto.getSaveFilename()!=null && dto.getSaveFilename().length()!=0) {
+						fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+					}
+					
+					dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+					dto.setSaveFilename(newFilename);
+					
+				}
+			}
+			result= dao.updateData("community_group.updateGroup", dto);
+		}catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteGroup(int groupNum, String pathname, String mId) {
+		int result = 0;
+		try {
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("groupNum", groupNum);
+			Group dto= readGroup(map);
+			if(dto!=null) {
+				if(! dto.getmId().equals(mId) && ! mId.equals("admin@a.com"))
+					return result;
+				
+				if(dto.getSaveFilename()!=null&&dto.getSaveFilename().length()!=0) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+			}
+			deleteGroupTable(groupNum);
+			result = dao.deleteData("community_group.deleteGroup", map);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int joinGroup(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.insertData("community_group.joinGroup", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int outGroup(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.deleteData("community_group.outGroup", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

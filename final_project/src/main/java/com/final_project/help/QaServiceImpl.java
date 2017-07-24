@@ -15,24 +15,24 @@ public class QaServiceImpl implements QaService{
 	private CommonDAO dao;
 
 	@Override
-	public int insertQa(Qa dto, String pathname) {
+	public int insertQa(Qa dto, String mode) {
 		int result=0;
 		
 		try {
-			int seq=dao.getIntValue("qa.seq");
-			dto.setQaNum(seq);
-			
-			if(pathname.equals("created")) {
-				dto.setGroupNum(seq);
+			if(mode.equals("created")) {
+				int maxNum=dao.getIntValue("qa.maxQaNum");
+				dto.setQaNum(maxNum+1);
+				dto.setGroupNum(dto.getQaNum());
 				
-			} else if(pathname.equals("reply")) {
+			} else if(mode.equals("reply")) {
 				// orderNo 변경
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("groupNum", dto.getGroupNum());
 				map.put("orderNo", dto.getOrderNo());
-				
 				dao.updateData("qa.updateOrderNo", map);
 
+				int maxNum=dao.getIntValue("qa.maxQaNum");
+				dto.setQaNum(maxNum+1);
 				dto.setDepth(dto.getDepth() + 1);
 				dto.setOrderNo(dto.getOrderNo() + 1);
 			}
@@ -92,30 +92,5 @@ public class QaServiceImpl implements QaService{
 		return result;
 	}
 	
-	@Override
-	public Qa preReadQa(Map<String, Object> map) {
-		Qa dto=null;
-		
-		try{
-			dto=dao.getReadData("qa.preReadQa", map);
-		} catch(Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return dto;
-
-	}
-
-	@Override
-	public Qa nextReadQa(Map<String, Object> map) {
-		Qa dto=null;
-		
-		try{
-			dto=dao.getReadData("qa.nextReadQa", map);
-		} catch(Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return dto;
-	}
+	
 }
