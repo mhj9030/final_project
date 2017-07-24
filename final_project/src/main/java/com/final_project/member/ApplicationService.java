@@ -33,6 +33,6 @@ public interface ApplicationService {
 	
 	// 3단계
 	public MemberDetail selectThrIntro(Map<String, Object> map);
-	public int insertThrIntro(MemberDetail dto);
+	public int insertThrIntro(Map<String, Object> map);
 	public int updateThrIntro(Map<String, Object> map);
 }

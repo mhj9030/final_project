@@ -50,7 +50,7 @@
                     <script>
             $("#skil").tagsinput("destroy");
             </script>
-           
+           <div class="row"> <span><strong>전문분야: </strong></span> <c:if test="${empty dto.expertise }">등록된 전문 분야가 없습니다</c:if> <c:if test="${not empty dto.expertise }"><input type="text" id="skil" value="${dto.expertise}" data-role="tagsinput" disabled="disabled"></c:if> </div>
         </div>
         <div class="main all">
             <section class="section_box">

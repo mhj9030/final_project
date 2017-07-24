@@ -26,7 +26,7 @@
 	
 	<form name="resume_detail" method="post">
 		<div id="resume_div">
-			<input type="hidden" name="rNum" value="${rDto.rNum}" />
+			<input type="hidden" name="rNum" value="${rNum}" />
 			<table id="license" class="table" style="height: 60px;">
 				<caption>▶ 자격증</caption>
 				<thead>
@@ -100,12 +100,12 @@
 			<div style="text-align: right;">
 				<c:if test="${mode!='update'}">
 					* 자기소개는 다음 단계에서 쓸 수 있습니다.<br>
+					* 남은 이력을 나중에 작성하시려면 이력서 목록을 눌러주세요.<br>
 					<button type="button" class="btn btn-info" onclick="check()">추가 정보 등록</button>
 				</c:if>
 				<c:if test="${mode=='update'}">
 					<button type="button" class="btn btn-info" onclick="check()">추가 정보 수정</button>
 				</c:if>
-				<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">이력서 목록</button>
 			</div>
 		</div>

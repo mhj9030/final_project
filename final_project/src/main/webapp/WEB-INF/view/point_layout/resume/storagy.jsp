@@ -9,7 +9,7 @@
 
 <div class="page_body">
 	<h3>
-		| 포인트 마켓
+		| 이력서 보관함
 		<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Point Storagy</small>
 	</h3><hr>
 	

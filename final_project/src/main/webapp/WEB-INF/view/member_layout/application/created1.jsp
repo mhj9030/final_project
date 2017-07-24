@@ -269,33 +269,50 @@ $(document).ready(function () {
 function check(){
 	var f = document.member_detail;
 	
+	if(f.memo==""){
+		alert("이력서 제목은 필수입니다.");
+		f.memo.focus();
+		return false;
+	}
+	
+	if(f.upload==""){
+		alert("사진은 필수입니다.");
+		return false;
+	}
+	
 	if(f.rName==""){
-		alert("이름 작성");
+		alert("이름 작성은 필수입니다.");
 		f.rName.focus();
 		return false;
 	}
 	
 	if(f.engName.value==""){
-		alert("이름 작성");
+		alert("영어 이름 작성은 필수입니다.");
 		f.engName.focus();
 		return false;
 	}
 	
 	if(f.phone.value==""){
-		alert("폰번호 작성");
+		alert("폰번호 작성은 필수입니다.");
 		f.phone.focus();
 		return false;
 	}
 	
 	if(f.addr.value==""){
-		alert("주소 작성");
+		alert("주소 작성은 필수입니다.");
 		f.addr.focus();
 		return false;
 	}
 	
 	if(f.addr2.value==""){
-		alert("주소 작성");
+		alert("주소 작성은 필수입니다.");
 		f.addr2.focus();
+		return false;
+	}
+	
+	if(f.pay.value==""){
+		alert("희망연봉 작성은 필수입니다.");
+		f.pay.focus();
 		return false;
 	}
 	
