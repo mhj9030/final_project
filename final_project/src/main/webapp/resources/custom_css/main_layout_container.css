@@ -198,6 +198,5 @@ body{
 
 .panel-news .news-created{
 	font-size : 12px;
-	text-align: right;
-	padding-top: 25px;
+	text-align: center;
 }

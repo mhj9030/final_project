@@ -126,7 +126,7 @@ public class NewsController {
 	}
 
 	@RequestMapping("/community/news/article")
-	public String article(@RequestParam(value = "jbnum") int jbnum, @RequestParam(value = "page") String page,
+	public String article(@RequestParam(value = "jbnum") int jbnum, @RequestParam(value = "page", defaultValue="1") String page,
 			@RequestParam(value = "searchKey", defaultValue = "subject") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
 			@RequestParam(value = "type", defaultValue = "") String type, Model model) throws Exception {

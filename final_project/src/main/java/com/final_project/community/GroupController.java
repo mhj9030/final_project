@@ -745,5 +745,41 @@ public class GroupController {
 		return model;
 	}
 	
+	@RequestMapping("/community/group/join")
+	public String joinGroup(
+			@RequestParam int groupNum,
+			@RequestParam int page,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("groupNum", groupNum);
+		map.put("mId", info.getUserId());
+		
+		service.joinGroup(map);
+		
+		
+		return "redirect:/community/group/article?groupNum="+groupNum+"&page="+page;
+	}
+	
+	@RequestMapping("/community/group/out")
+	public String outGroup(
+			@RequestParam int groupNum,
+			@RequestParam int page,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("groupNum", groupNum);
+		map.put("mId", info.getUserId());
+		
+		service.outGroup(map);
+		
+		
+		return "redirect:/community/group/article?groupNum="+groupNum+"&page="+page;
+	}
+	
 	
 }

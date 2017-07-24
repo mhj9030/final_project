@@ -206,4 +206,14 @@
 	        FROM jobnews_re WHERE answer=#{answer}
 	</select>
 	
+	
+	<select id="listMainNews" resultType="com.final_project.community.News">
+		SELECT ROWNUM, tb.* FROM(
+			select jbNum, subject, TO_CHAR(created,'YYYY-MM-DD') created, type FROM JOBNEWS_BBS 
+			WHERE state = 0 
+			ORDER BY jbNum DESC
+		<![CDATA[
+			)tb WHERE ROWNUM<=10
+		]]>
+	</select>
 </mapper>

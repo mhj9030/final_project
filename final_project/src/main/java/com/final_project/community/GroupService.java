@@ -26,6 +26,8 @@ public interface GroupService {
 	public int createGroupTable(int seq);
 	public int deleteGroupTable(int seq);
 	public int checkGroupMember(Map<String, Object> map);
+	public int joinGroup(Map<String, Object> map);
+	public int outGroup(Map<String, Object> map);
 	
 	
 	public int maxGroupBoardSeq(Map<String, Object> map);
