@@ -14,6 +14,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>사이트 타이틀</title>
 
+
+<!-- 소제목 글꼴 -->
+<link href="https://fonts.googleapis.com/css?family=Gudea|Yellowtail" rel="stylesheet">
 <!-- Bootstrap CSS -->
 <link href="<%=cp%>/resources/css/bootstrap.min.css" rel="stylesheet">
 <!-- Main_layout CSS -->

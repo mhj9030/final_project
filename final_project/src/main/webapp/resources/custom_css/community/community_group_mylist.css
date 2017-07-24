@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 .group_mylist{
 	width: 100%;
@@ -27,4 +28,14 @@
 
 #attachDiv input[type=button]{
 	width: 36px;
+}
+
+.mylistBar{
+	height: 30px;
+    background: rgba(230, 241, 255, 1);
+    text-align: center;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Jeju Gothic', serif;
+    padding-top: 5px;
 }

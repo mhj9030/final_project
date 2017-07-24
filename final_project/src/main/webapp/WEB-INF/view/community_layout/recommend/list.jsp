@@ -14,11 +14,16 @@ function searchList() {
 	}
 </script>
 
+<div class="topBar">
+		기업의 후기를 올려주시면  포인트가 제공됩니다.
+</div>
+
 <div class="recommend_list_wrap">
-	<h3>| 기업 추천 게시판</h3>
+	<h3>| 기업추천게시판 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Recommend Company</small></h3>
+	<hr>
 	
 	<p class="recommend_list_info">
-		자신의 경험담 및 기업의 정보를 공유하고 기업을 추천합시다!!
+		자신의 경험담 및 기업의 정보를 공유하고 기업을 추천합시다. 지피지기면 백전백승입니다!!
 	</p>
 	<div class="recommend_list_tab">
 		<i class="glyphicon glyphicon-inbox"></i><span> 등록된 회사 : ${dataCount}</span>&nbsp;&nbsp;&nbsp;&nbsp;

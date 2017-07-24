@@ -31,7 +31,11 @@ function deleteGroup() {
 </script>
 
 
-<div class="community_article_wrap" style="min-height:750px; border: 0px;">
+<div class="group_article_wrap" style="min-height:750px; border: 0px; width: 800px; margin : 30px auto;">
+	<h3>| 그룹정보 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b; margin-bottom: 10px;">Group Imformation</small>
+		<button onclick="javascript:location.href='<%=cp%>/community/group'" class="btn btn-xs btn-default" style="margin-left: 435px; font-size: 14px; vertical-align: baseline;">돌아가기</button>
+	</h3>
+	<hr>
 	<div class="group_article_info">
 		<div class="group_article_info_image">
 			<c:if test="${not empty dto.saveFilename}">
@@ -49,7 +53,7 @@ function deleteGroup() {
 		</div>
 		<div style="float: left; width: 50%; height: 100%; padding: 11px;">
 			<div class="group_article_info_name">
-				<strong>${dto.groupName}</strong> <button class="btn btn-sm btn-success">그룹장 : ${dto.mName}</button>
+				<strong>${dto.groupName}</strong>
 			</div>
 			<div class="group_article_info_tag">
 				<c:forEach var="vo" items="${dto.list}">	
@@ -57,23 +61,24 @@ function deleteGroup() {
 				</c:forEach>	
 			</div>
 			<div class="group_article_info_created">
-				<small>그룹생성일 : ${dto.created}</small>
+				<strong>그룹생성일</strong> : <small>${dto.created}</small>
 			</div>
 		</div>
-		<div style="float: left; width: 20%; height: 100%;">
+		<div style="float: left; width: 20%; height: 100%; text-align: center;">
+				 <button class="btn btn-sm btn-success" style="MARGIN-TOP: 40PX; BORDER-RADIUS: 0; height: 47px;">그룹장 : ${dto.mName}</button>
 				<c:if test="${check==0}">
-					<button class="btn btn-info" style="width: 100%; height:100%" onclick="javascript:location.href='<%=cp%>/community/group/join?groupNum=${dto.groupNum}&page=${page}'">
+					<button class="btn btn-info" style="width: 65%; MARGIN-TOP: 9PX; BORDER-RADIUS: 0; height: 26%; PADDING: 1PX;" onclick="javascript:location.href='<%=cp%>/community/group/join?groupNum=${dto.groupNum}&page=${page}'">
 						가입하기
 					</button>
 				</c:if>
 				<c:if test="${check==1 && dto.mName==sessionScope.member.userName}">
-					<button class="btn btn-info" style="width: 100%; height:100%" 
+					<button class="btn btn-info" style="width: 65%; MARGIN-TOP: 9PX; BORDER-RADIUS: 0; height: 26%; PADDING: 1PX;" 
 							onclick="deleteGroup();">
 						그룹삭제
 					</button>
 				</c:if>
 				<c:if test="${check==1 && dto.mName!=sessionScope.member.userName}">
-					<button class="btn btn-info" style="width: 100%; height:100%" onclick="javascript:location.href='<%=cp%>/community/group/out?groupNum=${dto.groupNum}&page=${page}'">
+					<button class="btn btn-info" style="width: 65%; MARGIN-TOP: 9PX; BORDER-RADIUS: 0; height: 26%; PADDING: 1PX;" onclick="javascript:location.href='<%=cp%>/community/group/out?groupNum=${dto.groupNum}&page=${page}'">
 						탈퇴하기
 					</button>
 				</c:if>
@@ -88,20 +93,29 @@ function deleteGroup() {
 			${dto.groupInfo}
 		</div>
 	</div>
-	<div class="group_article_info_member">
-		<div style="float: left; margin: 20px; border: 1px solid black; width: 80px; height: 70px;">
+	<h3>| 그룹원 소개<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b; margin-bottom: 10px;">Group Member</small></h3>
+	<hr>
+	<div class="group_article_info_member" style="min-height: 100px; padding-left: 24px;">
+			<div style="float: left; margin:10px; width: 120px; height: 130px;
+						background: rgba(240, 248, 255, 0.3); box-shadow: 0 2px 0 rgba(0,0,0,0.075);">
+				<div style="width: 100%; height: 80%;">
+					<img src="<%=cp%>/resources/image/profile_img.jpg" style="width:100%; height: 100%;">
+				</div>
+				<div style="width: 100%; height: 20%; text-align: center; padding: 5px;">
+					<strong style="font-size: 15px; font-family: 'Jeju Gothic', serif;">김민혁</strong>
+				</div>
+			</div>
 			
-		</div>
 	</div>
 	
+	
 	<c:if test="${check==0}">
-		<div class="groupNo">
-			그룹원만 이용 가능합니다.
-		</div>
 	</c:if>
 	
 	<c:if test="${check==1}">
 		<div class="list-body" align="center" style="min-height:500px;">
+		<h3 style="text-align:left;">| 그룹게시판 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b; margin-bottom: 10px;">Group Board</small></h3>
+		<hr>
 			<div>
 				<div align="right">${dataCount}개(${page}/${total_page} 페이지)</div>
 

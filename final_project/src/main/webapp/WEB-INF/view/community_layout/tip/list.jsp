@@ -96,12 +96,15 @@ function login() {
 }
 
 </script>
-
+<div class="topBar">
+		좋은 정보를 등록하고 포인트를 받으세요!!!&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/community/tip/created">꿀팁올리기</a>
+</div>
 
 <div class="tip_list_wrap">
-		<h3>| 취업꿀팁</h3>
+		<h3>| 취업꿀팁 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Job GoodTip</small></h3>
+		<hr>
 		<p>
-			각 분야별 취업관련 정보를 공유하고 소통하는 게시판입니다.
+			한 개의 촛불로서 많은 촛불에 불을 붙여도 처음의 촛불의 빛은 약해지지 않는다. 
 		</p>
 		<div class="row rowlist">
 			<p class="row_header">분야 설정</p>

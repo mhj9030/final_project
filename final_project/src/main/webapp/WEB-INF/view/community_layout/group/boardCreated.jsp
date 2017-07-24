@@ -38,7 +38,7 @@ if(typeof String.prototype.trim !== 'function') {
 <div class="created_form">
 	<div>
 		<h3>
-		그룹   | <c:if test="${mode=='created'}">글올리기</c:if><c:if test="${mode=='update'}">수정하기</c:if>
+		그룹<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Writing</small>
 		</h3>
 	</div>
 
@@ -92,7 +92,7 @@ if(typeof String.prototype.trim !== 'function') {
 							<td colspan="4" style="text-align: center;">
 								<button type="submit" class="btn btn-default">${mode=='update'?'수정완료':'등록하기'}</button>
 								<button type="reset" class="btn btn-default">다시입력</button>
-								<button type="button" class="btn btn-default" onclick="javascript:location.href='';">${mode=='update'?'수정취소':'등록취소'}</button> 
+								<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${groupNum}';">${mode=='update'?'수정취소':'등록취소'}</button> 
 								 <c:if test="${mode=='update'}">
 						         	 <input type="hidden" name="gbNum" value="${dto.gbNum}">
 						         	 <input type="hidden" name="saveFilename" value="${dto.saveFilename}">
