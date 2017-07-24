@@ -9,7 +9,8 @@
 
 <div class="list-body" align="center">
 	<div class="notice_list_wrap" style="text-align: left ">
-	<h3>| 질문과답변</h3>
+	<h3>| 질문과답변<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Q&A</small></h3>
+	<hr>
 	<p>
 	궁금한 점은 이곳에 글을 남겨 주시면 성심껏 답변 해드리겠습니다.
 	</p>    

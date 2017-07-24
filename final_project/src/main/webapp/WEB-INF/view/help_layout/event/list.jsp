@@ -18,7 +18,7 @@
 
 .subject {
      width:190px;
-     height:50px;
+     height:90px;
      line-height:25px;
      margin:5px auto 0px;
      border-top: 1px solid #D5D5D5;
@@ -48,7 +48,8 @@ function article(num) {
 <div class="list-body" align="center">
  
 	<div class="notice_list_wrap" style="text-align: left ">
-	<h3>| 이벤트</h3>
+	<h3>| 이벤트<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Event</small></h3>
+	<hr>
 	<p>
 	
 	</p>    
@@ -99,15 +100,15 @@ function article(num) {
             </c:if>
         </div>        
         
-        <div style="clear: both;">
+        <table class="list-comp">
         		
-		    	<c:if test="${sessionScope.member.userId=='admin@a.com'}">
-        		<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
+		    	<c:if test="${sessionScope.member.userId=='admin'}">
+        		<td align="right" width="100">
         		    <button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/help_layout/event/created';">글올리기</button>
-        		</div>
+        		    </td>
         		</c:if>
         		
-        </div>
+        </table>
         
     </div>
     

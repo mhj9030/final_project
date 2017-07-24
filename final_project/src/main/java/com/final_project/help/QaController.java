@@ -119,10 +119,6 @@ public class QaController {
 	public String createdForm(
 			Model model,
 			HttpSession session) throws Exception {
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		/*if(info==null){
-			
-		}*/
 		
 		
 		model.addAttribute("mode", "created");
@@ -137,12 +133,8 @@ public class QaController {
 			) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		//dto.setmId(info.getUserId());
-		dto.setmId("admin@a.com");
-		/*String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"";*/
+		dto.setmId(info.getUserId());
 		
-		//service.insertQa(dto, pathname);
 		service.insertQa(dto, "created");
 		return "redirect:/help_layout/qa/list";
 		

@@ -11,7 +11,8 @@
 
 <div class="list-body" align="center" style="overflow-x:hidden; overflow-y:auto;">
 	<div class="notice_list_wrap" style="text-align: left ">
-	<h3>| FAQ</h3>
+	<h3>| 자주묻는질문<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">FAQ</small></h3>
+	<hr>
 	<p>
 	궁금한 문의 사항을 확인 해 보세요.
 	</p>    

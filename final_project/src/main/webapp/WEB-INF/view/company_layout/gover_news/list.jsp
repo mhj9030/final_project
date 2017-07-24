@@ -71,7 +71,7 @@
 				</form>
 			</div>
 			<div class = "footer-bar-submit">
-				<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+				<c:if test="${sessionScope.member.userId=='admin'}">
 					<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/company/gover_news/created';">글쓰기</button>
 				</c:if>
 			</div>

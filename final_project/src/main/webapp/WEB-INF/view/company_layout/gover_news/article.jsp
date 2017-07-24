@@ -68,7 +68,7 @@
 	</table>
 	
 	<div style="text-align: right;">
-		<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId=='admin'}">
 			<button type="button" class="btn btn-default" onclick="updateInquiry();">수정</button>
 			<button type="button" class="btn btn-default" onclick="deleteInquiry();">삭제</button>
 		</c:if>

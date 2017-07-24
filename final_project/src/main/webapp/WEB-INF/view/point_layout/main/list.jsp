@@ -61,7 +61,7 @@
 				${paging}
 			</div>
 
-		<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId=='admin'}">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main/created'">글쓰기</button>
 			</div>

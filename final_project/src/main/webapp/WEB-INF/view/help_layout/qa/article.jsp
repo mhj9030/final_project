@@ -32,7 +32,7 @@
 <div class= "footer-bar">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/qa/list'">목록</button>
-				<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+				<c:if test="${sessionScope.member.userId=='admin'}">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/qa/reply?qaNum=${dto.qaNum}&page=${page}';">답변</button>
 				</c:if>
 			</div>
