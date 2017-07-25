@@ -266,12 +266,21 @@
 		</c:if>
 		
 		<hr>
-	</div>
-	<div class= "footer-bar">
-		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="history.back();">목록</button>
+	</div>.
+	<c:if test="${sessionScope.member.userId==rDto.mId}">
+		<div class= "footer-bar">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">목록</button>
+			</div>
 		</div>
-	</div>
+	</c:if>
+	<c:if test="${sessionScope.member.userId!=rDto.mId}">
+		<div class= "footer-bar">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="history.back();">목록</button>
+			</div>
+		</div>
+	</c:if>
 </div>
 
 <script>
