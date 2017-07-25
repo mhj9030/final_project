@@ -237,6 +237,8 @@ public class ApplicationController {
 		if(! dto.getUpload().isEmpty()){
 			String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
 			dto.setSaveFilename(saveFilename);
+		}else{
+			dto.setSaveFilename(dto.getrPhoto());
 		}
 		
 		service.updateDefault(dto);

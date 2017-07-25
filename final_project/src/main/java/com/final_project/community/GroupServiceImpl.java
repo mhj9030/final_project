@@ -581,4 +581,17 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<Group> listGroupPopul(Map<String, Object> map) {
+		List<Group> list = null;
+		
+		try{
+			list=dao.getListData("community_group.listPopularity",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
 }

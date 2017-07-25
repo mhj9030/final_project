@@ -22,36 +22,37 @@
     });
 </script>
 <div class="contents">
-    <div class="wrap">
-        <div class="span3 well setting"> 
-	        <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
-	        	<c:if test="${empty dto.proPhoto}">
-	        		<img src="<%=cp%>/resources/image/profile_img.jpg" name="aboutme" width="140" height="140" class="img-circle">
-	        	</c:if>
-	        	<c:if test="${not empty dto.proPhoto}">
-	        		<img src="<%=cp%>/uploads/profile/${dto.proPhoto}" name="aboutme" width="140" height="140" class="img-circle">
-	        	</c:if>
+	<div class="wrap">
+		<div class="span3 well setting"> 
+			<a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+				<c:if test="${empty dto.proPhoto}">
+					<img src="<%=cp%>/resources/image/profile_img.jpg" name="aboutme" width="140" height="140" class="img-circle">
+				</c:if>
+				<c:if test="${not empty dto.proPhoto}">
+					<img src="<%=cp%>/uploads/profile/${dto.proPhoto}" name="aboutme" width="140" height="140" class="img-circle">
+				</c:if>
 	        </a>
             <h3>${dto.mname } <small> ${dto.mgender }</small></h3>
-            <div class="row"> <em>
-        	<c:if test="${empty dto.proIntro }">
-                                             자기 소개가 없습니다.
- 											</c:if>
- 											
- 											<c:if test="${!empty dto.proIntro }">
-                                             ${dto.proIntro }
- 											</c:if>
-        </em> </div>
+            <div class="row">
+            	<em>
+		        	<c:if test="${empty dto.proIntro }">
+						자기 소개가 없습니다.
+					</c:if>
+					<c:if test="${!empty dto.proIntro }">
+						${dto.proIntro }
+					</c:if>
+				</em>
+        	</div>
         	<div align="right">
 	        	<a href="<%=cp%>/profile/update?id=${member.userId}">
 		            <span class="glyphicon glyphicon-cog"></span>프로필 수정
 		        </a>
 	        </div>
-                    <script>
-            $("#skil").tagsinput("destroy");
-            </script>
-           <div class="row"> <span><strong>전문분야: </strong></span> <c:if test="${empty dto.expertise }">등록된 전문 분야가 없습니다</c:if> <c:if test="${not empty dto.expertise }"><input type="text" id="skil" value="${dto.expertise}" data-role="tagsinput" disabled="disabled"></c:if> </div>
-        </div>
+			<script>
+				$("#skil").tagsinput("destroy");
+			</script>
+			<div class="row"> <span><strong>전문분야: </strong></span> <c:if test="${empty dto.expertise }">등록된 전문 분야가 없습니다</c:if> <c:if test="${not empty dto.expertise }"><input type="text" id="skil" value="${dto.expertise}" data-role="tagsinput" disabled="disabled"></c:if> </div>
+		</div>
         <div class="main all">
             <section class="section_box">
                 <div class="panel-head">
@@ -59,11 +60,20 @@
                 <div class="panel panel-default">
                     <div class="panel-body panel-view shadow">
                         <ul class="list-unstyled list list4 list-overflow-x clearfix">
+                        	<li role="presentation">
+                                <a href="#section_careers" data-toggle="collapse" data-target="#school" aria-expanded="false">
+                                    <div class="panel panel-info panel-colorful-cus">
+                                        <div class="pad-all text-center"> <i class="fa fa-university" aria-hidden="true"></i> <span class="text-2x text-thin">학교</span>
+                                            <p class="bo">학교 추가</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
                             <li role="presentation">
                                 <a href="#section_careers" data-toggle="collapse" data-target="#career" aria-expanded="false" aria-controls="collapseExample">
                                     <div class="panel panel-info panel-colorful-cus">
                                         <div class="pad-all text-center"> <i class="fa fa-building-o" aria-hidden="true"></i> <span class="text-2x text-thin">경력</span>
-                                            <p class="bo">경력 추가하기</p>
+                                            <p class="bo">경력 추가</p>
                                         </div>
                                     </div>
                                 </a>
@@ -72,16 +82,7 @@
                                 <a href="#section_careers" data-toggle="collapse" data-target="#project" aria-expanded="false">
                                     <div class="panel panel-info panel-colorful-cus">
                                         <div class="pad-all text-center"> <i class="fa fa-suitcase" aria-hidden="true"></i> <span class="text-2x text-thin">프로젝트</span>
-                                            <p class="bo">프로젝트 추가하기</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#section_careers" data-toggle="collapse" data-target="#school" aria-expanded="false">
-                                    <div class="panel panel-info panel-colorful-cus">
-                                        <div class="pad-all text-center"> <i class="fa fa-university" aria-hidden="true"></i> <span class="text-2x text-thin">학교</span>
-                                            <p class="bo">학교 추가</p>
+                                            <p class="bo">프로젝트 추가</p>
                                         </div>
                                     </div>
                                 </a>
@@ -96,19 +97,19 @@
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="#section_careers" data-toggle="collapse" data-target="#mypassword" aria-expanded="false">
+                                <a href="#section_careers" data-toggle="collapse" data-target="#interest" aria-expanded="false">
                                     <div class="panel panel-info panel-colorful-cus">
-                                        <div class="pad-all text-center"> <i class="fa fa-building-o" aria-hidden="true"></i> <span class="text-2x text-thin">비밀번호 관리</span>
-                                            <p class="bo">비밀번호 변경</p>
+                                        <div class="pad-all text-center"> <i class="fa fa-building-o" aria-hidden="true"></i> <span class="text-2x text-thin">관심분야</span>
+                                            <p class="bo">관심분야 추가</p>
                                         </div>
                                     </div>
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="#section_careers" data-toggle="collapse" data-target="#otp" aria-expanded="false">
+                                <a href="#section_careers" data-toggle="collapse" data-target="#mypassword" aria-expanded="false">
                                     <div class="panel panel-info panel-colorful-cus">
-                                        <div class="pad-all text-center"> <i class="fa fa-building-o" aria-hidden="true"></i> <span class="text-2x text-thin">OTP</span>
-                                            <p class="bo">OTP 적용</p>
+                                        <div class="pad-all text-center"> <i class="fa fa-building-o" aria-hidden="true"></i> <span class="text-2x text-thin">비밀번호 관리</span>
+                                            <p class="bo">비밀번호 변경</p>
                                         </div>
                                     </div>
                                 </a>
@@ -298,8 +299,139 @@
         <div class="collapse" id="mypassword" aria-expanded="false">
             <div class="well"> 비밀번호 관리 </div>
         </div>
-        <div class="collapse" id="otp" aria-expanded="false">
-            <div class="well"> OTP </div>
-        </div>
-    </div>
+		<div class="collapse" id="interest" aria-expanded="false">
+			<div class="well">
+				관심분야<br>
+				<form name="submitinterest" method="post" class="form form-horizontal experience">
+					<fieldset>
+						<table class="table">
+							<tbody>
+								<tr align="center">
+									<td width="12%">직&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</td>
+									<td colspan="5">
+										<div style="padding-left: 25px; text-align: left;">
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="1">경영/사무</button>
+										        <input type="radio" name="mainCode" class="hidden" value="1" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="2">마케팅/무역/유통</button>
+										        <input type="radio" name="mainCode" class="hidden" value="2" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="3">영업/고객상담</button>
+										        <input type="radio" name="mainCode" class="hidden" value="3" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="4">IT/인터넷</button>
+										        <input type="radio" name="mainCode" class="hidden" value="4" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="5">연구개발/설계</button>
+										        <input type="radio" name="mainCode" class="hidden" value="5" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="6">생산/제조</button>
+										        <input type="radio" name="mainCode" class="hidden" value="6" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="7">전문/특수직</button>
+										        <input type="radio" name="mainCode" class="hidden" value="7" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="8">디자인</button>
+										        <input type="radio" name="mainCode" class="hidden" value="8" />
+										    </span>
+										<span class="button-checkbox">
+										        <button type="button" name="mainName" class="btn btn-default btn-xs" value="9">미디어</button>
+										        <input type="radio" name="mainCode" class="hidden" value="9" />
+										    </span>
+										</div>
+									</td>
+								</tr>
+								<tr align="center">
+									<td>세부직종</td>
+									<td colspan="5">
+										<div id="subType" style="padding-left: 25px; padding-button: 25px; text-align: left;"></div>
+									</td>
+								</tr>
+							</tbody>
+							</table>
+					</fieldset>
+					<input type="submit" class="btn btn-primary add" value="저장" onclick="return insertInterest();">
+				</form>
+<script type="text/javascript">
+var cc = 0;
+
+$(document).ready(function() {
+	list(0);
+	$("#subType").html('직종을 선택해 주세요.');
+});
+
+$("body").on("click", 'button[name="mainName"]', function(){
+	$('input:radio[name="mainCode"][value="' + $(this).val() + '"]').prop("checked", true);
+	for(var i=0;i<10;i++)
+		$('button[name="mainName"][value="' + i + '"]').attr("class", "btn btn-default btn-xs");
+	$(this).attr("class", "btn btn-info btn-xs");
+	query = $("form[name=submitinterest]").serialize();
+	
+	$.ajax({
+		type: "post",
+		url: "<%=cp%>/setting/subType",
+		data: query,
+		dataType: "json",
+		success: function(data){
+			subPrint(data);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+});
+
+function isCheck(data) {
+	if($('input:checkbox[name="subCode"][value="' + data + '"]').is(":checked")){
+		$('input:checkbox[name="subCode"][value="' + data + '"]').attr("checked", false);
+		$('button[name="subName"][value="' + data + '"]').attr("class", "btn btn-default btn-xs");
+		cc--;
+	}else{
+		$('input:checkbox[name="subCode"][value="' + data + '"]').attr("checked", true);
+		$('button[name="subName"][value="' + data + '"]').attr("class", "btn btn-info btn-xs");
+		cc++;
+	}
+	
+	if(cc==0){
+		$('input:checkbox[name="subCode"][value="0"]').attr("checked", true);
+		$('button[name="subName"][value="0"]').attr("class", "btn btn-info btn-xs");
+	}else{
+		$('input:checkbox[name="subCode"][value="0"]').attr("checked", false);
+		$('button[name="subName"][value="0"]').attr("class", "btn btn-default btn-xs");
+	}
+	
+	var query = $("form[name=searchForm]").serialize();
+}
+
+function subPrint(data){
+	var out = "";
+	if(data.subType.length!=0){
+		out += '<span class="button-checkbox">';
+		out += '<button type="button" name="subName" class="btn btn-info btn-xs" value="0"> 전체 </button>';
+		out += '<input type="checkbox" name="subCode" class="hidden" checked="checked" value="0" />';
+		out += '</span>';
+		for(var i=0; i<data.subType.length; i++){
+			out += '<span class="button-checkbox">';
+			out += '<button type="button" name="subName" class="btn btn-default btn-xs" value="' + data.subType[i].subCode + '" onclick="isCheck(' + data.subType[i].subCode + ');">' + data.subType[i].subName + '</button>';
+			out += '<input type="checkbox" name="subCode" class="hidden" value="' + data.subType[i].subCode + '" />';
+			out += '</span>';
+		}
+	}else{
+		out = '직종을 선택해 주세요.';
+	}
+	
+	$("#subType").html(out);
+}
+</script>
+			</div>
+		</div>
+	</div>
 </div>

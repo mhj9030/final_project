@@ -31,4 +31,7 @@ public interface TalentService {
 	// storagy
 	public int storagyDataCount(Map<String, Object> map);
 	public List<Talent> storagyResume(Map<String, Object> map);
+	
+	//
+	public int insertInterest(List<String> list, Map<String, Object> map);
 }
