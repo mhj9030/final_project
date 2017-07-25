@@ -74,12 +74,14 @@ public class ApplicationController {
 	
 	@RequestMapping(value="/member/applications/created2", method=RequestMethod.GET)
 	public String created_step2(@RequestParam("rNum")int rNum, Model model) throws Exception {
+		model.addAttribute("rNum", rNum);
 		
 		return ".member_layout.application.created2";
 	}
 	
 	@RequestMapping(value="/member/applications/created3", method=RequestMethod.GET)
 	public String created_step3(@RequestParam("rNum")int rNum, Model model) throws Exception {
+		model.addAttribute("rNum", rNum);
 		
 		return ".member_layout.application.created3";
 	}
@@ -93,8 +95,6 @@ public class ApplicationController {
 		
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + File.separator + "uploads" + File.separator + "resume";
-		System.out.println(pathname);
-		System.out.println(dto.getUpload());
 		
 		if(! dto.getUpload().isEmpty()){
 			String saveFilename = fileManager.doFileUpload(dto.getUpload(), pathname);
@@ -114,7 +114,6 @@ public class ApplicationController {
 	
 	@RequestMapping(value="/member/applications/created2", method=RequestMethod.POST)
 	public String created_step2_ok(@RequestParam("rNum")int rNum, MemberDetail dto, Model model) throws Exception {
-		
 		model.addAttribute("rNum", rNum);
 		
 		return "redirect:/member/applications/created3";
@@ -123,9 +122,14 @@ public class ApplicationController {
 	@RequestMapping(value="/member/applications/created3", method=RequestMethod.POST)
 	public String created_step3_ok(@RequestParam("rNum")int rNum, MemberDetail dto, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
-		map.put("rNum", rNum);
 		
-		service.insertThrIntro(dto);
+		map.put("rNum", rNum);
+		map.put("intro1", dto.getIntro1());
+		map.put("intro2", dto.getIntro2());
+		map.put("intro3", dto.getIntro3());
+		map.put("intro4", dto.getIntro4());
+		
+		service.insertThrIntro(map);
 		
 		model.addAttribute("rNum", rNum);
 		
@@ -146,9 +150,6 @@ public class ApplicationController {
 		List<MemberDetail> coList = service.careerList(map);
 		
 		MemberDetail iDto = service.selectThrIntro(map);
-		
-		
-		System.out.println(rDto.getrPhoto());
 		
 		model.addAttribute("rNum", rNum);
 		model.addAttribute("rDto", rDto);
@@ -185,8 +186,6 @@ public class ApplicationController {
 		List<MemberDetail> acList = service.academyList(map);
 		List<MemberDetail> proList = service.projectList(map);
 		List<MemberDetail> coList = service.careerList(map);
-		
-		System.out.println(rDto.getApply());
 		
 		List<Talent> mainType = new ArrayList<>();
 		mainType = tService.mainType();

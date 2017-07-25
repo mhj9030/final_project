@@ -53,13 +53,13 @@ public class SearchServiceImpl implements SearchService{
 				
 				dto.setcProfit("");
 				
-				if(dto.getcProfit1()!=null && dto.getcProfit1().length()!=0){
+				if(!dto.getcProfit1().equals("0")){
 					dto.setcProfit(dto.getcProfit()+dto.getcProfit1()+"조 ");
 				}
-				if(dto.getcProfit()!=null && dto.getcProfit2().length()!=0){
+				if(!dto.getcProfit2().equals("0")){
 					dto.setcProfit(dto.getcProfit()+dto.getcProfit2()+"억 ");
 				}
-				if(dto.getcProfit()!=null && dto.getcProfit3().length()!=0){
+				if(!dto.getcProfit3().equals("0")){
 					dto.setcProfit(dto.getcProfit()+dto.getcProfit3()+"만원");
 				}
 			}
