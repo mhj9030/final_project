@@ -278,7 +278,7 @@
     				<input type="button" class="btn btn-default" onclick="sample5_execDaumPostcode()" value="주소 검색">
     			</div>
     		</div>
-			<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+			<div id="map" style="width:100%;height:300px;margin-top:10px;"></div>
   		</div>
   		
   		<div class="form-group">
@@ -347,10 +347,10 @@
 	            });
 
 	            // 인포윈도우로 장소에 대한 설명을 표시합니다
-	            var infowindow = new daum.maps.InfoWindow({
+	            /* var infowindow = new daum.maps.InfoWindow({
 	                content: '<div style="width:150px;text-align:center;padding:6px 0;">${dto.cName}</div>'
 	            });
-	            infowindow.open(map, marker);
+	            infowindow.open(map, marker); */
 
 	            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	            map.setCenter(coords);

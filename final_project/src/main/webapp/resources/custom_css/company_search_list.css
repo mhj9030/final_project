@@ -115,6 +115,7 @@
 
 .item-content .content-intro{
 	clear: both;
+	width: 85%;
 }
 
 .list .page{
@@ -126,4 +127,20 @@
     height: 15px;
 }
 
+.search .size {
+	text-align: left;
+}
 
+.search .type {
+	text-align: left;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+    
+.search .type .btn-group {
+	padding-bottom: 5px;
+}
+
+a.btn.btn-link{
+	font-size: 20px;
+}

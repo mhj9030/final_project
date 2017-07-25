@@ -351,7 +351,7 @@
     				<input type="button" class="btn btn-default" onclick="sample5_execDaumPostcode()" value="주소 검색">
     			</div>
     		</div>
-			<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+			<div id="map" style="margin-top:10px;"></div>
   		</div>
   		
   		<div class="form-group">
@@ -379,6 +379,7 @@
     		<div class="row">
     			<div class="col-xs-3">
     				<input name="upload" type="file">
+    				
     			</div>
     			
     			<div class="col-xs-2 original-filename">
@@ -392,7 +393,9 @@
     		</div>
   		</div>
   		
-  		<button type="button" class="btn btn-default" onclick="check();">${mode=='update'?'수정':'등록'}</button>
+  		<div align="center">
+  			<button type="button" class="btn btn-info btn-lg" onclick="check();">${mode=='update'?'수정':'등록'}</button>
+  		</div>
   		<c:if test="${mode=='update'}">
 			<input type="hidden" name="cLogoImage" value="${dto.cLogoImage}">        	
 			<input type="hidden" name="cCoverImage" value="${dto.cCoverImage}">
