@@ -113,7 +113,7 @@
 		</div>
 	</div> 
 	
-	<div class="row">
+	<div class="row">	
 	  <c:forEach var="dto" items="${comList}">
 	  <div class="col-md-4">
 	  	<div class="panel-busi">
@@ -194,18 +194,10 @@
 				<h4>이벤트</h4>
 	  			<hr>
 				<table>
-					<tr>
-						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
-						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>
-					</tr>
-					<tr>
-						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
-						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>
-					</tr>
-					<tr>
-						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
-						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>
-					</tr>
+			
+			
+			
+			
 					
 				</table>	
 			</div>
