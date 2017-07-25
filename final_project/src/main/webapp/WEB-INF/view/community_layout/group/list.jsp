@@ -47,11 +47,12 @@
   		</button>
   		<ul class="dropdown-menu group_list_dropdown" role="menu">
     		<li><a href="<%=cp%>/community/group">최근 생성순</a></li>
-   			<li><a href="#">인기순</a></li>
+   			<li><a href="<%=cp%>/community/group?type=popul">인기순</a></li>
 		</ul>
 	</div>
 	<div class="group_list_search">
 		<form name="searchForm" method="post" class="form-inline">
+			<input type="hidden" name="type" value="${type}">
 			<select class="form-control input-sm" name="searchKey">
 				<option value="groupName">그룹명</option>
 				<option value="groupTag">태그명</option>
