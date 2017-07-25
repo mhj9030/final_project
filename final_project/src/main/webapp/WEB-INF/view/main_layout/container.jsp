@@ -87,14 +87,15 @@
 	  <div class="col-md-4">
 	  	<div class="panel-hire">
 	  		<div class="hire-info">
-	  			<div class="hire-img"><img src='<%=cp%>/uploads/company/${dto.cLogoimage}' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'></div>
+	  			<div class="hire-img"><img src='<%=cp%>/uploads/company/${dto.cLogoimage}' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'>
+	  			<a href='<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}'>${dto.cName}</a></div>
 	  			<div class="hire-etc">
 	  				<div><a href='<%=cp%>/employ/article?ceNum=${dto.ceNum}'>${dto.ceSubject}</a></div>
-	  				<div><a href='<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}'>${dto.cName}</a></div>
-	  				<div>${dto.ceType}</div>
+	  				<div><br></div>
+	  				<div>현재 지원자 수: ${dto.applicant_count }</div>
 	  			</div>
 	  		</div>
-	  		<div class="hire-type">현재 지원자 수: ${dto.applicant_count }, 분야:${dto.subname}</div>
+	  		<div class="hire-type">고용형태:${dto.ceType}, 분야:${dto.subname}</div>
 	  		<div class="hire-now">마감일: ~${dto.ceEnd }, 연봉 ${dto.cePay}</div>
 	  	</div>
 	  </div>

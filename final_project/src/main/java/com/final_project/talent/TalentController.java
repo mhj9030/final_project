@@ -61,7 +61,7 @@ public class TalentController {
 		if(dataCount != 0)
 			total_page = util.pageCount(rows, dataCount);
 		
-		if(current_page > total_page)
+		if(current_page < total_page)
 			current_page = total_page;
 		
 		int start = (current_page - 1) * rows + 1;
