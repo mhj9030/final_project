@@ -80,6 +80,28 @@
     ]]> 
 	</select>
 	
+	<select id="listPopularity" parameterType="map" resultType="com.final_project.community.Group">
+		SELECT * FROM( 
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT gi.groupNum, groupName, saveFilename, originalFilename, gi.mId, memberCount  
+				FROM group_info gi JOIN member m ON gi.mId=m.mId
+				LEFT OUTER JOIN
+			    (
+			    	SELECT groupNum, COUNT(*) memberCount FROM group_member 
+			        GROUP BY groupNum
+			    )gm ON gi.groupNum = gm.groupNum 
+				<where>
+			     	<if test="searchValue!=null and searchValue!='' ">
+			     	    <include refid="where-list"/>
+			     	</if>
+	    		</where>
+	    		ORDER BY memberCount DESC
+	<![CDATA[
+           ) tb WHERE ROWNUM <= #{end}
+       ) WHERE rnum >= #{start}
+    ]]> 
+	</select>
+	
 	<select id="tagListGroup" parameterType="map" resultType="com.final_project.community.Group">
 		SELECT * FROM( 
 			SELECT ROWNUM rnum, tb.* FROM(
