@@ -43,7 +43,8 @@
 	        <intercept-url pattern="/point/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 	        
 	        <intercept-url pattern="/member/scrap/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
-	        <intercept-url pattern="/member/applications/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
+	        <intercept-url pattern="/member/applications/application/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_COMPANY')"/>
+	        <intercept-url pattern="/member/applications/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 	        <intercept-url pattern="/member/myInquiry/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 	        
 	        <intercept-url pattern="/company/search/**" access="hasAnyRole('ROLE_USER','ROLE_COMPANY','ROLE_ADMIN')"/>
