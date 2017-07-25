@@ -86,10 +86,10 @@ function navloginCheck() {
                                 <div class="navbar-content">
                                     <div class="row">
                                         <div class="col-md-5"> 
-                                        	<c:if test="${not empty dto.proPhoto}">
-                                        		<img src="<%=cp%>/uploads/profile/${dto.proPhoto}" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
+                                        	<c:if test="${not empty member.proPhoto}">
+                                        		<img src="<%=cp%>/uploads/profile/${member.proPhoto}" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
                                         	</c:if>
-                                        	<c:if test="${empty dto.proPhoto}">
+                                        	<c:if test="${empty member.proPhoto}">
                                         		<img src="<%=cp%>/resources/image/profile_img.jpg" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
                                         	</c:if> 
                                         </div>

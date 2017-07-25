@@ -43,15 +43,16 @@
 					</c:if>
 				</em>
         	</div>
-        	<div align="right">
-	        	<a href="<%=cp%>/profile/update?id=${member.userId}">
-		            <span class="glyphicon glyphicon-cog"></span>프로필 수정
-		        </a>
-	        </div>
+        	
 			<script>
 				$("#skil").tagsinput("destroy");
 			</script>
 			<div class="row"> <span><strong>전문분야: </strong></span> <c:if test="${empty dto.expertise }">등록된 전문 분야가 없습니다</c:if> <c:if test="${not empty dto.expertise }"><input type="text" id="skil" value="${dto.expertise}" data-role="tagsinput" disabled="disabled"></c:if> </div>
+			<div align="right">
+		        <a href="<%=cp%>/profile/update?id=${member.userId}">
+			           <span class="glyphicon glyphicon-cog"></span>프로필 수정
+			    </a>
+		    </div>
 		</div>
         <div class="main all">
             <section class="section_box">

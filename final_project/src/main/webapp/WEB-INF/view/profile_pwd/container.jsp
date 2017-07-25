@@ -46,7 +46,7 @@
 						</div>
 
 					</fieldset>
-					<div class="form-group">
+					<div class="form-group" align="center">
 						<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="sendOk();"><span class="glyphicon glyphicon-check"></span> 확인</button>
 						<input type="hidden" name="mode" value="${mode}">
 					</div>
