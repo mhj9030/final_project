@@ -97,9 +97,10 @@ if(typeof String.prototype.trim !== 'function') {
 						         	 <input type="hidden" name="gbNum" value="${dto.gbNum}">
 						         	 <input type="hidden" name="saveFilename" value="${dto.saveFilename}">
 						         	 <input type="hidden" name="originalFilename" value="${dto.originalFilename}">
-						        	<input type="hidden" name="page" value="${page}">
 						        </c:if>
-						        <input type="hidden" name="groupNum" value="${groupNum}"> 
+						        <input type="hidden" name="page" value="${page}">
+						        <input type="hidden" name="groupNum" value="${groupNum}">
+						        
 							</td>
 						</tr>
 					</tfoot>

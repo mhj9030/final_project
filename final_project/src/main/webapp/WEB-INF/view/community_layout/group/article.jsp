@@ -165,7 +165,7 @@ function deleteGroup() {
 
 				<div class= "footer-bar" >
 					<div class = "foorter-bar-refresh">
-						<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">새로고침</button>
+						<button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}'">새로고침</button>
 					</div>
 					<div class = "footer-search-bar">
 						<form name="searchForm" method="post" class="form-inline">
@@ -183,7 +183,7 @@ function deleteGroup() {
 					</div>
 					<div class = "footer-bar-submit">
 						<button type="button" class="btn btn-default"
-							onclick="javascript:location.href='<%=cp%>/community/group/boardCreated?groupNum=${dto.groupNum}&page=${page}'">
+							onclick="javascript:location.href='<%=cp%>/community/group/boardCreated?groupNum=${dto.groupNum}'">
 							 글쓰기
 						</button>
 					</div>
