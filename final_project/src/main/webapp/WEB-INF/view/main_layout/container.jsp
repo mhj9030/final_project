@@ -128,7 +128,7 @@
 	  		</div>
 	  		<div class="busi-name"><a href="${articleUrl}?cNum=${dto.cNum}">${dto.cName}</a></div>
 	  		<div class="busi-type" style="overflow: hidden;"><span class="label label-primary">${dto.maName}</span> : <span class="label label-info">${dto.subName}</span></div>
-	  		<div class="busi-intro" style="overflow: auto;">${dto.cDescription}</div>
+	  		<div class="busi-intro" style="overflow: auto; font-size: 11px;">${dto.cDescription}</div>
 	  		<div class="busi-etc">
 	  			<div>
 	  				<c:if test="${not empty dto.proPhoto}">
