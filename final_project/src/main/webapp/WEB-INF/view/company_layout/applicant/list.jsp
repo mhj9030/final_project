@@ -52,6 +52,7 @@
 						var mGender=data.list[idx].mGender;
 						var proIntro=data.list[idx].proIntro;
 						var mId=data.list[idx].mId;
+						var rNum=data.list[idx].rNum;
 						
 						out+="<div class='list-item'>";
 						out+="	<div class='item-image'>";
@@ -66,8 +67,8 @@
 						out+="			<strong>"+mName+"</strong><span> "+mGender+"</span>";
 						out+="		</div>";
 						out+="		<div class='content-info' align='right'>";
-						out+="			<a href='<%=cp%>/profile?id="+mId+"'>프로필 보기</a>";
-						out+="			<a href='#'>&nbsp;&nbsp;이력서 보기</a>";
+						out+="			<span class='label label-primary'><a href='<%=cp%>/profile?id="+mId+"'><span class='glyphicon glyphicon-user'></span> 프로필 보기</a></span>";
+						out+="			&nbsp;&nbsp;<span class='label label-primary'><a href='<%=cp%>/member/applications/application?rNum="+rNum+"'><span class='glyphicon glyphicon-list-alt'></span> 이력서 보기</a></span>";
 						out+="		</div>";
 						if(proIntro!=null){
 							out+="<div class='content-intro'>"+proIntro+"</div>";
