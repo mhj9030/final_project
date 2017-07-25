@@ -19,6 +19,8 @@ function insertExpertise() {
 	return true;
 }
 
-
-
-	
+function insertInterest() {
+	var f = document.submitinterest;
+	f.action = "/final_project/setting/interest"
+	return true;
+}	
