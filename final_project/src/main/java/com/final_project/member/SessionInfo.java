@@ -6,6 +6,7 @@ public class SessionInfo {
 	private String userName;
 	private int memberLevel;
 	private String cSerial;
+	private String proPhoto;
 	
 	public int getMemberIdx() {
 		return memberIdx;
@@ -36,5 +37,11 @@ public class SessionInfo {
 	}
 	public void setcSerial(String cSerial) {
 		this.cSerial = cSerial;
+	}
+	public String getProPhoto() {
+		return proPhoto;
+	}
+	public void setProPhoto(String proPhoto) {
+		this.proPhoto = proPhoto;
 	}
 }
