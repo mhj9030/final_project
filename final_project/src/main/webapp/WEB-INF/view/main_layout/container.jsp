@@ -196,6 +196,18 @@
 				<table>
 			
 			
+			<c:forEach var="dto" items="${list}">
+			
+				<tr align="center">
+					<td><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
+					<td align="left">
+						<a href="${articleUrl}&num=${dto.notNum}">&nbsp;&nbsp;&nbsp;${dto.subject}</a>
+					</td>
+					<td><br><br></td>
+				</tr>
+				
+				
+				</c:forEach>
 			
 			
 					

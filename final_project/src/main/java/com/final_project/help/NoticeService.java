@@ -14,4 +14,5 @@ public interface NoticeService {
 	public int deleteNotice(Map<String, Object> map);
 	public int updateNotice(Notice dto);
 	
+	public List<Notice> listMainNotice();
 }
