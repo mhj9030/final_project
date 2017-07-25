@@ -62,7 +62,7 @@
 		<tr>
 			<td width="110">
 				<c:if test="${not empty dto.prophoto}">
-					<img src="<%=cp%>/resources/image/Desert.jpg" style="width:100px; height: 100px;">
+					<img src="<%=cp%>/uploads/profile/${dto.prophoto}" style="width:100px; height: 100px;">
 				</c:if>
 				<c:if test="${empty dto.prophoto}">
 					<img src="<%=cp%>/resources/image/profile_img.jpg" style="width:100px; height: 100px;">
