@@ -17,9 +17,10 @@
 
 
 <div class="free_list_wrap">
-		<h3>| 자유게시판</h3>
+		<h3>| 자유게시판 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Free Board</small></h3>
+		<hr>
 		<p>
-			자유롭게 대화하고 소통할 수 있는 게시판입니다.
+			자유롭게 대화하고 소통할 수 있는 게시판입니다. 광고, 도배, 욕설, 비방 및 논란유발 등 부정적인 글은 카페 이용에 제약을 받을 수 있습니다.
 		</p>
 		
 		<div class="list-body" align="center">

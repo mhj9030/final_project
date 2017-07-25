@@ -40,6 +40,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Profile JS -->
 <script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
+<!-- head font -->
+<link href="https://fonts.googleapis.com/css?family=Gudea|Yellowtail" rel="stylesheet">
 
 <!-- 본인의 css영역 -->
 <!-- community_review_list CSS -->

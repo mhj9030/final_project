@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%
+
    String cp = request.getContextPath();
 %>
 
@@ -61,7 +62,7 @@
 		  		<div class="group-name">${gdto.groupName}</div>
 		  		<div class="group-type">
 		  			<c:forEach var="grouplist" items="${gdto.list}">
-		  				${grouplist.groupTag}
+		  				<button class="btn btn-xs btn-default">${grouplist.groupTag}</button>
 		  			</c:forEach>
 		  		</div>
 		  		<div class="gruop-join"><button class="btn btn-warning" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${gdto.groupNum}'">가입하기</button></div>
@@ -191,9 +192,17 @@
 	  <div class="col-md-6">
 		<div class="panel-news">
 			<div class="news-event">
-				<h4>취업꿀팁</h4>
+				<h4>이벤트</h4>
 	  			<hr>
 				<table>
+					<tr>
+						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
+						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>
+					</tr>
+					<tr>
+						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
+						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>
+					</tr>
 					<tr>
 						<td class="news-subject" width="250">가입자 무료포인트 100증정 </td>
 						<td class="news-created" >2017-07-07 ~ 2017-08-07</td>

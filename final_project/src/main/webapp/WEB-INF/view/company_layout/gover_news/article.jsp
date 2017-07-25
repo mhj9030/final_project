@@ -32,8 +32,12 @@
 <div class="goverNews-article-body">
 	<div class="body-header">
 		<h3 align="left">
-			| 공무원 소식 <small></small>
+			| 공무원 소식 
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				Government Employee News
+			</small>
 		</h3>
+		<hr>
 	</div>
 	
 	<table class="table">
@@ -64,7 +68,7 @@
 	</table>
 	
 	<div style="text-align: right;">
-		<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId=='admin'}">
 			<button type="button" class="btn btn-default" onclick="updateInquiry();">수정</button>
 			<button type="button" class="btn btn-default" onclick="deleteInquiry();">삭제</button>
 		</c:if>

@@ -61,9 +61,16 @@ function sendLikePhoto(ptnum) {
 }
 </script>
 
+<div class="topBar">
+		사진을 등록하고 포인트를 받으세요!!!&nbsp;&nbsp;&nbsp;<a href="<%=cp%>/community/photo/created">사진올리기</a>
+</div>
+
 <div class="photo_list_wrap">
-	<h3>| 포토갤러리</h3>
-	<p>자유롭게 사진을 공유할 수 있습니다.</p>
+	<h3>| 포토갤러리 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Photo Gallery</small></h3>
+	<hr>
+	<p>
+		자유롭게 사진을 공유할 수 있습니다. 좋은 추억을 많은 회원들에게 공유해주세요!!
+	</p>
 	<div class="photo_list_subwrap">
 
 		<c:forEach var="dto" items="${list}">

@@ -25,10 +25,10 @@
         </td>
        <td class="community_reply_created">
            	<span>${vo.created}</span> |
-		   	<c:if test="${sessionScope.member.userId==vo.mId || sessionScope.member.userId=='admin@a.com'}">		   
+		   	<c:if test="${sessionScope.member.userId==vo.mId || sessionScope.member.userId=='admin'}">		   
           		<a onclick='deleteReply("${vo.replyNum}", "${pageNo}");'>삭제</a>
 		   	</c:if>		   
-			<c:if test="${sessionScope.member.userId!=vo.mId && sessionScope.member.userId!='admin@a.com'}">		   
+			<c:if test="${sessionScope.member.userId!=vo.mId && sessionScope.member.userId!='admin'}">		   
 			          <a href='#'>신고</a>
 			</c:if>	
 		</td>

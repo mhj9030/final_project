@@ -390,7 +390,9 @@ function sendLikeTip(jtnum) {
 </script> 
 
 <div class="community_article_wrap" style="width:700px; margin:0px auto;">
-
+	<h3>
+		취업꿀팁<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Member's Comments</small>
+	</h3>
 	<table class="table">
 		<tr>
 			<td colspan="2" class="article_subject">
@@ -446,7 +448,7 @@ function sendLikeTip(jtnum) {
 		<c:if test="${sessionScope.member.userId == dto.mId}">
 			<button class="btn btn-warning" onclick="updateTip();">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin'}">
 			<button class="btn btn-warning" onclick="deleteTip();">삭제</button>
 		</c:if>
 		<button class="btn btn-default" onclick="listPage(${page});">목록</button>

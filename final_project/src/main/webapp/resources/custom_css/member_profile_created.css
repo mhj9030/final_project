@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 .profile-created-body{
 	clear:both;
@@ -8,4 +9,31 @@
     margin-top: 40px;
     width: 800px;
  	height: auto;
+}
+
+.profile-created-body h3{
+   margin-top: 40px;
+   font-family: 'Jeju Gothic', serif;
+}
+
+.profile-created-body .body-header{
+	margin-bottom: 50px;
+}
+
+.profile-created-body .form-group label{
+	width: 100%;
+}
+
+.profile-created-body .profile-image img{
+	width: 156px;
+	height: 156px;
+	margin-bottom: 5px;
+}
+
+.profile-created-body .profile-intro{
+	width: 50%;
+}
+
+.profile-created-body .profile-image-delete{
+	margin-bottom: 20px;
 }

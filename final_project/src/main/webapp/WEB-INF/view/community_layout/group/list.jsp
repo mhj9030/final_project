@@ -18,8 +18,11 @@
 </script>
 
 <div class="group_list_wrap">
-	<h3>| 그룹</h3>
-	<p>하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.</p>
+	<h3>| 그룹 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Group</small></h3>
+	<hr>
+	<p>
+		하나의 목적을 가지는 다양한 그룹을 만들어 보세요. 친목을 나누고 좋은 정보를 공유할 수 있습니다.
+	</p>
 	
 	<ul class="nav nav-tabs">
 		<li role="presentation" class="active"><a style="cursor: pointer;" href="javascript:location.href='<%=cp%>/community/group'">그룹리스트</a></li>
@@ -44,11 +47,12 @@
   		</button>
   		<ul class="dropdown-menu group_list_dropdown" role="menu">
     		<li><a href="<%=cp%>/community/group">최근 생성순</a></li>
-   			<li><a href="#">인기순</a></li>
+   			<li><a href="<%=cp%>/community/group?type=popul">인기순</a></li>
 		</ul>
 	</div>
 	<div class="group_list_search">
 		<form name="searchForm" method="post" class="form-inline">
+			<input type="hidden" name="type" value="${type}">
 			<select class="form-control input-sm" name="searchKey">
 				<option value="groupName">그룹명</option>
 				<option value="groupTag">태그명</option>
@@ -83,7 +87,7 @@
   					</c:forEach>
   				</div>
   				<div class="group_list_groupjoin">
-  					<button type="button" class="btn btn-info btn-sm" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">자세히 보기</button>
+  					<button type="button" class="btn btn-sm btn-warning" onclick="javascript:location.href='<%=cp%>/community/group/article?groupNum=${dto.groupNum}&page=${page}'">자세히 보기</button>
   				</div>
   			</div>
   		</c:forEach>

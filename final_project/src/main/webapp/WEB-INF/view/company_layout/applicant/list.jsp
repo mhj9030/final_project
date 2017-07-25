@@ -92,8 +92,12 @@
 <div class="applicant-list-body" align="center">
 	<div class="body-header">
 		<h3 align="left">
-			| 지원자 현황 <small></small>
+			| 지원자 현황 
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				Applicant
+			</small>
 		</h3>
+		<hr>
 	</div>
 	
 	<div class="search" style="width: 800px; height: 34px;">

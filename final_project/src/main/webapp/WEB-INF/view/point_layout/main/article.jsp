@@ -8,9 +8,10 @@
 %>
 
 <div class="page_body">
-	<div class="page_head">
-		<h3>| 공지사항</h3><hr>
-	</div>
+	<h3>
+	| 공지사항 <small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Reading</small>
+	</h3><hr>
+
 	<div class="wrapper center-block" style="max-width: 980px;">
 		<div id="title"class="text-center">
 			<h1>${dto.subject}</h1>
@@ -45,7 +46,7 @@ ${dto.content}
 		<div class= "footer-bar">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main'">목록</button>
-			<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+			<c:if test="${sessionScope.member.userId=='admin'}">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/point/main/update?num=${dto.poNum}&page=${page}'">수정</button>
 				<button type="button" class="btn btn-default" onclick="deleteCheck('<%=cp%>/point/main/delete?num=${dto.poNum}')">삭제</button>
 			</c:if>

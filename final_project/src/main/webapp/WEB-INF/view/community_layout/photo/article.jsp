@@ -378,7 +378,9 @@ function sendLikePhoto(ptnum) {
 
 
 <div class="community_article_wrap">
-
+	<h3>
+		포토갤러리<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Member's Comments</small>
+	</h3>
 	<table class="table">
 		<tr>
 			<td colspan="2" class="article_subject">${dto.subject}</td>
@@ -429,7 +431,7 @@ function sendLikePhoto(ptnum) {
 		<c:if test="${sessionScope.member.userId == dto.mId}">
 			<button class="btn btn-warning" onclick="updatePhoto();">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
+		<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin'}">
 			<button class="btn btn-warning" onclick="deletePhoto();">삭제</button>
 		</c:if>
 		<button class="btn btn-default" onclick="javascript:location.href='<%=cp%>/community/photo?${query}'">목록</button>

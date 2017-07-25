@@ -68,8 +68,12 @@
 <div class="employ-created-body">
 	<div class="body-header">
 		<h3 align="left">
-			${mode=='update'?'| 채용수정':'| 채용등록'} <small></small>
+			${mode=='update'?'| 채용수정':'| 채용등록'}
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">
+				${mode=='update'?'| Employ Update':'| Employ Create'}
+			</small>
 		</h3>
+		<hr>
 	</div>
 	
 	<form name="employForm" method="post" enctype="multipart/form-data">

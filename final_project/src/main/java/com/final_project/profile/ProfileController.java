@@ -1,5 +1,7 @@
 package com.final_project.profile;
 
+import java.io.File;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.final_project.common.FileManager;
 import com.final_project.member.SessionInfo;
 
 @Controller
@@ -17,6 +20,8 @@ public class ProfileController {
 
 	@Autowired
 	private ProfileService service;
+	@Autowired
+	public FileManager fileManager;
 
 	@RequestMapping(value = "/profile")
 	public String method(@RequestParam(value = "id") String id, Model model, HttpSession session) throws Exception {
@@ -24,6 +29,7 @@ public class ProfileController {
 		Profile dto = service.profileRead(id);
 
 		model.addAttribute("dto", dto);
+		model.addAttribute("profile", "on");
 
 		return ".profileLayout";
 	}
@@ -86,10 +92,37 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value="/profile/update")
-	public String updateForm(Model model) throws Exception{
+	public String updateForm(@RequestParam(value = "id") String id, Model model) throws Exception{
 
+		Profile dto = service.profileRead(id);
+		
+		model.addAttribute("dto", dto);
 		model.addAttribute("profile", "on");
 		
 		return ".profile_layout.created";
 	}
+	
+	@RequestMapping(value="/profile/update", method=RequestMethod.POST)
+	public String updateSubmit(
+			Profile dto,
+			HttpSession session
+			) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"profile";
+		
+		service.updateProfile(dto, pathname);
+		
+		return "redirect:/profile/?id="+info.getUserId();
+	}
 }
+
+
+
+
+
+
+
+
+

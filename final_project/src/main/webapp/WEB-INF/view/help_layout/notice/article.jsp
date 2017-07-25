@@ -34,14 +34,12 @@
 	<div class= "footer-bar">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/notice/list'">목록</button>
-			<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+			<c:if test="${sessionScope.member.userId=='admin'}">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/update?num=${dto.notNum}&page=${page}'">수정</button>
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/notice/delete?num=${dto.notNum}'">삭제</button>
 			</c:if>
 			</div>
 	</div>
-
-
 
 </div>
 

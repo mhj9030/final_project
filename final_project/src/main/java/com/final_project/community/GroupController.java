@@ -41,6 +41,7 @@ public class GroupController {
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "groupName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
+			@RequestParam(value = "type", defaultValue = "") String type,
 			Model model, HttpServletRequest req) throws Exception{
 		
 		String cp = req.getContextPath();
@@ -79,7 +80,11 @@ public class GroupController {
 		if(searchKey.equals("groupTag")){
 			list = service.tagListGroup(map);
 		}else{
-			list = service.listGroup(map);
+			if(type.equals("popul")){
+				list = service.listGroupPopul(map);
+			}else{
+				list = service.listGroup(map);
+			}
 		}
 
 		
@@ -103,6 +108,8 @@ public class GroupController {
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 
+		
+		model.addAttribute("type", type);
 		model.addAttribute("menuTag", menuTag);
 		model.addAttribute("list", list);
 		model.addAttribute("articleUrl", articleUrl);
@@ -245,6 +252,8 @@ public class GroupController {
 		map.put("groupNum", groupNum);
 		map.put("mId", info.getUserId());
 		
+		List<GroupMember> memberList = service.listGroupMember(map);
+		
 		int check = service.checkGroupMember(map);
 		Group dto = service.readGroup(map);
 		dto.setList(service.tagList(dto.getGroupNum()));
@@ -286,6 +295,9 @@ public class GroupController {
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 		
+		
+		
+		model.addAttribute("memberList", memberList);
 		model.addAttribute("check", check);
 		model.addAttribute("list", list);
 		model.addAttribute("articleUrl", articleUrl);

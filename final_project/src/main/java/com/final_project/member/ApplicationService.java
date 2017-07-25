@@ -19,7 +19,7 @@ public interface ApplicationService {
 	public List<MemberDetail> careerList(Map<String, Object> map);
 	
 	// 1단계 저장
-	public int insertOneDetails(MemberDetail dto, String pathname);
+	public int insertOneDetails(MemberDetail dto);
 	public int insertOneCareer(List<MemberDetail> list, Map<String, Object> map);
 	public int insertOneProject(List<MemberDetail> list, Map<String, Object> map);
 	
@@ -27,7 +27,7 @@ public interface ApplicationService {
 	
 	
 	// 1단계 수정
-	public int updateDefault(MemberDetail dto, String pathname);
+	public int updateDefault(MemberDetail dto);
 	
 	// 2단계 수정
 	

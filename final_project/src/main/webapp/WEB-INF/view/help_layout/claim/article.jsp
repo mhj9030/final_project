@@ -89,7 +89,7 @@ function sendReply() {
 <div class= "footer-bar">
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/help_layout/claim/list'">목록</button>
-			<c:if test="${sessionScope.member.userId==dto.mId || sessionScope.member.userId=='admin@a.com'}">
+			<c:if test="${sessionScope.member.userId==dto.mId || sessionScope.member.userId=='admin'}">
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/claim/update?num=${dto.claimNum}&page=${page}'">수정</button>
 				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/claim/delete?num=${dto.claimNum}'">삭제</button>
 			</c:if>
@@ -98,7 +98,7 @@ function sendReply() {
 
 
 	<div>
-	<c:if test="${sessionScope.member.userId=='admin@a.com'}">
+	<c:if test="${sessionScope.member.userId=='admin'}">
             <table style='width: 100%; margin: 15px auto 0px; border-spacing: 0px;'>
             <tr height='30'> 
 	            <td align='left'>

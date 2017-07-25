@@ -7,6 +7,7 @@ import java.util.Map;
 public interface GroupService {
 	public int insertGroup(Group dto, String pathname);
 	public List<Group> listGroup(Map<String, Object> map);
+	public List<Group> listGroupPopul(Map<String, Object> map);
 	public List<Group> tagListGroup(Map<String, Object> map);
 	public List<Group> myList(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);

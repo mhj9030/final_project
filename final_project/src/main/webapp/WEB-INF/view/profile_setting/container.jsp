@@ -23,7 +23,15 @@
 </script>
 <div class="contents">
     <div class="wrap">
-        <div class="span3 well setting"> <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="<%=cp %>/resources/image/profile_img.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+        <div class="span3 well setting"> 
+	        <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+	        	<c:if test="${empty dto.proPhoto}">
+	        		<img src="<%=cp%>/resources/image/profile_img.jpg" name="aboutme" width="140" height="140" class="img-circle">
+	        	</c:if>
+	        	<c:if test="${not empty dto.proPhoto}">
+	        		<img src="<%=cp%>/uploads/profile/${dto.proPhoto}" name="aboutme" width="140" height="140" class="img-circle">
+	        	</c:if>
+	        </a>
             <h3>${dto.mname } <small> ${dto.mgender }</small></h3>
             <div class="row"> <em>
         	<c:if test="${empty dto.proIntro }">
@@ -34,11 +42,15 @@
                                              ${dto.proIntro }
  											</c:if>
         </em> </div>
+        	<div align="right">
+	        	<a href="<%=cp%>/profile/update?id=${member.userId}">
+		            <span class="glyphicon glyphicon-cog"></span>프로필 수정
+		        </a>
+	        </div>
                     <script>
             $("#skil").tagsinput("destroy");
             </script>
-            <div class="row"> <span><strong>전문분야: </strong></span> <c:if test="${empty dto.expertise }">등록된 전문 분야가 없습니다</c:if> <c:if test="${not empty dto.expertise }"><input type="text" id="skil" value="${dto.expertise}" data-role="tagsinput" disabled="disabled"></c:if> </div>
-
+           <div class="row"> <span><strong>전문분야: </strong></span> <c:if test="${empty dto.expertise }">등록된 전문 분야가 없습니다</c:if> <c:if test="${not empty dto.expertise }"><input type="text" id="skil" value="${dto.expertise}" data-role="tagsinput" disabled="disabled"></c:if> </div>
         </div>
         <div class="main all">
             <section class="section_box">

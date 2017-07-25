@@ -13,10 +13,10 @@
 				<c:if test="${sessionScope.member.userId == dto.mId}">
 					<a onclick="updateRecommend(${dto.gcNum});" style="cursor: pointer;">수정 | </a>
 				</c:if>
-				<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin@a.com'}">
+				<c:if test="${sessionScope.member.userId == dto.mId || sessionScope.member.userId=='admin'}">
 					<a onclick="deleteRecommend(${dto.gcNum}, ${dto.cNum});" style="cursor: pointer;">삭제</a>
 				</c:if>
-				<c:if test="${sessionScope.member.userId != dto.mId && sessionScope.member.userId !='admin@a.com'}">
+				<c:if test="${sessionScope.member.userId != dto.mId && sessionScope.member.userId !='admin'}">
 					<a href="#" style="cursor: pointer;">신고</a>
 				</c:if>
 			</small>

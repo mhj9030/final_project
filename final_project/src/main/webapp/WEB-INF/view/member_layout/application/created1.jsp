@@ -19,41 +19,43 @@
 </style>
 
 <div class="page_body .container-fluid ">
-	<div class="page_head">
-		<h3>
-			<c:if test="${mode!='update'}">
-			| 이력서 작성 
-			(<b>1단계</b> > 2단계 > 3단계)
-			</c:if>
-			<c:if test="${mode=='update'}">
-			| 이력서 수정 
-			(<b>1단계</b> > 2단계 > 3단계)
-			</c:if>
-		</h3><hr>
-	</div>
+	<h3>
+		<c:if test="${mode!='update'}">
+			이력서 작성 (<b>1단계</b> > 2단계 > 3단계)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume (1step)</small>
+		</c:if>
+		<c:if test="${mode=='update'}">
+			이력서 작성 (<b>1단계</b> > 2단계 > 3단계)
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume</small>
+		</c:if>
+	</h3><hr>
 	
-	<form name="member_detail" method="post">
+	<form name="member_detail" method="post" enctype="multipart/form-data">
 		<div id="resume_div">
 			<table class="table table-bordered">
 				<caption>
-					▶ 인적사항
-					<input type="hidden" name="rNum" value="${rDto.rNum}" /> 
+					이력서 제목: 
+					<c:if test="${mode!='update'}"><input type="text" name="memo" value="나의이력서" /></c:if>
+					<c:if test="${mode=='update'}"><input type="text" name="memo" value="${rDto.memo}" /></c:if>
+					<br><br>
+					▶ 인적사항 
+					<c:if test="${mode=='update'}"><input type="hidden" name="rNum" value="${rDto.rNum}" /> </c:if>
 					( 이력서 공개 설정 : <input type="radio" name="resumeType" value="1"> 공개 
 					<input type="radio" name="resumeType" value="0" checked="checked"> 비공개 )
 				</caption>
 				<tr>
 					<td rowspan="4" width="120px">
 						<div id="imgdiv" style="border: 2px solid #cccccc; width: 114px; height: 144px;">
-							<c:if test="${empty rDto.saveFilename}">
+							<c:if test="${empty rDto.rPhoto}">
 								<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 140px;" />
 							</c:if>
-							<c:if test="${not empty rDto.saveFilename}">
-								<img src="<%=cp%>/uploads/resume/${rDto.saveFilename}"  style="width: 110px; height: 140px;"/>
+							<c:if test="${not empty rDto.rPhoto}">
+								<img src="<%=cp%>/uploads/resume/${rDto.rPhoto}"  style="width: 110px; height: 140px;"/>
 							</c:if>
 						</div>
 						<div class="input-group file-class">
 							<label for="exampleInputFile">사진 업로드</label>
-							<input type="file" id="exampleInputFile" name="resumeImg" class="hidden">
+							<input type="file" id="exampleInputFile" name="upload" class="hidden">
 						</div>
 					</td>
 					<td width="80px">이름</td>
@@ -62,7 +64,7 @@
 							<input type="text" name="rName" class="form-control input-sm" value="${sessionScope.member.userName}" />
 						</c:if>
 						<c:if test="${mode=='update'}">
-							<input type="text" name="rName" class="form-control input-sm" value="${mDto.mname}" />
+							<input type="text" name="rName" class="form-control input-sm" value="${rDto.rName}" />
 						</c:if>
 					</td>
 					<td width="80px">영어</td>
@@ -70,7 +72,14 @@
 				</tr>
 				<tr>
 					<td>생년월인</td>
-					<td>${mDto.mbirth} ( ${mDto.age}세)</td>
+					<td>
+						<c:if test="${mode!='update'}">
+							${mDto.mbirth} ( ${mDto.age}세)
+						</c:if>
+						<c:if test="${mode=='update'}">
+							${rDto.mbirth} ( ${rDto.age}세)
+						</c:if>
+					</td>
 					<td>폰번호</td>
 					<td colspan="3"><input type="tel" name="phone" class="form-control input-sm" placeholder="핸드폰 번호" value="${rDto.phone}" /></td>
 				</tr>
@@ -85,7 +94,14 @@
 						</c:if>
 					</td>
 					<td>성별</td>
-					<td width="80px">${mDto.mgender}</td>
+					<td width="80px">
+						<c:if test="${mode!='update'}">
+							${mDto.mgender}
+						</c:if>
+						<c:if test="${mode=='update'}">
+							${rDto.mgender}
+						</c:if>
+					</td>
 					<td width="90px">병역</td>
 					<td>
 						<select name="army" id="army" class="form-control">
@@ -166,7 +182,7 @@
 					<td>${dto.part}</td>
 					<td>
 						${dto.memo}
-						<input type="hidden" name="mcNum" value="${dto.mcNum}" />
+						<%-- <input type="hidden" name="mcNum" value="${dto.mcNum}" /> --%>
 					</td>
 				</tr>
 			</c:forEach>
@@ -192,7 +208,7 @@
 					<td>${dto.prName}</td>
 					<td>
 						${dto.expState}
-						<input type="hidden" name="prNum" value="${dto.prNum}" />
+						<%-- <input type="hidden" name="prNum" value="${dto.prNum}" /> --%>
 					</td>
 				</tr>
 			</c:forEach>
@@ -203,7 +219,7 @@
 		<div class= "footer-bar">
 			<div style="text-align: right;">
 				<c:if test="${mode!='update'}">
-					* 자격증, 어학점수, 수상 경력 및 자기소개는 다음 단계에서 쓸 수 있습니다. 
+					* 자격증, 어학점수, 수상 경력은 다음 단계에서 쓸 수 있습니다.<br>
 					<button type="button" class="btn btn-info" onclick="check();">저장하고 추가 정보 입력</button>
 					<button type="reset" class="btn btn-default">다시 입력</button>
 					<button type="button" class="btn btn-default" onclick="javascript:history.back();">취소</button>
@@ -253,33 +269,50 @@ $(document).ready(function () {
 function check(){
 	var f = document.member_detail;
 	
+	if(f.memo==""){
+		alert("이력서 제목은 필수입니다.");
+		f.memo.focus();
+		return false;
+	}
+	
+	if(f.upload==""){
+		alert("사진은 필수입니다.");
+		return false;
+	}
+	
 	if(f.rName==""){
-		alert("이름 작성");
+		alert("이름 작성은 필수입니다.");
 		f.rName.focus();
 		return false;
 	}
 	
 	if(f.engName.value==""){
-		alert("이름 작성");
+		alert("영어 이름 작성은 필수입니다.");
 		f.engName.focus();
 		return false;
 	}
 	
 	if(f.phone.value==""){
-		alert("폰번호 작성");
+		alert("폰번호 작성은 필수입니다.");
 		f.phone.focus();
 		return false;
 	}
 	
 	if(f.addr.value==""){
-		alert("주소 작성");
+		alert("주소 작성은 필수입니다.");
 		f.addr.focus();
 		return false;
 	}
 	
 	if(f.addr2.value==""){
-		alert("주소 작성");
+		alert("주소 작성은 필수입니다.");
 		f.addr2.focus();
+		return false;
+	}
+	
+	if(f.pay.value==""){
+		alert("희망연봉 작성은 필수입니다.");
+		f.pay.focus();
 		return false;
 	}
 	
