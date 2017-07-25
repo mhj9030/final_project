@@ -61,11 +61,11 @@
 	
 	<!-- 포인트 내역 -->
 	<div>
-		<div style="height: 50px; text-align: center;">
-			<br><h4>- 나의 포인트 내역 -</h4>
-		</div>
 		<div>
 			<table class="point_list">
+				<caption style="text-align: center;">
+					<h4>- 나의 포인트 내역 -</h4>
+				</caption>
 				<tbody>
 				<c:forEach var="dto" items="${list}">
 					<tr align="center">
