@@ -27,6 +27,16 @@ public class CreatedServiceImpl implements CreatedService{
 							dto.getcTel3() != null && dto.getcTel3().length()!=0)
 				dto.setcTel(dto.getcTel1() + "-" + dto.getcTel2() + "-" + dto.getcTel3());
 			
+			if(dto.getcProfit1()==null && dto.getcProfit1().length()==0){
+				dto.setcProfit1("0");
+			}
+			if(dto.getcProfit2()==null && dto.getcProfit2().length()==0){
+				dto.setcProfit2("0");
+			}
+			if(dto.getcProfit3()==null && dto.getcProfit3().length()==0){
+				dto.setcProfit3("0");
+			}
+			
 			dto.setcProfit(dto.getcProfit1()+","+dto.getcProfit2()+","+dto.getcProfit3());
 			
 			dao.insertData("company.insertCompany", dto);

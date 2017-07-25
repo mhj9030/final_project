@@ -121,4 +121,9 @@
 	margin-top: 10px;
 }
 
+.search-list-body .content-intro h5{
+	overflow: auto;
+    height: 15px;
+}
+
 

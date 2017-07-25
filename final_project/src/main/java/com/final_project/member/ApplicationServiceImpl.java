@@ -103,7 +103,6 @@ public class ApplicationServiceImpl implements ApplicationService{
 		int result = 0;
 		
 		try {
-			System.out.println(dto.getrPhoto());
 			result = dao.insertData("applications.insertDefault", dto);
 			
 			if(result!=0){
@@ -212,11 +211,11 @@ public class ApplicationServiceImpl implements ApplicationService{
 	}
 	
 	@Override
-	public int insertThrIntro(MemberDetail dto) {
+	public int insertThrIntro(Map<String, Object> map) {
 		int result = 0;
 		
 		try {
-			result = dao.updateData("applications.insertThrIntro", dto);
+			result = dao.updateData("applications.insertThrIntro", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
