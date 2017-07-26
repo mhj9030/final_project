@@ -8,6 +8,8 @@
    String cp = request.getContextPath();
 %>
 
+
+
 <!-- 메인 점보트론 -->
 <div class="jumbotron">
 	<div class="container">
@@ -92,7 +94,7 @@
 	  			<div class="hire-etc">
 	  				<div><a href='<%=cp%>/employ/article?ceNum=${dto.ceNum}'>${dto.ceSubject}</a></div>
 	  				<div><br></div>
-	  				<div>지원자 <span class="badge">${dto.applicant_count }</span> </div>
+	  				<div>지원자 <span class="badge" style="background: red;">${dto.applicant_count }</span> </div>
 	  			</div>
 	  		</div>
 	  		<hr style="margin:10px;">
@@ -152,7 +154,7 @@
 	  			</div>
 	  			<div class="busi-etc-text" align="right">
 	  				<c:if test="${dto.employ_cnt>0}">
-						<a href="<%=cp%>/employ/main">채용 <span class="badge">${dto.employ_cnt}</span></a>
+						<a href="<%=cp%>/employ/main">채용 <span class="badge" style="background: red;">${dto.employ_cnt}</span></a>
 					</c:if>
 	  			</div>
 	  		</div>
