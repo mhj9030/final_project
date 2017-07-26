@@ -168,7 +168,6 @@ public class NoticeController {
 		if(dto==null)
 			return "redirect:/notice/list?page="+page;
 		
-        /*dto.setContent(util.htmlSymbols(dto.getContent()));*/
         
 		// 이전 글, 다음 글
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -176,9 +175,6 @@ public class NoticeController {
 		map.put("searchValue", searchValue);
 		map.put("num", num);
 
-		/*Notice preReadDto = service.preReadNotice(map);
-		Notice nextReadDto = service.nextReadNotice(map);*/
-        
 		
 		
 		String query = "page="+page;
@@ -189,13 +185,9 @@ public class NoticeController {
 		
 		
 		model.addAttribute("dto", dto);
-		/*model.addAttribute("preReadDto", preReadDto);
-		model.addAttribute("nextReadDto", nextReadDto);*/
-
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 
-		/*model.addAttribute("countLikeQa", countLikeQa);*/
 		
 		return ".help_layout.notice.article";
 	}

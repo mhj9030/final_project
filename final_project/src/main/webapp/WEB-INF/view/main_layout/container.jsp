@@ -88,15 +88,24 @@
 	  	<div class="panel-hire">
 	  		<div class="hire-info">
 	  			<div class="hire-img"><img src='<%=cp%>/uploads/company/${dto.cLogoimage}' onError='imageError(this);' class='img-responsive' style='max-height: 100px; margin:auto;'>
-	  			<a href='<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}'>${dto.cName}</a></div>
+	  			<a href='<%=cp%>/company/search/article?page=1&cNum=${dto.cNum}' style="font-size:16px; font-weight:bold;">${dto.cName}</a></div>
 	  			<div class="hire-etc">
 	  				<div><a href='<%=cp%>/employ/article?ceNum=${dto.ceNum}'>${dto.ceSubject}</a></div>
 	  				<div><br></div>
-	  				<div>현재 지원자 수: ${dto.applicant_count }</div>
+	  				<div>지원자 <span class="badge">${dto.applicant_count }</span> </div>
 	  			</div>
 	  		</div>
-	  		<div class="hire-type">고용형태:${dto.ceType}, 분야:${dto.subname}</div>
-	  		<div class="hire-now">마감일: ~${dto.ceEnd }, 연봉 ${dto.cePay}</div>
+	  		<hr style="margin:10px;">
+	  		<div>
+	  		<table style="margin:0 auto;">
+      	<tr><th><span class="label label-primary">채용 분야</span> </th><td><span class="label label-info">${dto. subname}</span></td></tr>
+      	<tr><th><span class="label label-primary">고용 형태</span> </th><td><span class="label label-info">${dto.ceType}</span></td></tr>
+      	<tr><th><span class="label label-primary">&nbsp;&nbsp;&nbsp;&nbsp;연봉&nbsp;&nbsp;&nbsp;&nbsp;</span> </th><td><span class="label label-info">${dto.cePay } 만원</span></td></tr>
+      	<tr><th><span class="label label-primary">&nbsp;&nbsp;마감일&nbsp;&nbsp;&nbsp;</span> </th><td><span class="label label-info">~${dto.ceEnd}</span></td></tr>
+      	</table>
+      		</div>
+	  		<%-- <div class="hire-type">고용형태:${dto.ceType}, 분야:${dto.subname}</div>
+	  		<div class="hire-now">마감일: ~${dto.ceEnd }, 연봉 ${dto.cePay}</div> --%>
 	  	</div>
 	  </div>
 	   </c:forEach>
@@ -128,7 +137,7 @@
 	  		</div>
 	  		<div class="busi-name"><a href="${articleUrl}?cNum=${dto.cNum}">${dto.cName}</a></div>
 	  		<div class="busi-type" style="overflow: hidden;"><span class="label label-primary">${dto.maName}</span> : <span class="label label-info">${dto.subName}</span></div>
-	  		<div class="busi-intro" style="overflow: auto;">${dto.cDescription}</div>
+	  		<div class="busi-intro" style="overflow: auto; font-size: 11px;">${dto.cDescription}</div>
 	  		<div class="busi-etc">
 	  			<div>
 	  				<c:if test="${not empty dto.proPhoto}">
@@ -141,7 +150,7 @@
 	  			<div class="busi-etc-text">
 	  				<a href="<%=cp%>/profile?id=${dto.mId}">${dto.mName}</a>
 	  			</div>
-	  			<div class="busi-etc-text">
+	  			<div class="busi-etc-text" align="right">
 	  				<c:if test="${dto.employ_cnt>0}">
 						<a href="<%=cp%>/employ/main">채용 <span class="badge">${dto.employ_cnt}</span></a>
 					</c:if>
@@ -192,7 +201,7 @@
 	  <div class="col-md-6">
 		<div class="panel-news">
 			<div class="news-event">
-				<h4>이벤트</h4>
+				<h4>공지사항<small style="margin-left: 300px; font-size: 11px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/help_layout/notice/list'">더보기</small></h4>
 	  			<hr>
 				<table>
 			
@@ -202,7 +211,8 @@
 				<tr align="center">
 					<td><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
 					<td align="left">
-						<a href="${articleUrl}&num=${dto.notNum}">&nbsp;&nbsp;&nbsp;${dto.subject}</a>
+						<a href="${articleUrl1}&num=${dto.notNum}">&nbsp;&nbsp;&nbsp;${dto.subject}</a>
+						
 					</td>
 					<td><br><br></td>
 				</tr>

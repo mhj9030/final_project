@@ -125,6 +125,7 @@
 .search-list-body .content-intro h5{
 	overflow: auto;
     height: 15px;
+    font-size: 12px;
 }
 
 .search .size {
