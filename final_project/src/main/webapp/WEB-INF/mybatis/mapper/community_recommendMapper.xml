@@ -63,18 +63,12 @@
     ]]> 
 	</select>
 	<select id="listRecommendArticle" parameterType="map" resultType="com.final_project.community.RecommendArticle">
-		SELECT * FROM( 
-			SELECT ROWNUM rnum, tb.* FROM(
 				SELECT g.gcNum, c.cName, subject, content, grade, created, g.mId, mName 
 		        from goodcom_bbs g
 		        join member m on g.mId = m.mId
 		        join company c on g.cNum=c.cNum 
 				WHERE g.cNum = #{cNum}
 	    		ORDER BY gcNum DESC
-	<![CDATA[
-           ) tb WHERE ROWNUM <= #{end}
-       ) WHERE rnum >= #{start}
-    ]]> 
 	</select>
 	
 	<select id="RecommendArticleInfo" parameterType="map" resultType="com.final_project.community.RecommendArticle">
