@@ -35,6 +35,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 		info.setUserId(member.getMid());
 		info.setUserName(member.getMname());
 		info.setcSerial(member.getcSerial());
+		info.setProPhoto(member.getProPhoto());
 		
 		session.setAttribute("member", info);
 

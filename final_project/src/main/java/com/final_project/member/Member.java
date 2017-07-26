@@ -12,6 +12,7 @@ public class Member {
 	private String age; // 사용자  나이
 	private String mgender; // 사용자 성별
 	private String cSerial; // 사업자등록번호(기업등록을 했을 때, 생성)
+	private String proPhoto;
 	
 	private String authority;
 
@@ -93,5 +94,12 @@ public class Member {
 
 	public void setAge(String age) {
 		this.age = age;
+	}
+
+	public String getProPhoto() {
+		return proPhoto;
+	}
+	public void setProPhoto(String proPhoto) {
+		this.proPhoto = proPhoto;
 	}
 }

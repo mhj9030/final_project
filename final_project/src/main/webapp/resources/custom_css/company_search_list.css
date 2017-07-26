@@ -115,6 +115,7 @@
 
 .item-content .content-intro{
 	clear: both;
+	width: 85%;
 }
 
 .list .page{
@@ -124,6 +125,23 @@
 .search-list-body .content-intro h5{
 	overflow: auto;
     height: 15px;
+    font-size: 12px;
 }
 
+.search .size {
+	text-align: left;
+}
 
+.search .type {
+	text-align: left;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+    
+.search .type .btn-group {
+	padding-bottom: 5px;
+}
+
+a.btn.btn-link{
+	font-size: 20px;
+}

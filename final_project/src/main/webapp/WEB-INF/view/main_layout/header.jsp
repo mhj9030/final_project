@@ -68,16 +68,31 @@ function navloginCheck() {
                 </c:if>
                 <c:if test="${not empty sessionScope.member}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px; margin-top: -5px;"> <img
-								src="<%=cp%>/resources/image/profile_img.jpg"
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px; margin-top: -5px;"> 
+                        <c:if test="${not empty member.proPhoto}">
+                        	<img src="<%=cp%>/uploads/profile/${member.proPhoto}"
 								class="img-responsive img-circle" title="John Doe"
 								alt="John Doe" width="30px" height="30px">
+                        </c:if>
+                        <c:if test="${empty member.proPhoto}">
+                        	<img src="<%=cp%>/resources/image/profile_img.jpg"
+								class="img-responsive img-circle" title="John Doe"
+								alt="John Doe" width="30px" height="30px">
+                        </c:if>
+                        
 						</span> <span class="user-name"> ${member.userName } </span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="navbar-content">
                                     <div class="row">
-                                        <div class="col-md-5"> <img src="<%=cp%>/resources/image/profile_img.jpg" alt="Alternate Text" class="img-responsive" width="120px" height="120px" /> </div>
+                                        <div class="col-md-5"> 
+                                        	<c:if test="${not empty member.proPhoto}">
+                                        		<img src="<%=cp%>/uploads/profile/${member.proPhoto}" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
+                                        	</c:if>
+                                        	<c:if test="${empty member.proPhoto}">
+                                        		<img src="<%=cp%>/resources/image/profile_img.jpg" alt="Alternate Text" class="img-responsive" width="120px" height="120px" />
+                                        	</c:if> 
+                                        </div>
                                         <div class="col-md-7"> <span>${member.userName }</span>
                                             <p class="text-muted small">${member.userId }</p>
                                             <input type="hidden" value="${member.userId }">

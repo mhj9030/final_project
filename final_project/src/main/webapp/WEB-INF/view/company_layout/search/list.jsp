@@ -303,15 +303,15 @@
 				</div>
 				<div class="item-content">
 					<div class="content-name">
-						<h4><a href="${articleUrl}&cNum=${dto.cNum}">${dto.cName}</a></h4>
+						<a href="${articleUrl}&cNum=${dto.cNum}" class="btn btn-link">${dto.cName}</a>
 					</div>
 					<div class="content-employ" align="right">
 							<c:if test="${dto.employ_cnt>0}">
-								<a href="<%=cp%>/employ/main">채용진행 : ${dto.employ_cnt}</a>
+								<a href="<%=cp%>/employ/main">채용진행 : <span class="badge">${dto.employ_cnt}</span></a>
 							</c:if>
 						</div>
 					<div class="content-intro"><h5>${dto.cDescription}</h5></div>
-					<div class="content-type"><h5>${dto.maName} : ${dto.subName}</h5></div>
+					<div class="content-type"><h5><span class="label label-primary">${dto.maName}</span> : <span class="label label-info">${dto.subName}</span></h5></div>
 				</div>
 			</div>
 		</c:forEach>

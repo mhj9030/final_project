@@ -121,5 +121,20 @@ public class NoticeServiceImpl implements NoticeService{
 		return list;
 	}
 	
+	@Override
+	public List<Notice> listMainNotice() {
+		List<Notice> list=null;
+		
+		try {
+			list=dao.getListData("notice.listMainNotice");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		
+		
+		return list;
+	}
+	
 	
 }
