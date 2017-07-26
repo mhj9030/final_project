@@ -90,8 +90,6 @@ public class NoticeController {
         	Notice data = it.next();
             listNum = dataCount - (start + n - 1);
             data.setListNum(listNum);
-            
-            System.out.println(listNum);
             n++;
         }
         
@@ -145,7 +143,6 @@ public class NoticeController {
 		String pathname=root+File.separator+"uploads"+File.separator+"";
 		
 		dto.setmId(info.getUserId());
-		//dto.setmId("admin@a.com");
 		
 		service.insertNotice(dto, pathname);
 		return "redirect:/help_layout/notice/list";

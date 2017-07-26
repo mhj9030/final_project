@@ -35,6 +35,7 @@
 <!-- list_form CSS -->
 <link href="<%=cp%>/resources/custom_css/list_form.css" rel="stylesheet">
 <link href="<%=cp%>/resources/custom_css/help_notice_list.css" rel="stylesheet">
+<link href="<%=cp%>/resources/custom_css/help_event_list.css" rel="stylesheet">
 
 
 <!-- 알림창 CSS -->

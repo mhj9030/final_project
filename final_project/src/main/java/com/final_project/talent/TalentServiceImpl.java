@@ -229,4 +229,20 @@ public class TalentServiceImpl implements TalentService{
 		
 		return list;
 	}
+
+	@Override
+	public int insertInterest(List<String> list, Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			for(String s:list){
+				map.put("subCode", s);
+				result = dao.insertData("talent.insertInterest", map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

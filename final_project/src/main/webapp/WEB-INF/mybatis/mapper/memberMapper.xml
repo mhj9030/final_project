@@ -14,9 +14,10 @@
 <!-- 회원정보 불러오기 -->
 <select id="readMember" resultType="com.final_project.member.Member" parameterType="String">
 	SELECT m.mid, mpwd, mname, TO_CHAR(mbirth, 'YYYY-MM-DD')mbirth,
-		mgender, TO_CHAR(mcreated, 'YYYY-MM-DD')mcreated, c.cSerial
+		mgender, TO_CHAR(mcreated, 'YYYY-MM-DD')mcreated, c.cSerial, proPhoto
 			FROM member m
 			left outer join company c on m.mid=c.mid
+			join profile p on m.mId=p.mId
 				WHERE m.mid = #{mid}
 </select>
 

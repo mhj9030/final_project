@@ -158,6 +158,12 @@
 		</c:if>
 		</table>
 		
+		<div style="text-align: right;">
+			<c:if test="${sessionScope.member.userId==rDto.mId}">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/profile/pwd'">계정설정</button>
+			</c:if>
+		</div>
+		
 		<table id="license" class="table" style="height: 60px;">
 			<caption>▶ 자격증</caption>
 			<tr>
@@ -260,12 +266,21 @@
 		</c:if>
 		
 		<hr>
-	</div>
-	<div class= "footer-bar">
-		<div style="text-align: right;">
-			<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">목록</button>
+	</div>.
+	<c:if test="${sessionScope.member.userId==rDto.mId}">
+		<div class= "footer-bar">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/member/applications/list'">목록</button>
+			</div>
 		</div>
-	</div>
+	</c:if>
+	<c:if test="${sessionScope.member.userId!=rDto.mId}">
+		<div class= "footer-bar">
+			<div style="text-align: right;">
+				<button type="button" class="btn btn-default" onclick="history.back();">목록</button>
+			</div>
+		</div>
+	</c:if>
 </div>
 
 <script>

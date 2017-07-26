@@ -9,8 +9,10 @@
 <!-- Bootstrap CSS -->
 <!-- <link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 h3{
    margin-top: 40px;
+    font-family: 'Jeju Gothic', serif;
 }
 /* 즉시지원버튼 */
   .apply {
@@ -246,15 +248,14 @@ function ajaxHTML(url, type, query) {
 
 
 <div class="wrap" style="max-width:800px;">
-	<div class="jumbotron"> 
-	</div>
+	
 		
 	
   		
   	
   	<div class="row">
   			<div class="col-md-12">
-  			<h3>|스크랩한 채용정보</h3><hr style="margin-bottom: 0">	
+  			<h3>|스크랩한 채용정보<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Scrap</small></h3><hr style="margin-bottom: 0">	
 	  		</div>
 	  		<br>
   	</div>	
@@ -273,22 +274,22 @@ function ajaxHTML(url, type, query) {
 	<option value="deadlineover">마감공고</option>
 	</select>
 	</div>
-	<div>&nbsp;</div>
+	
 
 	
 	
 	
-		<div class="col-md-12" style="background: #5BC0DE;border-radius: 3px;padding: 20px;margin: 20px 0;color:white;max-height:15px;text-align: center;border-left-width: 5px solid #337AB7;">
+		<div class="col-md-12" style="background: #5BC0DE;border-radius: 3px;padding: 20px;margin: 20px 0;color:white;max-height:15px;text-align: center;border-left-width: 5px solid #337AB7;line-height: 0px;">
 			<div class="col-md-1">
 				삭제
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2" >
 				스크랩일
 			</div>
 			<div class="col-md-2">
 				회사명
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3" >
 				제목
 			</div>
 			<div class="col-md-2">
@@ -299,6 +300,8 @@ function ajaxHTML(url, type, query) {
 			</div>
 			
 		</div>
+		
+		<div id="123" style="height: 500px;">&nbsp;</div>
 	
 	
 	<!-- 채용정보 -->
@@ -310,7 +313,7 @@ function ajaxHTML(url, type, query) {
 		<div id="listEmploy"><!-- ajax나오는id -->
 					<!-- 받아온것 ceNum, ceSubject, ability, ceType, ceStart, ceEnd, C.cSerial, cName, cLogoimage -->
 					<!-- 채용정보 한세트 -->
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-12">
 						<div class="col-md-1">
 							<input type="checkbox" class="form-group">
@@ -335,7 +338,7 @@ function ajaxHTML(url, type, query) {
 					
 				</div>
 				
-				<hr>
+				<hr> -->
 			
 		
 		

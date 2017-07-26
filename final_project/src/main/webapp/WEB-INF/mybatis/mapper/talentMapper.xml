@@ -162,4 +162,8 @@
 	<select id="isBuy"  parameterType="map" resultType="Integer">
 		select count(*) from storagy where mId=#{mId} and rnum=#{rNum}
 	</select>
+	
+	<insert id="insertInterest" parameterType="map">
+		insert into interest_job(inNum, subCode, mId) values(interest_job_seq.nextval, #{subCode}, #{mId})
+	</insert>
 </mapper>

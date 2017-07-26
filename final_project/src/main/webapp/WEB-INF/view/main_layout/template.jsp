@@ -47,8 +47,8 @@
 <!-- Profile JS -->
 <script src="<%=cp%>/resources/js/profile.js" type="text/javascript"></script>
 
-  <!-- 알림창 CSS -->
-  <link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
+<!-- 알림창 CSS -->
+<link rel="stylesheet" href="<%=cp%>/resources/css/sweetalert2.min.css">
 
 
 

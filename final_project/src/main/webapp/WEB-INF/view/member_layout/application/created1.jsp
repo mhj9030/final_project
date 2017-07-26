@@ -123,7 +123,7 @@
 			<table class="table table-bordered">
 				<tr>
 					<td>지원분야</td>
-					<td>
+					<td>${rDto.apply}
 						<select name="apply" id="mainCode" class="form-control">
 							<option value="미선택" selected="selected">대분류</option>
 						<c:forEach var="dto" items="${mainType}">
@@ -243,7 +243,9 @@ $(document).ready(function () {
 		$("select #army option:eq(3)").attr("selected", "selected");
 	}
 	
+	$('input:radio[name="resumeType"][value="${rDto.resumeType}"]').prop('checked', true);
 	$("select #mainCode option").val('${rDto.apply}').attr("selected", "selected");
+	//$("select #mainCode option").val('${rDto.apply}').attr("selected", "selected");
 	
 	$('#exampleInputFile').change(function(e) {
 		var upload = document.getElementById('exampleInputFile');
