@@ -52,6 +52,9 @@ function deleteRecommend(gcNum, cNum){
 
 
 <div class="community_article_wrap" style="border: 0px;">
+
+<h3>추천합니다<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Recommendation</small></h3>
+<hr>
 	<div style="width:760px; height: 700px; margin:0px auto;">
 		<div style="float: left; height: 410px; width:250px; position: relative; margin-bottom: 160px;">
 			<div class="recommend_article_cname">${dto.cName}</div>

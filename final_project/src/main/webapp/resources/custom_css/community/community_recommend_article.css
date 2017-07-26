@@ -9,6 +9,13 @@
     padding-top: 36px;
     font-weight: bold;
 }
+
+.recommend_list_wrap h3{
+	margin-top: 40px;
+	font-family: 'Jeju Gothic', serif;
+}
+
+
 .recommend_article_employ{
 	height: 17%;
     width: 100%;

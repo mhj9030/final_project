@@ -8,6 +8,8 @@
    String cp = request.getContextPath();
 %>
 
+
+
 <!-- 메인 점보트론 -->
 <div class="jumbotron">
 	<div class="container">
