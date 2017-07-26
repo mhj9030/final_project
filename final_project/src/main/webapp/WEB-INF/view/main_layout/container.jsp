@@ -141,7 +141,7 @@
 	  			<div class="busi-etc-text">
 	  				<a href="<%=cp%>/profile?id=${dto.mId}">${dto.mName}</a>
 	  			</div>
-	  			<div class="busi-etc-text">
+	  			<div class="busi-etc-text" align="right">
 	  				<c:if test="${dto.employ_cnt>0}">
 						<a href="<%=cp%>/employ/main">채용 <span class="badge">${dto.employ_cnt}</span></a>
 					</c:if>
