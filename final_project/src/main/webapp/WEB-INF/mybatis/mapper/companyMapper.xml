@@ -442,7 +442,7 @@
 	
 	<!-- 공무원 소식 가져오기 -->
 	<select id="readGoverNews" parameterType="Integer" resultType="com.final_project.company.GoverNews">
-		select gnNum, gnSubject, gnContent, gnHitCount, gnCreated, gn.mId, mName
+		select gnNum, gnSubject, gnContent, gnHitCount, to_char(gnCreated, 'YYYY-MM-DD') gnCreated, gn.mId, mName
 			from gov_news gn
 			join member m on gn.mId=m.mId
 		    where gnNum=#{gnNum}
@@ -486,6 +486,11 @@
 	<update id="updateGoverNews" parameterType="com.final_project.company.GoverNews">
 		update gov_news set gnSubject=#{gnSubject}, gnContent=#{gnContent}
 	</update>
+	
+	<!-- 공무원 소식 삭제 -->
+	<delete id="deleteGoverNews" parameterType="Integer">
+		delete from gov_news where gnNum=#{gnNum}
+	</delete>
 </mapper>
 
 

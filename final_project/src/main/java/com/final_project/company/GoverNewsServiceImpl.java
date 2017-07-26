@@ -105,4 +105,13 @@ public class GoverNewsServiceImpl implements GoverNewsService{
 			throw e;
 		}
 	}
+
+	@Override
+	public void deleteGoverNews(int gnNum) throws Exception {
+		try {
+			dao.deleteData("company.deleteGoverNews", gnNum);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

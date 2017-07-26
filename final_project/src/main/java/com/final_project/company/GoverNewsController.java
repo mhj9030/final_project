@@ -157,9 +157,48 @@ public class GoverNewsController {
 		
 		return ".company_layout.gover_news.article";
 	}
+	
+	@RequestMapping(value="/company/gover_news/update")
+	public String updateForm(
+		@RequestParam int gnNum,
+		@RequestParam(value="page", defaultValue="1") int page,
+		Model model) throws Exception{
+			
+		GoverNews dto=service.readGoverNews(gnNum);
+		
+		if(dto==null)
+			return "redirect:/company/gover_news";
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("mode", "update");
+		model.addAttribute("gover_news", "on");
+		
+		return ".company_layout.gover_news.created"; 
+	}
+	
+	@RequestMapping(value="/company/gover_news/update", method=RequestMethod.POST)
+	public String updateSubmit(
+			GoverNews dto,
+			@RequestParam(value="page", defaultValue="1") int page
+			) throws Exception{
+		
+		service.updateGoverNews(dto);
+		
+		return "redirect:/company/gover_news?page="+page;
+	}
+	
+	@RequestMapping(value="/company/gover_news/delete")
+	public String delete(
+			@RequestParam int gnNum,
+			@RequestParam(value="page", defaultValue="1") int page 
+			) throws Exception{
+		
+		service.deleteGoverNews(gnNum);
+		
+		return "redirect:/company/gover_news?page="+page;
+	}
 }
-
-
 
 
 
