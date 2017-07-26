@@ -121,10 +121,10 @@
 				} else{
 					var str="<span style='color:red; font-weight: bold;'>"+cSerial+" 이미 등록된 번호입니다.</span>";
 					$(".serial-help-block").html(str);
-					$("#serial1").val("");
-					$("#serial2").val("");
-					$("#serial3").val("");
-					$("#serial1").focus();
+					$("#cSerial1").val("");
+					$("#cSerial2").val("");
+					$("#cSerial3").val("");
+					$("#cSerial1").focus();
 				}
 			}
 		});
