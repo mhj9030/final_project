@@ -26,7 +26,7 @@
 
 <!-- 글내용  content -->
 <div id="content">
-<pre style="white-space: pre-wrap; background:white;">
+<pre style="white-space: pre-wrap; background:white; text-align: center;" >
  ${dto.content}
 </pre>
 </div>
