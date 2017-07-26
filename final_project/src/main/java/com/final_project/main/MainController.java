@@ -49,6 +49,8 @@ public class MainController {
 		List<Company> comList=service.listMainCompany();
 		
 		String articleUrl=cp+"/company/search/article";
+		String articleUrl1 = cp+"/notice/article?page=" + current_page;
+		
 		
 		
 		List<Group> groupList = service.listMainGroup();
@@ -92,12 +94,12 @@ public class MainController {
 	            n++;
 	        }
 		
-		
 	    model.addAttribute("list", list);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("employList",employList);
 		model.addAttribute("groupList", groupList);
 		model.addAttribute("comList", comList);
+		model.addAttribute("articleUrl1", articleUrl1);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("newsList", newsList);
 		return ".mainLayout";

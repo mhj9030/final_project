@@ -150,7 +150,7 @@
 	  			<div class="busi-etc-text">
 	  				<a href="<%=cp%>/profile?id=${dto.mId}">${dto.mName}</a>
 	  			</div>
-	  			<div class="busi-etc-text">
+	  			<div class="busi-etc-text" align="right">
 	  				<c:if test="${dto.employ_cnt>0}">
 						<a href="<%=cp%>/employ/main">채용 <span class="badge">${dto.employ_cnt}</span></a>
 					</c:if>
@@ -201,7 +201,7 @@
 	  <div class="col-md-6">
 		<div class="panel-news">
 			<div class="news-event">
-				<h4>이벤트</h4>
+				<h4>공지사항<small style="margin-left: 300px; font-size: 11px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/help_layout/notice/list'">더보기</small></h4>
 	  			<hr>
 				<table>
 			
@@ -211,7 +211,8 @@
 				<tr align="center">
 					<td><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
 					<td align="left">
-						<a href="${articleUrl}&num=${dto.notNum}">&nbsp;&nbsp;&nbsp;${dto.subject}</a>
+						<a href="${articleUrl1}&num=${dto.notNum}">&nbsp;&nbsp;&nbsp;${dto.subject}</a>
+						
 					</td>
 					<td><br><br></td>
 				</tr>
