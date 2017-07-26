@@ -11,16 +11,46 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("employ.GovController")
 public class GovController {
+	@Autowired
+	EmployService service;
 	
 	@RequestMapping("/employ/gov")
 	public String search(Model model) {
+		 //메인업종리스트,서브업종리스트
+		List<Employ> mblist= service.list_main_bu_class();
+		List<Employ> sblist= service.list_sub_bu_class();
 		
+		//메인직종리스트,서브직종리스트
+		List<Employ> mjlist= service.list_main_class();
+		List<Employ> sjlist= service.list_sub_class();
+		//자격증
+		List<Employ> lclist=service.list_license();
+		//우대사항
+		List<Employ> cePlist = service.list_cePrefere();
+		//근무조건
+		List<Employ> ceTlist = service.list_ceType();
+		//학력
+		List<Employ> lalist = service.list_ability();
+		int dataCount = service.dataCount();
+		//지금 해야되는거 우대사항 학력 자격증 근무조건 컨트롤러로 받아와서 검색 바뀌게한다.
+		//한개 먼저한다. 우대사항
+		model.addAttribute("dataCount",dataCount);
+		
+		model.addAttribute("lalist",lalist);
+		model.addAttribute("sblist",sblist);
+		model.addAttribute("mblist",mblist);
+		model.addAttribute("sjlist",sjlist);
+		model.addAttribute("mjlist",mjlist);
+		model.addAttribute("lclist",lclist);
+		model.addAttribute("cePlist",cePlist);
+		model.addAttribute("ceTlist",ceTlist);
 		model.addAttribute("gov","on");
 		return ".employ_layout.gov.search";
 
