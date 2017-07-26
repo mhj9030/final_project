@@ -60,7 +60,7 @@ function updateEvent() {
 
 <!-- 글내용  content -->
 <div id="content">
-<pre style="white-space: pre-wrap; background:white;">
+<pre style="white-space: pre-wrap; background:white; text-align: center;">
  <img src="<%=cp%>/uploads/event/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
  ${dto.content}
 </pre>

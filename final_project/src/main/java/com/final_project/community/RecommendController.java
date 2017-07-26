@@ -99,8 +99,7 @@ public class RecommendController {
 			Model model) throws Exception {
 		
 		
-		int rows = 5;
-		int total_page = 0;
+		
 		int dataCount = 0;
 
 
@@ -108,22 +107,13 @@ public class RecommendController {
 		map.put("cNum", cNum);
 
 		dataCount = service.dataCountGoodcom(map);
-		if (dataCount != 0)
-			total_page = myUtil.pageCount(rows, dataCount);
 
-		if (total_page < current_page)
-			current_page = total_page;
 
-		int start = (current_page - 1) * rows + 1;
-		int end = current_page * rows;
-		map.put("start", start);
-		map.put("end", end);
 
 		List<RecommendArticle> list = service.listRecommendArticle(map);
 		RecommendArticle dto = service.RecommendArticleInfo(cNum);
 		int employCount = service.dataCountEmploy(cNum);
 
-		String paging = myUtil.paging(current_page, total_page);
 
 		
 		model.addAttribute("employCount", employCount);
@@ -131,9 +121,6 @@ public class RecommendController {
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("total_page", total_page);
-		model.addAttribute("paging", paging);
-		
 		return ".community_layout.recommend.article";
 	}
 	

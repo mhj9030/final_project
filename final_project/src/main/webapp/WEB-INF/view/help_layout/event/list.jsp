@@ -7,7 +7,8 @@
 %>
 
 <style type="text/css">
-
+#bu{float:right;
+	margin-right:35px;}
 </style>
 
 <script type="text/javascript">
@@ -77,15 +78,16 @@ function article(num) {
             <c:if test="${dataCount!=0 }">
                 ${paging}
             </c:if>
+            <c:if test="${sessionScope.member.userId=='admin'}">
+        		<td align="right" width="100">
+        		    <button id="bu" class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/help_layout/event/created';">글올리기</button>
+        		    </td>
+        		</c:if>
         </div>        
         
         <table class="list-comp">
         		
-		    	<c:if test="${sessionScope.member.userId=='admin'}">
-        		<td align="right" width="100">
-        		    <button class="btn btn-default" type="button" onclick="javascript:location.href='<%=cp%>/help_layout/event/created';">글올리기</button>
-        		    </td>
-        		</c:if>
+		    	
         		
         </table>
         
