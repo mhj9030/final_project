@@ -18,15 +18,15 @@
 }
 </style>
 
-<div class="page_body .container-fluid ">
+<div class="myInquiry-list-body">
 	<h3>
 		<c:if test="${mode!='update'}">
 			이력서 작성 (<b>1단계</b> > 2단계 > 3단계)
-			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume (1step)</small>
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write application (1step)</small>
 		</c:if>
 		<c:if test="${mode=='update'}">
 			이력서 작성 (<b>1단계</b> > 2단계 > 3단계)
-			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Write Resume</small>
+			<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Update application</small>
 		</c:if>
 	</h3><hr>
 	
