@@ -9,11 +9,14 @@
 <!-- Bootstrap CSS -->
 <!-- <link href="/final_project/resources/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 body{
 background: white;
 }
+
 h3{
    margin-top: 40px;
+    font-family: 'Jeju Gothic', serif;
 }
 /* 즉시지원버튼 */
   .apply {
@@ -748,16 +751,15 @@ function ajaxHTML(url, type, query) {
 
 
 <div class="wrap" style="max-width:800px;">
-	<div class="jumbotron">
-  
-	</div>
+	
 		
 	
   		
   	
   		<div class="row">
   			<div class="col-md-12">
-  			<h3>|전체 채용정보</h3><hr style="margin-bottom: 0">
+  			
+  			<h3>|기업 채용정보<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Employ Search</small></h3><hr style="margin-bottom: 0">
 	  			<div class="col-md-3"  style="background:#F5F5F5; font-weight:900; height:30px; width:25%;">
 		  			<span style="line-height:30px">직무/산업별 ＞</span>
 		  		</div>	
