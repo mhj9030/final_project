@@ -112,7 +112,7 @@
 						        <td style="padding-left:10px;">
 						        	${dto.originalFilename}
 						            <c:if test="${not empty dto.originalFilename}">
-						            	| <a href="<%=cp%>/community/free/deleteFile?jtnum=${dto.jtnum}&page=${page}">삭제</a>
+						            	| <a href="<%=cp%>/community/tip/deleteFile?jtnum=${dto.jtnum}&page=${page}">삭제</a>
 						            </c:if>
 						        </td>
 						    </tr>
