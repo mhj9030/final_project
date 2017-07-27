@@ -15,7 +15,7 @@
 
 <div class="myInquiry-list-body">
 	<h3>
-		 이력서 열람<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Read Resume</small>
+		 이력서 열람<small style="font-family: 'Gudea', sans-serif; letter-spacing: 3px; margin-left: 5px; font-size: 16px; font-weight: bold; color: #6d6b6b;">Read Application</small>
 	</h3><hr>
 	
 	<div id="resume_div">
