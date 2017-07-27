@@ -8,23 +8,23 @@
 %>
 
 <script>
-	function updateInquiry(){
-		<%-- var cqNum=${dto.cqNum};
+	function updateGoverNews(){
+		var gnNum=${dto.gnNum};
 		var page=${page};
-		var query="cqNum="+cqNum+"&page="+page;
-		var url="<%=cp%>/company/inquiry/update?"+query;
+		var query="gnNum="+gnNum+"&page="+page;
+		var url="<%=cp%>/company/gover_news/update?"+query;
 		
-		location.href=url; --%>
+		location.href=url;
 	}
 
-	function deleteInquiry(){
-		<%-- var cqNum=${dto.cqNum};
+	function deleteGoverNews(){
+		var gnNum=${dto.gnNum};
 		var page=${page};
-		var query="cqNum="+cqNum+"&page="+page;
-		var url="<%=cp%>/company/inquiry/delete?"+query;
+		var query="gnNum="+gnNum+"&page="+page;
+		var url="<%=cp%>/company/gover_news/delete?"+query;
 		
 		if(confirm("위 자료를 삭제 하시게습니까?"))
-			location.href=url; --%>
+			location.href=url;
 	}
 	
 </script>
@@ -69,8 +69,8 @@
 	
 	<div style="text-align: right;">
 		<c:if test="${sessionScope.member.userId=='admin'}">
-			<button type="button" class="btn btn-default" onclick="updateInquiry();">수정</button>
-			<button type="button" class="btn btn-default" onclick="deleteInquiry();">삭제</button>
+			<button type="button" class="btn btn-default" onclick="updateGoverNews();">수정</button>
+			<button type="button" class="btn btn-default" onclick="deleteGoverNews();">삭제</button>
 		</c:if>
 		<button type="button" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/company/gover_news?${query}';">뒤로</button>
 	</div>

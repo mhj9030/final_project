@@ -69,6 +69,10 @@
 							<td colspan="4" style="text-align: center;">
 								<button type="button" class="btn btn-default" onclick="check();">확인 </button>
 								<button type="reset" class="btn btn-default">다시입력</button>
+								<c:if test="${mode='update'}">
+									<input type="hidden" name="gnNum" value="${dto.gnNum}">
+									<input type="hidden" name="page" value="${page}">
+								</c:if>
 							</td>
 						</tr>
 					</tfoot>
