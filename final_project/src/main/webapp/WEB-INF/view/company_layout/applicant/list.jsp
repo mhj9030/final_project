@@ -57,7 +57,7 @@
 						out+="<div class='list-item'>";
 						out+="	<div class='item-image'>";
 						if(proPhoto!=null){
-							out+="<img width='80px' src='<%=cp%>/uploads/member/"+proPhoto+"'>";
+							out+="<img width='80px' src='<%=cp%>/uploads/profile/"+proPhoto+"'>";
 						} else{
 							out+="<img width='80px' src='<%=cp%>/resources/image/profile_img.jpg'>";
 						}
