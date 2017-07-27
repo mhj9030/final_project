@@ -133,7 +133,7 @@ public class MemberController {
 	public String noAuthorized(
 			) throws Exception {
 		
-		return "redirect:/submain";
+		return ".member_layout.complete.complete";
 	}
 
 }
