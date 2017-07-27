@@ -484,7 +484,7 @@
 	
 	<!-- 공무원 소식 수정 -->
 	<update id="updateGoverNews" parameterType="com.final_project.company.GoverNews">
-		update gov_news set gnSubject=#{gnSubject}, gnContent=#{gnContent}
+		update gov_news set gnSubject=#{gnSubject}, gnContent=#{gnContent} where gnNum=#{gnNum}
 	</update>
 	
 	<!-- 공무원 소식 삭제 -->
