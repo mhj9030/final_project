@@ -80,11 +80,11 @@
 	</select>
 	
 	<select id="readAbility" parameterType="map" resultType="com.final_project.talent.Talent">
-		select acName, termtime, memo
+		select school, a.MAJOR, ABNUM, TERMSTATE, TERMEND, TERMSTART, a.MEMO, r.MID
 		from resume r
 		join member m on r.mId=m.mId
 		join ability a on m.mId=a.mId
-		join academy ac on a.acCode=ac.acCode
+		<!-- join academy ac on a.acCode=ac.acCode -->
 		where rNum=#{rNum}
 	</select>
 	
