@@ -99,7 +99,7 @@ function navloginCheck() {
                                             <div class="divider"></div>
                                             <form name="profileaction">
                                                 <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('mypage', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i>마이페이지</button>
-                                                <button type="button" class="btn btn-primary btn-xs" onclick="memberMenu('applications', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 관리 </button>
+                                                <%-- <button type="button" class="btn btn-primary btn-xs" onclick="memberMenu('applications', '${member.userId}');"> <i class="fa fa-user" aria-hidden="true"></i> 지원서 관리 </button> --%>
                                                 <button type="button" class="btn btn-primary btn-xs" onclick="profileMenu('pwd', 'update');"> <i class="fa fa-cogs" aria-hidden="true"></i> 계정설정 </button>
                                             </form>
                                         </div>

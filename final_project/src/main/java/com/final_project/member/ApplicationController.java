@@ -138,12 +138,12 @@ public class ApplicationController {
 	
 	// 글보기
 	@RequestMapping("/member/applications/application")
-	public String article(@RequestParam int rNum, HttpSession session, Model model) throws Exception {
+	public String article(@RequestParam("rNum") int rNum, HttpSession session, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		map.put("mId", info.getUserId());		
+		map.put("mId", info.getUserId());
 		map.put("rNum", rNum);
-		
+		System.out.println(map.get("rNum"));
 		MemberDetail rDto = service.readResume(map);
 		List<MemberDetail> acList = service.academyList(map);
 		List<MemberDetail> proList = service.projectList(map);
