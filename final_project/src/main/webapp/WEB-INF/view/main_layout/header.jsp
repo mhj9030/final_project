@@ -68,7 +68,7 @@ function navloginCheck() {
                 </c:if>
                 <c:if test="${not empty sessionScope.member}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px;"> 
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px; margin-top:-5px;"> 
                         <c:if test="${not empty member.proPhoto}">
                         	<img src="<%=cp%>/uploads/profile/${member.proPhoto}"
 								class="img-responsive img-circle" title="John Doe"
