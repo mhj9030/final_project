@@ -37,7 +37,7 @@ public class PointMarketController {
 	public String marketList(@RequestParam(value="page", defaultValue="1")int current_page, 
 			@RequestParam(value="mainCode", defaultValue="0")int mainCode, 
 			@RequestParam(value="subCode", defaultValue="")String subCode, 
-			HttpSession session, Model model) throws Exception{
+			HttpSession session, HttpServletRequest req, Model model) throws Exception{
 		Point dto = new Point();
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -48,7 +48,7 @@ public class PointMarketController {
 		
 		List<Talent> mainType = new ArrayList<>();
 		
-		if(subCode!=null && ! subCode.equals("") ){
+		if(subCode!=null && ! subCode.equals("")){
 			List<String> subCodes = Arrays.asList(subCode);
 			map.put("list", subCodes);
 		}else{
@@ -79,7 +79,21 @@ public class PointMarketController {
 		list = tService.interestList(list);
 		list = tService.isBuy(list, map);
 		
-		String paging = util.paging(current_page, total_page);
+		String cp = req.getContextPath();
+		String query = "";
+		String listUrl = cp + "/point/market";
+        if(mainCode!=0) {
+        	query = "mainCode=" + mainCode;
+        	if(subCode!=null && ! subCode.equals("")){
+        		query += "&subCode=" + subCode;
+        	}
+        }
+        
+        if(query.length()!=0) {
+        	listUrl = cp + "/point/market?" + query;
+        }
+        
+		String paging = util.paging(current_page, total_page, listUrl);
 		
 		model.addAttribute("page", current_page);
 		model.addAttribute("mainType", mainType);
@@ -186,7 +200,21 @@ public class PointMarketController {
 		List<Talent> list = tService.storagyResume(map);
 		list = tService.interestList(list);
 		
-		String paging = util.paging(current_page, total_page);
+		String cp = req.getContextPath();
+		String query = "";
+		String listUrl = cp + "/point/market";
+        if(mainCode!=0) {
+        	query = "mainCode=" + mainCode;
+        	if(subCode!=null && ! subCode.equals("")){
+        		query += "&subCode=" + subCode;
+        	}
+        }
+        
+        if(query.length()!=0) {
+        	listUrl = cp + "/point/market?" + query;
+        }
+        
+		String paging = util.paging(current_page, total_page, listUrl);
 		
 		model.addAttribute("page", current_page);
 		model.addAttribute("mainType", mainType);
@@ -196,38 +224,5 @@ public class PointMarketController {
 		model.addAttribute("paging", paging);
 		
 		return ".point_layout.resume.storagy";
-	}
-	
-	@RequestMapping("/point/storagy/article")
-	public String acticle(@RequestParam(value="page", defaultValue="1")int page, 
-			@RequestParam("rNum") int rNum, Model model) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("rNum", rNum);
-		
-		Talent introList = tService.readIntro(map);
-		List<Talent> abilityList = null;
-		abilityList = tService.readAbility(map);
-		List<Talent> licenseList = null;
-		licenseList = tService.readLicense(map);
-		List<Talent> languageList = null;
-		languageList = tService.readLanguage(map);
-		List<Talent> projectList = null;
-		projectList = tService.readProject(map);
-		List<Talent> awardList = null;
-		awardList = tService.readAward(map);
-		List<Talent> careerList = null;
-		careerList = tService.readCareer(map);
-		
-		model.addAttribute("rNum", rNum);
-		model.addAttribute("page", page);
-		model.addAttribute("introList", introList);
-		model.addAttribute("abilityList", abilityList);
-		model.addAttribute("licenseList", licenseList);
-		model.addAttribute("languageList", languageList);
-		model.addAttribute("projectList", projectList);
-		model.addAttribute("awardList", awardList);
-		model.addAttribute("careerList", careerList);
-		
-		return ".point_layout.resume.article";
 	}
 }

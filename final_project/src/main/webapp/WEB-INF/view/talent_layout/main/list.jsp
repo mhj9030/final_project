@@ -145,7 +145,11 @@ function listPrint(data){
 		for(var i=0; i<data.list.length; i++){
 			out += '<div class="list-content col-xs-5 col-sm-5">';
 			out += '	<div class="col-xs-6 col-sm-5">';
-			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />';//data.list[i].photo
+			if(data.list[i].rPhoto == null || data.list[i].rPhoto == ""){
+			out += '		<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 110px;" />';//data.list[i].photo
+			}else{
+			out += '		<img src="<%=cp%>/uploads/resume/' + data.list[i].rPhoto + '" style="width: 110px; height: 110px;" />';
+			}
 			out += '	</div>';
 			out += '	<div class="col-xs-6 col-sm-7">';
 			out += '		<span>' + data.list[i].rName + '(' + data.list[i].rNum + ')</span>';

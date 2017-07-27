@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +27,23 @@ public class PointController {
 	private MyUtilBootstrap util;
 	
 	@RequestMapping("/point/main")
-	public String list(@RequestParam(value="page", defaultValue="0")int current_page, Model model) throws Exception {
+	public String list(@RequestParam(value="page", defaultValue="1")int current_page, HttpServletRequest req, Model model) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		
-		int rows = 10;
+		int rows = 3;
 		int total_page = 0;
+		int dataCount = 0;
 		
-		int dataCount = service.dataCount();
+		dataCount = service.dataCount();
 		
 		if(dataCount != 0)
 			total_page = util.pageCount(rows, dataCount);
 		
-		if(current_page < total_page){
+		if(current_page > total_page)
 			current_page = total_page;
-		}
 		
 		int start = (current_page-1)*rows+1;
-		int end = total_page*rows;
+		int end = current_page*rows;
 		
 		map.put("start", start);
 		map.put("end", end);
@@ -50,10 +51,14 @@ public class PointController {
 		List<Point> list;
 		list = service.readBoardList(map);
 		
-		String paging = util.paging(current_page, total_page);
+		String cp = req.getContextPath();
+		String listUrl = cp + "/point/main";
+		
+		String paging = util.paging(current_page, total_page, listUrl);
 		
 		model.addAttribute("page", current_page);
 		model.addAttribute("list", list);
+		model.addAttribute("listUrl", listUrl);
 		model.addAttribute("paging", paging);
 		
 		return ".point_layout.main.list";

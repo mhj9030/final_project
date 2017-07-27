@@ -39,7 +39,10 @@ public class CreatedController {
 		dto.setmId(info.getUserId());
 		service.insertCompany(dto, pathname);
 				
-		return "redirect:/company/search";
+		session.removeAttribute("member");
+		session.invalidate();
+
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/company/update", method=RequestMethod.GET)

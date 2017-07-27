@@ -48,8 +48,13 @@
 		<c:forEach var="dto" items="${list}">
 		<div class="list-content col-xs-5 col-sm-5">
 			<div class="col-xs-6 col-sm-5">
-				<img src="<%=cp%>/resources/image/profile_img.jpg" width="110px" />
-			</div>
+					<c:if test="${empty dto.rPhoto}">
+						<img src="<%=cp%>/resources/image/profile_img.jpg" style="width: 110px; height: 110px;" />
+					</c:if>
+					<c:if test="${not empty dto.rPhoto}">
+						<img src="<%=cp%>/uploads/resume/${dto.rPhoto}" style="width: 110px; height: 110px;"/>
+					</c:if>
+				</div>
 			<div class="col-xs-6 col-sm-7">
 				<span>${dto.rName}(${dto.rNum})</span>
 				<p class="text-muted small">${dto.mId}</p>
