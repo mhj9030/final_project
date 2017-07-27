@@ -7,6 +7,9 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
+
+
+
 function check(){
 	 if( $("#che_16").is(':checked') ){
 	        $("input[name=chk]").prop("checked", true);
