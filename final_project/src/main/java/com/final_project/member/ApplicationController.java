@@ -55,10 +55,10 @@ public class ApplicationController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mId", info.getUserId());
 		
-		Member mem = service.memberList(map);
-		List<MemberDetail> mdac = service.academyList(map);
-		List<MemberDetail> mdpr = service.projectList(map);
-		List<MemberDetail> mdco = service.careerList(map);
+		Member mem = service.member(map);
+		List<MemberDetail> mdac = service.academy(map);
+		List<MemberDetail> mdpr = service.project(map);
+		List<MemberDetail> mdco = service.career(map);
 		
 		List<Talent> mainType = new ArrayList<>();
 		mainType = tService.mainType();

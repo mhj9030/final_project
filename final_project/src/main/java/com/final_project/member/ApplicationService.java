@@ -12,6 +12,12 @@ public interface ApplicationService {
 	// 삭제
 	public int delete(List<String> list);
 	
+	// 1단계 초기
+	public Member member(Map<String, Object> map);
+	public List<MemberDetail> academy(Map<String, Object> map);
+	public List<MemberDetail> project(Map<String, Object> map);
+	public List<MemberDetail> career(Map<String, Object> map);
+	
 	// 1단계 입력
 	public Member memberList(Map<String, Object> map);
 	public List<MemberDetail> academyList(Map<String, Object> map);
