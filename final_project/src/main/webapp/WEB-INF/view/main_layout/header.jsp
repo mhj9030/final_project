@@ -68,16 +68,16 @@ function navloginCheck() {
                 </c:if>
                 <c:if test="${not empty sessionScope.member}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px; margin-top: -5px;"> 
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="user-avatar pull-left" style="margin-right: 8px;"> 
                         <c:if test="${not empty member.proPhoto}">
                         	<img src="<%=cp%>/uploads/profile/${member.proPhoto}"
 								class="img-responsive img-circle" title="John Doe"
-								alt="John Doe" width="30px" height="30px">
-                        </c:if>
+								alt="John Doe" style="width: 30px; height: 30px;">
+                       </c:if>
                         <c:if test="${empty member.proPhoto}">
                         	<img src="<%=cp%>/resources/image/profile_img.jpg"
 								class="img-responsive img-circle" title="John Doe"
-								alt="John Doe" width="30px" height="30px">
+								alt="John Doe" style="width: 30px; height: 30px;">
                         </c:if>
                         
 						</span> <span class="user-name"> ${member.userName } </span> <b class="caret"></b></a>

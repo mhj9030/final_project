@@ -41,9 +41,9 @@
 	</select>
 	
 	<select id="searchList" parameterType="map" resultType="com.final_project.talent.Talent">
-		select mId, rNum, rName, subTypes from( 
+		select mId, rNum, rName, rPhoto, subTypes from( 
 			select rownum, tb.* from( 
-				select mId, r.rNum, rName, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes
+				select mId, r.rNum, rName, rPhoto, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes
 				from member m
 				join resume r on m.mId=r.mId
 				left join intro i on r.rNum=i.rNum
@@ -54,7 +54,7 @@
 			<if test="(mainCode!='' and mainCode!=null) or list!=null">
 				and (<include refid="where-list" />)
 			</if>
-				group by mId, r.rNum, rName
+				group by mId, r.rNum, rName, rPhoto
 			)tb where <![CDATA[rownum<=#{end} 
 		)where rownum>=#{start}]]>
 	</select>
@@ -142,9 +142,9 @@
 	</select>
 	
 	<select id="storagyResume" parameterType="map" resultType="com.final_project.talent.Talent">
-		select mId, rNum, rName from( 
+		select mId, rNum, rName, rPhoto, subTypes from( 
 			select rownum, tb.* from( 
-				select r.mId, r.rNum, rName, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes 
+				select r.mId, r.rNum, rName, rPhoto, LISTAGG(s.subName, ',') WITHIN GROUP(ORDER BY s.subCode) subTypes 
 				from storagy s 
 				left join resume r on s.rNum=r.rNum 
 				join interest_job ij on r.mId=ij.mId 
@@ -154,7 +154,7 @@
 			<if test="(mainCode!='' and mainCode!=null) or list!=null">
 				and <include refid="where-list" />
 			</if>
-				group by r.mId, r.rNum, rName
+				group by r.mId, r.rNum, rName, rPhoto
 			)tb where <![CDATA[rownum<=#{end} 
 		)where rownum>=#{start}]]>
 	</select>
