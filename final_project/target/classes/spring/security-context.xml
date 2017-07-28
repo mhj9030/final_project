@@ -63,7 +63,7 @@
 	             login-processing-url="/member/login_check"
 	             username-parameter="mId"
 	             password-parameter="mPwd"
-	             authentication-failure-url="/?login_error" 
+	             authentication-failure-url="/submain?login_error" 
 	             default-target-url="/main"
 	             always-use-default-target="false"
 	             authentication-success-handler-ref="authenticationSuccessHandler"/>
