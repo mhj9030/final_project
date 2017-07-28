@@ -19,6 +19,38 @@
 		where rNum=#{rNum}
 	</select>
 	
+	<!-- 이력서 1단계 초기 작성 -->
+	
+	<select id="member" parameterType="map" resultType="com.final_project.member.Member">
+		select mId, mName, to_char(mBirth, 'YYYY-MM-DD') mBirth, to_char(sysdate, 'YYYY')-to_char(mBirth, 'YYYY')+1 age, mGender 
+		from member where mId=#{mId}
+	</select>
+	
+	<select id="academy" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select school, a.MAJOR, ABNUM, TERMSTATE, TERMEND, TERMSTART, a.MEMO
+		from resume r
+		join member m on r.mId=m.mId
+		join ability a on m.mId=a.mId
+		where mId=#{mId} 
+		order by termStart desc
+	</select>
+	
+	<select id="career" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select rc.mcNum, company, part, carStart, carEnd, memo 
+		from re_career rc 
+		left join mem_career mc on rc.mcNum=mc.mcNum
+		where mId=#{mId} 
+		order by carStart desc
+	</select>
+	
+	<select id="project" parameterType="map" resultType="com.final_project.member.MemberDetail">
+		select rp.prNum, prName, expStartYear, expEndYear, expStartMonth, expEndMonth, expState
+		from re_project rp 
+		left join mem_project mp on rp.prNum=mp.prNum
+		where mId=#{mId} order by expStartYear desc
+	</select>
+	
+	
 	<!-- 이력서 1단계 불러오기 -->
 	
 	<select id="memberList" parameterType="map" resultType="com.final_project.member.Member">

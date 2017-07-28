@@ -8,16 +8,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.final_project.common.FileManager;
 import com.final_project.common.dao.CommonDAO;
 
 @Service("member.applicationService")
 public class ApplicationServiceImpl implements ApplicationService{
 	@Autowired
 	private CommonDAO dao;
-	
-	@Autowired
-	private FileManager fileManager;
 
 	// 보기
 	@Override
@@ -31,6 +27,58 @@ public class ApplicationServiceImpl implements ApplicationService{
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public Member member(Map<String, Object> map) {
+		Member dto = new Member();
+		
+		try {
+			dto = dao.getReadData("applications.member", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public List<MemberDetail> academy(Map<String, Object> map) {
+		List<MemberDetail> list = new ArrayList<>();
+		
+		try {
+			list = dao.getListData("applications.academy", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<MemberDetail> project(Map<String, Object> map) {
+		List<MemberDetail> list = new ArrayList<>();
+		
+		try {
+			list = dao.getListData("applications.project", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<MemberDetail> career(Map<String, Object> map) {
+		List<MemberDetail> list = new ArrayList<>();
+		
+		try {
+			list = dao.getListData("applications.career", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
 	}
 	
 	@Override
