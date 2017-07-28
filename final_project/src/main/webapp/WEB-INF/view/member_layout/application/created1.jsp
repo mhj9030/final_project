@@ -245,7 +245,7 @@ $(document).ready(function () {
 	
 	$('input:radio[name="resumeType"][value="${rDto.resumeType}"]').prop('checked', true);
 	
-	if(${rDto.apply}==null || ${rDto.apply}==""){
+	if(${rDto.apply==''}){
 		$("#mainCode").val('${rDto.apply}').attr("selected", "selected");
 	}
 	//$("select #mainCode option").val('${rDto.apply}').attr("selected", "selected");
